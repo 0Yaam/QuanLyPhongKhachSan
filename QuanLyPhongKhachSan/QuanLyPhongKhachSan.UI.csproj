@@ -76,6 +76,42 @@
     <Compile Include="Bar\UserControlThongKe.Designer.cs">
       <DependentUpon>UserControlThongKe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\frmAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\frmAdmin.Designer.cs">
+      <DependentUpon>frmAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlAdmin.Designer.cs">
+      <DependentUpon>UserControlAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlChucNang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlChucNang.Designer.cs">
+      <DependentUpon>UserControlChucNang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlDanhSachTaiKhoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlDanhSachTaiKhoan.Designer.cs">
+      <DependentUpon>UserControlDanhSachTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlThongKe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\UserControlAdmin\UserControlThongKe.Designer.cs">
+      <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    </Compile>
     <Compile Include="ThemvaSuaKH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +137,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Bar\UserControlThongKe.resx">
       <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\frmAdmin.resx">
+      <DependentUpon>frmAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\UserControlAdmin\UserControlAdmin.resx">
+      <DependentUpon>UserControlAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThemvaSuaKH.resx">
       <DependentUpon>ThemvaSuaKH.cs</DependentUpon>
@@ -144,6 +189,12 @@
       <Project>{80bc3e24-81f2-4ded-ae66-a31de8d3839f}</Project>
       <Name>QuanLyPhongKhachSan.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\v904-nunny-012-f.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Susumu Nakoshi Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

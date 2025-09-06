@@ -1,0 +1,9 @@
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\bin\Debug\QuanLyPhongKhachSan.BLL.dll
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\bin\Debug\QuanLyPhongKhachSan.BLL.pdb
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\obj\Debug\QuanLyPhongKhachSan.BLL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\obj\Debug\QuanLyPhongKhachSan.BLL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\obj\Debug\QuanLyPh.1809AF54.Up2Date
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\obj\Debug\QuanLyPhongKhachSan.BLL.dll
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.BLL\obj\Debug\QuanLyPhongKhachSan.BLL.pdb

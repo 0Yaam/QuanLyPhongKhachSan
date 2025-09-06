@@ -69,5 +69,25 @@ namespace QuanLyPhongKhachSan.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Susumu_Nakoshi_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Susumu Nakoshi Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap v904_nunny_012_f {
+            get {
+                object obj = ResourceManager.GetObject("v904-nunny-012-f", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
