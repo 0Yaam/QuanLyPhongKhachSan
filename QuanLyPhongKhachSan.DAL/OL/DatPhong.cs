@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuanLyPhongKhachSan.DAL.OL
 {
@@ -16,7 +12,7 @@ namespace QuanLyPhongKhachSan.DAL.OL
         public DateTime? NgayTraThucTe { get; set; }
         public decimal TienCoc { get; set; }
         public decimal TienThue { get; set; }
-        public string TrangThai { get; set; }
+        public string TrangThai { get; set; } // Giữ string để lưu trạng thái ("Đã đặt", "Trống", v.v.)
 
         public DatPhong() { }
 

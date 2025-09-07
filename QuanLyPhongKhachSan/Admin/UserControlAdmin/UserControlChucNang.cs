@@ -16,5 +16,15 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         {
             InitializeComponent();
         }
+
+        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void xóaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace QuanLyPhongKhachSan
 {
-    public partial class frmAdmin : Form
+    public partial class frmHoaDon : Form
     {
-        public frmAdmin()
+        public frmHoaDon()
         {
             InitializeComponent();
+        }
+
+        private void guna2HtmlLabel2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

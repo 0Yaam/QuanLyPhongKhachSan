@@ -41,6 +41,7 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,34 +53,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bar\UserControlDanhSachKhachHang.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Bar\UserControlDanhSachKhachHang.Designer.cs">
-      <DependentUpon>UserControlDanhSachKhachHang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Bar\UserControlDatPhong.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Bar\UserControlDatPhong.Designer.cs">
-      <DependentUpon>UserControlDatPhong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Bar\UserControlTaiKhoan.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Bar\UserControlTaiKhoan.Designer.cs">
-      <DependentUpon>UserControlTaiKhoan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Bar\UserControlThongKe.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Bar\UserControlThongKe.Designer.cs">
-      <DependentUpon>UserControlThongKe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\frmAdmin.cs">
+    <Compile Include="Staff\frmHoaDon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\frmAdmin.Designer.cs">
+    <Compile Include="Staff\frmHoaDon.Designer.cs">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\frmThemKH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Staff\frmThemKH.Designer.cs">
+      <DependentUpon>frmThemKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlDanhSachKhachHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlDanhSachKhachHang.Designer.cs">
+      <DependentUpon>UserControlDanhSachKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlDatPhong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlDatPhong.Designer.cs">
+      <DependentUpon>UserControlDatPhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlTaiKhoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlTaiKhoan.Designer.cs">
+      <DependentUpon>UserControlTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlThongKe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlThongKe.Designer.cs">
+      <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmAdmin.Designer.cs">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\frmLogin.cs">
@@ -88,69 +101,84 @@
     <Compile Include="Login\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlAdmin.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlChucNang.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlAdmin.Designer.cs">
-      <DependentUpon>UserControlAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlChucNang.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlChucNang.Designer.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlChucNang.Designer.cs">
       <DependentUpon>UserControlChucNang.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlDanhSachTaiKhoan.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlDanhSachTaiKhoan.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlDanhSachTaiKhoan.Designer.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlDanhSachTaiKhoan.Designer.cs">
       <DependentUpon>UserControlDanhSachTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlThongKe.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlLichSuThayDoi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Login\UserControlAdmin\UserControlThongKe.Designer.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlLichSuThayDoi.Designer.cs">
+      <DependentUpon>UserControlLichSuThayDoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserControlAdmin\UserControlThongKe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Admin\UserControlAdmin\UserControlThongKe.Designer.cs">
       <DependentUpon>UserControlThongKe.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThemvaSuaKH.cs">
+    <Compile Include="Staff\ThemvaSuaKH.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThemvaSuaKH.Designer.cs">
+    <Compile Include="Staff\ThemvaSuaKH.Designer.cs">
       <DependentUpon>ThemvaSuaKH.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Staff\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Staff\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Bar\UserControlDanhSachKhachHang.resx">
+    <EmbeddedResource Include="Staff\frmHoaDon.resx">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff\frmThemKH.resx">
+      <DependentUpon>frmThemKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff\UserControlStaff\UserControlDanhSachKhachHang.resx">
       <DependentUpon>UserControlDanhSachKhachHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bar\UserControlDatPhong.resx">
+    <EmbeddedResource Include="Staff\UserControlStaff\UserControlDatPhong.resx">
       <DependentUpon>UserControlDatPhong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bar\UserControlTaiKhoan.resx">
+    <EmbeddedResource Include="Staff\UserControlStaff\UserControlTaiKhoan.resx">
       <DependentUpon>UserControlTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bar\UserControlThongKe.resx">
+    <EmbeddedResource Include="Staff\UserControlStaff\UserControlThongKe.resx">
       <DependentUpon>UserControlThongKe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\frmAdmin.resx">
+    <EmbeddedResource Include="Admin\frmAdmin.resx">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\UserControlAdmin\UserControlAdmin.resx">
-      <DependentUpon>UserControlAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlChucNang.resx">
+      <DependentUpon>UserControlChucNang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThemvaSuaKH.resx">
+    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlDanhSachTaiKhoan.resx">
+      <DependentUpon>UserControlDanhSachTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlLichSuThayDoi.resx">
+      <DependentUpon>UserControlLichSuThayDoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlThongKe.resx">
+      <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff\ThemvaSuaKH.resx">
       <DependentUpon>ThemvaSuaKH.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Staff\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

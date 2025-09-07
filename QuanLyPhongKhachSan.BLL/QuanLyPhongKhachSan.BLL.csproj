@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\KhachHangService.cs" />
     <Compile Include="Services\PhongService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaiKhoanService.cs" />
+    <Compile Include="Services\TaiKhoanService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuanLyPhongKhachSan.DAL\QuanLyPhongKhachSan.DAL.csproj">

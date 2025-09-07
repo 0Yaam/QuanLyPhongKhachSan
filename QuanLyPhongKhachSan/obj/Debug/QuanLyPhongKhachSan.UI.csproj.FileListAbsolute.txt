@@ -8,7 +8,6 @@ C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\bin\Debu
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.UI.csproj.AssemblyReference.cache
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlDanhSachKhachHang.resources
-C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlDatPhong.resources
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlTaiKhoan.resources
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlThongKe.resources
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.frmThemvaSuaKH.resources
@@ -19,7 +18,13 @@ C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debu
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPh.DF605182.Up2Date
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.exe
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.pdb
-C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.exe.config
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.frmLogin.resources
 C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.frmAdmin.resources
-C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlAdmin.resources
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.exe.config
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlLichSuThayDoi.resources
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlThongKe.resources
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlChucNang.resources
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlDanhSachTaiKhoan.resources
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Staff.UserControlStaff.UserControlDatPhong.resources
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.frmHoaDon.resources
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Staff.frmThemKH.resources

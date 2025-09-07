@@ -1,5 +1,6 @@
 ﻿using Guna.UI2.WinForms;
 using QuanLyPhongKhachSan.Bar;
+using QuanLyPhongKhachSan.Staff.UserControlStaff;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -17,7 +18,6 @@ namespace QuanLyPhongKhachSan
         public Form1()
         {
             InitializeComponent();
-            // Khởi tạo các instance lần đầu
             datPhongInstance = new UserControlDatPhong();
             danhSachKhachHangInstance = new UserControlDanhSachKhachHang();
             thongKeInstance = new UserControlThongKe();

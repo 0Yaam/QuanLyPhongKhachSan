@@ -1,6 +1,6 @@
 ﻿namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 {
-    partial class UserControlThongKe
+    partial class UserControlDanhSachTaiKhoan
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // UserControlDanhSachTaiKhoan
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "UserControlDanhSachTaiKhoan";
+            this.Size = new System.Drawing.Size(612, 358);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 {
-    public partial class UserControlAdmin : UserControl
+    public partial class UserControlLichSuThayDoi : UserControl
     {
-        public UserControlAdmin()
+        public UserControlLichSuThayDoi()
         {
             InitializeComponent();
         }

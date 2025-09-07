@@ -14,9 +14,8 @@ namespace QuanLyPhongKhachSan.DAL.OL
         public string SDT { get; set; }
 
         public KhachHang() { }
-        public KhachHang(int maKH, string hoTen, string cccd, string sdt)
+        public KhachHang(string hoTen, string cccd, string sdt)
         {
-            MaKH = maKH;
             HoTen = hoTen;
             CCCD = cccd;
             SDT = sdt;

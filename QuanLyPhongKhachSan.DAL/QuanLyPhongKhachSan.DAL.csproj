@@ -53,6 +53,7 @@
     <Compile Include="OL\HoaDon.cs" />
     <Compile Include="OL\KhachHang.cs" />
     <Compile Include="OL\Phong.cs" />
+    <Compile Include="OL\RoomBookingInfo.cs" />
     <Compile Include="OL\TaiKhoan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
