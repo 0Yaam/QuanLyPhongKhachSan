@@ -357,7 +357,6 @@
             this.Name = "frmThemvaSuaKH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm và sửa khách hàng";
-            this.Load += new System.EventHandler(this.frmThemvaSuaKH_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
