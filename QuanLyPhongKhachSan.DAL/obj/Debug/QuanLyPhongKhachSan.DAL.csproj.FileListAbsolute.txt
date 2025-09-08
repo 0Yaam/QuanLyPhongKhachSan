@@ -1,0 +1,12 @@
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\source\repos\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan-feat-multiselect\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
