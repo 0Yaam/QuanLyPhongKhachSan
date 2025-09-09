@@ -223,36 +223,53 @@ namespace QuanLyPhongKhachSan.Staff
         {
             try
             {
-                // Chỉ in khi các phòng thuộc cùng 1 KH (bạn đã set _preMaKH khi mở form)
                 if (_preMaKH <= 0)
                 {
-                    MessageBox.Show("Vui lòng chọn các phòng thuộc cùng 1 khách hàng để in hoá đơn.");
+                    MessageBox.Show("Vui lòng chọn khách hàng hợp lệ.");
                     return;
                 }
 
-                // Khoảng ngày in: dùng DTP trên form
+                // Khoảng ngày in
                 DateTime tu = dtpNgayNhan.Value.Date;
                 DateTime den = dtpNgayTraDuKien.Value.Date;
                 if (den <= tu) den = tu.AddDays(1);
                 int soNgay = (den - tu).Days;
 
-                // Tên KH
+                // Thông tin KH
                 var kh = _khService.LayKhachHangTheoMaKH(_preMaKH);
                 string tenKH = kh?.HoTen ?? "";
 
-                // Build danh sách dòng từ _items (mỗi phòng 1 dòng)
+                // Build các dòng in + gom MaDat
                 var lines = new List<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal TienCoc, decimal GiaPhong)>();
+                var bookingIds = new List<int>();
+                decimal tongAll = 0m;
+                int skipped = 0;
 
                 foreach (var it in _items)
                 {
                     var room = it.Room;
-                    if (room == null) continue;
+                    if (room == null) { skipped++; continue; }
 
-                    // nếu phòng có booking khác KH thì bỏ qua
-                    if (it.Booking != null && it.Booking.MaKH != _preMaKH) continue;
+                    // Lấy booking: ưu tiên it.Booking, nếu null thì hỏi DB
+                    DatPhong bk = it.Booking;
+                    if (bk == null)
+                    {
+                        bk = _phongService.LayDatPhongTheoMaPhong(room.MaPhong);
+                    }
+                    if (bk == null || bk.MaKH != _preMaKH)
+                    {
+                        skipped++;
+                        continue;
+                    }
 
+                    // Tính tiền theo DTP form
                     decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out var g) ? g : room.Gia;
-                    decimal coc = (it.Booking?.TienCoc > 0 ? it.Booking.TienCoc : 200000m);
+                    decimal coc = (bk.TienCoc > 0 ? bk.TienCoc : 200000m);
+                    decimal tienPhong = soNgay * gia;
+                    decimal tongTien = tienPhong + coc;
+
+                    tongAll += tongTien;
+                    bookingIds.Add(bk.MaDat);
 
                     lines.Add((
                         Phong: room.SoPhong.ToString(),
@@ -264,31 +281,70 @@ namespace QuanLyPhongKhachSan.Staff
                     ));
                 }
 
-                if (lines.Count == 0)
+                if (bookingIds.Count == 0)
                 {
-                    MessageBox.Show("Không có phòng hợp lệ để in hoá đơn.");
+                    MessageBox.Show("Không tìm thấy đặt phòng (MaDat) cho các phòng đã chọn. Hãy lưu đặt phòng trước khi in.");
                     return;
                 }
 
+                // Dùng 1 MaDat đại diện (vì cột MaDat đang NOT NULL)
+                int maDatDaiDien = bookingIds.Min();
+
+                // 1) Lưu hóa đơn
+                var hoaDon = new HoaDon
+                {
+                    MaDat = maDatDaiDien,
+                    NgayLap = DateTime.Now,
+                    LoaiHoaDon = "Lần 1",      // khớp constraint
+                    TongThanhToan = 0,         // cập nhật sau
+                    GhiChu = (skipped > 0) ? $"Bỏ qua {skipped} phòng không có đặt phòng phù hợp" : ""
+                };
+                var hdSvc = new HoaDonService();
+                int maHD = hdSvc.ThemVaLayMa(hoaDon);
+                if (maHD <= 0)
+                {
+                    MessageBox.Show("Không lưu được hóa đơn.");
+                    return;
+                }
+
+                // 2) Lưu chi tiết
+                var ctSvc = new ChiTietHoaDonService();
+                foreach (var ln in lines)
+                {
+                    var ct = new QuanLyPhongKhachSan.DAL.OL.ChiTietHoaDon
+                    {
+                        MaHD = maHD,
+                        TenDichVu = $"Phòng {ln.Phong} ({ln.SoNgay} đêm x {ln.GiaPhong:N0}) + cọc",
+                        SoLuong = 1,
+                        Gia = ln.SoNgay * ln.GiaPhong + ln.TienCoc
+                    };
+                    ctSvc.Them(ct);
+                }
+
+                // 3) Cập nhật tổng tiền hóa đơn
+                hdSvc.CapNhatTongTien(maHD, tongAll);
+
+                // 4) Mở form in
                 using (var f = new frmHoaDon1())
                 {
                     f.BindHeader(
                         loaiHD: "Lần 1",
                         ngayLap: DateTime.Now,
                         nhanVien: Environment.UserName,
-                        maHD: 0,          // nếu chưa lưu DB, tạm để 0
+                        maHD: maHD,
                         tenKH: tenKH
                     );
-
                     f.BindChiTietNhieuPhong(lines);
                     f.ShowDialog(this);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
+                MessageBox.Show("Lỗi in hóa đơn: " + ex.Message);
             }
         }
+
+
 
     }
 }

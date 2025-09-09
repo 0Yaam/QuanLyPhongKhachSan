@@ -22,6 +22,8 @@ namespace QuanLyPhongKhachSan
         private decimal _tienThue = 0m;
         private decimal _tamTinh = 0m;
 
+        private readonly ChiTietHoaDonService _cthdService = new ChiTietHoaDonService();
+
         public frmThemvaSuaKH(Phong phong)
         {
             InitializeComponent();
@@ -132,7 +134,18 @@ namespace QuanLyPhongKhachSan
         public decimal TienCoc => TienCocMacDinh;
         public decimal TienThue => _tienThue;
         public decimal TamTinh => _tamTinh;
-        public string TrangThai => cbDaThue.Checked ? "Đã đặt" : _phong.TrangThai;
+        public string TrangThai
+        {
+            get
+            {
+                var today = DateTime.Today;
+                var nhan = dtpNgayNhan.Value.Date;
+                var tra = dtpNgayTraDuKien.Value.Date;
+                if (today >= nhan && today < tra) return "Đang sử dụng";
+                return "Đã đặt";
+            }
+        }
+
 
         private void btnHoanThanh_Click(object sender, EventArgs e)
         {
@@ -175,9 +188,9 @@ namespace QuanLyPhongKhachSan
                 }
 
                 _maDatHienTai = dat.MaDat;
-
                 string loaiHDDb = "Lần 1";
 
+                // Tính toán chi tiết
                 DateTime tuNgay = dat.NgayNhan.Date;
                 DateTime denNgay = dat.NgayTraDuKien.Date;
                 if (denNgay <= tuNgay) denNgay = tuNgay.AddDays(1);
@@ -186,32 +199,71 @@ namespace QuanLyPhongKhachSan
                 decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
                 decimal tienCoc = dat.TienCoc > 0 ? dat.TienCoc : 200_000m;
 
+                decimal tienPhong = soNgay * giaPhong;
+                decimal tongTien = tienPhong + tienCoc;
+
+                // Lưu HÓA ĐƠN trước
+                var hd = new HoaDon
+                {
+                    MaDat = dat.MaDat,
+                    NgayLap = DateTime.Now,
+                    LoaiHoaDon = loaiHDDb,      // đảm bảo khớp constraint
+                    TongThanhToan = tongTien,
+                    GhiChu = null
+                };
+
+                int maHD = _hoaDonService.ThemVaTraMa(hd);
+                if (maHD <= 0)
+                {
+                    MessageBox.Show("Lưu hóa đơn thất bại!");
+                    return;
+                }
+
+                // Lưu CHI TIẾT HÓA ĐƠN (2 dòng: Tiền phòng, Tiền cọc)
+                // 1) Tiền phòng
+                _cthdService.Them(new ChiTietHoaDon
+                {
+                    MaHD = maHD,
+                    TenDichVu = $"Tiền phòng - Phòng {_phong.SoPhong} ({soNgay} đêm x {giaPhong:N0})",
+                    SoLuong = soNgay,
+                    Gia = giaPhong
+                });
+
+                // 2) Tiền cọc
+                _cthdService.Them(new ChiTietHoaDon
+                {
+                    MaHD = maHD,
+                    TenDichVu = $"Tiền cọc - Phòng {_phong.SoPhong}",
+                    SoLuong = 1,
+                    Gia = tienCoc
+                });
+
+                // Lấy tên khách hàng
                 var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
                 string tenKH = kh?.HoTen ?? "";
 
+                // Mở form HĐ & hiển thị MaHD mới + 1 dòng ở dgvCTHD
                 using (var f = new frmHoaDon1())
                 {
-                    // ----- GỌI THEO API MỚI -----
                     f.BindHeader(
                         loaiHD: loaiHDDb,
                         ngayLap: DateTime.Now,
                         nhanVien: _tenNhanVien,
-                        maHD: dat.MaDat,     // tạm dùng MaDat làm mã hiển thị
+                        maHD: maHD,              // << MaHD mới tạo trong DB
                         tenKH: tenKH
                     );
 
-                    // 1 phòng -> truyền 1 phần tử (Phong là SỐ PHÒNG hiển thị ở cột đầu tiên)
                     f.BindChiTietNhieuPhong(new[]
                     {
-                (
-                    Phong: _phong.SoPhong.ToString(),
-                    TuNgay: tuNgay,
-                    DenNgay: denNgay,
-                    SoNgay: soNgay,
-                    TienCoc: tienCoc,
-                    GiaPhong: giaPhong
-                )
-            });
+                        (
+                            Phong: _phong.SoPhong.ToString(),
+                            TuNgay: tuNgay,
+                            DenNgay: denNgay,
+                            SoNgay: soNgay,
+                            TienCoc: tienCoc,
+                            GiaPhong: giaPhong
+                        )
+                    });
 
                     f.ShowDialog(this);
                 }

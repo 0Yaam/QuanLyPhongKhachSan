@@ -22,6 +22,9 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         {
             InitializeComponent();
 
+            // bảo đảm Load chạy khi control hiển thị
+            this.Load += UserControlDatPhong_Load;
+
             if (dtpNgayHienTai != null) dtpNgayHienTai.Value = DateTime.Now;
             if (txtSoPhong != null) txtSoPhong.PlaceholderText = "Số phòng";
             if (cbLoaiPhong != null)
@@ -31,7 +34,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
             if (btnThemKH != null) btnThemKH.Click += btnThemKH_Click;
 
-            // nhận phím Delete (set focusable + handler)
+            // nhận phím Delete
             this.TabStop = true;
             this.KeyDown += UserControl_KeyDown;
 
@@ -44,7 +47,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
         private void UserControlDatPhong_Load(object sender, EventArgs e)
         {
-            // bắt phím Delete ở level Form để chắc ăn
+            // bắt phím Delete ở Form
             var frm = this.FindForm();
             if (frm != null)
             {
@@ -56,7 +59,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             LoadPhongFromDB();
         }
 
-        // =============== LOAD PHÒNG ===============
         private void LoadPhongFromDB()
         {
             _selectedRoomIds.Clear();
@@ -75,7 +77,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             flpContain.AutoScroll = true;
         }
 
-        // =============== TẠO PANEL PHÒNG ===============
         private Guna2Panel TaoPhongMoi(Phong phong)
         {
             var pnl = new Guna2Panel
@@ -132,14 +133,14 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             // Hiện khách (mới nhất chưa trả)
             HienKhachLenPanel(phong, lblKhach, pnl);
 
-            // Click trái 1 lần: chọn/bỏ chọn (và focus để nhận phím)
+            // Click trái 1 lần: chọn/bỏ chọn
             pnl.MouseDown += (s, e) =>
             {
                 if (e.Button == MouseButtons.Left)
                     ToggleSelect((Guna2Panel)s);
             };
 
-            // DoubleClick: ép đơn chọn panel này rồi mở form đơn phòng
+            // DoubleClick: mở form đơn phòng
             pnl.DoubleClick += (s, e) => HandleDoubleClickOpen(pnl);
 
             // Child controls cũng nhận hành vi như panel
@@ -153,7 +154,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 child.DoubleClick += (s, e) => HandleDoubleClickOpen(pnl);
             }
 
-            // Context menu "Xóa" – hành xử giống Delete
+            // Context menu "Xóa"
             var menu = new ContextMenuStrip();
             menu.Items.Add("Xóa").Click += (s, e) =>
             {
@@ -165,7 +166,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             return pnl;
         }
 
-        // =============== LẤY BOOKING ĐỂ HIỂN THỊ ===============
         private DatPhong GetDatPhongDeHien(int maPhong)
         {
             var dat = phongService.LayDatPhongTheoMaPhong(maPhong);
@@ -213,7 +213,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
         }
 
-        // =============== DOUBLE CLICK ===============
         private void HandleDoubleClickOpen(Guna2Panel pnl)
         {
             if (pnl == null) return;
@@ -237,7 +236,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             MoFormKhachHang(pnl);
         }
 
-        // =============== SELECT UI ===============
         private void SetSelected(Guna2Panel pnl, bool selected)
         {
             pnl.BorderThickness = selected ? 3 : 0;
@@ -279,7 +277,12 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             return result;
         }
 
-        // =============== MỞ FORM 1 PHÒNG (giữ nguyên logic bạn đang dùng) ===============
+        private static string ComputeTrangThai(DateTime ngayNhan, DateTime ngayTraDuKien)
+        {
+            var today = DateTime.Today;
+            return (today >= ngayNhan.Date && today < ngayTraDuKien.Date) ? "Đang sử dụng" : "Đã đặt";
+        }
+
         private void MoFormKhachHang(Guna2Panel panelPhong)
         {
             if (panelPhong == null) return;
@@ -300,38 +303,42 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                         DateTime ngayTraDuKien = frmthemvasua.NgayTraDuKien;
                         decimal tienCoc = frmthemvasua.TienCoc;
                         decimal tienThue = frmthemvasua.TienThue;
-                        string trangThai = frmthemvasua.TrangThai;
 
                         int maKh = khachHangService.UpsertKhachHang(ten, cccd, sdt);
-                        if (maKh > 0)
+                        if (maKh <= 0)
                         {
-                            var datPhong = new DatPhong(
-                                0, maKh, phong.MaPhong,
-                                ngayNhan, ngayTraDuKien, null,
-                                tienCoc, tienThue, trangThai
-                            );
+                            MessageBox.Show("Lưu thông tin khách hàng thất bại!");
+                            return;
+                        }
 
-                            int maDatPhong = phongService.ThemDatPhong(datPhong);
-                            if (maDatPhong > 0)
-                            {
-                                var lbl = panelPhong.Controls.Find("lblKhach", true).FirstOrDefault() as Label;
-                                if (lbl != null)
-                                    lbl.Text = (string.IsNullOrEmpty(ten) && string.IsNullOrEmpty(sdt)) ? "" : ("Khách: " + ten + " - " + sdt);
+                        string trangThai = ComputeTrangThai(ngayNhan, ngayTraDuKien);
 
-                                panelPhong.FillColor = (trangThai == "Đang sử dụng")
-                                    ? Color.FromArgb(255, 235, 150)
-                                    : (trangThai == "Đã đặt")
-                                        ? Color.FromArgb(180, 220, 255)
-                                        : Color.FromArgb(255, 192, 192);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Lưu thông tin đặt phòng thất bại!");
-                            }
+                        var datPhong = new DatPhong(
+                            0, maKh, phong.MaPhong,
+                            ngayNhan, ngayTraDuKien, null,
+                            tienCoc, tienThue, trangThai
+                        );
+
+                        int maDatPhong = phongService.ThemDatPhong(datPhong);
+                        if (maDatPhong > 0)
+                        {
+                            // cập nhật label & màu nhanh
+                            var lbl = panelPhong.Controls.Find("lblKhach", true).FirstOrDefault() as Label;
+                            if (lbl != null)
+                                lbl.Text = (string.IsNullOrEmpty(ten) && string.IsNullOrEmpty(sdt)) ? "" : ("Khách: " + ten + " - " + sdt);
+
+                            panelPhong.FillColor = (trangThai == "Đang sử dụng")
+                                ? Color.FromArgb(255, 235, 150)
+                                : (trangThai == "Đã đặt")
+                                    ? Color.FromArgb(180, 220, 255)
+                                    : Color.FromArgb(255, 192, 192);
+
+                            // đồng bộ lại từ DB (tuỳ chọn)
+                            RefreshPhongPanel(panelPhong);
                         }
                         else
                         {
-                            MessageBox.Show("Lưu thông tin khách hàng thất bại!");
+                            MessageBox.Show("Lưu thông tin đặt phòng thất bại!");
                         }
                     }
                 }
@@ -342,10 +349,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
         }
 
-        // =============== NÚT THÊM KH (giữ logic hiện tại của bạn) ===============
-
-
-        // =============== XOÁ HÀNG LOẠT (Delete / ContextMenu) ===============
         private void UserControl_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -389,7 +392,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             if (MessageBox.Show(msg, "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
-            // 3) Thực thi xóa
             foreach (var id in ids)
             {
                 // xóa DB
@@ -419,7 +421,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
         }
 
-        // =============== THÊM PHÒNG MỚI (giữ nguyên) ===============
         private void btnThem_Click(object sender, EventArgs e)
         {
             if (cbLoaiPhong.SelectedIndex == -1)
@@ -428,8 +429,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 return;
             }
 
-            int soPhong;
-            if (!int.TryParse(txtSoPhong.Text, out soPhong) || soPhong <= 0)
+            if (!int.TryParse(txtSoPhong.Text, out int soPhong) || soPhong <= 0)
             {
                 MessageBox.Show("Vui lòng nhập số phòng hợp lệ!!");
                 return;
@@ -541,14 +541,35 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 MessageBox.Show($"Lỗi khi mở form: {ex.Message}");
             }
         }
-        private void btnThemKH_Click_1(object sender, EventArgs e)
-        {
 
+        private void RefreshPhongPanel(Guna2Panel panelPhong)
+        {
+            if (panelPhong == null) return;
+            var phong = panelPhong.Tag as Phong;
+            if (phong == null) return;
+
+            var lbl = panelPhong.Controls.Find("lblKhach", true)
+                                         .OfType<Label>()
+                                         .FirstOrDefault();
+            if (lbl == null) return;
+
+            HienKhachLenPanel(phong, lbl, panelPhong);
+        }
+
+        public void RefreshPhongById(int maPhong)
+        {
+            foreach (Control c in flpContain.Controls)
+            {
+                if (c is Guna2Panel pnl && pnl.Tag is Phong p && p.MaPhong == maPhong)
+                {
+                    RefreshPhongPanel(pnl);
+                    break;
+                }
+            }
         }
     }
 }
 
-// =================== GIÁ PHÒNG CONFIG ===================
 public static class PhongGiaConfig
 {
     public static Dictionary<string, decimal> GiaPhong = new Dictionary<string, decimal>

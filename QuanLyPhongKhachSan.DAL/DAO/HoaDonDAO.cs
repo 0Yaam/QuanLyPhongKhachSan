@@ -46,23 +46,153 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 conn.Open();
                 const string sql = @"
 INSERT INTO HoaDon (MaDat, NgayLap, LoaiHoaDon, TongThanhToan, GhiChu)
-OUTPUT INSERTED.MaHD
-VALUES (@MaDat, @NgayLap, @LoaiHoaDon, @TongThanhToan, @GhiChu);";
+VALUES (@MaDat, @NgayLap, @LoaiHoaDon, @TongThanhToan, @GhiChu);
+SELECT CAST(SCOPE_IDENTITY() AS int);";  // <<< an toàn hơn
+
                 using (var cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = hd.MaDat;
+                    // MaDat: nếu <=0 thì để NULL
+                    var pMaDat = cmd.Parameters.Add("@MaDat", SqlDbType.Int);
+                    pMaDat.Value = (hd.MaDat > 0) ? (object)hd.MaDat : DBNull.Value;
+
                     cmd.Parameters.Add("@NgayLap", SqlDbType.DateTime2).Value = hd.NgayLap;
-                    cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 100).Value = (object)hd.LoaiHoaDon ?? DBNull.Value;
+
+                    // khớp cột NVARCHAR(20) của bạn
+                    cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value =
+                        string.IsNullOrWhiteSpace(hd.LoaiHoaDon) ? (object)DBNull.Value : hd.LoaiHoaDon;
 
                     var pTong = cmd.Parameters.Add("@TongThanhToan", SqlDbType.Decimal);
-                    pTong.Precision = 18; pTong.Scale = 2; pTong.Value = (object)hd.TongThanhToan ?? DBNull.Value;
+                    pTong.Precision = 18; pTong.Scale = 2;
+                    pTong.Value = hd.TongThanhToan.HasValue ? (object)hd.TongThanhToan.Value : DBNull.Value;
 
-                    cmd.Parameters.Add("@GhiChu", SqlDbType.NVarChar, 500).Value = (object)hd.GhiChu ?? DBNull.Value;
+                    cmd.Parameters.Add("@GhiChu", SqlDbType.NVarChar, 500).Value =
+                        string.IsNullOrWhiteSpace(hd.GhiChu) ? (object)DBNull.Value : hd.GhiChu;
 
-                    var id = cmd.ExecuteScalar();
-                    return id == null ? 0 : Convert.ToInt32(id);
+                    var idObj = cmd.ExecuteScalar();
+                    return (idObj == null || idObj == DBNull.Value) ? 0 : Convert.ToInt32(idObj);
                 }
             }
         }
+
+        public int ThemVaTraMa(HoaDon hd)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connStr))
+                {
+                    conn.Open();
+                    const string sql = @"
+INSERT INTO HoaDon (MaDat, NgayLap, LoaiHoaDon, TongThanhToan, GhiChu)
+OUTPUT INSERTED.MaHD
+VALUES (@MaDat, @NgayLap, @LoaiHoaDon, @TongThanhToan, @GhiChu);";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        var pMaDat = cmd.Parameters.Add("@MaDat", SqlDbType.Int);
+                        pMaDat.Value = (hd.MaDat > 0) ? (object)hd.MaDat : DBNull.Value; // << đổi ở đây
+
+                        cmd.Parameters.Add("@NgayLap", SqlDbType.DateTime2).Value = hd.NgayLap;
+                        cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value =
+                            string.IsNullOrWhiteSpace(hd.LoaiHoaDon) ? (object)DBNull.Value : hd.LoaiHoaDon;
+
+                        var pTong = cmd.Parameters.Add("@TongThanhToan", SqlDbType.Decimal);
+                        pTong.Precision = 18; pTong.Scale = 2;
+                        pTong.Value = hd.TongThanhToan.HasValue ? (object)hd.TongThanhToan.Value : DBNull.Value;
+
+                        cmd.Parameters.Add("@GhiChu", SqlDbType.NVarChar, 500).Value =
+                            string.IsNullOrWhiteSpace(hd.GhiChu) ? (object)DBNull.Value : hd.GhiChu;
+
+                        var id = cmd.ExecuteScalar();
+                        return id == null ? 0 : Convert.ToInt32(id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi ThemVaTraMa HoaDon: " + ex.Message);
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// Thêm hoá đơn và trả về MaHD mới.
+        /// Bảng HoaDon gồm: MaHD (PK, identity), MaDat (int, cho phép null/0), NgayLap (datetime), LoaiHoaDon (nvarchar), TongThanhToan (decimal, null), GhiChu (nvarchar, null)
+        /// </summary>
+        public int Them(HoaDon hd)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connStr))
+                {
+                    conn.Open();
+                    const string sql = @"
+INSERT INTO HoaDon (MaDat, NgayLap, LoaiHoaDon, TongThanhToan, GhiChu)
+OUTPUT INSERTED.MaHD
+VALUES (@MaDat, @NgayLap, @LoaiHoaDon, @TongThanhToan, @GhiChu);";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        var pMaDat = cmd.Parameters.Add("@MaDat", SqlDbType.Int);
+                        pMaDat.Value = (hd.MaDat > 0) ? (object)hd.MaDat : DBNull.Value; // << đổi ở đây
+
+                        cmd.Parameters.Add("@NgayLap", SqlDbType.DateTime).Value = hd.NgayLap;
+
+                        cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value =
+                            string.IsNullOrWhiteSpace(hd.LoaiHoaDon) ? (object)DBNull.Value : hd.LoaiHoaDon;
+
+                        var pTong = cmd.Parameters.Add("@TongThanhToan", SqlDbType.Decimal);
+                        pTong.Precision = 18; pTong.Scale = 2;
+                        pTong.Value = hd.TongThanhToan.HasValue ? (object)hd.TongThanhToan.Value : DBNull.Value;
+
+                        cmd.Parameters.Add("@GhiChu", SqlDbType.NVarChar, 500).Value =
+                            string.IsNullOrWhiteSpace(hd.GhiChu) ? (object)DBNull.Value : hd.GhiChu;
+
+                        var id = cmd.ExecuteScalar();
+                        return (id == null) ? 0 : Convert.ToInt32(id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi HoaDonDAO.Them: " + ex.Message);
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Cập nhật tổng tiền cho hoá đơn
+        /// </summary>
+        public int CapNhatTongTien(int maHD, decimal tong)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connStr))
+                {
+                    conn.Open();
+                    const string sql = @"
+UPDATE HoaDon
+SET TongThanhToan = @Tong
+WHERE MaHD = @MaHD;";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        var pTong = cmd.Parameters.Add("@Tong", SqlDbType.Decimal);
+                        pTong.Precision = 18; pTong.Scale = 2; pTong.Value = tong;
+
+                        cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = maHD;
+
+                        return cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi HoaDonDAO.CapNhatTongTien: " + ex.Message);
+                return 0;
+            }
+        }
+
+
+
+
+
     }
 }

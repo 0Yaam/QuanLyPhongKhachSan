@@ -1,5 +1,4 @@
-﻿//Phongservice
-using QuanLyPhongKhachSan.DAL.DAO;
+﻿using QuanLyPhongKhachSan.DAL.DAO;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,9 @@ namespace QuanLyPhongKhachSan.BLL.Services
 {
     public class PhongService
     {
-        private PhongDAO dao = new PhongDAO();
+        private readonly PhongDAO dao = new PhongDAO();
         private readonly DatPhongDAO _repoDatPhong = new DatPhongDAO();
-        private readonly PhongDAO _repoPhong = new PhongDAO(); // nếu bạn đã có
+        private readonly PhongDAO _repoPhong = new PhongDAO();
 
         public List<Phong> LayDanhSach()
         {
@@ -42,9 +41,10 @@ namespace QuanLyPhongKhachSan.BLL.Services
             dao.Xoa(maPhong);
         }
 
+        // SỬA: dùng DatPhongDAO để lấy booking theo phòng
         public DatPhong LayDatPhongTheoMaPhong(int maPhong)
         {
-            return dao.LayDatPhongTheoMaPhong(maPhong);
+            return _repoDatPhong.LayDatPhongTheoMaPhong(maPhong);
         }
 
         public int ThemDatPhong(DatPhong datPhong)
@@ -56,6 +56,7 @@ namespace QuanLyPhongKhachSan.BLL.Services
             }
             return dao.ThemDatPhong(datPhong);
         }
+
         public bool KiemTraPhongTrungLichExcept(int maPhong, DateTime nhan, DateTime tra, int excludeMaDat)
         {
             return _repoDatPhong.KiemTraPhongTrungLichExcept(maPhong, nhan, tra, excludeMaDat);
@@ -68,8 +69,5 @@ namespace QuanLyPhongKhachSan.BLL.Services
 
         public bool KiemTraPhongTrungLich(int maPhong, DateTime nhan, DateTime tra)
             => _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
-
-
-
     }
 }
