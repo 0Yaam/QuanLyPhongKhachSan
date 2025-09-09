@@ -1,8 +1,8 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.DAL.OL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using QuanLyPhongKhachSan.DAL.OL;
 
 namespace QuanLyPhongKhachSan.DAL.DAO
 {
@@ -44,7 +44,7 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi LayDanhSach DatPhong: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Lỗi LayDanhSach DatPhong: {ex.Message}");
             }
             return danhSach;
         }
@@ -53,46 +53,45 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         {
             try
             {
-                using (var conn = new SqlConnection(_connStr))
+                using (SqlConnection conn = new SqlConnection(_connStr))
                 {
                     conn.Open();
-                    const string sql = @"
-SELECT TOP 1 MaDat, MaKH, MaPhong, NgayNhan, NgayTraDuKien, NgayTraThucTe, TienCoc, TienThue, TrangThai
-FROM DatPhong
-WHERE MaPhong = @MaPhong
-ORDER BY NgayNhan DESC;";
+                    string sql = @"
+                SELECT TOP 1 MaDat, MaKH, MaPhong, NgayNhan, NgayTraDuKien, NgayTraThucTe, TienCoc, TienThue, TrangThai
+                FROM DatPhong
+                WHERE MaPhong = @MaPhong
+                  AND NgayTraThucTe IS NULL
+                ORDER BY NgayNhan DESC";
                     using (var cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.Add("@MaPhong", SqlDbType.Int).Value = maPhong;
-                        using (var rd = cmd.ExecuteReader())
+                        cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            if (rd.Read())
+                            if (!reader.Read()) return null;
+
+                            return new DatPhong
                             {
-                                return new DatPhong
-                                {
-                                    MaDat = rd.GetInt32(0),
-                                    MaKH = rd.GetInt32(1),
-                                    MaPhong = rd.GetInt32(2),
-                                    NgayNhan = rd.GetDateTime(3),
-                                    NgayTraDuKien = rd.GetDateTime(4),
-                                    NgayTraThucTe = rd.IsDBNull(5) ? (DateTime?)null : rd.GetDateTime(5),
-                                    TienCoc = rd.GetDecimal(6),
-                                    TienThue = rd.GetDecimal(7),
-                                    TrangThai = rd.IsDBNull(8) ? null : rd.GetString(8)
-                                };
-                            }
+                                MaDat = reader.GetInt32(0),
+                                MaKH = reader.GetInt32(1),
+                                MaPhong = reader.GetInt32(2),
+                                NgayNhan = reader.GetDateTime(3),
+                                NgayTraDuKien = reader.GetDateTime(4),
+                                NgayTraThucTe = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5),
+                                TienCoc = reader.GetDecimal(6),
+                                TienThue = reader.GetDecimal(7),
+                                TrangThai = reader.IsDBNull(8) ? null : reader.GetString(8)
+                            };
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi LayDatPhongTheoMaPhong: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"LayDatPhongTheoMaPhong(MaPhong={maPhong}): Error: {ex.Message}");
+                throw;
             }
-            return null;
         }
 
-        // Check trùng lịch (ngoại trừ chính booking đang sửa)
         public bool KiemTraPhongTrungLichExcept(int maPhong, DateTime nhan, DateTime tra, int excludeMaDat)
         {
             try
@@ -123,12 +122,11 @@ SELECT CASE WHEN EXISTS (
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi KiemTraPhongTrungLichExcept: " + ex.Message);
-                return true; // an toàn: coi như bị trùng để tránh ghi sai
+                System.Diagnostics.Debug.WriteLine($"KiemTraPhongTrungLichExcept(MaPhong={maPhong}, ExcludeMaDat={excludeMaDat}): Error: {ex.Message}");
+                return true;
             }
         }
 
-        // Cập nhật đặt phòng
         public int Update(DatPhong dat)
         {
             try
@@ -151,22 +149,18 @@ WHERE MaDat = @MaDat;";
                         cmd.Parameters.Add("@MaKH", SqlDbType.Int).Value = dat.MaKH;
                         cmd.Parameters.Add("@NgayNhan", SqlDbType.DateTime2).Value = dat.NgayNhan;
                         cmd.Parameters.Add("@NgayTraDuKien", SqlDbType.DateTime2).Value = dat.NgayTraDuKien;
-
                         var pCoc = cmd.Parameters.Add("@TienCoc", SqlDbType.Decimal);
                         pCoc.Precision = 18; pCoc.Scale = 2; pCoc.Value = dat.TienCoc;
-
                         var pThue = cmd.Parameters.Add("@TienThue", SqlDbType.Decimal);
                         pThue.Precision = 18; pThue.Scale = 2; pThue.Value = dat.TienThue;
-
                         cmd.Parameters.Add("@TrangThai", SqlDbType.NVarChar, 50).Value = (object)(dat.TrangThai ?? "Đã đặt");
-
                         return cmd.ExecuteNonQuery(); // >0 là ok
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi Update DatPhong: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Update DatPhong(MaDat={dat.MaDat}): Error: {ex.Message}");
                 return 0;
             }
         }
@@ -180,8 +174,8 @@ WHERE MaDat = @MaDat;";
                     conn.Open();
                     const string sql = @"
 INSERT INTO DatPhong (MaKH, MaPhong, NgayNhan, NgayTraDuKien, NgayTraThucTe, TienCoc, TienThue, TrangThai)
-OUTPUT INSERTED.MaDat
-VALUES (@MaKH, @MaPhong, @NgayNhan, @NgayTraDuKien, @NgayTraThucTe, @TienCoc, @TienThue, @TrangThai);";
+VALUES (@MaKH, @MaPhong, @NgayNhan, @NgayTraDuKien, @NgayTraThucTe, @TienCoc, @TienThue, @TrangThai);
+SELECT CAST(SCOPE_IDENTITY() AS int);";
                     using (var cmd = new SqlCommand(sql, conn))
                     {
                         cmd.Parameters.Add("@MaKH", SqlDbType.Int).Value = dat.MaKH;
@@ -189,23 +183,26 @@ VALUES (@MaKH, @MaPhong, @NgayNhan, @NgayTraDuKien, @NgayTraThucTe, @TienCoc, @T
                         cmd.Parameters.Add("@NgayNhan", SqlDbType.DateTime2).Value = dat.NgayNhan;
                         cmd.Parameters.Add("@NgayTraDuKien", SqlDbType.DateTime2).Value = dat.NgayTraDuKien;
                         cmd.Parameters.Add("@NgayTraThucTe", SqlDbType.DateTime2).Value = (object)dat.NgayTraThucTe ?? DBNull.Value;
-
                         var pCoc = cmd.Parameters.Add("@TienCoc", SqlDbType.Decimal);
                         pCoc.Precision = 18; pCoc.Scale = 2; pCoc.Value = dat.TienCoc;
-
                         var pThue = cmd.Parameters.Add("@TienThue", SqlDbType.Decimal);
                         pThue.Precision = 18; pThue.Scale = 2; pThue.Value = dat.TienThue;
-
                         cmd.Parameters.Add("@TrangThai", SqlDbType.NVarChar, 50).Value = (object)(dat.TrangThai ?? "Đã đặt");
 
+                        System.Diagnostics.Debug.WriteLine($"Them DatPhong: MaKH={dat.MaKH}, MaPhong={dat.MaPhong}, NgayNhan={dat.NgayNhan}, NgayTraDuKien={dat.NgayTraDuKien}, TienCoc={dat.TienCoc}, TienThue={dat.TienThue}, TrangThai={dat.TrangThai}");
                         var id = cmd.ExecuteScalar();
-                        return id == null ? 0 : Convert.ToInt32(id);
+                        if (id == null)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Them DatPhong: ExecuteScalar returned null");
+                            return 0;
+                        }
+                        return Convert.ToInt32(id);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi Them DatPhong: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Lỗi Them DatPhong(MaKH={dat.MaKH}, MaPhong={dat.MaPhong}): {ex.Message}");
                 return 0;
             }
         }
@@ -238,7 +235,7 @@ SELECT CASE WHEN EXISTS (
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi KiemTraPhongTrungLich: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"KiemTraPhongTrungLich(MaPhong={maPhong}): Error: {ex.Message}");
                 return true;
             }
         }

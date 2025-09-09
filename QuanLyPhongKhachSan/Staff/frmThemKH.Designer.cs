@@ -205,6 +205,7 @@
             this.btnHoanThanh.Size = new System.Drawing.Size(92, 36);
             this.btnHoanThanh.TabIndex = 56;
             this.btnHoanThanh.Text = "Hoàn thành";
+            this.btnHoanThanh.Click += new System.EventHandler(this.btnHoanThanh_Click);
             // 
             // frmThemKH
             // 

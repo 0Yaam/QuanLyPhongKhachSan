@@ -7,41 +7,28 @@ namespace QuanLyPhongKhachSan.BLL.Services
 {
     public class PhongService
     {
-        private readonly PhongDAO dao = new PhongDAO();
+        private readonly PhongDAO _dao = new PhongDAO();
         private readonly DatPhongDAO _repoDatPhong = new DatPhongDAO();
-        private readonly PhongDAO _repoPhong = new PhongDAO();
 
         public List<Phong> LayDanhSach()
         {
-            return dao.LayDanhSach();
+            return _dao.LayDanhSach();
         }
 
         public int Them(Phong p)
         {
-            if (p.SoPhong <= 0)
+            if (p.SoPhong <= 0 || string.IsNullOrEmpty(p.LoaiPhong) || p.Gia <= 0)
             {
-                Console.WriteLine("Số phòng phải lớn hơn 0!");
                 return -1;
             }
-            if (string.IsNullOrEmpty(p.LoaiPhong))
-            {
-                Console.WriteLine("Loại phòng không được để trống!");
-                return -1;
-            }
-            if (p.Gia <= 0)
-            {
-                Console.WriteLine("Giá phải lớn hơn 0!");
-                return -1;
-            }
-            return dao.Them(p);
+            return _dao.Them(p);
         }
 
         public void Xoa(int maPhong)
         {
-            dao.Xoa(maPhong);
+            _dao.Xoa(maPhong);
         }
 
-        // SỬA: dùng DatPhongDAO để lấy booking theo phòng
         public DatPhong LayDatPhongTheoMaPhong(int maPhong)
         {
             return _repoDatPhong.LayDatPhongTheoMaPhong(maPhong);
@@ -49,12 +36,15 @@ namespace QuanLyPhongKhachSan.BLL.Services
 
         public int ThemDatPhong(DatPhong datPhong)
         {
-            if (datPhong.MaKH <= 0 || datPhong.MaPhong <= 0 || datPhong.NgayNhan == DateTime.MinValue || datPhong.NgayTraDuKien == DateTime.MinValue)
+            if (datPhong.MaKH <= 0 || datPhong.MaPhong <= 0
+                || datPhong.NgayNhan == DateTime.MinValue
+                || datPhong.NgayTraDuKien == DateTime.MinValue)
             {
-                Console.WriteLine("Thông tin đặt phòng không hợp lệ!");
                 return -1;
             }
-            return dao.ThemDatPhong(datPhong);
+
+            // DÙNG ĐÚNG DAO của bảng DatPhong:
+            return _repoDatPhong.Them(datPhong);
         }
 
         public bool KiemTraPhongTrungLichExcept(int maPhong, DateTime nhan, DateTime tra, int excludeMaDat)
@@ -68,6 +58,8 @@ namespace QuanLyPhongKhachSan.BLL.Services
         }
 
         public bool KiemTraPhongTrungLich(int maPhong, DateTime nhan, DateTime tra)
-            => _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
+        {
+            return _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
+        }
     }
 }

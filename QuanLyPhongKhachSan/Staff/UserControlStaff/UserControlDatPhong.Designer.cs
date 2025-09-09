@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.rdPhongTrong = new System.Windows.Forms.RadioButton();
             this.rdPhongDaDat = new System.Windows.Forms.RadioButton();
-            this.rdPhongDoi = new System.Windows.Forms.RadioButton();
-            this.rdPhongVip = new System.Windows.Forms.RadioButton();
-            this.rdPhongDon = new System.Windows.Forms.RadioButton();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
@@ -56,6 +53,7 @@
             this.dtpNgayHienTai = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
             this.btnTraPhong = new Guna.UI2.WinForms.Guna2Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.guna2Panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -86,39 +84,6 @@
             this.rdPhongDaDat.TabStop = true;
             this.rdPhongDaDat.Text = "Phòng đã đặt";
             this.rdPhongDaDat.UseVisualStyleBackColor = true;
-            // 
-            // rdPhongDoi
-            // 
-            this.rdPhongDoi.AutoSize = true;
-            this.rdPhongDoi.Location = new System.Drawing.Point(7, 49);
-            this.rdPhongDoi.Name = "rdPhongDoi";
-            this.rdPhongDoi.Size = new System.Drawing.Size(89, 22);
-            this.rdPhongDoi.TabIndex = 10;
-            this.rdPhongDoi.TabStop = true;
-            this.rdPhongDoi.Text = "Phòng đôi";
-            this.rdPhongDoi.UseVisualStyleBackColor = true;
-            // 
-            // rdPhongVip
-            // 
-            this.rdPhongVip.AutoSize = true;
-            this.rdPhongVip.Location = new System.Drawing.Point(7, 24);
-            this.rdPhongVip.Name = "rdPhongVip";
-            this.rdPhongVip.Size = new System.Drawing.Size(92, 22);
-            this.rdPhongVip.TabIndex = 9;
-            this.rdPhongVip.TabStop = true;
-            this.rdPhongVip.Text = "Phòng VIP";
-            this.rdPhongVip.UseVisualStyleBackColor = true;
-            // 
-            // rdPhongDon
-            // 
-            this.rdPhongDon.AutoSize = true;
-            this.rdPhongDon.Location = new System.Drawing.Point(7, 77);
-            this.rdPhongDon.Name = "rdPhongDon";
-            this.rdPhongDon.Size = new System.Drawing.Size(92, 22);
-            this.rdPhongDon.TabIndex = 11;
-            this.rdPhongDon.TabStop = true;
-            this.rdPhongDon.Text = "Phòng đơn";
-            this.rdPhongDon.UseVisualStyleBackColor = true;
             // 
             // guna2Panel1
             // 
@@ -156,7 +121,7 @@
             // 
             this.cbLoaiPhong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLoaiPhong.FormattingEnabled = true;
-            this.cbLoaiPhong.Location = new System.Drawing.Point(917, 407);
+            this.cbLoaiPhong.Location = new System.Drawing.Point(917, 359);
             this.cbLoaiPhong.Name = "cbLoaiPhong";
             this.cbLoaiPhong.Size = new System.Drawing.Size(83, 21);
             this.cbLoaiPhong.TabIndex = 16;
@@ -172,7 +137,7 @@
             this.txtSoPhong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSoPhong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSoPhong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSoPhong.Location = new System.Drawing.Point(917, 383);
+            this.txtSoPhong.Location = new System.Drawing.Point(917, 335);
             this.txtSoPhong.Name = "txtSoPhong";
             this.txtSoPhong.PlaceholderText = "";
             this.txtSoPhong.SelectedText = "";
@@ -188,7 +153,7 @@
             this.btnThem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThem.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Location = new System.Drawing.Point(917, 443);
+            this.btnThem.Location = new System.Drawing.Point(917, 395);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(83, 38);
             this.btnThem.TabIndex = 12;
@@ -200,7 +165,7 @@
             this.groupBox1.Controls.Add(this.rdPhongTrong);
             this.groupBox1.Controls.Add(this.rdPhongDaDat);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(900, 189);
+            this.groupBox1.Location = new System.Drawing.Point(900, 141);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(122, 90);
             this.groupBox1.TabIndex = 19;
@@ -209,13 +174,11 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.rdPhongVip);
-            this.groupBox2.Controls.Add(this.rdPhongDoi);
-            this.groupBox2.Controls.Add(this.rdPhongDon);
+            this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(900, 68);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(119, 115);
+            this.groupBox2.Size = new System.Drawing.Size(119, 67);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Trạng thái";
@@ -225,7 +188,7 @@
             this.groupBox3.Controls.Add(this.rdTang);
             this.groupBox3.Controls.Add(this.rdGiam);
             this.groupBox3.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(900, 285);
+            this.groupBox3.Location = new System.Drawing.Point(900, 237);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(122, 92);
             this.groupBox3.TabIndex = 20;
@@ -384,7 +347,7 @@
             this.btnThemKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThemKH.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemKH.ForeColor = System.Drawing.Color.White;
-            this.btnThemKH.Location = new System.Drawing.Point(909, 503);
+            this.btnThemKH.Location = new System.Drawing.Point(909, 455);
             this.btnThemKH.Name = "btnThemKH";
             this.btnThemKH.Size = new System.Drawing.Size(99, 38);
             this.btnThemKH.TabIndex = 25;
@@ -399,11 +362,20 @@
             this.btnTraPhong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnTraPhong.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTraPhong.ForeColor = System.Drawing.Color.White;
-            this.btnTraPhong.Location = new System.Drawing.Point(909, 570);
+            this.btnTraPhong.Location = new System.Drawing.Point(909, 522);
             this.btnTraPhong.Name = "btnTraPhong";
             this.btnTraPhong.Size = new System.Drawing.Size(99, 38);
             this.btnTraPhong.TabIndex = 26;
             this.btnTraPhong.Text = "Trả phòng";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(17, 24);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(83, 26);
+            this.comboBox1.TabIndex = 27;
             // 
             // UserControlDatPhong
             // 
@@ -429,7 +401,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.flpContain.ResumeLayout(false);
@@ -443,9 +414,6 @@
         #endregion
         private System.Windows.Forms.RadioButton rdPhongTrong;
         private System.Windows.Forms.RadioButton rdPhongDaDat;
-        private System.Windows.Forms.RadioButton rdPhongDoi;
-        private System.Windows.Forms.RadioButton rdPhongVip;
-        private System.Windows.Forms.RadioButton rdPhongDon;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
@@ -468,5 +436,6 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayHienTai;
         private Guna.UI2.WinForms.Guna2Button btnThemKH;
         private Guna.UI2.WinForms.Guna2Button btnTraPhong;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
