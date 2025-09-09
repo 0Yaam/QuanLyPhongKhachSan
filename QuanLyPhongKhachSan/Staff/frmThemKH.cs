@@ -221,7 +221,74 @@ namespace QuanLyPhongKhachSan.Staff
 
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng in hóa đơn đang phát triển.");
+            try
+            {
+                // Chỉ in khi các phòng thuộc cùng 1 KH (bạn đã set _preMaKH khi mở form)
+                if (_preMaKH <= 0)
+                {
+                    MessageBox.Show("Vui lòng chọn các phòng thuộc cùng 1 khách hàng để in hoá đơn.");
+                    return;
+                }
+
+                // Khoảng ngày in: dùng DTP trên form
+                DateTime tu = dtpNgayNhan.Value.Date;
+                DateTime den = dtpNgayTraDuKien.Value.Date;
+                if (den <= tu) den = tu.AddDays(1);
+                int soNgay = (den - tu).Days;
+
+                // Tên KH
+                var kh = _khService.LayKhachHangTheoMaKH(_preMaKH);
+                string tenKH = kh?.HoTen ?? "";
+
+                // Build danh sách dòng từ _items (mỗi phòng 1 dòng)
+                var lines = new List<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal TienCoc, decimal GiaPhong)>();
+
+                foreach (var it in _items)
+                {
+                    var room = it.Room;
+                    if (room == null) continue;
+
+                    // nếu phòng có booking khác KH thì bỏ qua
+                    if (it.Booking != null && it.Booking.MaKH != _preMaKH) continue;
+
+                    decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out var g) ? g : room.Gia;
+                    decimal coc = (it.Booking?.TienCoc > 0 ? it.Booking.TienCoc : 200000m);
+
+                    lines.Add((
+                        Phong: room.SoPhong.ToString(),
+                        TuNgay: tu,
+                        DenNgay: den,
+                        SoNgay: soNgay,
+                        TienCoc: coc,
+                        GiaPhong: gia
+                    ));
+                }
+
+                if (lines.Count == 0)
+                {
+                    MessageBox.Show("Không có phòng hợp lệ để in hoá đơn.");
+                    return;
+                }
+
+                using (var f = new frmHoaDon1())
+                {
+                    f.BindHeader(
+                        loaiHD: "Lần 1",
+                        ngayLap: DateTime.Now,
+                        nhanVien: Environment.UserName,
+                        maHD: 0,          // nếu chưa lưu DB, tạm để 0
+                        tenKH: tenKH
+                    );
+
+                    f.BindChiTietNhieuPhong(lines);
+                    f.ShowDialog(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
+            }
         }
+
     }
 }

@@ -173,45 +173,45 @@ namespace QuanLyPhongKhachSan
                     MessageBox.Show("Chưa có đặt phòng để lập hoá đơn.");
                     return;
                 }
+
                 _maDatHienTai = dat.MaDat;
 
-                // Loại hóa đơn: mặc định Lần 1 (sau này bạn có thể tự chọn thêm Lần 2)
                 string loaiHDDb = "Lần 1";
 
-                // Tính toán chi tiết
                 DateTime tuNgay = dat.NgayNhan.Date;
                 DateTime denNgay = dat.NgayTraDuKien.Date;
                 if (denNgay <= tuNgay) denNgay = tuNgay.AddDays(1);
 
                 int soNgay = Math.Max(1, (denNgay - tuNgay).Days);
                 decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
-                decimal tienCoc = dat.TienCoc > 0 ? dat.TienCoc : TienCocMacDinh;
-                decimal tongTien = soNgay * giaPhong + tienCoc;
+                decimal tienCoc = dat.TienCoc > 0 ? dat.TienCoc : 200_000m;
 
-                // Lấy tên khách hàng
                 var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
                 string tenKH = kh?.HoTen ?? "";
 
                 using (var f = new frmHoaDon1())
                 {
-                    // Header hóa đơn
+                    // ----- GỌI THEO API MỚI -----
                     f.BindHeader(
-                        soPhong: _phong.SoPhong.ToString(),
                         loaiHD: loaiHDDb,
                         ngayLap: DateTime.Now,
                         nhanVien: _tenNhanVien,
-                        maHD: dat.MaDat,    // tạm dùng MaDat làm mã hóa đơn hiển thị
+                        maHD: dat.MaDat,     // tạm dùng MaDat làm mã hiển thị
                         tenKH: tenKH
                     );
 
-                    // Chi tiết (chỉ 1 dòng: thời gian thuê, cọc, tổng tiền)
-                    f.BindChiTiet(
-                        tuNgay: tuNgay,
-                        denNgay: denNgay,
-                        soNgay: soNgay,
-                        tienCoc: tienCoc,
-                        tongTien: tongTien
-                    );
+                    // 1 phòng -> truyền 1 phần tử (Phong là SỐ PHÒNG hiển thị ở cột đầu tiên)
+                    f.BindChiTietNhieuPhong(new[]
+                    {
+                (
+                    Phong: _phong.SoPhong.ToString(),
+                    TuNgay: tuNgay,
+                    DenNgay: denNgay,
+                    SoNgay: soNgay,
+                    TienCoc: tienCoc,
+                    GiaPhong: giaPhong
+                )
+            });
 
                     f.ShowDialog(this);
                 }
@@ -221,6 +221,7 @@ namespace QuanLyPhongKhachSan
                 MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
             }
         }
+
 
 
     }
