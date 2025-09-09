@@ -59,7 +59,6 @@ namespace QuanLyPhongKhachSan
           int maHD,
           string tenKH)
         {
-            txtPhong.Text = soPhong;
             txtLoaiHD.Text = loaiHD;
             txtNgayLapHD.Text = ngayLap.ToString("dd/MM/yyyy HH:mm");
             txtNhanVien.Text = nhanVien;

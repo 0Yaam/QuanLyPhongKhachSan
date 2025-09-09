@@ -1,4 +1,4 @@
-﻿// QuanLyPhongKhachSan.frmThemvaSuaKH.cs
+﻿// QuanLyPhongKhachSan.frmThemvaSuaKH.cs frm này cũng giống frmThemKH, nhưng chỉ dành cho 1 khách hàng
 using QuanLyPhongKhachSan.BLL.Services;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;

@@ -1,4 +1,5 @@
-﻿using QuanLyPhongKhachSan.DAL.DAO;
+﻿//Phongservice
+using QuanLyPhongKhachSan.DAL.DAO;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;

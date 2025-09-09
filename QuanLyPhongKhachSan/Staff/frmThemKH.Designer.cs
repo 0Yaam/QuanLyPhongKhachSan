@@ -2,15 +2,8 @@
 {
     partial class frmThemKH
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,11 +14,6 @@
         }
 
         #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -33,13 +21,13 @@
             this.btnInHoaDon = new Guna.UI2.WinForms.Guna2Button();
             this.dtpNgayNhan = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.dtpNgayTraDuKien = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.btnHoanThanh = new Guna.UI2.WinForms.Guna2Button();
             this.txtSDT = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtCCCD = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtTenKH = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnHoanThanh = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // guna2HtmlLabel8
@@ -86,6 +74,7 @@
             this.btnInHoaDon.Size = new System.Drawing.Size(92, 36);
             this.btnInHoaDon.TabIndex = 53;
             this.btnInHoaDon.Text = "In hóa đơn";
+            this.btnInHoaDon.Click += new System.EventHandler(this.btnInHoaDon_Click);
             // 
             // dtpNgayNhan
             // 
@@ -114,22 +103,6 @@
             this.dtpNgayTraDuKien.Size = new System.Drawing.Size(201, 36);
             this.dtpNgayTraDuKien.TabIndex = 51;
             this.dtpNgayTraDuKien.Value = new System.DateTime(2025, 9, 7, 12, 29, 11, 39);
-            // 
-            // btnHoanThanh
-            // 
-            this.btnHoanThanh.BorderRadius = 10;
-            this.btnHoanThanh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnHoanThanh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnHoanThanh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnHoanThanh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnHoanThanh.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHoanThanh.ForeColor = System.Drawing.Color.White;
-            this.btnHoanThanh.Location = new System.Drawing.Point(297, 98);
-            this.btnHoanThanh.Name = "btnHoanThanh";
-            this.btnHoanThanh.Size = new System.Drawing.Size(92, 36);
-            this.btnHoanThanh.TabIndex = 50;
-            this.btnHoanThanh.Text = "Hoàn thành";
-            this.btnHoanThanh.Click += new System.EventHandler(this.btnHoanThanh_Click_1);
             // 
             // txtSDT
             // 
@@ -218,17 +191,32 @@
             this.guna2HtmlLabel5.TabIndex = 44;
             this.guna2HtmlLabel5.Text = "Tên khách hàng";
             // 
+            // btnHoanThanh
+            // 
+            this.btnHoanThanh.BorderRadius = 10;
+            this.btnHoanThanh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoanThanh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoanThanh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnHoanThanh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnHoanThanh.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHoanThanh.ForeColor = System.Drawing.Color.White;
+            this.btnHoanThanh.Location = new System.Drawing.Point(295, 98);
+            this.btnHoanThanh.Name = "btnHoanThanh";
+            this.btnHoanThanh.Size = new System.Drawing.Size(92, 36);
+            this.btnHoanThanh.TabIndex = 56;
+            this.btnHoanThanh.Text = "Hoàn thành";
+            // 
             // frmThemKH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 149);
+            this.Controls.Add(this.btnHoanThanh);
             this.Controls.Add(this.guna2HtmlLabel8);
             this.Controls.Add(this.txtTamTinh);
             this.Controls.Add(this.btnInHoaDon);
             this.Controls.Add(this.dtpNgayNhan);
             this.Controls.Add(this.dtpNgayTraDuKien);
-            this.Controls.Add(this.btnHoanThanh);
             this.Controls.Add(this.txtSDT);
             this.Controls.Add(this.guna2HtmlLabel7);
             this.Controls.Add(this.txtCCCD);
@@ -236,12 +224,13 @@
             this.Controls.Add(this.txtTenKH);
             this.Controls.Add(this.guna2HtmlLabel5);
             this.Name = "frmThemKH";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form khách hàng thuê nhiều phòng";
+            this.Load += new System.EventHandler(this.frmThemKH_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
         #endregion
 
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
@@ -249,12 +238,12 @@
         private Guna.UI2.WinForms.Guna2Button btnInHoaDon;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayNhan;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayTraDuKien;
-        private Guna.UI2.WinForms.Guna2Button btnHoanThanh;
         private Guna.UI2.WinForms.Guna2TextBox txtSDT;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox txtCCCD;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2TextBox txtTenKH;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
+        private Guna.UI2.WinForms.Guna2Button btnHoanThanh;
     }
 }

@@ -103,36 +103,38 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "SELECT MaDat, MaKH, MaPhong, NgayNhan, NgayTraDuKien, NgayTraThucTe, TienCoc, TienThue, TrangThai FROM DatPhong WHERE MaPhong = @MaPhong";
+                    string sql = "SELECT TOP 1 * FROM DatPhong WHERE MaPhong = @MaPhong AND NgayTraThucTe IS NULL ORDER BY NgayNhan DESC";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@MaPhong", maPhong);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        return new DatPhong
+                        if (reader.Read())
                         {
-                            MaDat = reader.GetInt32(0),
-                            MaKH = reader.GetInt32(1),
-                            MaPhong = reader.GetInt32(2),
-                            NgayNhan = reader.GetDateTime(3),
-                            NgayTraDuKien = reader.GetDateTime(4),
-                            NgayTraThucTe = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5),
-                            TienCoc = reader.GetDecimal(6),
-                            TienThue = reader.GetDecimal(7),
-                            TrangThai = reader.GetString(8)
-                        };
+                            return new DatPhong
+                            {
+                                MaDat = Convert.ToInt32(reader["MaDat"]),
+                                MaKH = Convert.ToInt32(reader["MaKH"]),
+                                MaPhong = Convert.ToInt32(reader["MaPhong"]),
+                                NgayNhan = Convert.ToDateTime(reader["NgayNhan"]),
+                                NgayTraDuKien = Convert.ToDateTime(reader["NgayTraDuKien"]),
+                                NgayTraThucTe = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5),
+                                TienCoc = Convert.ToDecimal(reader["TienCoc"]),
+                                TienThue = Convert.ToDecimal(reader["TienThue"]),
+                                TrangThai = reader["TrangThai"].ToString()
+                            };
+                        }
                     }
-                    return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi lấy đặt phòng: " + ex.Message);
-                return null;
+                Console.WriteLine($"Lỗi LayDatPhongTheoMaPhong: {ex.Message}");
             }
+            return null;
         }
 
+
+        //                            NgayTraThucTe = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5),
         public int ThemDatPhong(DatPhong datPhong)
         {
             try

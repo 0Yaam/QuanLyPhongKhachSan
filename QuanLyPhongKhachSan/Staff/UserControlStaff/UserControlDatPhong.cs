@@ -168,9 +168,14 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         // =============== LẤY BOOKING ĐỂ HIỂN THỊ ===============
         private DatPhong GetDatPhongDeHien(int maPhong)
         {
-            var dat = phongService.LayDatPhongTheoMaPhong(maPhong); // TOP 1, chưa trả
+            var dat = phongService.LayDatPhongTheoMaPhong(maPhong);
+            Console.WriteLine($"LayDatPhongTheoMaPhong(MaPhong={maPhong}): {(dat != null ? $"MaDat={dat.MaDat}, MaKH={dat.MaKH}, TrangThai={dat.TrangThai}" : "null")}");
             if (dat == null) return null;
-            if (dat.NgayTraThucTe.HasValue) return null;
+            if (dat.NgayTraThucTe.HasValue || (dat.TrangThai != "Đã đặt" && dat.TrangThai != "Đang sử dụng"))
+            {
+                Console.WriteLine($"DatPhong MaPhong={maPhong} không hợp lệ: {(dat.NgayTraThucTe.HasValue ? $"Đã trả phòng (NgayTraThucTe={dat.NgayTraThucTe})" : $"Trạng thái={dat.TrangThai}")}");
+                return null;
+            }
             return dat;
         }
 
@@ -338,63 +343,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         }
 
         // =============== NÚT THÊM KH (giữ logic hiện tại của bạn) ===============
-        private void btnThemKH_Click(object sender, EventArgs e)
-        {
-            var selected = GetSelectedRooms();
-            if (selected.Count == 0)
-            {
-                MessageBox.Show("Chọn ít nhất 1 phòng.");
-                return;
-            }
 
-            var list = new List<RoomBookingInfo>();
-            foreach (var room in selected)
-            {
-                var bk = GetDatPhongDeHien(room.MaPhong);
-                KhachHang kh = (bk != null) ? khachHangService.LayKhachHangTheoMaKH(bk.MaKH) : null;
-                list.Add(new RoomBookingInfo { Room = room, Booking = bk, Customer = kh });
-            }
-
-            var bookedItems = list.Where(x => x.Booking != null).ToList();
-            var maKhSet = bookedItems.Select(x => x.Booking.MaKH).Distinct().ToList();
-
-            if (maKhSet.Count > 1)
-            {
-                MessageBox.Show("Chỉ chọn các phòng của CÙNG 1 khách để sửa.");
-                return;
-            }
-
-            string preTen = "", preCCCD = "", preSDT = "";
-            int preMaKH = 0;
-            DateTime? preNhan = null, preTra = null;
-
-            if (maKhSet.Count == 1)
-            {
-                var any = bookedItems.First();
-                var kh = any.Customer;
-                if (kh != null)
-                {
-                    preTen = kh.HoTen ?? "";
-                    preCCCD = kh.CCCD ?? "";
-                    preSDT = kh.SDT ?? "";
-                    preMaKH = kh.MaKH;
-                }
-
-                preNhan = bookedItems.Min(x => x.Booking.NgayNhan).Date;
-                preTra = bookedItems.Max(x => x.Booking.NgayTraDuKien).Date;
-                if (preTra <= preNhan) preTra = preNhan.Value.AddDays(1);
-            }
-
-            using (var frm = new frmThemKH(list, preTen, preCCCD, preSDT, preMaKH, preNhan, preTra))
-            {
-                var dr = frm.ShowDialog(this);
-                if (dr == DialogResult.OK)
-                {
-                    LoadPhongFromDB();
-                    _selectedRoomIds.Clear();
-                }
-            }
-        }
 
         // =============== XOÁ HÀNG LOẠT (Delete / ContextMenu) ===============
         private void UserControl_KeyDown(object sender, KeyEventArgs e)
@@ -511,6 +460,90 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             {
                 MessageBox.Show("Thêm phòng thất bại! Kiểm tra lại dữ liệu.");
             }
+        }
+
+        private void btnThemKH_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedRooms();
+            if (selected.Count == 0)
+            {
+                MessageBox.Show("Chọn ít nhất 1 phòng.");
+                return;
+            }
+
+            var list = new List<RoomBookingInfo>();
+            foreach (var room in selected)
+            {
+                var bk = GetDatPhongDeHien(room.MaPhong);
+                KhachHang kh = bk != null ? khachHangService.LayKhachHangTheoMaKH(bk.MaKH) : null;
+                Console.WriteLine($"LayKhachHangTheoMaKH for MaKH={(bk != null ? bk.MaKH.ToString() : "null")}: {(kh != null ? $"Ten={kh.HoTen}, CCCD={kh.CCCD}" : "null")}");
+                list.Add(new RoomBookingInfo { Room = room, Booking = bk, Customer = kh });
+            }
+
+            var bookedItems = list.Where(x => x.Booking != null && (x.Booking.TrangThai == "Đã đặt" || x.Booking.TrangThai == "Đang sử dụng")).ToList();
+            var maKhSet = bookedItems.Select(x => x.Booking.MaKH).Distinct().ToList();
+
+            Console.WriteLine($"bookedItems.Count={bookedItems.Count}, maKhSet.Count={maKhSet.Count}, maKhSet={string.Join(", ", maKhSet)}");
+
+            if (maKhSet.Count > 1)
+            {
+                MessageBox.Show("Chỉ chọn các phòng của CÙNG 1 khách để sửa.");
+                return;
+            }
+
+            string preTen = "", preCCCD = "", preSDT = "";
+            int preMaKH = 0;
+            DateTime? preNhan = null, preTra = null;
+
+            if (bookedItems.Any())
+            {
+                var validBooked = bookedItems.FirstOrDefault(x => x.Customer != null);
+                if (validBooked == null)
+                {
+                    MessageBox.Show("Có booking nhưng không lấy được thông tin khách hàng. Kiểm tra bảng KhachHang trong DB.");
+                    return;
+                }
+
+                var kh = validBooked.Customer;
+                preTen = kh.HoTen ?? "";
+                preCCCD = kh.CCCD ?? "";
+                preSDT = kh.SDT ?? "";
+                preMaKH = kh.MaKH;
+
+                preNhan = bookedItems.Min(x => x.Booking.NgayNhan).Date;
+                preTra = bookedItems.Max(x => x.Booking.NgayTraDuKien).Date;
+                if (preTra <= preNhan) preTra = preNhan.Value.AddDays(1);
+
+                Console.WriteLine($"Prefill: Ten={preTen}, CCCD={preCCCD}, SDT={preSDT}, MaKH={preMaKH}, NgayNhan={preNhan}, NgayTra={preTra}");
+            }
+            else
+            {
+                Console.WriteLine("Tất cả phòng trống, không có thông tin khách hàng để load.");
+            }
+
+            try
+            {
+                using (var frm = new frmThemKH(list, preTen, preCCCD, preSDT, preMaKH, preNhan, preTra))
+                {
+                    Console.WriteLine("Calling frm.ShowDialog...");
+                    var dr = frm.ShowDialog(this);
+                    Console.WriteLine($"frm.ShowDialog returned: {dr}");
+                    if (dr == DialogResult.OK)
+                    {
+                        LoadPhongFromDB();
+                        _selectedRoomIds.Clear();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi mở frmThemKH: {ex.Message}");
+                MessageBox.Show($"Lỗi khi mở form: {ex.Message}");
+            }
+        }
+        private void btnThemKH_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
