@@ -59,6 +59,12 @@
     <Compile Include="Staff\frmHoaDon1.Designer.cs">
       <DependentUpon>frmHoaDon1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Staff\frmHoaDon2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Staff\frmHoaDon2.Designer.cs">
+      <DependentUpon>frmHoaDon2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Staff\frmThemKH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Staff\frmHoaDon1.resx">
       <DependentUpon>frmHoaDon1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff\frmHoaDon2.resx">
+      <DependentUpon>frmHoaDon2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Staff\frmThemKH.resx">
       <DependentUpon>frmThemKH.cs</DependentUpon>

@@ -1,6 +1,7 @@
 ﻿using QuanLyPhongKhachSan.DAL.DAO;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
+using System.Collections.Generic;
 
 namespace QuanLyPhongKhachSan.BLL.Services
 {
@@ -32,6 +33,11 @@ namespace QuanLyPhongKhachSan.BLL.Services
         public KhachHang LayKhachHangTheoMaKH(int maKH)
         {
             return _dao.LayKhachHangTheoMaKH(maKH);
+        }
+
+        public List<KhachHang> LayDanhSach()
+        {
+            return _dao.LayDanhSach();
         }
     }
 }

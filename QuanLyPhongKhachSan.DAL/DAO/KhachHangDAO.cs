@@ -1,11 +1,13 @@
 ﻿using QuanLyPhongKhachSan.DAL.OL;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace QuanLyPhongKhachSan.DAL.DAO
 {
     public class KhachHangDAO
     {
+        string connecstring = Config.ConnectionString;  
         public int KiemTraTonTai(string cccd, string sdt)
         {
             try
@@ -102,5 +104,40 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 throw new Exception($"Lỗi khi lấy khách hàng (MaKH={maKH}): {ex.Message}");
             }
         }
+
+        public List<KhachHang> LayDanhSach()
+        {
+            var danhSach = new List<KhachHang>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+                {
+                    conn.Open();
+                    string sql = "SELECT MaKH, HoTen, CCCD, SDT FROM KhachHang";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            danhSach.Add(new KhachHang
+                            {
+                                MaKH = reader.GetInt32(0),
+                                HoTen = reader.GetString(1),
+                                CCCD = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                SDT = reader.GetString(3)
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy danh sách khách hàng: " + ex.Message);
+            }
+            return danhSach;
+        }
+
+
+
     }
 }

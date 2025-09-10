@@ -14,8 +14,6 @@ namespace QuanLyPhongKhachSan
             InitGridMapping();
         }
 
-        // View model đúng tên cột trong dgvCTHD (đÃ tạo sẵn trong Designer):
-        // Phong, TuNgay, DenNgay, SoNgay, TienCoc, TienPhong, TongTien
         private class CTHDView
         {
             public string Phong { get; set; }
@@ -60,8 +58,6 @@ namespace QuanLyPhongKhachSan
             txtKhachHang.Text = tenKH;
         }
 
-        // Bind nhiều phòng – mỗi phòng một dòng trong dgv
-        // items: Phong (số phòng), Tu/Đến/Ngày, TienCoc, GiaPhong
         public void BindChiTietNhieuPhong(IEnumerable<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal TienCoc, decimal GiaPhong)> items)
         {
             var rows = new List<CTHDView>();

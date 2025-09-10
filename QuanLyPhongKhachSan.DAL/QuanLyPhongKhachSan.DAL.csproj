@@ -50,6 +50,7 @@
     <Compile Include="DAO\TaiKhoanDAO.cs" />
     <Compile Include="OL\ChiTietHoaDon.cs" />
     <Compile Include="OL\DatPhong.cs" />
+    <Compile Include="OL\DichVuView.cs" />
     <Compile Include="OL\HoaDon.cs" />
     <Compile Include="OL\KhachHang.cs" />
     <Compile Include="OL\Phong.cs" />

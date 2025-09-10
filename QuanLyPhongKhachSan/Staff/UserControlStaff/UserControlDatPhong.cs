@@ -37,6 +37,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 flpContain.TabStop = true;
                 flpContain.KeyDown += UserControl_KeyDown;
             }
+            txtTimKiem.TextChanged += txtTimKiem_TextChanged; // Xử lý tìm kiếm tự động
+            rdSoPhong.Checked = true; // Mặc định tìm theo số phòng
         }
 
         private void UserControlDatPhong_Load(object sender, EventArgs e)
@@ -141,8 +143,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                         ToggleSelect(pnl);
                 };
                 child.DoubleClick += (s, e) => HandleDoubleClickOpen(pnl);
-            }
-            ;
+            };
 
             var menu = new ContextMenuStrip();
             menu.Items.Add("Xóa").Click += (s, e) =>
@@ -577,6 +578,62 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
         }
 
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            string tuKhoa = txtTimKiem.Text.Trim();
+            if (string.IsNullOrEmpty(tuKhoa)) // Nếu xóa trắng, load lại toàn bộ
+            {
+                LoadDanhSachPhong();
+                return;
+            }
+
+            var datPhongList = _allRooms.Select(p => phongService.LayDatPhongTheoMaPhong(p.MaPhong)).Where(dp => dp != null).ToList();
+            var khachHangList = khachHangService.LayDanhSach(); // Giả sử có phương thức này
+
+            var filteredRooms = new List<Phong>();
+            if (rdTen.Checked)
+            {
+                filteredRooms = _allRooms
+                    .Join(datPhongList, p => p.MaPhong, dp => dp.MaPhong, (p, dp) => new { Phong = p, DatPhong = dp })
+                    .Join(khachHangList, x => x.DatPhong.MaKH, kh => kh.MaKH, (x, kh) => new { x.Phong, KhachHang = kh })
+                    .Where(x => x.KhachHang.HoTen.Contains(tuKhoa))
+                    .Select(x => x.Phong)
+                    .ToList();
+            }
+            else if (rdCCCD.Checked)
+            {
+                filteredRooms = _allRooms
+                    .Join(datPhongList, p => p.MaPhong, dp => dp.MaPhong, (p, dp) => new { Phong = p, DatPhong = dp })
+                    .Join(khachHangList, x => x.DatPhong.MaKH, kh => kh.MaKH, (x, kh) => new { x.Phong, KhachHang = kh })
+                    .Where(x => x.KhachHang.CCCD.Contains(tuKhoa))
+                    .Select(x => x.Phong)
+                    .ToList();
+            }
+            else if (rdSDT.Checked)
+            {
+                filteredRooms = _allRooms
+                    .Join(datPhongList, p => p.MaPhong, dp => dp.MaPhong, (p, dp) => new { Phong = p, DatPhong = dp })
+                    .Join(khachHangList, x => x.DatPhong.MaKH, kh => kh.MaKH, (x, kh) => new { x.Phong, KhachHang = kh })
+                    .Where(x => x.KhachHang.SDT.Contains(tuKhoa))
+                    .Select(x => x.Phong)
+                    .ToList();
+            }
+            else if (rdSoPhong.Checked)
+            {
+                filteredRooms = _allRooms.Where(p => p.SoPhong.ToString().Contains(tuKhoa)).ToList();
+            }
+
+            // Cập nhật flpContain
+            flpContain.Controls.Clear();
+            foreach (var phong in filteredRooms)
+            {
+                var pnl = TaoPhongMoi(phong);
+                flpContain.Controls.Add(pnl);
+            }
+            flpContain.Visible = true;
+            flpContain.AutoScroll = true;
+        }
+
         private void cbLoai_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadDanhSachPhong();
@@ -600,6 +657,30 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         private void rdGiam_CheckedChanged(object sender, EventArgs e)
         {
             LoadDanhSachPhong();
+        }
+
+        private void rdTen_CheckedChanged(object sender, EventArgs e)
+        {
+            txtTimKiem.Clear();
+            txtTimKiem_TextChanged(sender, e); // Kích hoạt tìm kiếm khi thay đổi RadioButton
+        }
+
+        private void rdCCCD_CheckedChanged(object sender, EventArgs e)
+        {
+            txtTimKiem.Clear();
+            txtTimKiem_TextChanged(sender, e); // Kích hoạt tìm kiếm khi thay đổi RadioButton
+        }
+
+        private void rdSoPhong_CheckedChanged(object sender, EventArgs e)
+        {
+            txtTimKiem.Clear();
+            txtTimKiem_TextChanged(sender, e); // Kích hoạt tìm kiếm khi thay đổi RadioButton
+        }
+
+        private void rdSDT_CheckedChanged(object sender, EventArgs e)
+        {
+            txtTimKiem.Clear();
+            txtTimKiem_TextChanged(sender, e); // Kích hoạt tìm kiếm khi thay đổi RadioButton
         }
     }
 }

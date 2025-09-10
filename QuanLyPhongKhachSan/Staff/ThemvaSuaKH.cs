@@ -1,6 +1,8 @@
 ﻿using QuanLyPhongKhachSan.BLL.Services;
 using QuanLyPhongKhachSan.DAL.OL;
+using QuanLyPhongKhachSan.Staff;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace QuanLyPhongKhachSan
@@ -28,12 +30,11 @@ namespace QuanLyPhongKhachSan
             InitializeComponent();
             _phong = phong ?? throw new ArgumentNullException(nameof(phong));
 
-            // Load danh sách loại phòng từ PhongGiaConfig
             LoadLoaiPhong();
 
             _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
             txtSoPhong.Text = _phong.SoPhong.ToString();
-            cbLoaiPhong.SelectedItem = _phong.LoaiPhong; // Chọn loại phòng hiện tại
+            cbLoaiPhong.SelectedItem = _phong.LoaiPhong;
             txtGia.Text = FormatVnd(_giaPhong);
 
             dtpNgayNhan.Value = DateTime.Now;
@@ -41,7 +42,7 @@ namespace QuanLyPhongKhachSan
 
             dtpNgayNhan.ValueChanged += dtpNgayNhan_ValueChanged;
             dtpNgayTraDuKien.ValueChanged += dtpNgayTraDuKien_ValueChanged;
-            cbLoaiPhong.SelectedIndexChanged += cbLoaiPhong_SelectedIndexChanged; // Xử lý thay đổi loại phòng
+            cbLoaiPhong.SelectedIndexChanged += cbLoaiPhong_SelectedIndexChanged;
 
             LoadDatPhongCu();
             CapNhatTamTinh();
@@ -56,7 +57,7 @@ namespace QuanLyPhongKhachSan
             }
             if (cbLoaiPhong.Items.Count > 0 && string.IsNullOrEmpty(_phong.LoaiPhong))
             {
-                cbLoaiPhong.SelectedIndex = 0; // Chọn mặc định nếu không có loại phòng
+                cbLoaiPhong.SelectedIndex = 0;
             }
         }
 
@@ -198,7 +199,7 @@ namespace QuanLyPhongKhachSan
 
             _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
             _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
-            if (phongService.CapNhat(_phong)) // Sử dụng trực tiếp bool thay vì > 0
+            if (phongService.CapNhat(_phong))
             {
                 CapNhatTamTinh();
                 this.DialogResult = DialogResult.OK;
@@ -210,7 +211,6 @@ namespace QuanLyPhongKhachSan
             }
         }
 
-        //in hoa don
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
             try
@@ -231,13 +231,13 @@ namespace QuanLyPhongKhachSan
 
                 int soNgay = Math.Max(1, (denNgay - tuNgay).Days);
                 decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
-                decimal tienCoc = dat.TienCoc > 0 ? dat.TienCoc : 200_000m;
+                decimal? tienCoc = dat.TienCoc;
+                decimal tienCocValue = tienCoc.HasValue ? tienCoc.Value : 200_000m;
 
                 decimal tienPhong = soNgay * giaPhong;
-                decimal tongTien = tienPhong + tienCoc;
+                decimal tongTien = tienPhong + tienCocValue;
 
-                // luu hoa don trc
-                var hd = new HoaDon
+                var hoaDon = new HoaDon
                 {
                     MaDat = dat.MaDat,
                     NgayLap = DateTime.Now,
@@ -246,7 +246,7 @@ namespace QuanLyPhongKhachSan
                     GhiChu = null
                 };
 
-                int maHD = _hoaDonService.ThemVaTraMa(hd);
+                int maHD = _hoaDonService.ThemVaTraMa(hoaDon);
                 if (maHD <= 0)
                 {
                     MessageBox.Show("Lưu hóa đơn thất bại!");
@@ -266,7 +266,7 @@ namespace QuanLyPhongKhachSan
                     MaHD = maHD,
                     TenDichVu = $"Tiền cọc - Phòng {_phong.SoPhong}",
                     SoLuong = 1,
-                    Gia = tienCoc
+                    Gia = tienCocValue
                 });
 
                 var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
@@ -289,7 +289,7 @@ namespace QuanLyPhongKhachSan
                             TuNgay: tuNgay,
                             DenNgay: denNgay,
                             SoNgay: soNgay,
-                            TienCoc: tienCoc,
+                            TienCoc: tienCocValue,
                             GiaPhong: giaPhong
                         )
                     });
@@ -300,6 +300,111 @@ namespace QuanLyPhongKhachSan
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
+            }
+        }
+
+        private void btnHoaDon2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dat = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
+                if (dat == null || dat.MaDat <= 0)
+                {
+                    MessageBox.Show("Không tìm thấy thông tin đặt phòng hợp lệ.");
+                    return;
+                }
+
+                _maDatHienTai = dat.MaDat;
+                var hoaDonList = _hoaDonService.LayDanhSach();
+                var hoaDonLan1 = hoaDonList.FirstOrDefault(hd => hd.MaDat == _maDatHienTai && hd.LoaiHoaDon == "Lần 1");
+                if (hoaDonLan1 == null)
+                {
+                    MessageBox.Show("Chưa có hóa đơn lần 1. Vui lòng in hóa đơn lần 1 trước.");
+                    return;
+                }
+
+                string loaiHDDb = "Hóa đơn lần 2";
+                DateTime tuNgay = dat.NgayNhan.Date;
+                DateTime denNgay = dat.NgayTraDuKien.Date;
+                if (denNgay <= tuNgay) denNgay = tuNgay.AddDays(1);
+
+                int soNgay = Math.Max(1, (denNgay - tuNgay).Days);
+                decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
+                decimal? tienCoc = dat.TienCoc;
+                decimal tienCocValue = tienCoc.HasValue ? tienCoc.Value : 200_000m;
+
+                var hoaDon = new HoaDon
+                {
+                    MaDat = dat.MaDat,
+                    NgayLap = DateTime.Now,
+                    LoaiHoaDon = loaiHDDb,
+                    TongThanhToan = 0m,
+                    GhiChu = null
+                };
+
+                int maHD = _hoaDonService.ThemVaTraMa(hoaDon);
+                if (maHD <= 0)
+                {
+                    MessageBox.Show($"Lưu hóa đơn lần 2 thất bại! MaHD = {maHD}. Vui lòng kiểm tra kết nối hoặc dữ liệu.");
+                    return;
+                }
+
+                // Thêm chi tiết hóa đơn lần 2
+                _cthdService.Them(new ChiTietHoaDon
+                {
+                    MaHD = maHD,
+                    TenDichVu = $"Tiền phòng bổ sung - Phòng {_phong.SoPhong} ({soNgay} đêm x {giaPhong:N0})",
+                    SoLuong = soNgay,
+                    Gia = giaPhong
+                });
+
+                using (var f = new frmHoaDon2(_phong.MaPhong))
+                {
+                    var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
+                    string tenKH = kh?.HoTen ?? "";
+
+                    f.BindHeader(
+                        loaiHD: loaiHDDb,
+                        ngayLap: DateTime.Now,
+                        nhanVien: _tenNhanVien,
+                        maHD: maHD,
+                        tenKH: tenKH,
+                        maDat: _maDatHienTai,
+                        tongTienLan1: hoaDonLan1.TongThanhToan ?? 0m,
+                        tienCoc: tienCocValue
+                    );
+
+                    f.BindChiTietNhieuPhong(new[]
+                    {
+                        (
+                            Phong: _phong.SoPhong.ToString(),
+                            TuNgay: tuNgay,
+                            DenNgay: denNgay,
+                            SoNgay: soNgay,
+                            TienCoc: 0m,
+                            GiaPhong: giaPhong
+                        )
+                    });
+
+                    if (f.ShowDialog(this) == DialogResult.OK)
+                    {
+                        var dichVuRows = f.GetDichVuData();
+                        foreach (var dv in dichVuRows)
+                        {
+                            _cthdService.Them(new ChiTietHoaDon
+                            {
+                                MaHD = maHD,
+                                TenDichVu = dv.DichVu,
+                                SoLuong = 1,
+                                Gia = dv.SoTien
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi mở hóa đơn lần 2: " + ex.Message);
             }
         }
     }

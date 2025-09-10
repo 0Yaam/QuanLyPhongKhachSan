@@ -98,7 +98,12 @@ namespace QuanLyPhongKhachSan.BLL.Services
             {
                 return false;
             }
-            return _dao.CapNhat(phong) > 0; // So sánh với 0 để kiểm tra thành công
+            return _dao.CapNhat(phong) > 0;
+        }
+
+        public Phong LayPhongTheoMaPhong(int maPhong)
+        {
+            return _dao.LayDanhSach().FirstOrDefault(p => p.MaPhong == maPhong);
         }
     }
 }
