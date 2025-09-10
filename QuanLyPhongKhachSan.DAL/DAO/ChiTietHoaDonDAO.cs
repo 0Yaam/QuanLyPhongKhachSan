@@ -17,29 +17,28 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 {
                     conn.Open();
                     const string sql = @"
-INSERT INTO ChiTietHoaDon (MaHD, SoLuong)
+INSERT INTO ChiTietHoaDon (MaHD, TenDichVu, SoLuong, Gia)
 OUTPUT INSERTED.MaCTHD
-VALUES (@MaHD, @SoLuong);";
+VALUES (@MaHD, @TenDichVu, @SoLuong, @Gia);";
+
                     using (var cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = cthd.MaHD;
-                        cmd.Parameters.Add("@SoLuong", SqlDbType.Int).Value = cthd.SoLuong;
+                        cmd.Parameters.AddWithValue("@MaHD", cthd.MaHD);
+                        cmd.Parameters.AddWithValue("@TenDichVu", (object)(cthd.TenDichVu ?? "") ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@SoLuong", cthd.SoLuong);
+                        cmd.Parameters.AddWithValue("@Gia", cthd.Gia);
 
                         var id = cmd.ExecuteScalar();
                         return (id == null) ? 0 : Convert.ToInt32(id);
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Lỗi ChiTietHoaDonDAO.Them: {ex.Message}");
                 return 0;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi không xác định ChiTietHoaDonDAO.Them: {ex.Message}");
-                return 0;
-            }
         }
+
     }
 }

@@ -315,6 +315,8 @@ namespace QuanLyPhongKhachSan
                 }
 
                 _maDatHienTai = dat.MaDat;
+
+                // Lấy hóa đơn lần 1 để biết tổng lần 1
                 var hoaDonList = _hoaDonService.LayDanhSach();
                 var hoaDonLan1 = hoaDonList.FirstOrDefault(hd => hd.MaDat == _maDatHienTai && hd.LoaiHoaDon == "Lần 1");
                 if (hoaDonLan1 == null)
@@ -323,17 +325,25 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                string loaiHDDb = "Hóa đơn lần 2";
+                // Lưu DB bắt buộc dùng "Lần 2" để không vi phạm CHECK constraint
+                string loaiHDDb = "Lần 2";
+
                 DateTime tuNgay = dat.NgayNhan.Date;
                 DateTime denNgay = dat.NgayTraDuKien.Date;
                 if (denNgay <= tuNgay) denNgay = tuNgay.AddDays(1);
 
                 int soNgay = Math.Max(1, (denNgay - tuNgay).Days);
                 decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
-                decimal? tienCoc = dat.TienCoc;
-                decimal tienCocValue = tienCoc.HasValue ? tienCoc.Value : 200_000m;
 
-                var hoaDon = new HoaDon
+                // Nếu model DatPhong.TienCoc là decimal?
+                decimal tienCocValue;
+                {
+                    decimal? tienCocNullable = dat.TienCoc; // giả định DatPhong.TienCoc là nullable decimal
+                    tienCocValue = tienCocNullable.HasValue ? tienCocNullable.Value : 200_000m;
+                }
+
+                // 1) Tạo HĐ2 (tạm thời tổng = 0, ghi chú = null). Service/DAO chịu trách nhiệm insert.
+                var hoaDon2 = new HoaDon
                 {
                     MaDat = dat.MaDat,
                     NgayLap = DateTime.Now,
@@ -342,32 +352,24 @@ namespace QuanLyPhongKhachSan
                     GhiChu = null
                 };
 
-                int maHD = _hoaDonService.ThemVaTraMa(hoaDon);
-                if (maHD <= 0)
+                int maHD2 = _hoaDonService.ThemVaTraMa(hoaDon2);
+                if (maHD2 <= 0)
                 {
-                    MessageBox.Show($"Lưu hóa đơn lần 2 thất bại! MaHD = {maHD}. Vui lòng kiểm tra kết nối hoặc dữ liệu.");
+                    MessageBox.Show($"Lưu hóa đơn lần 2 thất bại! MaHD = {maHD2}. Vui lòng kiểm tra kết nối hoặc dữ liệu.");
                     return;
                 }
 
-                // Thêm chi tiết hóa đơn lần 2
-                _cthdService.Them(new ChiTietHoaDon
-                {
-                    MaHD = maHD,
-                    TenDichVu = $"Tiền phòng bổ sung - Phòng {_phong.SoPhong} ({soNgay} đêm x {giaPhong:N0})",
-                    SoLuong = soNgay,
-                    Gia = giaPhong
-                });
-
-                using (var f = new frmHoaDon2(_phong.MaPhong))
+                // 2) Mở form Hóa đơn 2 để NV nhập dịch vụ, xem lố ngày...
+                using (var f = new QuanLyPhongKhachSan.Staff.frmHoaDon2(_phong.MaPhong))
                 {
                     var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
                     string tenKH = kh?.HoTen ?? "";
 
                     f.BindHeader(
-                        loaiHD: loaiHDDb,
+                        loaiHD: "Hóa đơn lần 2",               // Text hiển thị, DB vẫn là "Lần 2"
                         ngayLap: DateTime.Now,
                         nhanVien: _tenNhanVien,
-                        maHD: maHD,
+                        maHD: maHD2,
                         tenKH: tenKH,
                         maDat: _maDatHienTai,
                         tongTienLan1: hoaDonLan1.TongThanhToan ?? 0m,
@@ -376,36 +378,75 @@ namespace QuanLyPhongKhachSan
 
                     f.BindChiTietNhieuPhong(new[]
                     {
-                        (
-                            Phong: _phong.SoPhong.ToString(),
-                            TuNgay: tuNgay,
-                            DenNgay: denNgay,
-                            SoNgay: soNgay,
-                            TienCoc: 0m,
-                            GiaPhong: giaPhong
-                        )
-                    });
+                (
+                    Phong: _phong.SoPhong.ToString(),
+                    TuNgay: tuNgay,
+                    DenNgay: denNgay,
+                    SoNgay: soNgay,
+                    TienCoc: 0m,           // lần 2 không cộng cọc vào CTHD
+                    GiaPhong: giaPhong
+                )
+            });
 
                     if (f.ShowDialog(this) == DialogResult.OK)
                     {
-                        var dichVuRows = f.GetDichVuData();
-                        foreach (var dv in dichVuRows)
+                        // 3) Ghép GHI CHÚ từ danh sách dịch vụ NV nhập
+                        var dvList = f.GetDichVuData();
+                        var vi = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                        string dvGhiChu = string.Join(Environment.NewLine,
+                            dvList.Where(x => x != null && (!string.IsNullOrWhiteSpace(x.DichVu) || x.SoTien > 0))
+                                  .Select(x => $"{x.DichVu}: {x.SoTien.ToString("N0", vi)}đ"));
+
+                        // 4) TÍNH TỔNG CTHD HIỆN TẠI (tiền phòng đã tính lố ngày nếu có)
+                        var datNow = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
+                        DateTime denDuKien2 = datNow?.NgayTraDuKien.Date ?? denNgay;
+                        DateTime denThucTe2 = datNow?.NgayTraThucTe ?? DateTime.Today;
+                        if (denThucTe2 < denDuKien2) denThucTe2 = denDuKien2;
+                        int soNgayTong2 = Math.Max(1, (denThucTe2 - tuNgay).Days);
+                        decimal tongCTHD = soNgayTong2 * giaPhong;
+
+                        // 5) Tổng dịch vụ
+                        decimal tongDV = dvList.Sum(x => x?.SoTien ?? 0m);
+
+                        // 6) Tổng lần 1
+                        decimal tongLan1 = hoaDonLan1.TongThanhToan ?? 0m;
+
+                        // 7) Số tiền LẦN 2 theo công thức của bạn
+                        decimal soTienLan2 = (tongCTHD - tongLan1) + tongDV - tienCocValue;
+
+                        // 8) Cập nhật tổng tiền + ghi chú vào HĐ2 qua BLL/DAO (KHÔNG truy vấn trực tiếp ở UI)
+                        //    ==> YÊU CẦU: HoaDonService có hàm CapNhatTongTienVaGhiChu(int maHD, decimal tong, string ghiChu)
+                        bool ok = _hoaDonService.CapNhatTongTienVaGhiChu(maHD2, soTienLan2, dvGhiChu);
+                        if (!ok)
                         {
-                            _cthdService.Them(new ChiTietHoaDon
-                            {
-                                MaHD = maHD,
-                                TenDichVu = dv.DichVu,
-                                SoLuong = 1,
-                                Gia = dv.SoTien
-                            });
+                            MessageBox.Show("Cập nhật tổng tiền/ghi chú hóa đơn lần 2 thất bại!");
+                            return;
+                        }
+
+                        // 9) Reset phòng/đặt phòng sau khi hoàn tất HĐ2 (qua service)
+                        var datReset = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
+                        if (datReset != null)
+                        {
+                            datReset.NgayTraThucTe = DateTime.Now;
+                            datReset.TrangThai = "Trống";
+                            phongService.CapNhatDatPhong(datReset);
+                        }
+
+                        var phong = phongService.LayPhongTheoMaPhong(_phong.MaPhong);
+                        if (phong != null)
+                        {
+                            phong.TrangThai = "Trống";
+                            phongService.CapNhat(phong);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi mở hóa đơn lần 2: " + ex.Message);
+                MessageBox.Show("Lỗi khi mở/lưu hóa đơn lần 2: " + ex.Message);
             }
         }
+
+
     }
 }

@@ -28,6 +28,7 @@
             this.txtTenKH = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnHoanThanh = new Guna.UI2.WinForms.Guna2Button();
+            this.btnHoaDon2 = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // guna2HtmlLabel8
@@ -57,7 +58,7 @@
             this.txtTamTinh.PlaceholderText = "";
             this.txtTamTinh.ReadOnly = true;
             this.txtTamTinh.SelectedText = "";
-            this.txtTamTinh.Size = new System.Drawing.Size(114, 23);
+            this.txtTamTinh.Size = new System.Drawing.Size(99, 23);
             this.txtTamTinh.TabIndex = 54;
             // 
             // btnInHoaDon
@@ -69,11 +70,11 @@
             this.btnInHoaDon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnInHoaDon.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInHoaDon.ForeColor = System.Drawing.Color.White;
-            this.btnInHoaDon.Location = new System.Drawing.Point(404, 98);
+            this.btnInHoaDon.Location = new System.Drawing.Point(307, 95);
             this.btnInHoaDon.Name = "btnInHoaDon";
             this.btnInHoaDon.Size = new System.Drawing.Size(92, 36);
             this.btnInHoaDon.TabIndex = 53;
-            this.btnInHoaDon.Text = "In hóa đơn";
+            this.btnInHoaDon.Text = "Hóa đơn 1";
             this.btnInHoaDon.Click += new System.EventHandler(this.btnInHoaDon_Click);
             // 
             // dtpNgayNhan
@@ -200,18 +201,35 @@
             this.btnHoanThanh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnHoanThanh.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHoanThanh.ForeColor = System.Drawing.Color.White;
-            this.btnHoanThanh.Location = new System.Drawing.Point(295, 98);
+            this.btnHoanThanh.Location = new System.Drawing.Point(209, 95);
             this.btnHoanThanh.Name = "btnHoanThanh";
             this.btnHoanThanh.Size = new System.Drawing.Size(92, 36);
             this.btnHoanThanh.TabIndex = 56;
             this.btnHoanThanh.Text = "Hoàn thành";
             this.btnHoanThanh.Click += new System.EventHandler(this.btnHoanThanh_Click);
             // 
+            // btnHoaDon2
+            // 
+            this.btnHoaDon2.BorderRadius = 10;
+            this.btnHoaDon2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoaDon2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoaDon2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnHoaDon2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnHoaDon2.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHoaDon2.ForeColor = System.Drawing.Color.White;
+            this.btnHoaDon2.Location = new System.Drawing.Point(405, 95);
+            this.btnHoaDon2.Name = "btnHoaDon2";
+            this.btnHoaDon2.Size = new System.Drawing.Size(92, 36);
+            this.btnHoaDon2.TabIndex = 57;
+            this.btnHoaDon2.Text = "Hóa đơn 2";
+            this.btnHoaDon2.Click += new System.EventHandler(this.btnHoaDon2_Click);
+            // 
             // frmThemKH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 149);
+            this.Controls.Add(this.btnHoaDon2);
             this.Controls.Add(this.btnHoanThanh);
             this.Controls.Add(this.guna2HtmlLabel8);
             this.Controls.Add(this.txtTamTinh);
@@ -246,5 +264,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTenKH;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2Button btnHoanThanh;
+        private Guna.UI2.WinForms.Guna2Button btnHoaDon2;
     }
 }

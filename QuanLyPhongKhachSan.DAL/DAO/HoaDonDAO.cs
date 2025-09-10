@@ -192,5 +192,38 @@ WHERE MaHD = @MaHD;";
                 return 0;
             }
         }
+        public int CapNhatTongTienVaGhiChu(int maHD, decimal tong, string ghiChu)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connStr))
+                {
+                    conn.Open();
+                    const string sql = @"
+UPDATE HoaDon
+SET TongThanhToan = @Tong,
+    GhiChu = @GhiChu
+WHERE MaHD = @MaHD;";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        var pTong = cmd.Parameters.Add("@Tong", SqlDbType.Decimal);
+                        pTong.Precision = 18; pTong.Scale = 2; pTong.Value = tong;
+
+                        cmd.Parameters.Add("@GhiChu", SqlDbType.NVarChar, -1) // -1 = NVARCHAR(MAX)
+                           .Value = (object)ghiChu ?? DBNull.Value;
+
+                        cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = maHD;
+
+                        return cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi HoaDonDAO.CapNhatTongTienVaGhiChu: {ex.Message}");
+                return 0;
+            }
+        }
+
     }
 }

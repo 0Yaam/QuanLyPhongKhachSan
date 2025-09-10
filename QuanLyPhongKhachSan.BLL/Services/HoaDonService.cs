@@ -31,5 +31,14 @@ namespace QuanLyPhongKhachSan.BLL.Services
             if (maHD <= 0) return false;
             return _dao.CapNhatTongTien(maHD, tong) > 0;
         }
+        public bool CapNhatTongTienVaGhiChu(int maHD, decimal tong, string ghiChu)
+        {
+            if (maHD <= 0) return false;
+            return _dao.CapNhatTongTienVaGhiChu(maHD, tong, ghiChu) > 0;
+        }
+
+
+
+
     }
 }
