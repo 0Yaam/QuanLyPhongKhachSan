@@ -2,6 +2,7 @@
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyPhongKhachSan.BLL.Services
 {
@@ -42,8 +43,6 @@ namespace QuanLyPhongKhachSan.BLL.Services
             {
                 return -1;
             }
-
-            // DÙNG ĐÚNG DAO của bảng DatPhong:
             return _repoDatPhong.Them(datPhong);
         }
 
@@ -61,5 +60,45 @@ namespace QuanLyPhongKhachSan.BLL.Services
         {
             return _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
         }
+
+
+        public List<string> LayDanhSachLoaiPhong()
+        {
+            return _dao.LayDanhSachLoaiPhong();
+        }
+
+        public List<Phong> LayDanhSachSapXep(string loaiPhong, string trangThai, bool tangDan)
+        {
+            var phongList = _dao.LayDanhSach();
+
+            if (!string.IsNullOrEmpty(loaiPhong) && loaiPhong != "None")
+            {
+                phongList = phongList.Where(p => p.LoaiPhong == loaiPhong).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(trangThai))
+            {
+                phongList = phongList.Where(p => p.TrangThai == trangThai).ToList();
+            }
+
+            if (tangDan)
+            {
+                phongList = phongList.OrderBy(p => p.SoPhong).ToList();
+            }
+            else
+            {
+                phongList = phongList.OrderByDescending(p => p.SoPhong).ToList();
+            }
+
+            return phongList;
+        }
+
+
+
+
+
+
+
+
     }
 }

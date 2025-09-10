@@ -39,6 +39,7 @@
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbLoai = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rdTang = new System.Windows.Forms.RadioButton();
             this.rdGiam = new System.Windows.Forms.RadioButton();
@@ -53,7 +54,6 @@
             this.dtpNgayHienTai = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
             this.btnTraPhong = new Guna.UI2.WinForms.Guna2Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.guna2Panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -73,6 +73,7 @@
             this.rdPhongTrong.TabStop = true;
             this.rdPhongTrong.Text = "Phòng trống";
             this.rdPhongTrong.UseVisualStyleBackColor = true;
+            this.rdPhongTrong.CheckedChanged += new System.EventHandler(this.rdPhongTrong_CheckedChanged);
             // 
             // rdPhongDaDat
             // 
@@ -84,6 +85,7 @@
             this.rdPhongDaDat.TabStop = true;
             this.rdPhongDaDat.Text = "Phòng đã đặt";
             this.rdPhongDaDat.UseVisualStyleBackColor = true;
+            this.rdPhongDaDat.CheckedChanged += new System.EventHandler(this.rdPhongDaDat_CheckedChanged);
             // 
             // guna2Panel1
             // 
@@ -174,7 +176,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.cbLoai);
             this.groupBox2.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(900, 68);
             this.groupBox2.Name = "groupBox2";
@@ -182,6 +184,16 @@
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Trạng thái";
+            // 
+            // cbLoai
+            // 
+            this.cbLoai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLoai.FormattingEnabled = true;
+            this.cbLoai.Location = new System.Drawing.Point(17, 24);
+            this.cbLoai.Name = "cbLoai";
+            this.cbLoai.Size = new System.Drawing.Size(83, 26);
+            this.cbLoai.TabIndex = 27;
+            this.cbLoai.SelectedIndexChanged += new System.EventHandler(this.cbLoai_SelectedIndexChanged);
             // 
             // groupBox3
             // 
@@ -205,6 +217,7 @@
             this.rdTang.TabStop = true;
             this.rdTang.Text = "Tăng";
             this.rdTang.UseVisualStyleBackColor = true;
+            this.rdTang.CheckedChanged += new System.EventHandler(this.rdTang_CheckedChanged);
             // 
             // rdGiam
             // 
@@ -216,6 +229,7 @@
             this.rdGiam.TabStop = true;
             this.rdGiam.Text = "Giảm";
             this.rdGiam.UseVisualStyleBackColor = true;
+            this.rdGiam.CheckedChanged += new System.EventHandler(this.rdGiam_CheckedChanged);
             // 
             // flpContain
             // 
@@ -368,15 +382,6 @@
             this.btnTraPhong.TabIndex = 26;
             this.btnTraPhong.Text = "Trả phòng";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(17, 24);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(83, 26);
-            this.comboBox1.TabIndex = 27;
-            // 
             // UserControlDatPhong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,6 +441,6 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayHienTai;
         private Guna.UI2.WinForms.Guna2Button btnThemKH;
         private Guna.UI2.WinForms.Guna2Button btnTraPhong;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbLoai;
     }
 }

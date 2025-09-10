@@ -92,7 +92,7 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             catch (Exception ex)
             {
                 Console.WriteLine("Lỗi khi xóa phòng: " + ex.Message);
-                throw; // Ném lỗi để xử lý ở tầng trên
+                throw; 
             }
         }
 
@@ -160,5 +160,36 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 return -1;
             }
         }
+
+        public List<string> LayDanhSachLoaiPhong()
+        {
+            var loaiPhongList = new List<string>();
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    const string sql = "SELECT DISTINCT LoaiPhong FROM Phong";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            loaiPhongList.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Lỗi LayDanhSachLoaiPhong: {ex.Message}");
+            }
+            return loaiPhongList;
+        }
+
+
+
+
+
     }
 }
