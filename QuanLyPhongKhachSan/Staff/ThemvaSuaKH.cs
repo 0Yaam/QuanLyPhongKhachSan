@@ -1,5 +1,4 @@
-﻿// QuanLyPhongKhachSan.frmThemvaSuaKH.cs frm này cũng giống frmThemKH, nhưng chỉ dành cho 1 khách hàng
-using QuanLyPhongKhachSan.BLL.Services;
+﻿using QuanLyPhongKhachSan.BLL.Services;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Windows.Forms;
@@ -29,9 +28,12 @@ namespace QuanLyPhongKhachSan
             InitializeComponent();
             _phong = phong ?? throw new ArgumentNullException(nameof(phong));
 
+            // Load danh sách loại phòng từ PhongGiaConfig
+            LoadLoaiPhong();
+
             _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
             txtSoPhong.Text = _phong.SoPhong.ToString();
-            cbLoaiPhong.Text = _phong.LoaiPhong;
+            cbLoaiPhong.SelectedItem = _phong.LoaiPhong; // Chọn loại phòng hiện tại
             txtGia.Text = FormatVnd(_giaPhong);
 
             dtpNgayNhan.Value = DateTime.Now;
@@ -39,9 +41,23 @@ namespace QuanLyPhongKhachSan
 
             dtpNgayNhan.ValueChanged += dtpNgayNhan_ValueChanged;
             dtpNgayTraDuKien.ValueChanged += dtpNgayTraDuKien_ValueChanged;
+            cbLoaiPhong.SelectedIndexChanged += cbLoaiPhong_SelectedIndexChanged; // Xử lý thay đổi loại phòng
 
             LoadDatPhongCu();
             CapNhatTamTinh();
+        }
+
+        private void LoadLoaiPhong()
+        {
+            cbLoaiPhong.Items.Clear();
+            foreach (var loai in PhongGiaConfig.GiaPhong.Keys)
+            {
+                cbLoaiPhong.Items.Add(loai);
+            }
+            if (cbLoaiPhong.Items.Count > 0 && string.IsNullOrEmpty(_phong.LoaiPhong))
+            {
+                cbLoaiPhong.SelectedIndex = 0; // Chọn mặc định nếu không có loại phòng
+            }
         }
 
         private void LoadDatPhongCu()
@@ -103,7 +119,7 @@ namespace QuanLyPhongKhachSan
             return string.Format(vi, "{0:N0}đ", v);
         }
 
-        private static decimal LayGiaTheoLoaiPhong(string loai)
+        private decimal LayGiaTheoLoaiPhong(string loai)
         {
             if (string.IsNullOrWhiteSpace(loai)) return 0m;
             decimal gia;
@@ -122,6 +138,17 @@ namespace QuanLyPhongKhachSan
         private void dtpNgayTraDuKien_ValueChanged(object sender, EventArgs e)
         {
             CapNhatTamTinh();
+        }
+
+        private void cbLoaiPhong_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbLoaiPhong.SelectedItem != null)
+            {
+                _phong.LoaiPhong = cbLoaiPhong.SelectedItem.ToString();
+                _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
+                txtGia.Text = FormatVnd(_giaPhong);
+                CapNhatTamTinh();
+            }
         }
 
         public string TenKhachHang => txtTenKH.Text;
@@ -146,7 +173,6 @@ namespace QuanLyPhongKhachSan
             }
         }
 
-
         private void btnHoanThanh_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTenKH.Text))
@@ -170,12 +196,21 @@ namespace QuanLyPhongKhachSan
                 return;
             }
 
-            CapNhatTamTinh();
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
+            _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
+            if (phongService.CapNhat(_phong)) // Sử dụng trực tiếp bool thay vì > 0
+            {
+                CapNhatTamTinh();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật loại phòng thất bại!");
+            }
         }
 
-        // ====== IN HÓA ĐƠN ======
+        //in hoa don
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
             try
@@ -190,7 +225,6 @@ namespace QuanLyPhongKhachSan
                 _maDatHienTai = dat.MaDat;
                 string loaiHDDb = "Lần 1";
 
-                // Tính toán chi tiết
                 DateTime tuNgay = dat.NgayNhan.Date;
                 DateTime denNgay = dat.NgayTraDuKien.Date;
                 if (denNgay <= tuNgay) denNgay = tuNgay.AddDays(1);
@@ -202,12 +236,12 @@ namespace QuanLyPhongKhachSan
                 decimal tienPhong = soNgay * giaPhong;
                 decimal tongTien = tienPhong + tienCoc;
 
-                // Lưu HÓA ĐƠN trước
+                // luu hoa don trc
                 var hd = new HoaDon
                 {
                     MaDat = dat.MaDat,
                     NgayLap = DateTime.Now,
-                    LoaiHoaDon = loaiHDDb,      // đảm bảo khớp constraint
+                    LoaiHoaDon = loaiHDDb,
                     TongThanhToan = tongTien,
                     GhiChu = null
                 };
@@ -219,8 +253,6 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                // Lưu CHI TIẾT HÓA ĐƠN (2 dòng: Tiền phòng, Tiền cọc)
-                // 1) Tiền phòng
                 _cthdService.Them(new ChiTietHoaDon
                 {
                     MaHD = maHD,
@@ -229,7 +261,6 @@ namespace QuanLyPhongKhachSan
                     Gia = giaPhong
                 });
 
-                // 2) Tiền cọc
                 _cthdService.Them(new ChiTietHoaDon
                 {
                     MaHD = maHD,
@@ -238,18 +269,16 @@ namespace QuanLyPhongKhachSan
                     Gia = tienCoc
                 });
 
-                // Lấy tên khách hàng
                 var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
                 string tenKH = kh?.HoTen ?? "";
 
-                // Mở form HĐ & hiển thị MaHD mới + 1 dòng ở dgvCTHD
                 using (var f = new frmHoaDon1())
                 {
                     f.BindHeader(
                         loaiHD: loaiHDDb,
                         ngayLap: DateTime.Now,
                         nhanVien: _tenNhanVien,
-                        maHD: maHD,              // << MaHD mới tạo trong DB
+                        maHD: maHD,
                         tenKH: tenKH
                     );
 
@@ -273,8 +302,5 @@ namespace QuanLyPhongKhachSan
                 MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
             }
         }
-
-
-
     }
 }

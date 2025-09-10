@@ -92,7 +92,7 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             catch (Exception ex)
             {
                 Console.WriteLine("Lỗi khi xóa phòng: " + ex.Message);
-                throw; 
+                throw;
             }
         }
 
@@ -133,8 +133,6 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             return null;
         }
 
-
-        //                            NgayTraThucTe = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5),
         public int ThemDatPhong(DatPhong datPhong)
         {
             try
@@ -187,9 +185,30 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             return loaiPhongList;
         }
 
-
-
-
-
+        public int CapNhat(Phong phong)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string sql = "UPDATE Phong SET SoPhong = @SoPhong, LoaiPhong = @LoaiPhong, Gia = @Gia, TrangThai = @TrangThai WHERE MaPhong = @MaPhong";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaPhong", phong.MaPhong);
+                        cmd.Parameters.AddWithValue("@SoPhong", phong.SoPhong);
+                        cmd.Parameters.AddWithValue("@LoaiPhong", phong.LoaiPhong);
+                        cmd.Parameters.AddWithValue("@Gia", phong.Gia);
+                        cmd.Parameters.AddWithValue("@TrangThai", phong.TrangThai);
+                        return cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi cập nhật phòng: " + ex.Message);
+                return 0;
+            }
+        }
     }
 }

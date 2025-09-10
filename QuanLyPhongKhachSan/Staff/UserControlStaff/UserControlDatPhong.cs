@@ -68,6 +68,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             flpContain.Visible = true;
             flpContain.AutoScroll = true;
             LoadDanhSachPhong(); // Áp dụng sắp xếp ban đầu
+            KhoiTaoComboBox(); // Đảm bảo cbLoai được cập nhật khi load
         }
 
         private Guna2Panel TaoPhongMoi(Phong phong)
@@ -141,6 +142,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 };
                 child.DoubleClick += (s, e) => HandleDoubleClickOpen(pnl);
             }
+            ;
 
             var menu = new ContextMenuStrip();
             menu.Items.Add("Xóa").Click += (s, e) =>
@@ -408,6 +410,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 _allRooms.Add(phongMoi);
                 var pnl = TaoPhongMoi(phongMoi);
                 flpContain.Controls.Add(pnl);
+                KhoiTaoComboBox(); // Cập nhật cbLoai với loại phòng mới
                 txtSoPhong.Clear();
                 cbLoaiPhong.SelectedIndex = -1;
             }
@@ -513,7 +516,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
         private void KhoiTaoComboBox()
         {
-            var loaiPhongList = phongService.LayDanhSachLoaiPhong();
+            var loaiPhongList = phongService.LayDanhSachLoaiPhong().Distinct().ToList();
             cbLoai.Items.Clear();
             cbLoai.Items.Add("None"); // Thêm "None" làm mặc định
             cbLoai.Items.AddRange(loaiPhongList.ToArray());

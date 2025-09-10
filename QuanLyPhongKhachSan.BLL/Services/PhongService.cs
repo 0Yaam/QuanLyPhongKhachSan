@@ -61,7 +61,6 @@ namespace QuanLyPhongKhachSan.BLL.Services
             return _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
         }
 
-
         public List<string> LayDanhSachLoaiPhong()
         {
             return _dao.LayDanhSachLoaiPhong();
@@ -93,12 +92,13 @@ namespace QuanLyPhongKhachSan.BLL.Services
             return phongList;
         }
 
-
-
-
-
-
-
-
+        public bool CapNhat(Phong phong)
+        {
+            if (phong == null || phong.MaPhong <= 0 || string.IsNullOrEmpty(phong.LoaiPhong) || phong.Gia <= 0)
+            {
+                return false;
+            }
+            return _dao.CapNhat(phong) > 0; // So sánh với 0 để kiểm tra thành công
+        }
     }
 }
