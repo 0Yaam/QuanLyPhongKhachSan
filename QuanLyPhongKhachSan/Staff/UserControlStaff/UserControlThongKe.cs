@@ -37,20 +37,20 @@
 
             }
 
-            private void guna2Button1_Click(object sender, EventArgs e)
-            {
-                try
-                {
-                cmd = new SqlCommand("select * from DatPhong", con); // thêm con vào đây
-                adt = new SqlDataAdapter(cmd);
-                adt.Fill(dt);
-                guna2DataGridView1.DataSource = dt;
+            //private void guna2Button1_Click(object sender, EventArgs e)
+            //{
+            //    try
+            //    {
+            //    cmd = new SqlCommand("select * from DatPhong", con); // thêm con vào đây
+            //    adt = new SqlDataAdapter(cmd);
+            //    adt.Fill(dt);
+            //    guna2DataGridView1.DataSource = dt;
 
-            }
-            catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
+            //}
+            //catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
         }
     }

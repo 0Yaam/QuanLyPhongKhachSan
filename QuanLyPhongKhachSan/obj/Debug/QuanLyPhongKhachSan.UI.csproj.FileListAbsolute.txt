@@ -89,3 +89,6 @@ C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan\obj\Debug\QuanLyPh.DF605182.Up2Date
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.exe.config
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Staff.frmHoaDon2.resources
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Admin.UserControlAdmin.UserControlTaiKhoanAdmin.resources
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Admin.frmThemNhanVien.resources
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Staff.UserControlStaff.UserControlLichSuHoaDon.resources

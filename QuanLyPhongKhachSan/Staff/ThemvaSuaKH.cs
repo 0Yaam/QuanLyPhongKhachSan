@@ -272,6 +272,21 @@ namespace QuanLyPhongKhachSan
                 var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
                 string tenKH = kh?.HoTen ?? "";
 
+                // ===== LOG LỊCH SỬ HÓA ĐƠN (LẦN 1) =====
+                var lichSuSvc = new LichSuHoaDonService();
+                int logId = lichSuSvc.Them(new LichSuHoaDon
+                {
+                    MaHD = maHD,
+                    MaDat = dat.MaDat,      // Cột MaDat trong DB là NOT NULL -> phải có
+                    TenKH = tenKH,
+                    CCCD = kh?.CCCD,
+                    SDT = kh?.SDT,
+                    ThoiGianIn = DateTime.Now,
+                    LoaiHoaDon = "Lần 1"
+                });
+                MessageBox.Show("Đã ghi lịch sử HĐ (Lần 1). Id=" + logId);
+                // ========================================
+
                 using (var f = new frmHoaDon1())
                 {
                     f.BindHeader(
@@ -284,15 +299,15 @@ namespace QuanLyPhongKhachSan
 
                     f.BindChiTietNhieuPhong(new[]
                     {
-                        (
-                            Phong: _phong.SoPhong.ToString(),
-                            TuNgay: tuNgay,
-                            DenNgay: denNgay,
-                            SoNgay: soNgay,
-                            TienCoc: tienCocValue,
-                            GiaPhong: giaPhong
-                        )
-                    });
+                (
+                    Phong: _phong.SoPhong.ToString(),
+                    TuNgay: tuNgay,
+                    DenNgay: denNgay,
+                    SoNgay: soNgay,
+                    TienCoc: tienCocValue,
+                    GiaPhong: giaPhong
+                )
+            });
 
                     f.ShowDialog(this);
                 }
@@ -302,6 +317,7 @@ namespace QuanLyPhongKhachSan
                 MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
             }
         }
+
 
         private void btnHoaDon2_Click(object sender, EventArgs e)
         {
@@ -316,7 +332,6 @@ namespace QuanLyPhongKhachSan
 
                 _maDatHienTai = dat.MaDat;
 
-                // Lấy hóa đơn lần 1 để biết tổng lần 1
                 var hoaDonList = _hoaDonService.LayDanhSach();
                 var hoaDonLan1 = hoaDonList.FirstOrDefault(hd => hd.MaDat == _maDatHienTai && hd.LoaiHoaDon == "Lần 1");
                 if (hoaDonLan1 == null)
@@ -325,7 +340,6 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                // Lưu DB bắt buộc dùng "Lần 2" để không vi phạm CHECK constraint
                 string loaiHDDb = "Lần 2";
 
                 DateTime tuNgay = dat.NgayNhan.Date;
@@ -335,14 +349,12 @@ namespace QuanLyPhongKhachSan
                 int soNgay = Math.Max(1, (denNgay - tuNgay).Days);
                 decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
 
-                // Nếu model DatPhong.TienCoc là decimal?
                 decimal tienCocValue;
                 {
-                    decimal? tienCocNullable = dat.TienCoc; // giả định DatPhong.TienCoc là nullable decimal
+                    decimal? tienCocNullable = dat.TienCoc;
                     tienCocValue = tienCocNullable.HasValue ? tienCocNullable.Value : 200_000m;
                 }
 
-                // 1) Tạo HĐ2 (tạm thời tổng = 0, ghi chú = null). Service/DAO chịu trách nhiệm insert.
                 var hoaDon2 = new HoaDon
                 {
                     MaDat = dat.MaDat,
@@ -359,14 +371,13 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                // 2) Mở form Hóa đơn 2 để NV nhập dịch vụ, xem lố ngày...
                 using (var f = new QuanLyPhongKhachSan.Staff.frmHoaDon2(_phong.MaPhong))
                 {
                     var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
                     string tenKH = kh?.HoTen ?? "";
 
                     f.BindHeader(
-                        loaiHD: "Hóa đơn lần 2",               // Text hiển thị, DB vẫn là "Lần 2"
+                        loaiHD: "Hóa đơn lần 2",
                         ngayLap: DateTime.Now,
                         nhanVien: _tenNhanVien,
                         maHD: maHD2,
@@ -383,21 +394,19 @@ namespace QuanLyPhongKhachSan
                     TuNgay: tuNgay,
                     DenNgay: denNgay,
                     SoNgay: soNgay,
-                    TienCoc: 0m,           // lần 2 không cộng cọc vào CTHD
+                    TienCoc: 0m,
                     GiaPhong: giaPhong
                 )
             });
 
                     if (f.ShowDialog(this) == DialogResult.OK)
                     {
-                        // 3) Ghép GHI CHÚ từ danh sách dịch vụ NV nhập
                         var dvList = f.GetDichVuData();
                         var vi = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
                         string dvGhiChu = string.Join(Environment.NewLine,
                             dvList.Where(x => x != null && (!string.IsNullOrWhiteSpace(x.DichVu) || x.SoTien > 0))
                                   .Select(x => $"{x.DichVu}: {x.SoTien.ToString("N0", vi)}đ"));
 
-                        // 4) TÍNH TỔNG CTHD HIỆN TẠI (tiền phòng đã tính lố ngày nếu có)
                         var datNow = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
                         DateTime denDuKien2 = datNow?.NgayTraDuKien.Date ?? denNgay;
                         DateTime denThucTe2 = datNow?.NgayTraThucTe ?? DateTime.Today;
@@ -405,17 +414,10 @@ namespace QuanLyPhongKhachSan
                         int soNgayTong2 = Math.Max(1, (denThucTe2 - tuNgay).Days);
                         decimal tongCTHD = soNgayTong2 * giaPhong;
 
-                        // 5) Tổng dịch vụ
                         decimal tongDV = dvList.Sum(x => x?.SoTien ?? 0m);
-
-                        // 6) Tổng lần 1
                         decimal tongLan1 = hoaDonLan1.TongThanhToan ?? 0m;
-
-                        // 7) Số tiền LẦN 2 theo công thức của bạn
                         decimal soTienLan2 = (tongCTHD - tongLan1) + tongDV - tienCocValue;
 
-                        // 8) Cập nhật tổng tiền + ghi chú vào HĐ2 qua BLL/DAO (KHÔNG truy vấn trực tiếp ở UI)
-                        //    ==> YÊU CẦU: HoaDonService có hàm CapNhatTongTienVaGhiChu(int maHD, decimal tong, string ghiChu)
                         bool ok = _hoaDonService.CapNhatTongTienVaGhiChu(maHD2, soTienLan2, dvGhiChu);
                         if (!ok)
                         {
@@ -423,7 +425,23 @@ namespace QuanLyPhongKhachSan
                             return;
                         }
 
-                        // 9) Reset phòng/đặt phòng sau khi hoàn tất HĐ2 (qua service)
+
+                        // ===== LOG LỊCH SỬ HÓA ĐƠN (LẦN 2) =====
+                        var lichSuSvc = new LichSuHoaDonService();
+                        int logId2 = lichSuSvc.Them(new LichSuHoaDon
+                        {
+                            MaHD = maHD2,
+                            MaDat = dat.MaDat,
+                            TenKH = tenKH,
+                            CCCD = kh?.CCCD,
+                            SDT = kh?.SDT,
+                            ThoiGianIn = DateTime.Now,
+                            LoaiHoaDon = "Lần 2"
+                        });
+                        MessageBox.Show("Đã ghi lịch sử HĐ (Lần 2). Id=" + logId2);
+                        // ========================================
+
+                        // Reset phòng/đặt phòng
                         var datReset = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
                         if (datReset != null)
                         {
@@ -446,6 +464,7 @@ namespace QuanLyPhongKhachSan
                 MessageBox.Show("Lỗi khi mở/lưu hóa đơn lần 2: " + ex.Message);
             }
         }
+
 
 
     }

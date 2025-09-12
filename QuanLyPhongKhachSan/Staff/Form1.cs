@@ -14,6 +14,7 @@ namespace QuanLyPhongKhachSan
         private UserControlDanhSachKhachHang danhSachKhachHangInstance;
         private UserControlThongKe thongKeInstance;
         private UserControlTaiKhoan taiKhoanInstance;
+        private UserControlLichSuHoaDon lichSuHoaDonInstance;
 
         public Form1()
         {
@@ -22,7 +23,7 @@ namespace QuanLyPhongKhachSan
             danhSachKhachHangInstance = new UserControlDanhSachKhachHang();
             thongKeInstance = new UserControlThongKe();
             taiKhoanInstance = new UserControlTaiKhoan();
-
+            lichSuHoaDonInstance = new UserControlLichSuHoaDon();
             // Load UserControl mặc định khi mở form
             addUserControl(datPhongInstance);
         }
@@ -83,7 +84,7 @@ namespace QuanLyPhongKhachSan
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            addUserControl(thongKeInstance); // Tái sử dụng instance
+            addUserControl(lichSuHoaDonInstance); // Tái sử dụng instance
             CapNhatMauNut(sender);
         }
 
@@ -114,6 +115,12 @@ namespace QuanLyPhongKhachSan
             {
                 clickedBtn.FillColor = ColorTranslator.FromHtml("#D7E4F2"); // Màu chọn
             }
+        }
+
+        private void btnThongKe_Click_1(object sender, EventArgs e)
+        {
+            addUserControl(thongKeInstance); // Tái sử dụng instance
+            CapNhatMauNut(sender);
         }
     }
 }

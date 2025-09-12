@@ -53,6 +53,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\frmThemNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmThemNhanVien.Designer.cs">
+      <DependentUpon>frmThemNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserControlAdmin\UserControlTaiKhoanAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Admin\UserControlAdmin\UserControlTaiKhoanAdmin.Designer.cs">
+      <DependentUpon>UserControlTaiKhoanAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppEvents.cs" />
     <Compile Include="Staff\frmHoaDon1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +95,12 @@
     </Compile>
     <Compile Include="Staff\UserControlStaff\UserControlDatPhong.Designer.cs">
       <DependentUpon>UserControlDatPhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlLichSuHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Staff\UserControlStaff\UserControlLichSuHoaDon.Designer.cs">
+      <DependentUpon>UserControlLichSuHoaDon.cs</DependentUpon>
     </Compile>
     <Compile Include="Staff\UserControlStaff\UserControlTaiKhoan.cs">
       <SubType>UserControl</SubType>
@@ -145,6 +164,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Admin\frmThemNhanVien.resx">
+      <DependentUpon>frmThemNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlTaiKhoanAdmin.resx">
+      <DependentUpon>UserControlTaiKhoanAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Staff\frmHoaDon1.resx">
       <DependentUpon>frmHoaDon1.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Staff\UserControlStaff\UserControlDatPhong.resx">
       <DependentUpon>UserControlDatPhong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff\UserControlStaff\UserControlLichSuHoaDon.resx">
+      <DependentUpon>UserControlLichSuHoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Staff\UserControlStaff\UserControlTaiKhoan.resx">
       <DependentUpon>UserControlTaiKhoan.cs</DependentUpon>
@@ -232,6 +260,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Susumu Nakoshi Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GL7ic1kWUAAWMa_.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

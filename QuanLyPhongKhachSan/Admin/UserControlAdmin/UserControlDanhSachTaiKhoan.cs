@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyPhongKhachSan.Admin;
 
 namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 {
@@ -15,6 +16,12 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         public UserControlDanhSachTaiKhoan()
         {
             InitializeComponent();
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            frmThemNhanVien frm = new frmThemNhanVien();
+            frm.ShowDialog();
         }
     }
 }

@@ -16,20 +16,29 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 using (var conn = new SqlConnection(_connStr))
                 {
                     conn.Open();
+
+                    // KHÔNG insert ThanhTien vì là computed
                     const string sql = @"
-INSERT INTO ChiTietHoaDon (MaHD, TenDichVu, SoLuong, Gia)
-OUTPUT INSERTED.MaCTHD
-VALUES (@MaHD, @TenDichVu, @SoLuong, @Gia);";
+INSERT INTO ChiTietHoaDon (MaHD, DanhMuc, SoLuong, DonGia)
+OUTPUT INSERTED.MaCT
+VALUES (@MaHD, @DanhMuc, @SoLuong, @DonGia);";
 
                     using (var cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@MaHD", cthd.MaHD);
-                        cmd.Parameters.AddWithValue("@TenDichVu", (object)(cthd.TenDichVu ?? "") ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@SoLuong", cthd.SoLuong);
-                        cmd.Parameters.AddWithValue("@Gia", cthd.Gia);
+                        cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = cthd.MaHD;
 
-                        var id = cmd.ExecuteScalar();
-                        return (id == null) ? 0 : Convert.ToInt32(id);
+                        cmd.Parameters.Add("@DanhMuc", SqlDbType.NVarChar, 200)
+                           .Value = (object)(cthd.TenDichVu ?? "") ?? DBNull.Value;
+
+                        cmd.Parameters.Add("@SoLuong", SqlDbType.Int).Value = cthd.SoLuong;
+
+                        var pDonGia = cmd.Parameters.Add("@DonGia", SqlDbType.Decimal);
+                        pDonGia.Precision = 18;
+                        pDonGia.Scale = 2;
+                        pDonGia.Value = cthd.Gia;
+
+                        var idObj = cmd.ExecuteScalar();
+                        return (idObj == null || idObj == DBNull.Value) ? 0 : Convert.ToInt32(idObj);
                     }
                 }
             }
@@ -39,6 +48,5 @@ VALUES (@MaHD, @TenDichVu, @SoLuong, @Gia);";
                 return 0;
             }
         }
-
     }
 }

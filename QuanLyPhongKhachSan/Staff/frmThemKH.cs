@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using QuanLyPhongKhachSan;
+
 
 namespace QuanLyPhongKhachSan.Staff
 {
@@ -328,6 +330,19 @@ namespace QuanLyPhongKhachSan.Staff
                 }
 
                 hdSvc.CapNhatTongTien(maHD, tongAll);
+                var lichSuSvc = new LichSuHoaDonService();
+                lichSuSvc.Them(new LichSuHoaDon
+                {
+                    MaHD = maHD,
+                    MaDat = maDatDaiDien,        // bạn vừa tính ở trên
+                    TenKH = tenKH,                 // đã có ở trên: string tenKH = kh?.HoTen ?? "";
+                    CCCD = kh?.CCCD,
+                    SDT = kh?.SDT,
+                    ThoiGianIn = DateTime.Now,
+                    LoaiHoaDon = "Lần 1"
+                }
+                );
+                AppEvents.RaiseInvoiceLogged();
 
                 using (var f = new frmHoaDon1())
                 {
@@ -346,6 +361,7 @@ namespace QuanLyPhongKhachSan.Staff
             {
                 MessageBox.Show("Lỗi in hóa đơn: " + ex.Message);
             }
+
         }
 
         private void btnHoaDon2_Click(object sender, EventArgs e)
@@ -364,14 +380,10 @@ namespace QuanLyPhongKhachSan.Staff
                     var room = it.Room;
                     if (room == null) continue;
 
-                    DatPhong bk = it.Booking;
-                    if (bk == null)
-                    {
-                        bk = _phongService.LayDatPhongTheoMaPhong(room.MaPhong);
-                    }
-                    if (bk == null) continue;                    // không có đặt phòng
-                    if (bk.NgayTraThucTe.HasValue) continue;     // đã trả thực tế thì bỏ
-                    if (bk.MaKH != _preMaKH) continue;           // không phải khách hiện tại thì bỏ
+                    DatPhong bk = it.Booking ?? _phongService.LayDatPhongTheoMaPhong(room.MaPhong);
+                    if (bk == null) continue;
+                    if (bk.NgayTraThucTe.HasValue) continue; // đã trả rồi thì bỏ
+                    if (bk.MaKH != _preMaKH) continue;       // không phải KH hiện tại
 
                     bookings.Add((room, bk));
                 }
@@ -392,6 +404,7 @@ namespace QuanLyPhongKhachSan.Staff
                 var kh = _khService.LayKhachHangTheoMaKH(_preMaKH);
                 string tenKH = kh?.HoTen ?? "";
 
+                // Lấy MaDat đại diện
                 var bookingIds = bookings.Select(x => x.Booking.MaDat).ToList();
                 int maDatDaiDien = bookingIds.Min();
 
@@ -405,10 +418,8 @@ namespace QuanLyPhongKhachSan.Staff
                 }
                 decimal tongLan1 = hdLan1.TongThanhToan ?? 0m;
 
-
                 decimal tongCoc = 0m;
                 var lines = new List<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal GiaPhong)>();
-
                 foreach (var it in bookings)
                 {
                     var room = it.Room;
@@ -417,23 +428,15 @@ namespace QuanLyPhongKhachSan.Staff
                     DateTime tu = bk.NgayNhan.Date;
                     DateTime duKien = bk.NgayTraDuKien.Date <= tu ? tu.AddDays(1) : bk.NgayTraDuKien.Date;
                     DateTime thucTe = bk.NgayTraThucTe ?? DateTime.Today;
-                    DateTime den = thucTe > duKien ? thucTe.Date : duKien; // lấy max(NgayTraThucTe, NgayTraDuKien)
+                    DateTime den = thucTe > duKien ? thucTe.Date : duKien;
 
                     int soNgay = Math.Max(1, (den - tu).Days);
 
-                    decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out var g)
-                                  ? g : room.Gia;
-
+                    decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out var g) ? g : room.Gia;
                     decimal coc = (bk.TienCoc > 0 ? bk.TienCoc : 200000m);
                     tongCoc += coc;
 
-                    lines.Add((
-                        Phong: room.SoPhong.ToString(),
-                        TuNgay: tu,
-                        DenNgay: den,
-                        SoNgay: soNgay,
-                        GiaPhong: gia
-                    ));
+                    lines.Add((room.SoPhong.ToString(), tu, den, soNgay, gia));
                 }
 
                 if (lines.Count == 0)
@@ -472,58 +475,89 @@ namespace QuanLyPhongKhachSan.Staff
 
                     f.BindChiTietPrecomputed(lines);
 
-                    if (f.ShowDialog(this) == DialogResult.OK)
+                    if (f.ShowDialog(this) != DialogResult.OK)
                     {
-                        var dvList = f.GetDichVuData();
-                        var vi = new System.Globalization.CultureInfo("vi-VN");
-                        string ghiChuDv = string.Join(Environment.NewLine,
-                            dvList.Where(x => x != null && (!string.IsNullOrWhiteSpace(x.DichVu) || x.SoTien > 0))
-                                  .Select(x => $"{x.DichVu}: {x.SoTien.ToString("N0", vi)}đ"));
+                        return;
+                    }
 
-                        decimal tongCTHD = lines.Sum(l => Math.Max(1, l.SoNgay) * l.GiaPhong);
+                    var dvList = f.GetDichVuData();
+                    var vi = new System.Globalization.CultureInfo("vi-VN");
+                    string ghiChuDv = string.Join(Environment.NewLine,
+                        dvList.Where(x => x != null && (!string.IsNullOrWhiteSpace(x.DichVu) || x.SoTien > 0))
+                              .Select(x => $"{x.DichVu}: {x.SoTien.ToString("N0", vi)}đ"));
 
-                        decimal tongDV = dvList.Sum(x => x?.SoTien ?? 0m);
+                    var datNow = _phongService.LayDatPhongTheoMaPhong(bookings.First().Room.MaPhong);
+                    DateTime tuNgay = bookings.First().Booking.NgayNhan.Date;
+                    DateTime denDuKien2 = datNow?.NgayTraDuKien.Date ?? lines.Max(l => l.DenNgay);
+                    DateTime denThucTe2 = datNow?.NgayTraThucTe ?? DateTime.Today;
+                    if (denThucTe2 < denDuKien2) denThucTe2 = denDuKien2;
 
-                        decimal soTienLan2 = (tongCTHD - tongLan1) + tongDV - tongCoc;
+                    // Tổng tiền phòng (cộng tất cả phòng) theo lines đã tính
+                    decimal tongCTHD = lines.Sum(l => Math.Max(1, l.SoNgay) * l.GiaPhong);
 
-                        bool ok = hdSvc.CapNhatTongTienVaGhiChu(maHD2, soTienLan2, ghiChuDv);
-                        if (!ok)
+                    // Tổng dịch vụ
+                    decimal tongDV = dvList.Sum(x => x?.SoTien ?? 0m);
+
+                    // Số tiền lần 2
+                    decimal soTienLan2 = (tongCTHD - tongLan1) + tongDV - tongCoc;
+
+                    // Cập nhật tổng tiền/ghi chú
+                    bool ok = hdSvc.CapNhatTongTienVaGhiChu(maHD2, soTienLan2, ghiChuDv);
+                    if (!ok)
+                    {
+                        MessageBox.Show("Cập nhật tổng tiền/ghi chú hóa đơn lần 2 thất bại!");
+                        return;
+                    }
+
+                    var lichSuSvc = new LichSuHoaDonService();
+                    int logId2 = lichSuSvc.Them(new LichSuHoaDon
+                    {
+                        MaHD = maHD2,
+                        MaDat = maDatDaiDien,
+                        TenKH = tenKH,
+                        CCCD = kh?.CCCD,
+                        SDT = kh?.SDT,
+                        ThoiGianIn = DateTime.Now,
+                        LoaiHoaDon = "Lần 2"
+                    });
+                    AppEvents.RaiseInvoiceLogged();
+
+
+                    // Thông báo giống lần 1 (có MaHD & Id log)
+                    MessageBox.Show(
+                        $"Đã lưu Hóa đơn Lần 2 (Mã: {maHD2}).\n" +
+                        $"Tiền phải thu: {soTienLan2:N0}đ\n" +
+                        $"Đã ghi lịch sử (Id={logId2}).",
+                        "Thành công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    // --- Reset phòng/đặt phòng ---
+                    foreach (var it in bookings)
+                    {
+                        var bk = _phongService.LayDatPhongTheoMaPhong(it.Room.MaPhong);
+                        if (bk != null)
                         {
-                            MessageBox.Show("Cập nhật tổng tiền/Ghi chú hóa đơn lần 2 thất bại!");
-                            return;
+                            bk.NgayTraThucTe = DateTime.Now;
+                            bk.TrangThai = "Trống";
+                            _phongService.CapNhatDatPhong(bk);
                         }
 
-                        foreach (var it in bookings)
+                        var p = _phongService.LayPhongTheoMaPhong(it.Room.MaPhong);
+                        if (p != null)
                         {
-                            // cập nhật DatPhong
-                            var bk = _phongService.LayDatPhongTheoMaPhong(it.Room.MaPhong);
-                            if (bk != null)
-                            {
-                                bk.NgayTraThucTe = DateTime.Now;
-                                bk.TrangThai = "Trống";
-                                _phongService.CapNhatDatPhong(bk);
-                            }
-
-                            // cập nhật Phong
-                            var p = _phongService.LayPhongTheoMaPhong(it.Room.MaPhong);
-                            if (p != null)
-                            {
-                                p.TrangThai = "Trống";
-                                _phongService.CapNhat(p);
-                            }
+                            p.TrangThai = "Trống";
+                            _phongService.CapNhat(p);
                         }
-
-                        MessageBox.Show("Đã lưu Hóa đơn lần 2 và trả phòng thành công.");
-                        // Tùy ý: đóng form chỉnh KH nếu đây là thao tác cuối
-                        // this.DialogResult = DialogResult.OK;
-                        // this.Close();
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi in Hóa đơn lần 2 nhiều phòng: " + ex.Message);
+                MessageBox.Show("Lỗi in Hóa đơn lần 2: " + ex.Message);
             }
         }
+
     }
 }
