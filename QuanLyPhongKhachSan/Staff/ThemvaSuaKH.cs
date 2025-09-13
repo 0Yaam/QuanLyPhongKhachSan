@@ -3,7 +3,7 @@ using QuanLyPhongKhachSan.DAL.OL;
 using QuanLyPhongKhachSan.Staff;
 using System;
 using System.Linq;
-using System.Windows.Forms; 
+using System.Windows.Forms;
 
 namespace QuanLyPhongKhachSan
 {
@@ -85,7 +85,7 @@ namespace QuanLyPhongKhachSan
             }
             else
             {
-                ClearForm(); // Reset form nếu không có đặt phòng hoặc đã trả phòng
+                ClearForm();
                 System.Diagnostics.Debug.WriteLine("LoadDatPhongCu: Gọi ClearForm vì không có đặt phòng hợp lệ hoặc đã trả phòng");
             }
         }
@@ -167,38 +167,98 @@ namespace QuanLyPhongKhachSan
 
         private void btnHoanThanh_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtTenKH.Text))
+            try
             {
-                MessageBox.Show("Nhập tên khách hàng");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtSDT.Text))
-            {
-                MessageBox.Show("Nhập số điện thoại");
-                return;
-            }
-            if (NgayNhan >= NgayTraDuKien)
-            {
-                MessageBox.Show("Ngày nhận phải trước ngày trả dự kiến!");
-                return;
-            }
-            if (SoDem <= 0)
-            {
-                MessageBox.Show("Số đêm phải lớn hơn 0!");
-                return;
-            }
+                // Kiểm tra thông tin
+                if (string.IsNullOrWhiteSpace(txtTenKH.Text))
+                {
+                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Tên khách hàng trống");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtSDT.Text))
+                {
+                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Số điện thoại trống");
+                    return;
+                }
+                if (NgayNhan >= NgayTraDuKien)
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Ngày nhận ({NgayNhan}) phải trước ngày trả dự kiến ({NgayTraDuKien})");
+                    return;
+                }
+                if (SoDem <= 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Số đêm phải lớn hơn 0");
+                    return;
+                }
 
-            _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
-            _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
-            if (phongService.CapNhat(_phong))
-            {
+                // Cập nhật loại phòng
+                _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
+                _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
+                if (!phongService.CapNhat(_phong))
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật loại phòng thất bại - MaPhong={_phong.MaPhong}, LoaiPhong={_phong.LoaiPhong}");
+                    return;
+                }
+
+                // Lưu hoặc cập nhật khách hàng
+                int maKh = khachHangService.UpsertKhachHang(txtTenKH.Text, txtCCCD.Text, txtSDT.Text);
+                if (maKh <= 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Lưu khách hàng thất bại - Ten={txtTenKH.Text}, CCCD={txtCCCD.Text}, SDT={txtSDT.Text}");
+                    return;
+                }
+
+                // Lưu hoặc cập nhật đặt phòng
+                string trangThai = TrangThai;
+                var datPhong = new DatPhong
+                {
+                    MaDat = _maDatHienTai,
+                    MaKH = maKh,
+                    MaPhong = _phong.MaPhong,
+                    NgayNhan = NgayNhan,
+                    NgayTraDuKien = NgayTraDuKien,
+                    NgayTraThucTe = null,
+                    TienCoc = TienCocMacDinh,
+                    TienThue = TienThue,
+                    TrangThai = trangThai
+                };
+
+                bool result;
+                var existingDat = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
+                if (existingDat != null && !existingDat.NgayTraThucTe.HasValue && (existingDat.TrangThai == "Đã đặt" || existingDat.TrangThai == "Đang sử dụng"))
+                {
+                    datPhong.MaDat = existingDat.MaDat;
+                    result = phongService.CapNhatDatPhong(datPhong);
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật DatPhong - MaDat={datPhong.MaDat}, MaKH={maKh}, MaPhong={_phong.MaPhong}, Result={result}");
+                }
+                else
+                {
+                    int maDat = phongService.ThemDatPhong(datPhong);
+                    result = maDat > 0;
+                    _maDatHienTai = maDat;
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Thêm DatPhong - MaDat={maDat}, MaKH={maKh}, MaPhong={_phong.MaPhong}, Result={result}");
+                }
+
+                if (!result)
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Lưu DatPhong thất bại - MaKH={maKh}, MaPhong={_phong.MaPhong}");
+                    return;
+                }
+
+                // Cập nhật trạng thái phòng
+                if (!phongService.CapNhatTrangThai(_phong.MaPhong, trangThai))
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật trạng thái phòng thất bại - MaPhong={_phong.MaPhong}, TrangThai={trangThai}");
+                    return;
+                }
+
                 CapNhatTamTinh();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Cập nhật loại phòng thất bại!");
+                System.Diagnostics.Debug.WriteLine($"Lỗi btnHoanThanh_Click: {ex.Message}");
             }
         }
 
@@ -206,32 +266,100 @@ namespace QuanLyPhongKhachSan
         {
             try
             {
-                var dat = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
-                if (dat == null)
+                // Kiểm tra thông tin
+                if (string.IsNullOrWhiteSpace(txtTenKH.Text))
                 {
-                    MessageBox.Show("Chưa có đặt phòng để lập hoá đơn.");
+                    System.Diagnostics.Debug.WriteLine("btnInHoaDon_Click: Tên khách hàng trống");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtSDT.Text))
+                {
+                    System.Diagnostics.Debug.WriteLine("btnInHoaDon_Click: Số điện thoại trống");
+                    return;
+                }
+                if (NgayNhan >= NgayTraDuKien)
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Ngày nhận ({NgayNhan}) phải trước ngày trả dự kiến ({NgayTraDuKien})");
+                    return;
+                }
+                if (SoDem <= 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("btnInHoaDon_Click: Số đêm phải lớn hơn 0");
                     return;
                 }
 
-                _maDatHienTai = dat.MaDat;
+                // Cập nhật loại phòng
+                _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
+                _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
+                if (!phongService.CapNhat(_phong))
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Cập nhật loại phòng thất bại - MaPhong={_phong.MaPhong}, LoaiPhong={_phong.LoaiPhong}");
+                    return;
+                }
+
+                // Lưu hoặc cập nhật khách hàng
+                int maKh = khachHangService.UpsertKhachHang(txtTenKH.Text, txtCCCD.Text, txtSDT.Text);
+                if (maKh <= 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Lưu khách hàng thất bại - Ten={txtTenKH.Text}, CCCD={txtCCCD.Text}, SDT={txtSDT.Text}");
+                    return;
+                }
+
+                // Lưu hoặc cập nhật đặt phòng
+                string trangThai = TrangThai;
+                var datPhong = new DatPhong
+                {
+                    MaDat = _maDatHienTai,
+                    MaKH = maKh,
+                    MaPhong = _phong.MaPhong,
+                    NgayNhan = NgayNhan,
+                    NgayTraDuKien = NgayTraDuKien,
+                    NgayTraThucTe = null,
+                    TienCoc = TienCocMacDinh,
+                    TienThue = TienThue,
+                    TrangThai = trangThai
+                };
+
+                var existingDat = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
+                bool result;
+                if (existingDat != null && !existingDat.NgayTraThucTe.HasValue && (existingDat.TrangThai == "Đã đặt" || existingDat.TrangThai == "Đang sử dụng"))
+                {
+                    datPhong.MaDat = existingDat.MaDat;
+                    result = phongService.CapNhatDatPhong(datPhong);
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Cập nhật DatPhong - MaDat={datPhong.MaDat}, MaKH={maKh}, MaPhong={_phong.MaPhong}, Result={result}");
+                }
+                else
+                {
+                    int maDat = phongService.ThemDatPhong(datPhong);
+                    result = maDat > 0;
+                    _maDatHienTai = maDat;
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Thêm DatPhong - MaDat={maDat}, MaKH={maKh}, MaPhong={_phong.MaPhong}, Result={result}");
+                }
+
+                if (!result)
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Lưu DatPhong thất bại - MaKH={maKh}, MaPhong={_phong.MaPhong}");
+                    return;
+                }
+
+                // Cập nhật trạng thái phòng
+                if (!phongService.CapNhatTrangThai(_phong.MaPhong, trangThai))
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Cập nhật trạng thái phòng thất bại - MaPhong={_phong.MaPhong}, TrangThai={trangThai}");
+                    return;
+                }
+
+                // In hóa đơn lần 1
                 string loaiHDDb = "Lần 1";
-
-                DateTime tuNgay = dat.NgayNhan.Date;
-                DateTime denNgay = dat.NgayTraDuKien.Date;
-                if (denNgay <= tuNgay) denNgay = tuNgay.AddDays(1);
-
-                int soNgay = Math.Max(1, (denNgay - tuNgay).Days);
+                int soNgay = Math.Max(1, (NgayTraDuKien - NgayNhan).Days);
                 decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
-                // 2) Ở btnInHoaDon_Click:
-                decimal tienCocValue = dat.TienCoc > 0 ? dat.TienCoc : 200_000m;
-
-
+                decimal tienCocValue = TienCocMacDinh;
                 decimal tienPhong = soNgay * giaPhong;
                 decimal tongTien = tienPhong + tienCocValue;
 
                 var hoaDon = new HoaDon
                 {
-                    MaDat = dat.MaDat,
+                    MaDat = _maDatHienTai,
                     NgayLap = DateTime.Now,
                     LoaiHoaDon = loaiHDDb,
                     TongThanhToan = tongTien,
@@ -241,7 +369,7 @@ namespace QuanLyPhongKhachSan
                 int maHD = _hoaDonService.ThemVaTraMa(hoaDon);
                 if (maHD <= 0)
                 {
-                    MessageBox.Show("Lưu hóa đơn thất bại!");
+                    System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Lưu hóa đơn thất bại - MaDat={_maDatHienTai}");
                     return;
                 }
 
@@ -261,25 +389,27 @@ namespace QuanLyPhongKhachSan
                     Gia = tienCocValue
                 });
 
-                var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
-                string tenKH = kh?.HoTen ?? "";
+                var kh = khachHangService.LayKhachHangTheoMaKH(maKh);
+                string tenKH = kh?.HoTen ?? txtTenKH.Text;
 
                 var lichSuSvc = new LichSuHoaDonService();
                 int logId = lichSuSvc.Them(new LichSuHoaDon
                 {
                     MaHD = maHD,
-                    MaDat = dat.MaDat,
+                    MaDat = _maDatHienTai,
                     TenKH = tenKH,
-                    CCCD = kh?.CCCD,
-                    SDT = kh?.SDT,
+                    CCCD = kh?.CCCD ?? txtCCCD.Text,
+                    SDT = kh?.SDT ?? txtSDT.Text,
                     ThoiGianIn = DateTime.Now,
-                    LoaiHoaDon = "Lần 1"
+                    LoaiHoaDon = "Lần 1",
+                    SoPhong = _phong.SoPhong
                 });
-                System.Diagnostics.Debug.WriteLine($"LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {dat.MaDat}");
+                System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {_maDatHienTai}");
 
-                // Sau đó raise event
+                // Raise event để làm mới giao diện
                 AppEvents.RaiseInvoiceLogged();
 
+                // Hiển thị form hóa đơn
                 using (var f = new frmHoaDon1())
                 {
                     f.BindHeader(
@@ -294,8 +424,8 @@ namespace QuanLyPhongKhachSan
                     {
                         (
                             Phong: _phong.SoPhong.ToString(),
-                            TuNgay: tuNgay,
-                            DenNgay: denNgay,
+                            TuNgay: NgayNhan,
+                            DenNgay: NgayTraDuKien,
                             SoNgay: soNgay,
                             TienCoc: tienCocValue,
                             GiaPhong: giaPhong
@@ -304,14 +434,17 @@ namespace QuanLyPhongKhachSan
 
                     f.ShowDialog(this);
                 }
+
+                // Đóng form sau khi in
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi in hoá đơn: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Lỗi btnInHoaDon_Click: {ex.Message}");
             }
         }
 
-        // === LẦN 2: reset phòng NGAY sau khi in thành công + bắn event ===
         private void btnHoaDon2_Click(object sender, EventArgs e)
         {
             try
@@ -376,15 +509,15 @@ namespace QuanLyPhongKhachSan
 
                     f.BindChiTietNhieuPhong(new[]
                     {
-                (
-                    Phong: _phong.SoPhong.ToString(),
-                    TuNgay: tuNgay,
-                    DenNgay: denNgay,
-                    SoNgay: soNgay,
-                    TienCoc: 0m,
-                    GiaPhong: giaPhong
-                )
-            });
+                        (
+                            Phong: _phong.SoPhong.ToString(),
+                            TuNgay: tuNgay,
+                            DenNgay: denNgay,
+                            SoNgay: soNgay,
+                            TienCoc: 0m,
+                            GiaPhong: giaPhong
+                        )
+                    });
 
                     if (f.ShowDialog(this) != DialogResult.OK) return;
 
@@ -484,6 +617,7 @@ namespace QuanLyPhongKhachSan
                 System.Diagnostics.Debug.WriteLine($"Lỗi btnHoaDon2_Click: {ex.Message}");
             }
         }
+
         private void ClearForm()
         {
             txtTenKH.Text = string.Empty;
@@ -499,19 +633,5 @@ namespace QuanLyPhongKhachSan
             _tienThue = 0m;
             _tamTinh = 0m;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
