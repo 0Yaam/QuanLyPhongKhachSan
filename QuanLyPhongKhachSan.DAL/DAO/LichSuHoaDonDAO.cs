@@ -13,8 +13,8 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         public int Them(LichSuHoaDon x)
         {
             const string sql = @"
-INSERT INTO LichSuHoaDon (MaHD, MaDat, TenKH, CCCD, SDT, ThoiGianIn, LoaiHoaDon, SoPhong)
-VALUES (@MaHD, @MaDat, @TenKH, @CCCD, @SDT, @ThoiGianIn, @LoaiHoaDon, @SoPhong);
+INSERT INTO LichSuHoaDon (MaHD, MaDat, ThoiGianIn, MaNV)
+VALUES (@MaHD, @MaDat, @ThoiGianIn, @MaNV);
 SELECT CAST(SCOPE_IDENTITY() AS int);";
 
             try
@@ -24,14 +24,10 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
                     conn.Open();
                     using (var cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = x.MaHD;
-                        cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = x.MaDat ?? 0; // Đảm bảo MaDat không null
-                        cmd.Parameters.Add("@TenKH", SqlDbType.NVarChar, 100).Value = (object)x.TenKH ?? DBNull.Value;
-                        cmd.Parameters.Add("@CCCD", SqlDbType.NVarChar, 20).Value = (object)x.CCCD ?? DBNull.Value;
-                        cmd.Parameters.Add("@SDT", SqlDbType.NVarChar, 20).Value = (object)x.SDT ?? DBNull.Value;
+                        cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = (x.MaHD == 0 ? (object)DBNull.Value : x.MaHD);
+                        cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = (x.MaDat == 0 ? (object)DBNull.Value : x.MaDat);
                         cmd.Parameters.Add("@ThoiGianIn", SqlDbType.DateTime2).Value = x.ThoiGianIn;
-                        cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value = (object)x.LoaiHoaDon ?? "Khác";
-                        cmd.Parameters.Add("@SoPhong", SqlDbType.Int).Value = (object)x.SoPhong ?? DBNull.Value; // Thêm SoPhong
+                        cmd.Parameters.Add("@MaNV", SqlDbType.Int).Value = (x.MaNV == 0 ? (object)DBNull.Value : x.MaNV);
 
                         var idObj = cmd.ExecuteScalar();
                         return (idObj == null || idObj == DBNull.Value) ? 0 : Convert.ToInt32(idObj);
@@ -40,7 +36,7 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
             }
             catch (SqlException ex)
             {
-                System.Diagnostics.Debug.WriteLine($"SQL Error LichSuHoaDonDAO.Them: MaHD={x.MaHD}, MaDat={x.MaDat}, SoPhong={x.SoPhong}, Error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"SQL Error LichSuHoaDonDAO.Them: MaHD={x.MaHD}, MaDat={x.MaDat}, Error: {ex.Message}");
                 throw;
             }
             catch (Exception ex)
@@ -50,15 +46,20 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
             }
         }
 
-
         public List<LichSuHoaDon> LayDanhSach()
         {
             const string sql = @"
 SELECT 
-    l.Id, l.MaHD, l.MaDat, l.TenKH, l.CCCD, l.SDT, l.ThoiGianIn, l.LoaiHoaDon,
-    p.SoPhong
+    l.Id, l.MaHD, l.MaDat, l.ThoiGianIn, l.MaNV,
+    ISNULL(k.HoTen, '') AS TenKH, 
+    ISNULL(k.CCCD, '') AS CCCD, 
+    ISNULL(k.SDT, '') AS SDT,
+    ISNULL(p.SoPhong, 0) AS SoPhong, 
+    ISNULL(h.LoaiHoaDon, '') AS LoaiHoaDon
 FROM LichSuHoaDon l
+LEFT JOIN HoaDon h ON h.MaHD = l.MaHD
 LEFT JOIN DatPhong dp ON dp.MaDat = l.MaDat
+LEFT JOIN KhachHang k ON k.MaKH = dp.MaKH
 LEFT JOIN Phong p ON p.MaPhong = dp.MaPhong
 ORDER BY l.ThoiGianIn DESC";
 
@@ -69,30 +70,31 @@ ORDER BY l.ThoiGianIn DESC";
                 conn.Open();
                 using (var rd = cmd.ExecuteReader())
                 {
-                    // dùng GetOrdinal để an toàn theo tên cột
                     int ordId = rd.GetOrdinal("Id");
                     int ordMaHD = rd.GetOrdinal("MaHD");
                     int ordMaDat = rd.GetOrdinal("MaDat");
+                    int ordThoiGianIn = rd.GetOrdinal("ThoiGianIn");
+                    int ordMaNV = rd.GetOrdinal("MaNV");
                     int ordTenKH = rd.GetOrdinal("TenKH");
                     int ordCCCD = rd.GetOrdinal("CCCD");
                     int ordSDT = rd.GetOrdinal("SDT");
-                    int ordThoiGianIn = rd.GetOrdinal("ThoiGianIn");
-                    int ordLoaiHoaDon = rd.GetOrdinal("LoaiHoaDon");
                     int ordSoPhong = rd.GetOrdinal("SoPhong");
+                    int ordLoaiHoaDon = rd.GetOrdinal("LoaiHoaDon");
 
                     while (rd.Read())
                     {
                         list.Add(new LichSuHoaDon
                         {
                             Id = rd.GetInt32(ordId),
-                            MaHD = rd.GetInt32(ordMaHD),
-                            MaDat = rd.IsDBNull(ordMaDat) ? (int?)null : rd.GetInt32(ordMaDat),
-                            TenKH = rd.IsDBNull(ordTenKH) ? null : rd.GetString(ordTenKH),
-                            CCCD = rd.IsDBNull(ordCCCD) ? null : rd.GetString(ordCCCD),
-                            SDT = rd.IsDBNull(ordSDT) ? null : rd.GetString(ordSDT),
+                            MaHD = rd.IsDBNull(ordMaHD) ? 0 : rd.GetInt32(ordMaHD),
+                            MaDat = rd.IsDBNull(ordMaDat) ? 0 : rd.GetInt32(ordMaDat),
                             ThoiGianIn = rd.GetDateTime(ordThoiGianIn),
-                            LoaiHoaDon = rd.IsDBNull(ordLoaiHoaDon) ? null : rd.GetString(ordLoaiHoaDon),
-                            SoPhong = rd.IsDBNull(ordSoPhong) ? (int?)null : rd.GetInt32(ordSoPhong)
+                            MaNV = rd.IsDBNull(ordMaNV) ? 0 : rd.GetInt32(ordMaNV),
+                            TenKH = rd.IsDBNull(ordTenKH) ? string.Empty : rd.GetString(ordTenKH),
+                            CCCD = rd.IsDBNull(ordCCCD) ? string.Empty : rd.GetString(ordCCCD),
+                            SDT = rd.IsDBNull(ordSDT) ? string.Empty : rd.GetString(ordSDT),
+                            SoPhong = rd.IsDBNull(ordSoPhong) ? 0 : rd.GetInt32(ordSoPhong),
+                            LoaiHoaDon = rd.IsDBNull(ordLoaiHoaDon) ? string.Empty : rd.GetString(ordLoaiHoaDon)
                         });
                     }
                 }
@@ -100,16 +102,15 @@ ORDER BY l.ThoiGianIn DESC";
             return list;
         }
 
-
         public int ThemNeuChuaCo(LichSuHoaDon x)
         {
             const string sqlSelect = @"
 SELECT TOP 1 Id FROM LichSuHoaDon 
-WHERE MaHD = @MaHD AND LoaiHoaDon = @LoaiHoaDon";
+WHERE MaHD = @MaHD AND ThoiGianIn = @ThoiGianIn";
 
             const string sqlInsert = @"
-INSERT INTO LichSuHoaDon (MaHD, MaDat, TenKH, CCCD, SDT, ThoiGianIn, LoaiHoaDon)
-VALUES (@MaHD, @MaDat, @TenKH, @CCCD, @SDT, @ThoiGianIn, @LoaiHoaDon);
+INSERT INTO LichSuHoaDon (MaHD, MaDat, ThoiGianIn, MaNV)
+VALUES (@MaHD, @MaDat, @ThoiGianIn, @MaNV);
 SELECT SCOPE_IDENTITY();";
 
             try
@@ -117,8 +118,8 @@ SELECT SCOPE_IDENTITY();";
                 using (var conn = new SqlConnection(_connStr))
                 using (var cmd = new SqlCommand(sqlSelect, conn))
                 {
-                    cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = x.MaHD;
-                    cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value = x.LoaiHoaDon ?? "Khác";
+                    cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = (x.MaHD == 0 ? (object)DBNull.Value : x.MaHD);
+                    cmd.Parameters.Add("@ThoiGianIn", SqlDbType.DateTime2).Value = x.ThoiGianIn;
                     conn.Open();
 
                     var existIdObj = cmd.ExecuteScalar();
@@ -129,13 +130,10 @@ SELECT SCOPE_IDENTITY();";
                 using (var conn = new SqlConnection(_connStr))
                 using (var cmd = new SqlCommand(sqlInsert, conn))
                 {
-                    cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = x.MaHD;
-                    cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = x.MaDat ?? (object)DBNull.Value;
-                    cmd.Parameters.Add("@TenKH", SqlDbType.NVarChar, 100).Value = (object)x.TenKH ?? DBNull.Value;
-                    cmd.Parameters.Add("@CCCD", SqlDbType.NVarChar, 20).Value = (object)x.CCCD ?? DBNull.Value;
-                    cmd.Parameters.Add("@SDT", SqlDbType.NVarChar, 20).Value = (object)x.SDT ?? DBNull.Value;
+                    cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = (x.MaHD == 0 ? (object)DBNull.Value : x.MaHD);
+                    cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = (x.MaDat == 0 ? (object)DBNull.Value : x.MaDat);
                     cmd.Parameters.Add("@ThoiGianIn", SqlDbType.DateTime2).Value = x.ThoiGianIn;
-                    cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value = x.LoaiHoaDon ?? "Khác";
+                    cmd.Parameters.Add("@MaNV", SqlDbType.Int).Value = (x.MaNV == 0 ? (object)DBNull.Value : x.MaNV);
 
                     conn.Open();
                     var obj = cmd.ExecuteScalar();
@@ -144,14 +142,9 @@ SELECT SCOPE_IDENTITY();";
             }
             catch (Exception ex)
             {
-                // Nếu đã tạo unique index, vi phạm sẽ rơi vào đây -> trả về Id cũ để idempotent
-                // Có thể thêm đoạn fetch Id cũ lần nữa nếu muốn
+                System.Diagnostics.Debug.WriteLine($"Error LichSuHoaDonDAO.ThemNeuChuaCo: {ex.Message}");
                 return 0;
             }
         }
-
-
-
-
     }
 }

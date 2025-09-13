@@ -390,19 +390,16 @@ namespace QuanLyPhongKhachSan
                 });
 
                 var kh = khachHangService.LayKhachHangTheoMaKH(maKh);
-                string tenKH = kh?.HoTen ?? txtTenKH.Text;
+                string tenKH = kh != null ? kh.HoTen : txtTenKH.Text;
 
+                // Ghi lịch sử hóa đơn
                 var lichSuSvc = new LichSuHoaDonService();
                 int logId = lichSuSvc.Them(new LichSuHoaDon
                 {
                     MaHD = maHD,
                     MaDat = _maDatHienTai,
-                    TenKH = tenKH,
-                    CCCD = kh?.CCCD ?? txtCCCD.Text,
-                    SDT = kh?.SDT ?? txtSDT.Text,
                     ThoiGianIn = DateTime.Now,
-                    LoaiHoaDon = "Lần 1",
-                    SoPhong = _phong.SoPhong
+                    MaNV = 0 // Thay bằng mã nhân viên thực tế nếu có (ví dụ từ phiên đăng nhập)
                 });
                 System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {_maDatHienTai}");
 
@@ -494,7 +491,7 @@ namespace QuanLyPhongKhachSan
                 using (var f = new QuanLyPhongKhachSan.Staff.frmHoaDon2(_phong.MaPhong))
                 {
                     var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
-                    string tenKH = kh?.HoTen ?? "";
+                    string tenKH = kh != null ? kh.HoTen : "";
 
                     f.BindHeader(
                         loaiHD: "Hóa đơn lần 2",
@@ -503,7 +500,7 @@ namespace QuanLyPhongKhachSan
                         maHD: maHD2,
                         tenKH: tenKH,
                         maDat: _maDatHienTai,
-                        tongTienLan1: hoaDonLan1.TongThanhToan ?? 0m,
+                        tongTienLan1: hoaDonLan1.TongThanhToan != null ? hoaDonLan1.TongThanhToan.Value : 0m,
                         tienCoc: tienCocValue
                     );
 
@@ -535,8 +532,8 @@ namespace QuanLyPhongKhachSan
                     // Tính số ngày thực tế
                     int soNgayTong2 = Math.Max(1, (denThucTe2 - tuNgay).Days);
                     decimal tongCTHD = soNgayTong2 * giaPhong;
-                    decimal tongDV = dvList.Sum(x => x?.SoTien ?? 0m);
-                    decimal tongLan1 = hoaDonLan1.TongThanhToan ?? 0m;
+                    decimal tongDV = dvList.Sum(x => x != null ? x.SoTien : 0m);
+                    decimal tongLan1 = hoaDonLan1.TongThanhToan != null ? hoaDonLan1.TongThanhToan.Value : 0m;
 
                     // Tính tiền hóa đơn lần 2
                     decimal soTienLan2;
@@ -565,12 +562,8 @@ namespace QuanLyPhongKhachSan
                     {
                         MaHD = maHD2,
                         MaDat = dat.MaDat,
-                        TenKH = tenKH,
-                        CCCD = kh?.CCCD,
-                        SDT = kh?.SDT,
                         ThoiGianIn = DateTime.Now,
-                        LoaiHoaDon = "Lần 2",
-                        SoPhong = _phong.SoPhong
+                        MaNV = 0 // Thay bằng mã nhân viên thực tế nếu có (ví dụ từ phiên đăng nhập)
                     });
                     System.Diagnostics.Debug.WriteLine($"LichSuHoaDon Lần 2 saved with ID: {logId}, MaHD: {maHD2}, MaDat: {dat.MaDat}");
 
