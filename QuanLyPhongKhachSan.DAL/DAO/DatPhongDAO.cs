@@ -239,5 +239,31 @@ SELECT CASE WHEN EXISTS (
                 return true;
             }
         }
+
+        public int CapNhatNgayTraThucTe(int maDat, DateTime ngayTra)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connStr))
+                {
+                    conn.Open();
+                    const string sql = @"
+UPDATE DatPhong
+SET NgayTraThucTe = @NgayTra, TrangThai = 'Đã trả'
+WHERE MaDat = @MaDat;";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = maDat;
+                        cmd.Parameters.Add("@NgayTra", SqlDbType.DateTime2).Value = ngayTra;
+                        return cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi CapNhatNgayTraThucTe: {ex.Message}");
+                return 0;
+            }
+        }
     }
 }

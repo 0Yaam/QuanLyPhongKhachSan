@@ -105,5 +105,10 @@ namespace QuanLyPhongKhachSan.BLL.Services
         {
             return _dao.LayDanhSach().FirstOrDefault(p => p.MaPhong == maPhong);
         }
+        public bool CapNhatTrangThai(int maPhong, string trangThai)
+        {
+            var dao = new PhongDAO(); // Giả sử
+            return dao.CapNhatTrangThai(maPhong, trangThai) > 0;
+        }
     }
 }

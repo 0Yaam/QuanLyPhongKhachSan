@@ -16,5 +16,9 @@ namespace QuanLyPhongKhachSan.DAL.OL
         public string SDT { get; set; }
         public System.DateTime ThoiGianIn { get; set; }
         public string LoaiHoaDon { get; set; }
+
+        // NEW: SoPhong chỉ để hiển thị, lấy qua JOIN (không cần cột DB)
+        public int? SoPhong { get; set; }
     }
 }
+

@@ -42,6 +42,7 @@
             this.TenKhachHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCCD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThoiGianIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoaiHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4.SuspendLayout();
@@ -172,6 +173,7 @@
             this.TenKhachHang,
             this.CCCD,
             this.SDT,
+            this.SoPhong,
             this.ThoiGianIn,
             this.LoaiHoaDon});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -242,6 +244,11 @@
             this.SDT.HeaderText = "Số điện thoại";
             this.SDT.Name = "SDT";
             // 
+            // SoPhong
+            // 
+            this.SoPhong.HeaderText = "Số phòng";
+            this.SoPhong.Name = "SoPhong";
+            // 
             // ThoiGianIn
             // 
             this.ThoiGianIn.DataPropertyName = "ThoiGianIn";
@@ -284,6 +291,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TenKhachHang;
         private System.Windows.Forms.DataGridViewTextBoxColumn CCCD;
         private System.Windows.Forms.DataGridViewTextBoxColumn SDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoPhong;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThoiGianIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoaiHoaDon;
     }

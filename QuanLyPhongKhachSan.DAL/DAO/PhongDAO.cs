@@ -1,7 +1,8 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.DAL.OL;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using QuanLyPhongKhachSan.DAL.OL;
 
 namespace QuanLyPhongKhachSan.DAL.DAO
 {
@@ -72,26 +73,92 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    // Xóa các bản ghi DatPhong liên quan
-                    string sqlDatPhong = "DELETE FROM DatPhong WHERE MaPhong = @MaPhong";
-                    using (SqlCommand cmd = new SqlCommand(sqlDatPhong, conn))
+                    using (SqlTransaction transaction = conn.BeginTransaction())
                     {
-                        cmd.Parameters.AddWithValue("@MaPhong", maPhong);
-                        cmd.ExecuteNonQuery();
-                    }
+                        try
+                        {
+                            // 1. Xóa các bản ghi trong ChiTietHoaDon liên quan đến HoaDon của DatPhong
+                            string sqlChiTietHoaDon = @"
+                    DELETE FROM ChiTietHoaDon 
+                    WHERE MaHD IN (
+                        SELECT MaHD 
+                        FROM HoaDon 
+                        WHERE MaDat IN (
+                            SELECT MaDat 
+                            FROM DatPhong 
+                            WHERE MaPhong = @MaPhong
+                        )
+                    )";
+                            using (SqlCommand cmd = new SqlCommand(sqlChiTietHoaDon, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                                cmd.ExecuteNonQuery();
+                            }
 
-                    // Xóa phòng
-                    string sqlPhong = "DELETE FROM Phong WHERE MaPhong = @MaPhong";
-                    using (SqlCommand cmd = new SqlCommand(sqlPhong, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@MaPhong", maPhong);
-                        cmd.ExecuteNonQuery();
+                            // 2. Xóa các bản ghi trong HoaDon liên quan đến DatPhong
+                            string sqlHoaDon = @"
+                    DELETE FROM HoaDon 
+                    WHERE MaDat IN (
+                        SELECT MaDat 
+                        FROM DatPhong 
+                        WHERE MaPhong = @MaPhong
+                    )";
+                            using (SqlCommand cmd = new SqlCommand(sqlHoaDon, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 3. Xóa các bản ghi trong LichSuHoaDon liên quan đến HoaDon
+                            string sqlLichSuHoaDon = @"
+                    DELETE FROM LichSuHoaDon 
+                    WHERE MaHD IN (
+                        SELECT MaHD 
+                        FROM HoaDon 
+                        WHERE MaDat IN (
+                            SELECT MaDat 
+                            FROM DatPhong 
+                            WHERE MaPhong = @MaPhong
+                        )
+                    )";
+                            using (SqlCommand cmd = new SqlCommand(sqlLichSuHoaDon, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 4. Xóa các bản ghi trong DatPhong liên quan
+                            string sqlDatPhong = "DELETE FROM DatPhong WHERE MaPhong = @MaPhong";
+                            using (SqlCommand cmd = new SqlCommand(sqlDatPhong, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 5. Xóa phòng
+                            string sqlPhong = "DELETE FROM Phong WHERE MaPhong = @MaPhong";
+                            using (SqlCommand cmd = new SqlCommand(sqlPhong, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // Commit transaction nếu tất cả thành công
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            // Rollback transaction nếu có lỗi
+                            transaction.Rollback();
+                            Console.WriteLine($"Lỗi khi xóa phòng (MaPhong={maPhong}): {ex.Message}");
+                            throw;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi xóa phòng: " + ex.Message);
+                Console.WriteLine($"Lỗi khi xóa phòng (MaPhong={maPhong}): {ex.Message}");
                 throw;
             }
         }
@@ -207,6 +274,28 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             catch (Exception ex)
             {
                 Console.WriteLine("Lỗi khi cập nhật phòng: " + ex.Message);
+                return 0;
+            }
+        }
+        public int CapNhatTrangThai(int maPhong, string trangThai)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(Config.ConnectionString))
+                {
+                    conn.Open();
+                    const string sql = "UPDATE Phong SET TrangThai = @TrangThai WHERE MaPhong = @MaPhong";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.Add("@TrangThai", SqlDbType.NVarChar, 50).Value = trangThai;
+                        cmd.Parameters.Add("@MaPhong", SqlDbType.Int).Value = maPhong;
+                        return cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi CapNhatTrangThai: {ex.Message}");
                 return 0;
             }
         }

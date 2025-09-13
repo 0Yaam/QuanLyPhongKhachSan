@@ -13,8 +13,8 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         public int Them(LichSuHoaDon x)
         {
             const string sql = @"
-INSERT INTO LichSuHoaDon (MaHD, MaDat, TenKH, CCCD, SDT, ThoiGianIn, LoaiHoaDon)
-VALUES (@MaHD, @MaDat, @TenKH, @CCCD, @SDT, @ThoiGianIn, @LoaiHoaDon);
+INSERT INTO LichSuHoaDon (MaHD, MaDat, TenKH, CCCD, SDT, ThoiGianIn, LoaiHoaDon, SoPhong)
+VALUES (@MaHD, @MaDat, @TenKH, @CCCD, @SDT, @ThoiGianIn, @LoaiHoaDon, @SoPhong);
 SELECT CAST(SCOPE_IDENTITY() AS int);";
 
             try
@@ -22,33 +22,16 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
                 using (var conn = new SqlConnection(_connStr))
                 {
                     conn.Open();
-
-                    // DEBUG: in ra DB đang kết nối
-                    using (var cmdDb = new SqlCommand("SELECT DB_NAME();", conn))
-                    {
-                        var dbname = (string)cmdDb.ExecuteScalar();
-                        System.Diagnostics.Debug.WriteLine("LichSuHoaDonDAO.Them -> DB: " + dbname);
-                    }
-
                     using (var cmd = new SqlCommand(sql, conn))
                     {
                         cmd.Parameters.Add("@MaHD", SqlDbType.Int).Value = x.MaHD;
-
-                        // MaDat của bạn đang NOT NULL -> bắt buộc có giá trị > 0
-                        if (!x.MaDat.HasValue || x.MaDat.Value <= 0)
-                            throw new Exception("MaDat NULL/0 nhưng cột MaDat là NOT NULL. Hãy truyền MaDat hợp lệ.");
-
-                        cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = x.MaDat.Value;
-
-                        cmd.Parameters.Add("@TenKH", SqlDbType.NVarChar, 100).Value =
-                            string.IsNullOrWhiteSpace(x.TenKH) ? (object)DBNull.Value : x.TenKH;
-                        cmd.Parameters.Add("@CCCD", SqlDbType.NVarChar, 20).Value =
-                            string.IsNullOrWhiteSpace(x.CCCD) ? (object)DBNull.Value : x.CCCD;
-                        cmd.Parameters.Add("@SDT", SqlDbType.NVarChar, 20).Value =
-                            string.IsNullOrWhiteSpace(x.SDT) ? (object)DBNull.Value : x.SDT;
+                        cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = x.MaDat ?? 0; // Đảm bảo MaDat không null
+                        cmd.Parameters.Add("@TenKH", SqlDbType.NVarChar, 100).Value = (object)x.TenKH ?? DBNull.Value;
+                        cmd.Parameters.Add("@CCCD", SqlDbType.NVarChar, 20).Value = (object)x.CCCD ?? DBNull.Value;
+                        cmd.Parameters.Add("@SDT", SqlDbType.NVarChar, 20).Value = (object)x.SDT ?? DBNull.Value;
                         cmd.Parameters.Add("@ThoiGianIn", SqlDbType.DateTime2).Value = x.ThoiGianIn;
-                        cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value =
-                            string.IsNullOrWhiteSpace(x.LoaiHoaDon) ? (object)"Khác" : x.LoaiHoaDon;
+                        cmd.Parameters.Add("@LoaiHoaDon", SqlDbType.NVarChar, 20).Value = (object)x.LoaiHoaDon ?? "Khác";
+                        cmd.Parameters.Add("@SoPhong", SqlDbType.Int).Value = (object)x.SoPhong ?? DBNull.Value; // Thêm SoPhong
 
                         var idObj = cmd.ExecuteScalar();
                         return (idObj == null || idObj == DBNull.Value) ? 0 : Convert.ToInt32(idObj);
@@ -57,12 +40,12 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
             }
             catch (SqlException ex)
             {
-                System.Diagnostics.Debug.WriteLine("SQL ERR LichSuHoaDonDAO.Them: " + ex.Message);
-                throw; // ĐỂ VĂNG RA UI -> bạn sẽ thấy MessageBox / Console
+                System.Diagnostics.Debug.WriteLine($"SQL Error LichSuHoaDonDAO.Them: MaHD={x.MaHD}, MaDat={x.MaDat}, SoPhong={x.SoPhong}, Error: {ex.Message}");
+                throw;
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("ERR LichSuHoaDonDAO.Them: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Error LichSuHoaDonDAO.Them: {ex.Message}");
                 throw;
             }
         }
@@ -71,9 +54,13 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
         public List<LichSuHoaDon> LayDanhSach()
         {
             const string sql = @"
-SELECT Id, MaHD, MaDat, TenKH, CCCD, SDT, ThoiGianIn, LoaiHoaDon
-FROM LichSuHoaDon
-ORDER BY ThoiGianIn DESC";
+SELECT 
+    l.Id, l.MaHD, l.MaDat, l.TenKH, l.CCCD, l.SDT, l.ThoiGianIn, l.LoaiHoaDon,
+    p.SoPhong
+FROM LichSuHoaDon l
+LEFT JOIN DatPhong dp ON dp.MaDat = l.MaDat
+LEFT JOIN Phong p ON p.MaPhong = dp.MaPhong
+ORDER BY l.ThoiGianIn DESC";
 
             var list = new List<LichSuHoaDon>();
             using (var conn = new SqlConnection(_connStr))
@@ -82,24 +69,37 @@ ORDER BY ThoiGianIn DESC";
                 conn.Open();
                 using (var rd = cmd.ExecuteReader())
                 {
+                    // dùng GetOrdinal để an toàn theo tên cột
+                    int ordId = rd.GetOrdinal("Id");
+                    int ordMaHD = rd.GetOrdinal("MaHD");
+                    int ordMaDat = rd.GetOrdinal("MaDat");
+                    int ordTenKH = rd.GetOrdinal("TenKH");
+                    int ordCCCD = rd.GetOrdinal("CCCD");
+                    int ordSDT = rd.GetOrdinal("SDT");
+                    int ordThoiGianIn = rd.GetOrdinal("ThoiGianIn");
+                    int ordLoaiHoaDon = rd.GetOrdinal("LoaiHoaDon");
+                    int ordSoPhong = rd.GetOrdinal("SoPhong");
+
                     while (rd.Read())
                     {
                         list.Add(new LichSuHoaDon
                         {
-                            Id = rd.GetInt32(0),
-                            MaHD = rd.GetInt32(1),
-                            MaDat = rd.IsDBNull(2) ? (int?)null : rd.GetInt32(2),
-                            TenKH = rd.IsDBNull(3) ? null : rd.GetString(3),
-                            CCCD = rd.IsDBNull(4) ? null : rd.GetString(4),
-                            SDT = rd.IsDBNull(5) ? null : rd.GetString(5),
-                            ThoiGianIn = rd.GetDateTime(6),
-                            LoaiHoaDon = rd.IsDBNull(7) ? null : rd.GetString(7),
+                            Id = rd.GetInt32(ordId),
+                            MaHD = rd.GetInt32(ordMaHD),
+                            MaDat = rd.IsDBNull(ordMaDat) ? (int?)null : rd.GetInt32(ordMaDat),
+                            TenKH = rd.IsDBNull(ordTenKH) ? null : rd.GetString(ordTenKH),
+                            CCCD = rd.IsDBNull(ordCCCD) ? null : rd.GetString(ordCCCD),
+                            SDT = rd.IsDBNull(ordSDT) ? null : rd.GetString(ordSDT),
+                            ThoiGianIn = rd.GetDateTime(ordThoiGianIn),
+                            LoaiHoaDon = rd.IsDBNull(ordLoaiHoaDon) ? null : rd.GetString(ordLoaiHoaDon),
+                            SoPhong = rd.IsDBNull(ordSoPhong) ? (int?)null : rd.GetInt32(ordSoPhong)
                         });
                     }
                 }
             }
             return list;
         }
+
 
         public int ThemNeuChuaCo(LichSuHoaDon x)
         {
