@@ -38,13 +38,13 @@
             this.rdSDT = new Guna.UI2.WinForms.Guna2RadioButton();
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dgvLichSu = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.dtpNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.TenKhachHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCCD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThoiGianIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoaiHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtpNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSu)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +81,7 @@
             this.rdSoPhong.UncheckedState.BorderThickness = 2;
             this.rdSoPhong.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSoPhong.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSoPhong.CheckedChanged += new System.EventHandler(this.rdSoPhong_CheckedChanged);
             // 
             // rdCCCD
             // 
@@ -99,6 +100,7 @@
             this.rdCCCD.UncheckedState.BorderThickness = 2;
             this.rdCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.CheckedChanged += new System.EventHandler(this.rdCCCD_CheckedChanged);
             // 
             // rdTen
             // 
@@ -117,6 +119,7 @@
             this.rdTen.UncheckedState.BorderThickness = 2;
             this.rdTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTen.CheckedChanged += new System.EventHandler(this.rdTen_CheckedChanged);
             // 
             // rdSDT
             // 
@@ -135,6 +138,7 @@
             this.rdSDT.UncheckedState.BorderThickness = 2;
             this.rdSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSDT.CheckedChanged += new System.EventHandler(this.rdSDT_CheckedChanged);
             // 
             // txtTimKiem
             // 
@@ -154,6 +158,7 @@
             this.txtTimKiem.SelectedText = "";
             this.txtTimKiem.Size = new System.Drawing.Size(443, 31);
             this.txtTimKiem.TabIndex = 24;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // dgvLichSu
             // 
@@ -212,20 +217,6 @@
             this.dgvLichSu.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvLichSu.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // dtpNgay
-            // 
-            this.dtpNgay.BorderRadius = 5;
-            this.dtpNgay.Checked = true;
-            this.dtpNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.dtpNgay.Location = new System.Drawing.Point(833, 19);
-            this.dtpNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dtpNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dtpNgay.Name = "dtpNgay";
-            this.dtpNgay.Size = new System.Drawing.Size(225, 36);
-            this.dtpNgay.TabIndex = 27;
-            this.dtpNgay.Value = new System.DateTime(2025, 9, 10, 21, 4, 4, 463);
-            // 
             // TenKhachHang
             // 
             this.TenKhachHang.DataPropertyName = "TenKhachHang";
@@ -260,6 +251,20 @@
             this.LoaiHoaDon.DataPropertyName = "LoaiHoaDon";
             this.LoaiHoaDon.HeaderText = "Loại hóa đơn";
             this.LoaiHoaDon.Name = "LoaiHoaDon";
+            // 
+            // dtpNgay
+            // 
+            this.dtpNgay.BorderRadius = 5;
+            this.dtpNgay.Checked = true;
+            this.dtpNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Long;
+            this.dtpNgay.Location = new System.Drawing.Point(833, 19);
+            this.dtpNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpNgay.Name = "dtpNgay";
+            this.dtpNgay.Size = new System.Drawing.Size(225, 36);
+            this.dtpNgay.TabIndex = 27;
+            this.dtpNgay.Value = new System.DateTime(2025, 9, 10, 21, 4, 4, 463);
             // 
             // UserControlLichSuHoaDon
             // 

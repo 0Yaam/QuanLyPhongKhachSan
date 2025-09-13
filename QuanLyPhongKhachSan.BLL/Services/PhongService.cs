@@ -41,19 +41,25 @@ namespace QuanLyPhongKhachSan.BLL.Services
                 || datPhong.NgayNhan == DateTime.MinValue
                 || datPhong.NgayTraDuKien == DateTime.MinValue)
             {
+                System.Diagnostics.Debug.WriteLine($"ThemDatPhong thất bại: Dữ liệu không hợp lệ - MaKH={datPhong.MaKH}, MaPhong={datPhong.MaPhong}, NgayNhan={datPhong.NgayNhan}, NgayTraDuKien={datPhong.NgayTraDuKien}");
                 return -1;
             }
-            return _repoDatPhong.Them(datPhong);
+
+            int maDat = _repoDatPhong.Them(datPhong);
+            System.Diagnostics.Debug.WriteLine($"ThemDatPhong: MaDat={maDat}, MaKH={datPhong.MaKH}, MaPhong={datPhong.MaPhong}");
+            return maDat;
         }
+
 
         public bool KiemTraPhongTrungLichExcept(int maPhong, DateTime nhan, DateTime tra, int excludeMaDat)
         {
             return _repoDatPhong.KiemTraPhongTrungLichExcept(maPhong, nhan, tra, excludeMaDat);
         }
-
-        public bool CapNhatDatPhong(DatPhong dat)
+        public bool CapNhatDatPhong(DatPhong datPhong)
         {
-            return _repoDatPhong.Update(dat) > 0;
+            int rowsAffected = _repoDatPhong.Update(datPhong);
+            System.Diagnostics.Debug.WriteLine($"CapNhatDatPhong: MaDat={datPhong.MaDat}, RowsAffected={rowsAffected}");
+            return rowsAffected > 0;
         }
 
         public bool KiemTraPhongTrungLich(int maPhong, DateTime nhan, DateTime tra)

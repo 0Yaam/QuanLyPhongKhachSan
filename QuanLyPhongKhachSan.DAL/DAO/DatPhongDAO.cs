@@ -131,79 +131,69 @@ SELECT CASE WHEN EXISTS (
         {
             try
             {
-                using (var conn = new SqlConnection(_connStr))
+                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
                 {
                     conn.Open();
-                    const string sql = @"
-UPDATE DatPhong
-SET MaKH = @MaKH,
-    NgayNhan = @NgayNhan,
-    NgayTraDuKien = @NgayTraDuKien,
-    TienCoc = @TienCoc,
-    TienThue = @TienThue,
-    TrangThai = @TrangThai
-WHERE MaDat = @MaDat;";
-                    using (var cmd = new SqlCommand(sql, conn))
+                    string sql = @"UPDATE DatPhong 
+                              SET MaKH = @MaKH, MaPhong = @MaPhong, NgayNhan = @NgayNhan, 
+                                  NgayTraDuKien = @NgayTraDuKien, NgayTraThucTe = @NgayTraThucTe, 
+                                  TienCoc = @TienCoc, TienThue = @TienThue, TrangThai = @TrangThai 
+                              WHERE MaDat = @MaDat";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = dat.MaDat;
-                        cmd.Parameters.Add("@MaKH", SqlDbType.Int).Value = dat.MaKH;
-                        cmd.Parameters.Add("@NgayNhan", SqlDbType.DateTime2).Value = dat.NgayNhan;
-                        cmd.Parameters.Add("@NgayTraDuKien", SqlDbType.DateTime2).Value = dat.NgayTraDuKien;
-                        var pCoc = cmd.Parameters.Add("@TienCoc", SqlDbType.Decimal);
-                        pCoc.Precision = 18; pCoc.Scale = 2; pCoc.Value = dat.TienCoc;
-                        var pThue = cmd.Parameters.Add("@TienThue", SqlDbType.Decimal);
-                        pThue.Precision = 18; pThue.Scale = 2; pThue.Value = dat.TienThue;
-                        cmd.Parameters.Add("@TrangThai", SqlDbType.NVarChar, 50).Value = (object)(dat.TrangThai ?? "Đã đặt");
-                        return cmd.ExecuteNonQuery(); // >0 là ok
+                        cmd.Parameters.AddWithValue("@MaDat", dat.MaDat);
+                        cmd.Parameters.AddWithValue("@MaKH", dat.MaKH);
+                        cmd.Parameters.AddWithValue("@MaPhong", dat.MaPhong);
+                        cmd.Parameters.AddWithValue("@NgayNhan", dat.NgayNhan);
+                        cmd.Parameters.AddWithValue("@NgayTraDuKien", dat.NgayTraDuKien);
+                        cmd.Parameters.AddWithValue("@NgayTraThucTe", (object)dat.NgayTraThucTe ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@TienCoc", dat.TienCoc);
+                        cmd.Parameters.AddWithValue("@TienThue", dat.TienThue);
+                        cmd.Parameters.AddWithValue("@TrangThai", dat.TrangThai);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        System.Diagnostics.Debug.WriteLine($"DatPhongDAO.Update: MaDat={dat.MaDat}, RowsAffected={rowsAffected}");
+                        return rowsAffected;
                     }
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Update DatPhong(MaDat={dat.MaDat}): Error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Lỗi DatPhongDAO.Update: MaDat={dat.MaDat}, Exception={ex.Message}");
                 return 0;
             }
         }
 
-        public int Them(DatPhong dat)
+        public int Them(DatPhong datPhong)
         {
             try
             {
-                using (var conn = new SqlConnection(_connStr))
+                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
                 {
                     conn.Open();
-                    const string sql = @"
-INSERT INTO DatPhong (MaKH, MaPhong, NgayNhan, NgayTraDuKien, NgayTraThucTe, TienCoc, TienThue, TrangThai)
-VALUES (@MaKH, @MaPhong, @NgayNhan, @NgayTraDuKien, @NgayTraThucTe, @TienCoc, @TienThue, @TrangThai);
-SELECT CAST(SCOPE_IDENTITY() AS int);";
-                    using (var cmd = new SqlCommand(sql, conn))
+                    string sql = @"INSERT INTO DatPhong (MaKH, MaPhong, NgayNhan, NgayTraDuKien, NgayTraThucTe, TienCoc, TienThue, TrangThai)
+                              VALUES (@MaKH, @MaPhong, @NgayNhan, @NgayTraDuKien, @NgayTraThucTe, @TienCoc, @TienThue, @TrangThai);
+                              SELECT SCOPE_IDENTITY();";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.Add("@MaKH", SqlDbType.Int).Value = dat.MaKH;
-                        cmd.Parameters.Add("@MaPhong", SqlDbType.Int).Value = dat.MaPhong;
-                        cmd.Parameters.Add("@NgayNhan", SqlDbType.DateTime2).Value = dat.NgayNhan;
-                        cmd.Parameters.Add("@NgayTraDuKien", SqlDbType.DateTime2).Value = dat.NgayTraDuKien;
-                        cmd.Parameters.Add("@NgayTraThucTe", SqlDbType.DateTime2).Value = (object)dat.NgayTraThucTe ?? DBNull.Value;
-                        var pCoc = cmd.Parameters.Add("@TienCoc", SqlDbType.Decimal);
-                        pCoc.Precision = 18; pCoc.Scale = 2; pCoc.Value = dat.TienCoc;
-                        var pThue = cmd.Parameters.Add("@TienThue", SqlDbType.Decimal);
-                        pThue.Precision = 18; pThue.Scale = 2; pThue.Value = dat.TienThue;
-                        cmd.Parameters.Add("@TrangThai", SqlDbType.NVarChar, 50).Value = (object)(dat.TrangThai ?? "Đã đặt");
-
-                        System.Diagnostics.Debug.WriteLine($"Them DatPhong: MaKH={dat.MaKH}, MaPhong={dat.MaPhong}, NgayNhan={dat.NgayNhan}, NgayTraDuKien={dat.NgayTraDuKien}, TienCoc={dat.TienCoc}, TienThue={dat.TienThue}, TrangThai={dat.TrangThai}");
-                        var id = cmd.ExecuteScalar();
-                        if (id == null)
-                        {
-                            System.Diagnostics.Debug.WriteLine("Them DatPhong: ExecuteScalar returned null");
-                            return 0;
-                        }
-                        return Convert.ToInt32(id);
+                        cmd.Parameters.AddWithValue("@MaKH", datPhong.MaKH);
+                        cmd.Parameters.AddWithValue("@MaPhong", datPhong.MaPhong);
+                        cmd.Parameters.AddWithValue("@NgayNhan", datPhong.NgayNhan);
+                        cmd.Parameters.AddWithValue("@NgayTraDuKien", datPhong.NgayTraDuKien);
+                        cmd.Parameters.AddWithValue("@NgayTraThucTe", (object)datPhong.NgayTraThucTe ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@TienCoc", datPhong.TienCoc);
+                        cmd.Parameters.AddWithValue("@TienThue", datPhong.TienThue);
+                        cmd.Parameters.AddWithValue("@TrangThai", datPhong.TrangThai);
+                        object result = cmd.ExecuteScalar();
+                        int maDat = result != null ? Convert.ToInt32(result) : -1;
+                        System.Diagnostics.Debug.WriteLine($"DatPhongDAO.Them: MaDat={maDat}, MaKH={datPhong.MaKH}, MaPhong={datPhong.MaPhong}");
+                        return maDat;
                     }
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Lỗi Them DatPhong(MaKH={dat.MaKH}, MaPhong={dat.MaPhong}): {ex.Message}");
-                return 0;
+                System.Diagnostics.Debug.WriteLine($"Lỗi DatPhongDAO.Them: MaKH={datPhong.MaKH}, MaPhong={datPhong.MaPhong}, Exception={ex.Message}");
+                return -1;
             }
         }
 

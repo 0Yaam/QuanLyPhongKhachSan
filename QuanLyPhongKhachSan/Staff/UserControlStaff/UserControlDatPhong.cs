@@ -284,58 +284,83 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 using (var frmthemvasua = new frmThemvaSuaKH(phong))
                 {
                     var dr = frmthemvasua.ShowDialog(this);
-                    if (dr == DialogResult.OK)
+                    if (dr != DialogResult.OK) // Chỉ xử lý nếu người dùng nhấn "Hoàn thành"
                     {
-                        string ten = (frmthemvasua.TenKhachHang ?? "").Trim();
-                        string cccd = (frmthemvasua.CCCD ?? "").Trim();
-                        string sdt = (frmthemvasua.SDT ?? "").Trim();
-                        DateTime ngayNhan = frmthemvasua.NgayNhan;
-                        DateTime ngayTraDuKien = frmthemvasua.NgayTraDuKien;
-                        decimal tienCoc = frmthemvasua.TienCoc;
-                        decimal tienThue = frmthemvasua.TienThue;
+                        System.Diagnostics.Debug.WriteLine($"MoFormKhachHang: Hủy hoặc đóng form - MaPhong={phong.MaPhong}");
+                        return;
+                    }
 
-                        int maKh = khachHangService.UpsertKhachHang(ten, cccd, sdt);
-                        if (maKh <= 0)
+                    string ten = (frmthemvasua.TenKhachHang ?? "").Trim();
+                    string cccd = (frmthemvasua.CCCD ?? "").Trim();
+                    string sdt = (frmthemvasua.SDT ?? "").Trim();
+                    DateTime ngayNhan = frmthemvasua.NgayNhan;
+                    DateTime ngayTraDuKien = frmthemvasua.NgayTraDuKien;
+                    decimal tienCoc = frmthemvasua.TienCoc;
+                    decimal tienThue = frmthemvasua.TienThue;
+
+                    // Kiểm tra thông tin khách hàng
+                    if (string.IsNullOrWhiteSpace(ten) || string.IsNullOrWhiteSpace(sdt))
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Lỗi MoFormKhachHang: Tên hoặc SDT trống - Ten={ten}, SDT={sdt}");
+                        return; // Không hiển thị MessageBox
+                    }
+
+                    // Lưu hoặc cập nhật khách hàng
+                    int maKh = khachHangService.UpsertKhachHang(ten, cccd, sdt);
+                    if (maKh <= 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Lỗi UpsertKhachHang: Ten={ten}, CCCD={cccd}, SDT={sdt}");
+                        return;
+                    }
+
+                    string trangThai = ComputeTrangThai(ngayNhan, ngayTraDuKien);
+                    var datPhong = new DatPhong(
+                        0, maKh, phong.MaPhong,
+                        ngayNhan, ngayTraDuKien, null,
+                        tienCoc, tienThue, trangThai
+                    );
+
+                    // Kiểm tra trạng thái phòng
+                    var dat = phongService.LayDatPhongTheoMaPhong(phong.MaPhong);
+                    System.Diagnostics.Debug.WriteLine($"MoFormKhachHang: Kiểm tra DatPhong - MaPhong={phong.MaPhong}, Dat={(dat != null ? $"MaDat={dat.MaDat}, NgayTraThucTe={dat.NgayTraThucTe}, TrangThai={dat.TrangThai}" : "null")}");
+
+                    bool result;
+                    if (dat != null && !dat.NgayTraThucTe.HasValue && (dat.TrangThai == "Đã đặt" || dat.TrangThai == "Đang sử dụng"))
+                    {
+                        datPhong.MaDat = dat.MaDat;
+                        datPhong.TrangThai = trangThai;
+                        result = phongService.CapNhatDatPhong(datPhong);
+                        System.Diagnostics.Debug.WriteLine($"Cập nhật DatPhong: MaDat={datPhong.MaDat}, MaKH={maKh}, MaPhong={phong.MaPhong}, Result={result}");
+                    }
+                    else
+                    {
+                        int maDat = phongService.ThemDatPhong(datPhong);
+                        result = maDat > 0;
+                        System.Diagnostics.Debug.WriteLine($"Thêm DatPhong: MaDat={maDat}, MaKH={maKh}, MaPhong={phong.MaPhong}, Result={result}");
+                    }
+
+                    if (result)
+                    {
+                        // Cập nhật trạng thái phòng
+                        if (!phongService.CapNhatTrangThai(phong.MaPhong, trangThai))
                         {
-                            MessageBox.Show("Lưu thông tin khách hàng thất bại!");
+                            System.Diagnostics.Debug.WriteLine($"Lỗi CapNhatTrangThai: MaPhong={phong.MaPhong}, TrangThai={trangThai}");
                             return;
                         }
 
-                        string trangThai = ComputeTrangThai(ngayNhan, ngayTraDuKien);
-                        var datPhong = new DatPhong(
-                            0, maKh, phong.MaPhong,
-                            ngayNhan, ngayTraDuKien, null,
-                            tienCoc, tienThue, trangThai
-                        );
-
-                        var dat = phongService.LayDatPhongTheoMaPhong(phong.MaPhong);
-                        bool result;
-                        if (dat != null && (dat.TrangThai == "Đã đặt" || dat.TrangThai == "Đang sử dụng"))
-                        {
-                            datPhong.MaDat = dat.MaDat;
-                            datPhong.TrangThai = trangThai;
-                            result = phongService.CapNhatDatPhong(datPhong);
-                        }
-                        else
-                        {
-                            result = phongService.ThemDatPhong(datPhong) > 0;
-                        }
-
-                        if (result)
-                        {
-                            LoadPhongFromDB(); // refresh ngay
-                            _selectedRoomIds.Clear();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Lưu thông tin đặt phòng thất bại!");
-                        }
+                        LoadPhongFromDB(); // Làm mới giao diện
+                        _selectedRoomIds.Clear();
+                        System.Diagnostics.Debug.WriteLine($"Lưu đặt phòng thành công: MaKH={maKh}, MaPhong={phong.MaPhong}");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Lỗi lưu DatPhong: MaKH={maKh}, MaPhong={phong.MaPhong}, NgayNhan={ngayNhan}, NgayTraDuKien={ngayTraDuKien}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi mở form: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Lỗi MoFormKhachHang: MaPhong={phong.MaPhong}, Exception={ex.Message}");
             }
         }
 

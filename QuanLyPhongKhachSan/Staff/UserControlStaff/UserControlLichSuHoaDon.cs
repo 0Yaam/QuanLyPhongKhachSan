@@ -61,21 +61,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         {
             dgvLichSu.AutoGenerateColumns = false;
 
-            // nếu bạn đã kéo thả 5 cột trước đó: TenKhachHang, CCCD, SDT, ThoiGianIn, LoaiHoaDon
-            // -> thêm 1 cột SoPhong vào vị trí sau SDT:
-            if (!dgvLichSu.Columns.Contains("SoPhong"))
-            {
-                var col = new DataGridViewTextBoxColumn
-                {
-                    Name = "SoPhong",
-                    HeaderText = "Số phòng",
-                    DataPropertyName = "SoPhong",
-                    Width = 80
-                };
-                // chèn sau SDT
-                int idx = dgvLichSu.Columns.Contains("SDT") ? dgvLichSu.Columns["SDT"].Index + 1 : dgvLichSu.Columns.Count;
-                dgvLichSu.Columns.Insert(idx, col);
-            }
 
             // map các cột sẵn có
             dgvLichSu.Columns["TenKhachHang"].DataPropertyName = "TenKH";
@@ -88,7 +73,29 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             RefreshData();
         }
 
-     
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void rdSoPhong_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdSDT_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdCCCD_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdTen_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
