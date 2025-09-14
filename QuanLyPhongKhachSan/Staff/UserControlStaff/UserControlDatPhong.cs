@@ -97,6 +97,11 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             KhoiTaoComboBox();
         }
 
+        public void RefreshData()
+        {
+            LoadPhongFromDB(); // Sử dụng LoadPhongFromDB để làm mới toàn bộ danh sách phòng
+        }
+
         private Guna2Panel TaoPhongMoi(Phong phong)
         {
             var pnl = new Guna2Panel
@@ -512,7 +517,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                     var dr = frm.ShowDialog(this);
                     if (dr == DialogResult.OK)
                     {
-                        LoadPhongFromDB();
+                        RefreshData(); // Gọi RefreshData để làm mới giao diện
                         _selectedRoomIds.Clear();
                     }
                 }

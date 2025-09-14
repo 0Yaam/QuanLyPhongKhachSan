@@ -3,8 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldanhsachkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldanhsachkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\roombookinginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\roombookinginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\phong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\phong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\lichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\lichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\dao\\lichsuhoadondao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\dao\\lichsuhoadondao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\dao\\phongdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\dao\\phongdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\dao\\taikhoandao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\dao\\taikhoandao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\frmhoadon1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmhoadon1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\themvasuakh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,12 +55,36 @@
       "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\themvasuakh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|c:\\users\\truongdan\\downloads\\quanlyphongkhachsan-feat-delete\\quanlyphongkhachsan-feat-delete\\quanlyphongkhachsan.dal\\ol\\lichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\lichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|c:\\users\\truongdan\\downloads\\quanlyphongkhachsan-feat-delete\\quanlyphongkhachsan-feat-delete\\quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrolthongke.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrolthongke.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroltaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroltaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DF5B36CC-CED2-44FB-B8AF-2D1F5C8642CF}|QuanLyPhongKhachSan.BLL\\QuanLyPhongKhachSan.BLL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.bll\\services\\lichsuhoadonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DF5B36CC-CED2-44FB-B8AF-2D1F5C8642CF}|QuanLyPhongKhachSan.BLL\\QuanLyPhongKhachSan.BLL.csproj|solutionrelative:quanlyphongkhachsan.bll\\services\\lichsuhoadonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\frmhoadon2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmhoadon2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DF5B36CC-CED2-44FB-B8AF-2D1F5C8642CF}|QuanLyPhongKhachSan.BLL\\QuanLyPhongKhachSan.BLL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.bll\\services\\hoadonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,18 +101,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DF5B36CC-CED2-44FB-B8AF-2D1F5C8642CF}|QuanLyPhongKhachSan.BLL\\QuanLyPhongKhachSan.BLL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.bll\\services\\chitiethoadonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DF5B36CC-CED2-44FB-B8AF-2D1F5C8642CF}|QuanLyPhongKhachSan.BLL\\QuanLyPhongKhachSan.BLL.csproj|solutionrelative:quanlyphongkhachsan.bll\\services\\chitiethoadonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\phong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\phong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\roombookinginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\roombookinginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\ol\\hoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -79,26 +131,6 @@
       "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\dao\\khachhangdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldanhsachkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldanhsachkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrollichsuhoadon.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -111,36 +143,12 @@
       "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\ol\\dichvuview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\frmhoadon2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmhoadon2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroltaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroltaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\themvasuakh.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\themvasuakh.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmthemkh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\dao\\phongdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\dao\\phongdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DF5B36CC-CED2-44FB-B8AF-2D1F5C8642CF}|QuanLyPhongKhachSan.BLL\\QuanLyPhongKhachSan.BLL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.bll\\services\\khachhangservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DF5B36CC-CED2-44FB-B8AF-2D1F5C8642CF}|QuanLyPhongKhachSan.BLL\\QuanLyPhongKhachSan.BLL.csproj|solutionrelative:quanlyphongkhachsan.bll\\services\\khachhangservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan.dal\\dao\\taikhoandao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80BC3E24-81F2-4DED-AE66-A31DE8D3839F}|QuanLyPhongKhachSan.DAL\\QuanLyPhongKhachSan.DAL.csproj|solutionrelative:quanlyphongkhachsan.dal\\dao\\taikhoandao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -163,20 +171,12 @@
       "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontroldatphong.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrolthongke.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\usercontrolstaff\\usercontrolthongke.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\admin\\usercontroladmin\\usercontroldanhsachtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\admin\\usercontroladmin\\usercontroldanhsachtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\admin\\usercontroladmin\\usercontrollichsuthaydoi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\admin\\usercontroladmin\\usercontrollichsuthaydoi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\staff\\frmhoadon1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|solutionrelative:quanlyphongkhachsan\\staff\\frmhoadon1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49C6FD34-C80A-46E6-901E-266B491AD8A0}|QuanLyPhongKhachSan\\QuanLyPhongKhachSan.UI.csproj|C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\quanlyphongkhachsan\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -250,17 +250,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 0,
               "Title": "UserControlLichSuHoaDon.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.cs",
               "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.cs",
               "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAIwGUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAtwFIAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-10T14:15:07.04Z",
               "IsPinned": true,
@@ -268,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 1,
               "Title": "UserControlLichSuHoaDon.cs [Design]",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.cs",
@@ -285,123 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LichSuHoaDonDAO.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAYwJUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T14:14:04.934Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LichSuHoaDon.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T14:13:37.717Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ThemvaSuaKH.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs [Design]",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T10:09:58.501Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ThemvaSuaKH.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
-              "ViewState": "AgIAAE0CAAAAAAAAAAAYwHUCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T03:26:40.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LichSuHoaDonService.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T14:14:28.419Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "HoaDonService.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAowCwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T10:20:34.767Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TaiKhoanService.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAIwC8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T02:54:43.448Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PhongService.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAgwCIAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T01:38:44.758Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ChiTietHoaDonService.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T14:51:16.99Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
               "Title": "Phong.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\Phong.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\Phong.cs",
@@ -414,20 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "TaiKhoan.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T01:39:52.71Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 4,
               "Title": "RoomBookingInfo.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\RoomBookingInfo.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\RoomBookingInfo.cs",
@@ -440,98 +311,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "HoaDon.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "TaiKhoan.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\TaiKhoan.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T09:29:28.262Z",
+              "WhenOpened": "2025-09-13T01:39:52.71Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "DatPhong.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T09:29:20.027Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ChiTietHoaDon.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T10:15:33.174Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "ChiTietHoaDonDAO.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAwDQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T06:54:39.581Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "DatPhongDAO.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAAwFwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T01:40:23.218Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "HoaDonDAO.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAAwOQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T02:33:56.284Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "KhachHangDAO.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAwwHUAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T02:33:57.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 2,
               "Title": "UserControlDanhSachKhachHang.cs [Design]",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDanhSachKhachHang.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDanhSachKhachHang.cs",
@@ -543,20 +336,109 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 6,
+              "Title": "LichSuHoaDon.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\LichSuHoaDon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T14:13:37.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LichSuHoaDonDAO.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\LichSuHoaDonDAO.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAiwJUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T14:14:04.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PhongDAO.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAAwLUAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:44:17.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TaiKhoanDAO.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T02:02:03.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "frmHoaDon1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs [Design]",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T06:22:54.162Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ThemvaSuaKH.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T03:26:40.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ThemvaSuaKH.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs [Design]",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T10:09:58.501Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "UserControlDatPhong.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.cs",
               "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.cs",
               "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.cs",
-              "ViewState": "AgIAAJQCAAAAAAAAAAAAALcCAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALsCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-10T06:29:12.097Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 14,
               "Title": "UserControlDatPhong.cs [Design]",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.cs",
@@ -568,7 +450,213 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "frmThemKH.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAKUBAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T03:38:12.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UserControlThongKe.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T07:53:49.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "frmThemKH.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs [Design]",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T03:38:10.837Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UserControlTaiKhoan.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs [Design]",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T14:02:28.691Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LichSuHoaDonService.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\LichSuHoaDonService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T14:14:28.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "frmHoaDon2.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs [Design]",
+              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T07:34:28.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "HoaDonService.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\HoaDonService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAowCwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T10:20:34.767Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "TaiKhoanService.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\TaiKhoanService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAIwC8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T02:54:43.448Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "PhongService.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\PhongService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAgwCIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:38:44.758Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 24,
+              "Title": "ChiTietHoaDonService.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.BLL\\Services\\ChiTietHoaDonService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T14:51:16.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "HoaDon.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\HoaDon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T09:29:28.262Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "DatPhong.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\DatPhong.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T09:29:20.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ChiTietHoaDon.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\OL\\ChiTietHoaDon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T10:15:33.174Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ChiTietHoaDonDAO.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\ChiTietHoaDonDAO.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAwDQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T06:54:39.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "DatPhongDAO.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\DatPhongDAO.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAAwFwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T01:40:23.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "HoaDonDAO.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\HoaDonDAO.cs",
+              "ViewState": "AgIAALoAAAAAAAAAAAAAwOQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T02:33:56.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "KhachHangDAO.cs",
+              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
+              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
+              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
+              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\KhachHangDAO.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAwwHUAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T02:33:57.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
               "Title": "UserControlLichSuHoaDon.Designer.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.Designer.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.Designer.cs",
@@ -581,7 +669,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 33,
               "Title": "UserControlLichSuHoaDon.resx",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.resx",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlLichSuHoaDon.resx",
@@ -593,7 +681,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 34,
               "Title": "DichVuView.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\DichVuView.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\DichVuView.cs",
@@ -605,40 +693,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "frmThemKH.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs [Design]",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T03:38:10.837Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "frmHoaDon2.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs [Design]",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmHoaDon2.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T07:34:28.271Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "UserControlTaiKhoan.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs [Design]",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlTaiKhoan.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T14:02:28.691Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 35,
               "Title": "ThemvaSuaKH.Designer.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.Designer.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\ThemvaSuaKH.Designer.cs",
@@ -651,31 +706,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "frmThemKH.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmThemKH.cs",
-              "ViewState": "AgIAAAkCAAAAAAAAAAAAADICAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T03:38:12.563Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "PhongDAO.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\PhongDAO.cs",
-              "ViewState": "AgIAAJ4AAAAAAAAAAAAAwLUAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T01:44:17.429Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "KhachHangService.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.BLL\\Services\\KhachHangService.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan.BLL\\Services\\KhachHangService.cs",
@@ -687,19 +718,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "TaiKhoanDAO.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan.DAL\\DAO\\TaiKhoanDAO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T02:02:03.548Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 37,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\App.config",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\App.config",
@@ -707,11 +726,12 @@
               "RelativeToolTip": "QuanLyPhongKhachSan\\App.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-09-12T09:48:45.057Z"
+              "WhenOpened": "2025-09-12T09:48:45.057Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 38,
               "Title": "AppEvents.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\AppEvents.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\AppEvents.cs",
@@ -723,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 39,
               "Title": "KhachHang.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan.DAL\\OL\\KhachHang.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan.DAL\\OL\\KhachHang.cs",
@@ -735,19 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "UserControlThongKe.cs",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T07:53:49.778Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 41,
               "Title": "UserControlDatPhong.Designer.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.Designer.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlDatPhong.Designer.cs",
@@ -760,7 +768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 40,
               "Title": "frmAdmin.Designer.cs",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Admin\\frmAdmin.Designer.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Admin\\frmAdmin.Designer.cs",
@@ -772,7 +780,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "UserControlDanhSachTaiKhoan.cs [Design]",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Admin\\UserControlAdmin\\UserControlDanhSachTaiKhoan.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Admin\\UserControlAdmin\\UserControlDanhSachTaiKhoan.cs",
@@ -783,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "UserControlLichSuThayDoi.cs [Design]",
               "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Admin\\UserControlAdmin\\UserControlLichSuThayDoi.cs",
               "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Admin\\UserControlAdmin\\UserControlLichSuThayDoi.cs",
@@ -791,17 +799,6 @@
               "RelativeToolTip": "QuanLyPhongKhachSan\\Admin\\UserControlAdmin\\UserControlLichSuThayDoi.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-10T14:02:07.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
-              "Title": "frmHoaDon1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs",
-              "RelativeDocumentMoniker": "QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs",
-              "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs [Design]",
-              "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T06:22:54.162Z"
             },
             {
               "$type": "Document",
@@ -824,7 +821,8 @@
               "ToolTip": "C:\\Users\\TruongDan\\Downloads\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan-feat-delete\\QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs [Design]",
               "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\UserControlStaff\\UserControlThongKe.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T14:02:34.094Z"
+              "WhenOpened": "2025-09-10T14:02:34.094Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -986,7 +984,8 @@
               "RelativeToolTip": "QuanLyPhongKhachSan\\Staff\\frmHoaDon1.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAAwF8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T07:19:15.137Z"
+              "WhenOpened": "2025-09-10T07:19:15.137Z",
+              "EditorCaption": ""
             }
           ]
         }

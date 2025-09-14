@@ -13,8 +13,8 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         public int Them(LichSuHoaDon x)
         {
             const string sql = @"
-INSERT INTO LichSuHoaDon (MaHD, MaDat, ThoiGianIn, MaNV)
-VALUES (@MaHD, @MaDat, @ThoiGianIn, @MaNV);
+INSERT INTO LichSuHoaDon (MaHD, MaDat, ThoiGianIn, MaNV, SoPhong)
+VALUES (@MaHD, @MaDat, @ThoiGianIn, @MaNV, @SoPhong);
 SELECT CAST(SCOPE_IDENTITY() AS int);";
 
             try
@@ -28,6 +28,7 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
                         cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = (x.MaDat == 0 ? (object)DBNull.Value : x.MaDat);
                         cmd.Parameters.Add("@ThoiGianIn", SqlDbType.DateTime2).Value = x.ThoiGianIn;
                         cmd.Parameters.Add("@MaNV", SqlDbType.Int).Value = (x.MaNV == 0 ? (object)DBNull.Value : x.MaNV);
+                        cmd.Parameters.Add("@SoPhong", SqlDbType.NVarChar).Value = (object)x.SoPhong ?? DBNull.Value;
 
                         var idObj = cmd.ExecuteScalar();
                         return (idObj == null || idObj == DBNull.Value) ? 0 : Convert.ToInt32(idObj);
@@ -50,17 +51,15 @@ SELECT CAST(SCOPE_IDENTITY() AS int);";
         {
             const string sql = @"
 SELECT 
-    l.Id, l.MaHD, l.MaDat, l.ThoiGianIn, l.MaNV,
-    ISNULL(k.HoTen, '') AS TenKH, 
-    ISNULL(k.CCCD, '') AS CCCD, 
+    l.Id, l.MaHD, l.MaDat, l.ThoiGianIn, l.MaNV, l.SoPhong,
+    ISNULL(k.HoTen, '') AS TenKH,
+    ISNULL(k.CCCD, '') AS CCCD,
     ISNULL(k.SDT, '') AS SDT,
-    ISNULL(p.SoPhong, 0) AS SoPhong, 
     ISNULL(h.LoaiHoaDon, '') AS LoaiHoaDon
 FROM LichSuHoaDon l
-LEFT JOIN HoaDon h ON h.MaHD = l.MaHD
 LEFT JOIN DatPhong dp ON dp.MaDat = l.MaDat
 LEFT JOIN KhachHang k ON k.MaKH = dp.MaKH
-LEFT JOIN Phong p ON p.MaPhong = dp.MaPhong
+LEFT JOIN HoaDon h ON h.MaHD = l.MaHD
 ORDER BY l.ThoiGianIn DESC";
 
             var list = new List<LichSuHoaDon>();
@@ -75,10 +74,10 @@ ORDER BY l.ThoiGianIn DESC";
                     int ordMaDat = rd.GetOrdinal("MaDat");
                     int ordThoiGianIn = rd.GetOrdinal("ThoiGianIn");
                     int ordMaNV = rd.GetOrdinal("MaNV");
+                    int ordSoPhong = rd.GetOrdinal("SoPhong");
                     int ordTenKH = rd.GetOrdinal("TenKH");
                     int ordCCCD = rd.GetOrdinal("CCCD");
                     int ordSDT = rd.GetOrdinal("SDT");
-                    int ordSoPhong = rd.GetOrdinal("SoPhong");
                     int ordLoaiHoaDon = rd.GetOrdinal("LoaiHoaDon");
 
                     while (rd.Read())
@@ -90,10 +89,10 @@ ORDER BY l.ThoiGianIn DESC";
                             MaDat = rd.IsDBNull(ordMaDat) ? 0 : rd.GetInt32(ordMaDat),
                             ThoiGianIn = rd.GetDateTime(ordThoiGianIn),
                             MaNV = rd.IsDBNull(ordMaNV) ? 0 : rd.GetInt32(ordMaNV),
+                            SoPhong = rd.IsDBNull(ordSoPhong) ? string.Empty : rd.GetString(ordSoPhong),
                             TenKH = rd.IsDBNull(ordTenKH) ? string.Empty : rd.GetString(ordTenKH),
                             CCCD = rd.IsDBNull(ordCCCD) ? string.Empty : rd.GetString(ordCCCD),
                             SDT = rd.IsDBNull(ordSDT) ? string.Empty : rd.GetString(ordSDT),
-                            SoPhong = rd.IsDBNull(ordSoPhong) ? 0 : rd.GetInt32(ordSoPhong),
                             LoaiHoaDon = rd.IsDBNull(ordLoaiHoaDon) ? string.Empty : rd.GetString(ordLoaiHoaDon)
                         });
                     }
@@ -109,8 +108,8 @@ SELECT TOP 1 Id FROM LichSuHoaDon
 WHERE MaHD = @MaHD AND ThoiGianIn = @ThoiGianIn";
 
             const string sqlInsert = @"
-INSERT INTO LichSuHoaDon (MaHD, MaDat, ThoiGianIn, MaNV)
-VALUES (@MaHD, @MaDat, @ThoiGianIn, @MaNV);
+INSERT INTO LichSuHoaDon (MaHD, MaDat, ThoiGianIn, MaNV, SoPhong)
+VALUES (@MaHD, @MaDat, @ThoiGianIn, @MaNV, @SoPhong);
 SELECT SCOPE_IDENTITY();";
 
             try
@@ -134,6 +133,7 @@ SELECT SCOPE_IDENTITY();";
                     cmd.Parameters.Add("@MaDat", SqlDbType.Int).Value = (x.MaDat == 0 ? (object)DBNull.Value : x.MaDat);
                     cmd.Parameters.Add("@ThoiGianIn", SqlDbType.DateTime2).Value = x.ThoiGianIn;
                     cmd.Parameters.Add("@MaNV", SqlDbType.Int).Value = (x.MaNV == 0 ? (object)DBNull.Value : x.MaNV);
+                    cmd.Parameters.Add("@SoPhong", SqlDbType.NVarChar).Value = (object)x.SoPhong ?? DBNull.Value;
 
                     conn.Open();
                     var obj = cmd.ExecuteScalar();

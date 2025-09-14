@@ -1,11 +1,11 @@
-﻿using QuanLyPhongKhachSan.BLL.Services;
+﻿using QuanLyPhongKhachSan;
+using QuanLyPhongKhachSan.BLL.Services;
 using QuanLyPhongKhachSan.DAL.OL;
+using QuanLyPhongKhachSan.Staff.UserControlStaff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using QuanLyPhongKhachSan;
-
 
 namespace QuanLyPhongKhachSan.Staff
 {
@@ -258,6 +258,9 @@ namespace QuanLyPhongKhachSan.Staff
                 decimal tongAll = 0m;
                 int skipped = 0;
 
+                // Thu thập danh sách số phòng
+                var soPhongList = new List<string>();
+
                 foreach (var it in _items)
                 {
                     var room = it.Room;
@@ -281,6 +284,7 @@ namespace QuanLyPhongKhachSan.Staff
 
                     tongAll += tongTien;
                     bookingIds.Add(bk.MaDat);
+                    soPhongList.Add(room.SoPhong.ToString());
 
                     lines.Add((
                         Phong: room.SoPhong.ToString(),
@@ -330,18 +334,19 @@ namespace QuanLyPhongKhachSan.Staff
                 }
 
                 hdSvc.CapNhatTongTien(maHD, tongAll);
+
+                // Lưu vào LichSuHoaDon với danh sách số phòng trong SoPhong
                 var lichSuSvc = new LichSuHoaDonService();
-                lichSuSvc.Them(new LichSuHoaDon
+                string soPhongStr = string.Join(" - ", soPhongList);
+                int logId = lichSuSvc.Them(new LichSuHoaDon
                 {
                     MaHD = maHD,
-                    MaDat = maDatDaiDien,        // bạn vừa tính ở trên
-                    TenKH = tenKH,                 // đã có ở trên: string tenKH = kh?.HoTen ?? "";
-                    CCCD = kh?.CCCD,
-                    SDT = kh?.SDT,
+                    MaDat = maDatDaiDien,
                     ThoiGianIn = DateTime.Now,
-                    LoaiHoaDon = "Lần 1"
-                }
-                );
+                    MaNV = 0,
+                    SoPhong = soPhongStr
+                });
+                System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {maDatDaiDien}, SoPhong: {soPhongStr}");
                 AppEvents.RaiseInvoiceLogged();
 
                 using (var f = new frmHoaDon1())
@@ -356,12 +361,22 @@ namespace QuanLyPhongKhachSan.Staff
                     f.BindChiTietNhieuPhong(lines);
                     f.ShowDialog(this);
                 }
+
+                // Thông báo thành công
+                MessageBox.Show(
+                    $"Đã lưu Hóa đơn Lần 1 (Mã: {maHD}).\n" +
+                    $"Danh sách phòng: {soPhongStr}\n" +
+                    $"Tổng tiền: {tongAll:N0}đ\n" +
+                    $"Đã ghi lịch sử (Id={logId}).",
+                    "Thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi in hóa đơn: " + ex.Message);
             }
-
         }
 
         private void btnHoaDon2_Click(object sender, EventArgs e)
@@ -404,7 +419,6 @@ namespace QuanLyPhongKhachSan.Staff
                 var kh = _khService.LayKhachHangTheoMaKH(_preMaKH);
                 string tenKH = kh?.HoTen ?? "";
 
-                // Lấy MaDat đại diện
                 var bookingIds = bookings.Select(x => x.Booking.MaDat).ToList();
                 int maDatDaiDien = bookingIds.Min();
 
@@ -420,6 +434,8 @@ namespace QuanLyPhongKhachSan.Staff
 
                 decimal tongCoc = 0m;
                 var lines = new List<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal GiaPhong)>();
+                var soPhongList = new List<string>(); // Thu thập danh sách số phòng
+
                 foreach (var it in bookings)
                 {
                     var room = it.Room;
@@ -435,6 +451,8 @@ namespace QuanLyPhongKhachSan.Staff
                     decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out var g) ? g : room.Gia;
                     decimal coc = (bk.TienCoc > 0 ? bk.TienCoc : 200000m);
                     tongCoc += coc;
+
+                    soPhongList.Add(room.SoPhong.ToString()); // Thêm số phòng vào danh sách
 
                     lines.Add((room.SoPhong.ToString(), tu, den, soNgay, gia));
                 }
@@ -492,16 +510,13 @@ namespace QuanLyPhongKhachSan.Staff
                     DateTime denThucTe2 = datNow?.NgayTraThucTe ?? DateTime.Today;
                     if (denThucTe2 < denDuKien2) denThucTe2 = denDuKien2;
 
-                    // Tổng tiền phòng (cộng tất cả phòng) theo lines đã tính
                     decimal tongCTHD = lines.Sum(l => Math.Max(1, l.SoNgay) * l.GiaPhong);
 
-                    // Tổng dịch vụ
                     decimal tongDV = dvList.Sum(x => x?.SoTien ?? 0m);
 
                     // Số tiền lần 2
                     decimal soTienLan2 = (tongCTHD - tongLan1) + tongDV - tongCoc;
 
-                    // Cập nhật tổng tiền/ghi chú
                     bool ok = hdSvc.CapNhatTongTienVaGhiChu(maHD2, soTienLan2, ghiChuDv);
                     if (!ok)
                     {
@@ -509,23 +524,24 @@ namespace QuanLyPhongKhachSan.Staff
                         return;
                     }
 
+                    // Lưu vào LichSuHoaDon với danh sách số phòng trong SoPhong
                     var lichSuSvc = new LichSuHoaDonService();
+                    string soPhongStr = string.Join(" - ", soPhongList);
                     int logId2 = lichSuSvc.Them(new LichSuHoaDon
                     {
                         MaHD = maHD2,
                         MaDat = maDatDaiDien,
-                        TenKH = tenKH,
-                        CCCD = kh?.CCCD,
-                        SDT = kh?.SDT,
                         ThoiGianIn = DateTime.Now,
-                        LoaiHoaDon = "Lần 2"
+                        SoPhong = soPhongStr,
+                        MaNV = 0
                     });
+                    System.Diagnostics.Debug.WriteLine($"btnHoaDon2_Click: LichSuHoaDon saved with ID: {logId2}, MaHD: {maHD2}, MaDat: {maDatDaiDien}, SoPhong: {soPhongStr}");
                     AppEvents.RaiseInvoiceLogged();
 
-
-                    // Thông báo giống lần 1 (có MaHD & Id log)
+                    // Thông báo thành công
                     MessageBox.Show(
                         $"Đã lưu Hóa đơn Lần 2 (Mã: {maHD2}).\n" +
+                        $"Danh sách phòng: {soPhongStr}\n" +
                         $"Tiền phải thu: {soTienLan2:N0}đ\n" +
                         $"Đã ghi lịch sử (Id={logId2}).",
                         "Thành công",
@@ -533,14 +549,13 @@ namespace QuanLyPhongKhachSan.Staff
                         MessageBoxIcon.Information
                     );
 
-                    // --- Reset phòng/đặt phòng ---
                     foreach (var it in bookings)
                     {
                         var bk = _phongService.LayDatPhongTheoMaPhong(it.Room.MaPhong);
                         if (bk != null)
                         {
                             bk.NgayTraThucTe = DateTime.Now;
-                            bk.TrangThai = "Trống";
+                            bk.TrangThai = "Hoàn thành";
                             _phongService.CapNhatDatPhong(bk);
                         }
 
@@ -551,6 +566,22 @@ namespace QuanLyPhongKhachSan.Staff
                             _phongService.CapNhat(p);
                         }
                     }
+
+
+                    if (this.Owner != null && this.Owner is Form parentForm)
+                    {
+                        foreach (Control ctrl in parentForm.Controls)
+                        {
+                            if (ctrl is UserControlDatPhong ucDatPhong)
+                            {
+                                ucDatPhong.RefreshData(); // Gọi phương thức làm mới của UserControl
+                                break;
+                            }
+                        }
+                    }
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
             }
             catch (Exception ex)
@@ -558,6 +589,5 @@ namespace QuanLyPhongKhachSan.Staff
                 MessageBox.Show("Lỗi in Hóa đơn lần 2: " + ex.Message);
             }
         }
-
     }
 }

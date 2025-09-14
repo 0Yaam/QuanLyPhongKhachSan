@@ -169,7 +169,6 @@ namespace QuanLyPhongKhachSan
         {
             try
             {
-                // Kiểm tra thông tin
                 if (string.IsNullOrWhiteSpace(txtTenKH.Text))
                 {
                     System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Tên khách hàng trống");
@@ -200,7 +199,6 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                // Lưu hoặc cập nhật khách hàng
                 int maKh = khachHangService.UpsertKhachHang(txtTenKH.Text, txtCCCD.Text, txtSDT.Text);
                 if (maKh <= 0)
                 {
@@ -208,7 +206,6 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                // Lưu hoặc cập nhật đặt phòng
                 string trangThai = TrangThai;
                 var datPhong = new DatPhong
                 {
@@ -305,7 +302,6 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                // Lưu hoặc cập nhật đặt phòng
                 string trangThai = TrangThai;
                 var datPhong = new DatPhong
                 {
@@ -342,14 +338,12 @@ namespace QuanLyPhongKhachSan
                     return;
                 }
 
-                // Cập nhật trạng thái phòng
                 if (!phongService.CapNhatTrangThai(_phong.MaPhong, trangThai))
                 {
                     System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Cập nhật trạng thái phòng thất bại - MaPhong={_phong.MaPhong}, TrangThai={trangThai}");
                     return;
                 }
 
-                // In hóa đơn lần 1
                 string loaiHDDb = "Lần 1";
                 int soNgay = Math.Max(1, (NgayTraDuKien - NgayNhan).Days);
                 decimal giaPhong = _giaPhong > 0 ? _giaPhong : GiaPhong;
@@ -391,6 +385,7 @@ namespace QuanLyPhongKhachSan
 
                 var kh = khachHangService.LayKhachHangTheoMaKH(maKh);
                 string tenKH = kh != null ? kh.HoTen : txtTenKH.Text;
+                string soPhongStr = _phong.SoPhong.ToString(); // Chuyển int sang string
 
                 // Ghi lịch sử hóa đơn
                 var lichSuSvc = new LichSuHoaDonService();
@@ -399,14 +394,12 @@ namespace QuanLyPhongKhachSan
                     MaHD = maHD,
                     MaDat = _maDatHienTai,
                     ThoiGianIn = DateTime.Now,
-                    MaNV = 0 // Thay bằng mã nhân viên thực tế nếu có (ví dụ từ phiên đăng nhập)
+                    MaNV = 0, // Thay bằng mã nhân viên thực tế nếu có
+                    SoPhong = soPhongStr
                 });
-                System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {_maDatHienTai}");
-
-                // Raise event để làm mới giao diện
+                System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {_maDatHienTai}, SoPhong: {soPhongStr}");
                 AppEvents.RaiseInvoiceLogged();
 
-                // Hiển thị form hóa đơn
                 using (var f = new frmHoaDon1())
                 {
                     f.BindHeader(
@@ -419,20 +412,19 @@ namespace QuanLyPhongKhachSan
 
                     f.BindChiTietNhieuPhong(new[]
                     {
-                        (
-                            Phong: _phong.SoPhong.ToString(),
-                            TuNgay: NgayNhan,
-                            DenNgay: NgayTraDuKien,
-                            SoNgay: soNgay,
-                            TienCoc: tienCocValue,
-                            GiaPhong: giaPhong
-                        )
-                    });
+                (
+                    Phong: _phong.SoPhong.ToString(),
+                    TuNgay: NgayNhan,
+                    DenNgay: NgayTraDuKien,
+                    SoNgay: soNgay,
+                    TienCoc: tienCocValue,
+                    GiaPhong: giaPhong
+                )
+            });
 
                     f.ShowDialog(this);
                 }
 
-                // Đóng form sau khi in
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -441,7 +433,6 @@ namespace QuanLyPhongKhachSan
                 System.Diagnostics.Debug.WriteLine($"Lỗi btnInHoaDon_Click: {ex.Message}");
             }
         }
-
         private void btnHoaDon2_Click(object sender, EventArgs e)
         {
             try
@@ -455,7 +446,6 @@ namespace QuanLyPhongKhachSan
 
                 _maDatHienTai = dat.MaDat;
 
-                // Kiểm tra hóa đơn lần 1
                 var hoaDonList = _hoaDonService.LayDanhSach();
                 var hoaDonLan1 = hoaDonList.FirstOrDefault(hd => hd.MaDat == _maDatHienTai && hd.LoaiHoaDon == "Lần 1");
                 if (hoaDonLan1 == null)
@@ -506,15 +496,15 @@ namespace QuanLyPhongKhachSan
 
                     f.BindChiTietNhieuPhong(new[]
                     {
-                        (
-                            Phong: _phong.SoPhong.ToString(),
-                            TuNgay: tuNgay,
-                            DenNgay: denNgay,
-                            SoNgay: soNgay,
-                            TienCoc: 0m,
-                            GiaPhong: giaPhong
-                        )
-                    });
+                (
+                    Phong: _phong.SoPhong.ToString(),
+                    TuNgay: tuNgay,
+                    DenNgay: denNgay,
+                    SoNgay: soNgay,
+                    TienCoc: 0m,
+                    GiaPhong: giaPhong
+                )
+            });
 
                     if (f.ShowDialog(this) != DialogResult.OK) return;
 
@@ -556,16 +546,17 @@ namespace QuanLyPhongKhachSan
                         return;
                     }
 
-                    // Ghi lịch sử hóa đơn
                     var lichSuSvc = new LichSuHoaDonService();
+                    string soPhongStr = _phong.SoPhong.ToString(); // Chuyển int sang string
                     int logId = lichSuSvc.Them(new LichSuHoaDon
                     {
                         MaHD = maHD2,
                         MaDat = dat.MaDat,
                         ThoiGianIn = DateTime.Now,
-                        MaNV = 0 // Thay bằng mã nhân viên thực tế nếu có (ví dụ từ phiên đăng nhập)
+                        MaNV = 0, // Thay bằng mã nhân viên thực tế nếu có
+                        SoPhong = soPhongStr
                     });
-                    System.Diagnostics.Debug.WriteLine($"LichSuHoaDon Lần 2 saved with ID: {logId}, MaHD: {maHD2}, MaDat: {dat.MaDat}");
+                    System.Diagnostics.Debug.WriteLine($"LichSuHoaDon Lần 2 saved with ID: {logId}, MaHD: {maHD2}, MaDat: {dat.MaDat}, SoPhong: {soPhongStr}");
 
                     // Reset đặt phòng
                     if (dat != null)
@@ -580,7 +571,6 @@ namespace QuanLyPhongKhachSan
                         System.Diagnostics.Debug.WriteLine($"Đã cập nhật DatPhong: MaDat={dat.MaDat}, NgayTraThucTe={dat.NgayTraThucTe}, TrangThai={dat.TrangThai}");
                     }
 
-                    // Reset phòng
                     var phong = phongService.LayPhongTheoMaPhong(_phong.MaPhong);
                     if (phong != null)
                     {
@@ -593,14 +583,11 @@ namespace QuanLyPhongKhachSan
                         System.Diagnostics.Debug.WriteLine($"Đã cập nhật Phong: MaPhong={phong.MaPhong}, TrangThai={phong.TrangThai}");
                     }
 
-                    // Clear form và làm mới giao diện
                     ClearForm();
                     LoadDatPhongCu();
 
-                    // Bắn event để refresh UserControlDatPhong
                     AppEvents.RaiseInvoiceLogged();
 
-                    // Đóng form
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
