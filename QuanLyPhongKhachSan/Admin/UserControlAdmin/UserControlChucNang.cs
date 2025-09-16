@@ -15,6 +15,8 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         public UserControlChucNang()
         {
             InitializeComponent();
+            txtTrangThai.PlaceholderText = "Thêm trạng thái phòng";
+            txtLoaiPhong.PlaceholderText = "Thêm loại phòng";
         }
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

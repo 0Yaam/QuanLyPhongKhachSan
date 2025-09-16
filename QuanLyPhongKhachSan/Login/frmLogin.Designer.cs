@@ -34,13 +34,14 @@
             this.lblForgotPassword = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cbShowPass = new System.Windows.Forms.CheckBox();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            this.pbImage = new Guna.UI2.WinForms.Guna2PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUserName
             // 
-            this.txtUserName.BorderRadius = 5;
+            this.txtUserName.BackColor = System.Drawing.Color.Transparent;
+            this.txtUserName.BorderRadius = 10;
             this.txtUserName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUserName.DefaultText = "";
             this.txtUserName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -59,7 +60,8 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.BorderRadius = 5;
+            this.txtPassword.BackColor = System.Drawing.Color.Transparent;
+            this.txtPassword.BorderRadius = 10;
             this.txtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtPassword.DefaultText = "";
             this.txtPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -78,6 +80,7 @@
             // 
             // btnDangNhap
             // 
+            this.btnDangNhap.BackColor = System.Drawing.Color.Transparent;
             this.btnDangNhap.BorderRadius = 5;
             this.btnDangNhap.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnDangNhap.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -95,7 +98,7 @@
             // lblForgotPassword
             // 
             this.lblForgotPassword.BackColor = System.Drawing.Color.Transparent;
-            this.lblForgotPassword.Location = new System.Drawing.Point(91, 242);
+            this.lblForgotPassword.Location = new System.Drawing.Point(91, 243);
             this.lblForgotPassword.Name = "lblForgotPassword";
             this.lblForgotPassword.Size = new System.Drawing.Size(91, 15);
             this.lblForgotPassword.TabIndex = 3;
@@ -104,12 +107,13 @@
             // cbShowPass
             // 
             this.cbShowPass.AutoSize = true;
+            this.cbShowPass.BackColor = System.Drawing.Color.Transparent;
             this.cbShowPass.Location = new System.Drawing.Point(28, 169);
             this.cbShowPass.Name = "cbShowPass";
             this.cbShowPass.Size = new System.Drawing.Size(101, 17);
             this.cbShowPass.TabIndex = 4;
             this.cbShowPass.Text = "Show password";
-            this.cbShowPass.UseVisualStyleBackColor = true;
+            this.cbShowPass.UseVisualStyleBackColor = false;
             this.cbShowPass.CheckedChanged += new System.EventHandler(this.cbShowPass_CheckedChanged);
             // 
             // guna2HtmlLabel1
@@ -122,27 +126,29 @@
             this.guna2HtmlLabel1.TabIndex = 5;
             this.guna2HtmlLabel1.Text = "LOGIN";
             // 
-            // guna2PictureBox1
+            // pbImage
             // 
-            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.BorderRadius = 14;
-            this.guna2PictureBox1.Image = global::QuanLyPhongKhachSan.Properties.Resources.Susumu_Nakoshi_Icon;
-            this.guna2PictureBox1.ImageFlip = Guna.UI2.WinForms.Enums.FlipOrientation.Horizontal;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(277, 25);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(203, 232);
-            this.guna2PictureBox1.TabIndex = 6;
-            this.guna2PictureBox1.TabStop = false;
+            this.pbImage.BackColor = System.Drawing.Color.Transparent;
+            this.pbImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbImage.BorderRadius = 14;
+            this.pbImage.Image = global::QuanLyPhongKhachSan.Properties.Resources.pexels_rickyrecap_1802268__1_;
+            this.pbImage.ImageFlip = Guna.UI2.WinForms.Enums.FlipOrientation.Horizontal;
+            this.pbImage.ImageRotate = 0F;
+            this.pbImage.Location = new System.Drawing.Point(277, 25);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(203, 232);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbImage.TabIndex = 6;
+            this.pbImage.TabStop = false;
             // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::QuanLyPhongKhachSan.Properties.Resources.v904_nunny_012_f;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(507, 285);
-            this.Controls.Add(this.guna2PictureBox1);
+            this.Controls.Add(this.pbImage);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.Controls.Add(this.cbShowPass);
             this.Controls.Add(this.lblForgotPassword);
@@ -151,8 +157,8 @@
             this.Controls.Add(this.txtUserName);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmLogin";
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +172,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblForgotPassword;
         private System.Windows.Forms.CheckBox cbShowPass;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2PictureBox pbImage;
     }
 }

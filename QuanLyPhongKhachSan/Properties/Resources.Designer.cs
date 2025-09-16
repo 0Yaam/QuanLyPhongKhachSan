@@ -83,6 +83,16 @@ namespace QuanLyPhongKhachSan.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pexels_rickyrecap_1802268__1_ {
+            get {
+                object obj = ResourceManager.GetObject("pexels-rickyrecap-1802268 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Susumu_Nakoshi_Icon {
             get {
                 object obj = ResourceManager.GetObject("Susumu Nakoshi Icon", resourceCulture);

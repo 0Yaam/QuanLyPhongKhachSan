@@ -16,5 +16,10 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         {
             InitializeComponent();
         }
+
+        private void dgvLog_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

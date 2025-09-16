@@ -20,7 +20,8 @@ namespace QuanLyPhongKhachSan
             // Bắt phím toàn form
             this.KeyPreview = true;
             this.KeyDown += frmLogin_KeyDown;
-            this.AcceptButton = btnDangNhap;   
+            this.AcceptButton = btnDangNhap;
+
         }
 
         private void cbShowPass_CheckedChanged(object sender, EventArgs e)
