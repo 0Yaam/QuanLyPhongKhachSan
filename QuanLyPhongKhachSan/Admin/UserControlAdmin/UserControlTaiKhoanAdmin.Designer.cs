@@ -32,6 +32,7 @@
             this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnBrowse = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +64,7 @@
             this.btnThemKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThemKH.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemKH.ForeColor = System.Drawing.Color.White;
-            this.btnThemKH.Location = new System.Drawing.Point(167, 258);
+            this.btnThemKH.Location = new System.Drawing.Point(169, 196);
             this.btnThemKH.Name = "btnThemKH";
             this.btnThemKH.Size = new System.Drawing.Size(132, 41);
             this.btnThemKH.TabIndex = 31;
@@ -78,6 +79,7 @@
             this.guna2PictureBox1.Location = new System.Drawing.Point(319, 25);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(252, 294);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 30;
             this.guna2PictureBox1.TabStop = false;
             // 
@@ -91,10 +93,28 @@
             this.guna2HtmlLabel1.TabIndex = 29;
             this.guna2HtmlLabel1.Text = "ADMIN";
             // 
+            // btnBrowse
+            // 
+            this.btnBrowse.BackColor = System.Drawing.Color.Transparent;
+            this.btnBrowse.BorderRadius = 5;
+            this.btnBrowse.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnBrowse.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnBrowse.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnBrowse.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnBrowse.FillColor = System.Drawing.Color.Silver;
+            this.btnBrowse.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowse.ForeColor = System.Drawing.Color.Black;
+            this.btnBrowse.Location = new System.Drawing.Point(271, 311);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(42, 35);
+            this.btnBrowse.TabIndex = 33;
+            this.btnBrowse.Text = "...";
+            // 
             // UserControlTaiKhoanAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.guna2TextBox2);
             this.Controls.Add(this.btnThemKH);
             this.Controls.Add(this.guna2PictureBox1);
@@ -113,5 +133,6 @@
         private Guna.UI2.WinForms.Guna2Button btnThemKH;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2Button btnBrowse;
     }
 }

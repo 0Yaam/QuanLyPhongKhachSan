@@ -38,13 +38,13 @@
             this.rdSDT = new Guna.UI2.WinForms.Guna2RadioButton();
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dgvLichSu = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.TenKhachHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtpNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.TenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCCD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThoiGianIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoaiHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtpNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSu)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +55,7 @@
             this.groupBox4.Controls.Add(this.rdCCCD);
             this.groupBox4.Controls.Add(this.rdTen);
             this.groupBox4.Controls.Add(this.rdSDT);
-            this.groupBox4.Location = new System.Drawing.Point(475, 9);
+            this.groupBox4.Location = new System.Drawing.Point(458, 9);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(337, 49);
             this.groupBox4.TabIndex = 25;
@@ -152,11 +152,11 @@
             this.txtTimKiem.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTimKiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTimKiem.Location = new System.Drawing.Point(20, 19);
+            this.txtTimKiem.Location = new System.Drawing.Point(31, 19);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.PlaceholderText = "";
             this.txtTimKiem.SelectedText = "";
-            this.txtTimKiem.Size = new System.Drawing.Size(443, 31);
+            this.txtTimKiem.Size = new System.Drawing.Size(418, 31);
             this.txtTimKiem.TabIndex = 24;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
@@ -175,7 +175,7 @@
             this.dgvLichSu.ColumnHeadersHeight = 15;
             this.dgvLichSu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvLichSu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TenKhachHang,
+            this.TenKH,
             this.CCCD,
             this.SDT,
             this.SoPhong,
@@ -217,11 +217,25 @@
             this.dgvLichSu.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvLichSu.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // TenKhachHang
+            // dtpNgay
             // 
-            this.TenKhachHang.DataPropertyName = "TenKhachHang";
-            this.TenKhachHang.HeaderText = "Tên Khách Hàng";
-            this.TenKhachHang.Name = "TenKhachHang";
+            this.dtpNgay.BorderRadius = 5;
+            this.dtpNgay.Checked = true;
+            this.dtpNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Long;
+            this.dtpNgay.Location = new System.Drawing.Point(807, 19);
+            this.dtpNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpNgay.Name = "dtpNgay";
+            this.dtpNgay.Size = new System.Drawing.Size(225, 36);
+            this.dtpNgay.TabIndex = 27;
+            this.dtpNgay.Value = new System.DateTime(2025, 9, 10, 21, 4, 4, 463);
+            // 
+            // TenKH
+            // 
+            this.TenKH.DataPropertyName = "TenKH";
+            this.TenKH.HeaderText = "Tên Khách Hàng";
+            this.TenKH.Name = "TenKH";
             // 
             // CCCD
             // 
@@ -252,20 +266,6 @@
             this.LoaiHoaDon.HeaderText = "Loại hóa đơn";
             this.LoaiHoaDon.Name = "LoaiHoaDon";
             // 
-            // dtpNgay
-            // 
-            this.dtpNgay.BorderRadius = 5;
-            this.dtpNgay.Checked = true;
-            this.dtpNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.dtpNgay.Location = new System.Drawing.Point(833, 19);
-            this.dtpNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dtpNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dtpNgay.Name = "dtpNgay";
-            this.dtpNgay.Size = new System.Drawing.Size(225, 36);
-            this.dtpNgay.TabIndex = 27;
-            this.dtpNgay.Value = new System.DateTime(2025, 9, 10, 21, 4, 4, 463);
-            // 
             // UserControlLichSuHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,7 +293,7 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private Guna.UI2.WinForms.Guna2DataGridView dgvLichSu;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenKhachHang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn CCCD;
         private System.Windows.Forms.DataGridViewTextBoxColumn SDT;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoPhong;

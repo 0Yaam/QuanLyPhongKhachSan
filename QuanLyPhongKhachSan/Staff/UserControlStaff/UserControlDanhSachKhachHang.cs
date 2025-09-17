@@ -15,6 +15,7 @@ namespace QuanLyPhongKhachSan.Bar
         public UserControlDanhSachKhachHang()
         {
             InitializeComponent();
+            txtTimKiem.PlaceholderText = "Tìm kiếm...";
         }
 
     }

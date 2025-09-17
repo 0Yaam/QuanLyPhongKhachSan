@@ -54,7 +54,6 @@
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dtpNgayHienTai = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
-            this.btnTraPhong = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -124,9 +123,9 @@
             // 
             this.cbLoaiPhong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLoaiPhong.FormattingEnabled = true;
-            this.cbLoaiPhong.Location = new System.Drawing.Point(917, 359);
+            this.cbLoaiPhong.Location = new System.Drawing.Point(906, 359);
             this.cbLoaiPhong.Name = "cbLoaiPhong";
-            this.cbLoaiPhong.Size = new System.Drawing.Size(83, 21);
+            this.cbLoaiPhong.Size = new System.Drawing.Size(102, 21);
             this.cbLoaiPhong.TabIndex = 16;
             // 
             // txtSoPhong
@@ -140,11 +139,11 @@
             this.txtSoPhong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSoPhong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSoPhong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSoPhong.Location = new System.Drawing.Point(917, 335);
+            this.txtSoPhong.Location = new System.Drawing.Point(906, 335);
             this.txtSoPhong.Name = "txtSoPhong";
             this.txtSoPhong.PlaceholderText = "";
             this.txtSoPhong.SelectedText = "";
-            this.txtSoPhong.Size = new System.Drawing.Size(83, 18);
+            this.txtSoPhong.Size = new System.Drawing.Size(102, 18);
             this.txtSoPhong.TabIndex = 17;
             // 
             // btnThem
@@ -394,26 +393,10 @@
             this.btnThemKH.TabIndex = 25;
             this.btnThemKH.Text = "Thêm khách hàng";
             // 
-            // btnTraPhong
-            // 
-            this.btnTraPhong.BorderRadius = 10;
-            this.btnTraPhong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTraPhong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTraPhong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTraPhong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTraPhong.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTraPhong.ForeColor = System.Drawing.Color.White;
-            this.btnTraPhong.Location = new System.Drawing.Point(909, 522);
-            this.btnTraPhong.Name = "btnTraPhong";
-            this.btnTraPhong.Size = new System.Drawing.Size(99, 38);
-            this.btnTraPhong.TabIndex = 26;
-            this.btnTraPhong.Text = "Trả phòng";
-            // 
             // UserControlDatPhong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnTraPhong);
             this.Controls.Add(this.btnThemKH);
             this.Controls.Add(this.dtpNgayHienTai);
             this.Controls.Add(this.groupBox4);
@@ -467,7 +450,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayHienTai;
         private Guna.UI2.WinForms.Guna2Button btnThemKH;
-        private Guna.UI2.WinForms.Guna2Button btnTraPhong;
         private System.Windows.Forms.ComboBox cbLoai;
         private Guna.UI2.WinForms.Guna2RadioButton rdSoPhong;
     }

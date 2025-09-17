@@ -244,7 +244,7 @@
             this.Controls.Add(this.guna2HtmlLabel5);
             this.Name = "frmThemKH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form khách hàng thuê nhiều phòng";
+            this.Text = "Form thêm khách hàng cho nhiều phòng";
             this.Load += new System.EventHandler(this.frmThemKH_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

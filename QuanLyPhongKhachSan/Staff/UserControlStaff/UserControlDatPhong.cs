@@ -47,6 +47,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             // Nếu muốn đổi ngày xem trạng thái (không bắt buộc)
             if (dtpNgayHienTai != null)
                 dtpNgayHienTai.ValueChanged += (s, e) => LoadDanhSachPhong();
+            txtSoPhong.PlaceholderText = "Nhập số phòng"; 
+            txtTimKiem.PlaceholderText = "Tìm kiếm...";
         }
 
         protected override void OnHandleDestroyed(EventArgs e)
@@ -211,9 +213,9 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 }
 
                 var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
-                lblKhach.Text = $"Khách: {kh?.HoTen ?? ""} - {kh?.SDT ?? ""}";
+                lblKhach.Text = $"{kh?.HoTen ?? ""} - {kh?.SDT ?? ""}";
 
-                pnl.FillColor = (today >= dat.NgayNhan.Date) ? Color.FromArgb(255, 235, 150) : Color.FromArgb(180, 220, 255);
+                pnl.FillColor = (today >= dat.NgayNhan.Date) ? Color.FromArgb(186, 213, 245) : Color.FromArgb(180, 220, 255);
             }
             catch
             {

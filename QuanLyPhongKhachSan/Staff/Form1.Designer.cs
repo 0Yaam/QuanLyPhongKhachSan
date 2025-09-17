@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.pnContainBar = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnThongKe = new Guna.UI2.WinForms.Guna2Button();
             this.btnDanhSachKhachHang = new Guna.UI2.WinForms.Guna2Button();
             this.btnLichSuHD = new Guna.UI2.WinForms.Guna2Button();
             this.btnDatPhong = new Guna.UI2.WinForms.Guna2Button();
             this.panelContainer = new System.Windows.Forms.Panel();
-            this.btnThongKe = new Guna.UI2.WinForms.Guna2Button();
             this.btnTaiKhoan = new Guna.UI2.WinForms.Guna2Button();
             this.pnContainBar.SuspendLayout();
             this.SuspendLayout();
@@ -41,6 +41,7 @@
             // pnContainBar
             // 
             this.pnContainBar.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnContainBar.BorderRadius = 15;
             this.pnContainBar.Controls.Add(this.btnThongKe);
             this.pnContainBar.Controls.Add(this.btnDanhSachKhachHang);
             this.pnContainBar.Controls.Add(this.btnTaiKhoan);
@@ -50,6 +51,23 @@
             this.pnContainBar.Name = "pnContainBar";
             this.pnContainBar.Size = new System.Drawing.Size(116, 614);
             this.pnContainBar.TabIndex = 0;
+            // 
+            // btnThongKe
+            // 
+            this.btnThongKe.BorderRadius = 10;
+            this.btnThongKe.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThongKe.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThongKe.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThongKe.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThongKe.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
+            this.btnThongKe.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongKe.ForeColor = System.Drawing.Color.Black;
+            this.btnThongKe.Location = new System.Drawing.Point(3, 324);
+            this.btnThongKe.Name = "btnThongKe";
+            this.btnThongKe.Size = new System.Drawing.Size(110, 57);
+            this.btnThongKe.TabIndex = 18;
+            this.btnThongKe.Text = "Thống kê";
+            this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click_1);
             // 
             // btnDanhSachKhachHang
             // 
@@ -104,27 +122,11 @@
             // 
             // panelContainer
             // 
+            this.panelContainer.BackColor = System.Drawing.SystemColors.Control;
             this.panelContainer.Location = new System.Drawing.Point(126, 2);
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(1040, 614);
             this.panelContainer.TabIndex = 1;
-            // 
-            // btnThongKe
-            // 
-            this.btnThongKe.BorderRadius = 10;
-            this.btnThongKe.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThongKe.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThongKe.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThongKe.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThongKe.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
-            this.btnThongKe.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThongKe.ForeColor = System.Drawing.Color.Black;
-            this.btnThongKe.Location = new System.Drawing.Point(3, 324);
-            this.btnThongKe.Name = "btnThongKe";
-            this.btnThongKe.Size = new System.Drawing.Size(110, 57);
-            this.btnThongKe.TabIndex = 18;
-            this.btnThongKe.Text = "Thống kê";
-            this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click_1);
             // 
             // btnTaiKhoan
             // 
@@ -148,12 +150,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 628);
+            this.ClientSize = new System.Drawing.Size(1172, 617);
             this.Controls.Add(this.pnContainBar);
             this.Controls.Add(this.panelContainer);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Quản lý đặt phòng";
             this.pnContainBar.ResumeLayout(false);
             this.ResumeLayout(false);
 

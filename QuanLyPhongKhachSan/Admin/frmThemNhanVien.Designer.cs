@@ -41,6 +41,7 @@
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnHoanThanh = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // txtTemHienThi
@@ -136,7 +137,7 @@
             this.dtpNgayThamGia.Checked = true;
             this.dtpNgayThamGia.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpNgayThamGia.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.dtpNgayThamGia.Location = new System.Drawing.Point(296, 15);
+            this.dtpNgayThamGia.Location = new System.Drawing.Point(296, 13);
             this.dtpNgayThamGia.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpNgayThamGia.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpNgayThamGia.Name = "dtpNgayThamGia";
@@ -176,7 +177,7 @@
             this.txtPass.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPass.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPass.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPass.Location = new System.Drawing.Point(375, 108);
+            this.txtPass.Location = new System.Drawing.Point(375, 93);
             this.txtPass.Name = "txtPass";
             this.txtPass.PlaceholderText = "";
             this.txtPass.SelectedText = "";
@@ -187,7 +188,7 @@
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(296, 108);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(296, 93);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(55, 19);
             this.guna2HtmlLabel4.TabIndex = 25;
@@ -205,7 +206,7 @@
             this.txtUserName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUserName.Location = new System.Drawing.Point(375, 75);
+            this.txtUserName.Location = new System.Drawing.Point(375, 60);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.PlaceholderText = "";
             this.txtUserName.SelectedText = "";
@@ -216,17 +217,33 @@
             // 
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(296, 75);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(296, 60);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(78, 19);
             this.guna2HtmlLabel5.TabIndex = 23;
             this.guna2HtmlLabel5.Text = "Tên tài khoản";
+            // 
+            // btnHoanThanh
+            // 
+            this.btnHoanThanh.BorderRadius = 5;
+            this.btnHoanThanh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoanThanh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoanThanh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnHoanThanh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnHoanThanh.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnHoanThanh.ForeColor = System.Drawing.Color.White;
+            this.btnHoanThanh.Location = new System.Drawing.Point(404, 118);
+            this.btnHoanThanh.Name = "btnHoanThanh";
+            this.btnHoanThanh.Size = new System.Drawing.Size(104, 31);
+            this.btnHoanThanh.TabIndex = 27;
+            this.btnHoanThanh.Text = "Hoàn thành";
             // 
             // frmThemNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 152);
+            this.Controls.Add(this.btnHoanThanh);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.guna2HtmlLabel4);
             this.Controls.Add(this.txtUserName);
@@ -263,5 +280,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2TextBox txtUserName;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
+        private Guna.UI2.WinForms.Guna2Button btnHoanThanh;
     }
 }

@@ -32,21 +32,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnHoanThanh = new Guna.UI2.WinForms.Guna2Button();
-            this.nudGiaTien = new Guna.UI2.WinForms.Guna2NumericUpDown();
+            this.txtLoaiPhong = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtTrangThai = new Guna.UI2.WinForms.Guna2TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbbLoaiPhong = new System.Windows.Forms.ComboBox();
+            this.nudGiaTien = new Guna.UI2.WinForms.Guna2NumericUpDown();
+            this.btnHoanThanh = new Guna.UI2.WinForms.Guna2Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.dgvChiTietPhong = new Guna.UI2.WinForms.Guna2DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtTrangThai = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtLoaiPhong = new Guna.UI2.WinForms.Guna2TextBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudGiaTien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietPhong)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -62,6 +62,74 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hiệu chỉnh";
             // 
+            // txtLoaiPhong
+            // 
+            this.txtLoaiPhong.BorderRadius = 8;
+            this.txtLoaiPhong.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtLoaiPhong.DefaultText = "";
+            this.txtLoaiPhong.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtLoaiPhong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtLoaiPhong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtLoaiPhong.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtLoaiPhong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtLoaiPhong.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtLoaiPhong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtLoaiPhong.Location = new System.Drawing.Point(192, 60);
+            this.txtLoaiPhong.Name = "txtLoaiPhong";
+            this.txtLoaiPhong.PlaceholderText = "";
+            this.txtLoaiPhong.SelectedText = "";
+            this.txtLoaiPhong.Size = new System.Drawing.Size(145, 25);
+            this.txtLoaiPhong.TabIndex = 6;
+            // 
+            // txtTrangThai
+            // 
+            this.txtTrangThai.BorderRadius = 8;
+            this.txtTrangThai.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTrangThai.DefaultText = "";
+            this.txtTrangThai.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtTrangThai.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtTrangThai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTrangThai.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTrangThai.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTrangThai.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtTrangThai.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTrangThai.Location = new System.Drawing.Point(192, 22);
+            this.txtTrangThai.Name = "txtTrangThai";
+            this.txtTrangThai.PlaceholderText = "";
+            this.txtTrangThai.SelectedText = "";
+            this.txtTrangThai.Size = new System.Drawing.Size(145, 25);
+            this.txtTrangThai.TabIndex = 5;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cbbLoaiPhong);
+            this.groupBox2.Controls.Add(this.nudGiaTien);
+            this.groupBox2.Location = new System.Drawing.Point(44, 17);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(124, 72);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Giá tiền";
+            // 
+            // cbbLoaiPhong
+            // 
+            this.cbbLoaiPhong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbLoaiPhong.FormattingEnabled = true;
+            this.cbbLoaiPhong.Location = new System.Drawing.Point(6, 19);
+            this.cbbLoaiPhong.Name = "cbbLoaiPhong";
+            this.cbbLoaiPhong.Size = new System.Drawing.Size(83, 21);
+            this.cbbLoaiPhong.TabIndex = 0;
+            // 
+            // nudGiaTien
+            // 
+            this.nudGiaTien.BackColor = System.Drawing.Color.Transparent;
+            this.nudGiaTien.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.nudGiaTien.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.nudGiaTien.Location = new System.Drawing.Point(6, 47);
+            this.nudGiaTien.Name = "nudGiaTien";
+            this.nudGiaTien.Size = new System.Drawing.Size(83, 21);
+            this.nudGiaTien.TabIndex = 1;
+            // 
             // btnHoanThanh
             // 
             this.btnHoanThanh.BorderRadius = 5;
@@ -76,25 +144,6 @@
             this.btnHoanThanh.Size = new System.Drawing.Size(94, 33);
             this.btnHoanThanh.TabIndex = 2;
             this.btnHoanThanh.Text = "Hoàn thành";
-            // 
-            // nudGiaTien
-            // 
-            this.nudGiaTien.BackColor = System.Drawing.Color.Transparent;
-            this.nudGiaTien.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.nudGiaTien.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.nudGiaTien.Location = new System.Drawing.Point(6, 47);
-            this.nudGiaTien.Name = "nudGiaTien";
-            this.nudGiaTien.Size = new System.Drawing.Size(83, 21);
-            this.nudGiaTien.TabIndex = 1;
-            // 
-            // cbbLoaiPhong
-            // 
-            this.cbbLoaiPhong.FormattingEnabled = true;
-            this.cbbLoaiPhong.Location = new System.Drawing.Point(6, 19);
-            this.cbbLoaiPhong.Name = "cbbLoaiPhong";
-            this.cbbLoaiPhong.Size = new System.Drawing.Size(83, 21);
-            this.cbbLoaiPhong.TabIndex = 0;
-            this.cbbLoaiPhong.Text = "Loại phòng";
             // 
             // dgvChiTietPhong
             // 
@@ -166,55 +215,6 @@
             this.Column3.HeaderText = "Trạng thái";
             this.Column3.Name = "Column3";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.cbbLoaiPhong);
-            this.groupBox2.Controls.Add(this.nudGiaTien);
-            this.groupBox2.Location = new System.Drawing.Point(44, 17);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(124, 72);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Giá tiền";
-            // 
-            // txtTrangThai
-            // 
-            this.txtTrangThai.BorderRadius = 8;
-            this.txtTrangThai.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTrangThai.DefaultText = "";
-            this.txtTrangThai.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtTrangThai.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtTrangThai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTrangThai.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTrangThai.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTrangThai.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtTrangThai.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTrangThai.Location = new System.Drawing.Point(192, 22);
-            this.txtTrangThai.Name = "txtTrangThai";
-            this.txtTrangThai.PlaceholderText = "";
-            this.txtTrangThai.SelectedText = "";
-            this.txtTrangThai.Size = new System.Drawing.Size(145, 25);
-            this.txtTrangThai.TabIndex = 5;
-            // 
-            // txtLoaiPhong
-            // 
-            this.txtLoaiPhong.BorderRadius = 8;
-            this.txtLoaiPhong.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtLoaiPhong.DefaultText = "";
-            this.txtLoaiPhong.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtLoaiPhong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtLoaiPhong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtLoaiPhong.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtLoaiPhong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtLoaiPhong.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtLoaiPhong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtLoaiPhong.Location = new System.Drawing.Point(192, 60);
-            this.txtLoaiPhong.Name = "txtLoaiPhong";
-            this.txtLoaiPhong.PlaceholderText = "";
-            this.txtLoaiPhong.SelectedText = "";
-            this.txtLoaiPhong.Size = new System.Drawing.Size(145, 25);
-            this.txtLoaiPhong.TabIndex = 6;
-            // 
             // UserControlChucNang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,9 +224,9 @@
             this.Name = "UserControlChucNang";
             this.Size = new System.Drawing.Size(612, 358);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudGiaTien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietPhong)).EndInit();
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

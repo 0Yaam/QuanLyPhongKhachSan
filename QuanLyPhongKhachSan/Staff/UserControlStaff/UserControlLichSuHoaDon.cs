@@ -19,6 +19,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
             // Hủy đăng ký khi control dispose (tránh leak)
             this.Disposed += (s, e) => AppEvents.InvoiceLogged -= OnInvoiceLogged;
+            txtTimKiem.PlaceholderText = "Tìm kiếm...";
         }
 
         private void OnInvoiceLogged()
@@ -63,12 +64,12 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             dgvLichSu.AutoGenerateColumns = false;
 
             // Đảm bảo các cột đã được thêm trong Designer
-            if (dgvLichSu.Columns["MaHD"] == null) dgvLichSu.Columns.Add("MaHD", "Mã HĐ");
+            if (dgvLichSu.Columns["MaHD"] == null) dgvLichSu.Columns.Add("MaHD", "Mã hóa đơn");
             if (dgvLichSu.Columns["TenKH"] == null) dgvLichSu.Columns.Add("TenKH", "Tên KH");
             if (dgvLichSu.Columns["CCCD"] == null) dgvLichSu.Columns.Add("CCCD", "CCCD");
             if (dgvLichSu.Columns["SDT"] == null) dgvLichSu.Columns.Add("SDT", "SĐT");
-            if (dgvLichSu.Columns["LoaiHoaDon"] == null) dgvLichSu.Columns.Add("LoaiHoaDon", "Loại HĐ");
-            if (dgvLichSu.Columns["SoPhong"] == null) dgvLichSu.Columns.Add("SoPhong", "Số Phòng");
+            if (dgvLichSu.Columns["LoaiHoaDon"] == null) dgvLichSu.Columns.Add("LoaiHoaDon", "Loại hóa đơn");
+            if (dgvLichSu.Columns["SoPhong"] == null) dgvLichSu.Columns.Add("SoPhong", "Số phòng");
             if (dgvLichSu.Columns["ThoiGianIn"] == null) dgvLichSu.Columns.Add("ThoiGianIn", "Thời gian");
 
             // Map các cột
