@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.chrThongKe = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -59,16 +59,16 @@
             // 
             // chrThongKe
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chrThongKe.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chrThongKe.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chrThongKe.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chrThongKe.Legends.Add(legend4);
             this.chrThongKe.Location = new System.Drawing.Point(29, 86);
             this.chrThongKe.Name = "chrThongKe";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chrThongKe.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chrThongKe.Series.Add(series4);
             this.chrThongKe.Size = new System.Drawing.Size(993, 520);
             this.chrThongKe.TabIndex = 36;
             this.chrThongKe.Text = "chart1";
@@ -87,7 +87,7 @@
             // 
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(628, 31);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(514, 34);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(123, 24);
             this.guna2HtmlLabel3.TabIndex = 40;
@@ -105,9 +105,11 @@
             this.txtSoLuongKhach.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSoLuongKhach.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSoLuongKhach.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSoLuongKhach.Location = new System.Drawing.Point(757, 30);
+            this.txtSoLuongKhach.Location = new System.Drawing.Point(643, 33);
             this.txtSoLuongKhach.Name = "txtSoLuongKhach";
+            this.txtSoLuongKhach.PlaceholderForeColor = System.Drawing.Color.Black;
             this.txtSoLuongKhach.PlaceholderText = "";
+            this.txtSoLuongKhach.ReadOnly = true;
             this.txtSoLuongKhach.SelectedText = "";
             this.txtSoLuongKhach.Size = new System.Drawing.Size(100, 28);
             this.txtSoLuongKhach.TabIndex = 41;
@@ -124,18 +126,19 @@
             this.txtTongTienThuong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTongTienThuong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTongTienThuong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTongTienThuong.Location = new System.Drawing.Point(885, 578);
+            this.txtTongTienThuong.Location = new System.Drawing.Point(905, 31);
             this.txtTongTienThuong.Name = "txtTongTienThuong";
             this.txtTongTienThuong.PlaceholderText = "";
+            this.txtTongTienThuong.ReadOnly = true;
             this.txtTongTienThuong.SelectedText = "";
             this.txtTongTienThuong.Size = new System.Drawing.Size(117, 28);
             this.txtTongTienThuong.TabIndex = 42;
             // 
             // guna2HtmlLabel4
             // 
-            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.White;
+            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(735, 578);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(755, 31);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(144, 28);
             this.guna2HtmlLabel4.TabIndex = 43;
@@ -145,7 +148,7 @@
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(309, 31);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(280, 31);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(78, 24);
             this.guna2HtmlLabel2.TabIndex = 45;
@@ -157,7 +160,7 @@
             this.dtpDenNgay.Checked = true;
             this.dtpDenNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDenNgay.Location = new System.Drawing.Point(393, 25);
+            this.dtpDenNgay.Location = new System.Drawing.Point(364, 25);
             this.dtpDenNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpDenNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDenNgay.Name = "dtpDenNgay";

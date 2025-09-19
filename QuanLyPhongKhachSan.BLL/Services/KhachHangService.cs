@@ -16,7 +16,7 @@ namespace QuanLyPhongKhachSan.BLL.Services
                 return -1;
             }
 
-            KhachHang khachHang = new KhachHang(hoTen, cccd, sdt);
+            KhachHang khachHang = new KhachHang(hoTen, cccd, sdt); // NgayThamGia tự động gán DateTime.Now trong constructor
             int maKH = _dao.KiemTraTonTai(cccd, sdt);
 
             if (maKH == -1)
@@ -26,6 +26,7 @@ namespace QuanLyPhongKhachSan.BLL.Services
             else
             {
                 khachHang.MaKH = maKH;
+                khachHang.NgayThamGia = DateTime.Now; // Cập nhật NgayThamGia khi sửa
                 return _dao.CapNhatKhachHang(khachHang);
             }
         }

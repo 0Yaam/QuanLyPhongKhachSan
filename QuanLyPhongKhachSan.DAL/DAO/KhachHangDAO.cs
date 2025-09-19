@@ -7,12 +7,13 @@ namespace QuanLyPhongKhachSan.DAL.DAO
 {
     public class KhachHangDAO
     {
-        string connecstring = Config.ConnectionString;  
+        private readonly string connectionString = Config.ConnectionString;
+
         public int KiemTraTonTai(string cccd, string sdt)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
                     string sql = "SELECT MaKH FROM KhachHang WHERE CCCD = @CCCD OR SDT = @SDT";
@@ -33,14 +34,15 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "INSERT INTO KhachHang (HoTen, CCCD, SDT) OUTPUT INSERTED.MaKH VALUES (@HoTen, @CCCD, @SDT)";
+                    string sql = "INSERT INTO KhachHang (HoTen, CCCD, SDT, NgayThamGia) OUTPUT INSERTED.MaKH VALUES (@HoTen, @CCCD, @SDT, @NgayThamGia)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@HoTen", khachHang.HoTen);
                     cmd.Parameters.AddWithValue("@CCCD", (object)khachHang.CCCD ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@SDT", khachHang.SDT);
+                    cmd.Parameters.AddWithValue("@NgayThamGia", (object)khachHang.NgayThamGia ?? DBNull.Value);
                     return (int)cmd.ExecuteScalar();
                 }
             }
@@ -54,14 +56,15 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "UPDATE KhachHang SET HoTen = @HoTen, CCCD = @CCCD, SDT = @SDT WHERE MaKH = @MaKH";
+                    string sql = "UPDATE KhachHang SET HoTen = @HoTen, CCCD = @CCCD, SDT = @SDT, NgayThamGia = @NgayThamGia WHERE MaKH = @MaKH";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@HoTen", khachHang.HoTen);
                     cmd.Parameters.AddWithValue("@CCCD", (object)khachHang.CCCD ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@SDT", khachHang.SDT);
+                    cmd.Parameters.AddWithValue("@NgayThamGia", (object)khachHang.NgayThamGia ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@MaKH", khachHang.MaKH);
                     int rows = cmd.ExecuteNonQuery();
                     return rows > 0 ? khachHang.MaKH : -1;
@@ -77,10 +80,10 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "SELECT MaKH, HoTen, CCCD, SDT FROM KhachHang WHERE MaKH = @MaKH";
+                    string sql = "SELECT MaKH, HoTen, CCCD, SDT, NgayThamGia FROM KhachHang WHERE MaKH = @MaKH";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@MaKH", maKH);
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -92,7 +95,8 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                                 MaKH = reader.GetInt32(0),
                                 HoTen = reader.GetString(1),
                                 CCCD = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                SDT = reader.GetString(3)
+                                SDT = reader.GetString(3),
+                                NgayThamGia = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                             };
                         }
                         return null;
@@ -110,10 +114,10 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             var danhSach = new List<KhachHang>();
             try
             {
-                using (SqlConnection conn = new SqlConnection(Config.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "SELECT MaKH, HoTen, CCCD, SDT FROM KhachHang";
+                    string sql = "SELECT MaKH, HoTen, CCCD, SDT, NgayThamGia FROM KhachHang";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -124,7 +128,8 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                                 MaKH = reader.GetInt32(0),
                                 HoTen = reader.GetString(1),
                                 CCCD = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                SDT = reader.GetString(3)
+                                SDT = reader.GetString(3),
+                                NgayThamGia = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                             });
                         }
                     }
@@ -132,12 +137,10 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi lấy danh sách khách hàng: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Lỗi khi lấy danh sách khách hàng: {ex.Message}");
+                throw;
             }
             return danhSach;
         }
-
-
-
     }
 }

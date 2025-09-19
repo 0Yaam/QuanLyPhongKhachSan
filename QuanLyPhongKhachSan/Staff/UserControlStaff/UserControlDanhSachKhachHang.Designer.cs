@@ -32,10 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDSKH = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdGiam = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdTang = new Guna.UI2.WinForms.Guna2RadioButton();
@@ -47,16 +45,23 @@
             this.rdSSDT = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdSCCCD = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdSTen = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.btnChonTatCa = new Guna.UI2.WinForms.Guna2Button();
-            this.txtXuatFile = new Guna.UI2.WinForms.Guna2Button();
+            this.btnXuatFile = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.dtpDenNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CCCD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayThamGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSKH)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvDSKH
@@ -74,9 +79,10 @@
             this.dgvDSKH.ColumnHeadersHeight = 15;
             this.dgvDSKH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvDSKH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
+            this.HoTen,
+            this.CCCD,
+            this.SDT,
+            this.NgayThamGia});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -113,23 +119,9 @@
             this.dgvDSKH.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDSKH.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Tên Khách Hàng";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Căn cước công dân/Passport";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Số điện thoại";
-            this.Column3.Name = "Column3";
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.rdSDT);
             this.groupBox1.Controls.Add(this.rdCCCD);
@@ -141,13 +133,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sắp xếp theo";
             // 
+            // btnReset
+            // 
+            this.btnReset.BorderRadius = 10;
+            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(125, 111);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(58, 26);
+            this.btnReset.TabIndex = 7;
+            this.btnReset.Text = "Reset";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click_1);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rdGiam);
             this.groupBox2.Controls.Add(this.rdTang);
-            this.groupBox2.Location = new System.Drawing.Point(106, 19);
+            this.groupBox2.Location = new System.Drawing.Point(106, 29);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(88, 110);
+            this.groupBox2.Size = new System.Drawing.Size(88, 67);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
@@ -159,7 +167,7 @@
             this.rdGiam.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.rdGiam.CheckedState.InnerColor = System.Drawing.Color.White;
             this.rdGiam.CheckedState.InnerOffset = -4;
-            this.rdGiam.Location = new System.Drawing.Point(6, 59);
+            this.rdGiam.Location = new System.Drawing.Point(7, 44);
             this.rdGiam.Name = "rdGiam";
             this.rdGiam.Size = new System.Drawing.Size(70, 17);
             this.rdGiam.TabIndex = 8;
@@ -168,6 +176,7 @@
             this.rdGiam.UncheckedState.BorderThickness = 2;
             this.rdGiam.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdGiam.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdGiam.CheckedChanged += new System.EventHandler(this.rdGiam_CheckedChanged);
             // 
             // rdTang
             // 
@@ -177,7 +186,7 @@
             this.rdTang.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.rdTang.CheckedState.InnerColor = System.Drawing.Color.White;
             this.rdTang.CheckedState.InnerOffset = -4;
-            this.rdTang.Location = new System.Drawing.Point(6, 27);
+            this.rdTang.Location = new System.Drawing.Point(7, 19);
             this.rdTang.Name = "rdTang";
             this.rdTang.Size = new System.Drawing.Size(71, 17);
             this.rdTang.TabIndex = 7;
@@ -186,6 +195,7 @@
             this.rdTang.UncheckedState.BorderThickness = 2;
             this.rdTang.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdTang.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTang.CheckedChanged += new System.EventHandler(this.rdTang_CheckedChanged);
             // 
             // rdSDT
             // 
@@ -204,6 +214,7 @@
             this.rdSDT.UncheckedState.BorderThickness = 2;
             this.rdSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSDT.CheckedChanged += new System.EventHandler(this.rdSDT_CheckedChanged);
             // 
             // rdCCCD
             // 
@@ -222,6 +233,7 @@
             this.rdCCCD.UncheckedState.BorderThickness = 2;
             this.rdCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.CheckedChanged += new System.EventHandler(this.rdCCCD_CheckedChanged);
             // 
             // rdTen
             // 
@@ -240,6 +252,7 @@
             this.rdTen.UncheckedState.BorderThickness = 2;
             this.rdTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTen.CheckedChanged += new System.EventHandler(this.rdTen_CheckedChanged);
             // 
             // txtTimKiem
             // 
@@ -259,6 +272,7 @@
             this.txtTimKiem.SelectedText = "";
             this.txtTimKiem.Size = new System.Drawing.Size(443, 31);
             this.txtTimKiem.TabIndex = 2;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // groupBox3
             // 
@@ -289,6 +303,7 @@
             this.rdSSDT.UncheckedState.BorderThickness = 2;
             this.rdSSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSSDT.CheckedChanged += new System.EventHandler(this.rdSSDT_CheckedChanged);
             // 
             // rdSCCCD
             // 
@@ -307,6 +322,7 @@
             this.rdSCCCD.UncheckedState.BorderThickness = 2;
             this.rdSCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSCCCD.CheckedChanged += new System.EventHandler(this.rdSCCCD_CheckedChanged);
             // 
             // rdSTen
             // 
@@ -327,20 +343,7 @@
             this.rdSTen.UncheckedState.BorderThickness = 2;
             this.rdSTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // dtpTuNgay
-            // 
-            this.dtpTuNgay.BorderRadius = 10;
-            this.dtpTuNgay.Checked = true;
-            this.dtpTuNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpTuNgay.Location = new System.Drawing.Point(62, 46);
-            this.dtpTuNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dtpTuNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dtpTuNgay.Name = "dtpTuNgay";
-            this.dtpTuNgay.Size = new System.Drawing.Size(123, 36);
-            this.dtpTuNgay.TabIndex = 4;
-            this.dtpTuNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.rdSTen.CheckedChanged += new System.EventHandler(this.rdSTen_CheckedChanged);
             // 
             // btnChonTatCa
             // 
@@ -356,25 +359,27 @@
             this.btnChonTatCa.Size = new System.Drawing.Size(130, 45);
             this.btnChonTatCa.TabIndex = 0;
             this.btnChonTatCa.Text = "Chọn tất cả";
+            this.btnChonTatCa.Click += new System.EventHandler(this.btnChonTatCa_Click);
             // 
-            // txtXuatFile
+            // btnXuatFile
             // 
-            this.txtXuatFile.BorderRadius = 10;
-            this.txtXuatFile.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.txtXuatFile.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.txtXuatFile.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.txtXuatFile.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.txtXuatFile.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtXuatFile.ForeColor = System.Drawing.Color.White;
-            this.txtXuatFile.Location = new System.Drawing.Point(151, 24);
-            this.txtXuatFile.Name = "txtXuatFile";
-            this.txtXuatFile.Size = new System.Drawing.Size(130, 45);
-            this.txtXuatFile.TabIndex = 1;
-            this.txtXuatFile.Text = "Xuất file excel";
+            this.btnXuatFile.BorderRadius = 10;
+            this.btnXuatFile.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnXuatFile.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnXuatFile.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnXuatFile.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnXuatFile.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnXuatFile.ForeColor = System.Drawing.Color.White;
+            this.btnXuatFile.Location = new System.Drawing.Point(151, 24);
+            this.btnXuatFile.Name = "btnXuatFile";
+            this.btnXuatFile.Size = new System.Drawing.Size(130, 45);
+            this.btnXuatFile.TabIndex = 1;
+            this.btnXuatFile.Text = "Xuất file excel";
+            this.btnXuatFile.Click += new System.EventHandler(this.btnXuatFile_Click);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.txtXuatFile);
+            this.groupBox4.Controls.Add(this.btnXuatFile);
             this.groupBox4.Controls.Add(this.btnChonTatCa);
             this.groupBox4.Location = new System.Drawing.Point(513, 19);
             this.groupBox4.Name = "groupBox4";
@@ -382,27 +387,92 @@
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             // 
-            // guna2DateTimePicker1
+            // groupBox5
             // 
-            this.guna2DateTimePicker1.BorderRadius = 10;
-            this.guna2DateTimePicker1.Checked = true;
-            this.guna2DateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.guna2DateTimePicker1.Location = new System.Drawing.Point(241, 46);
-            this.guna2DateTimePicker1.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            this.guna2DateTimePicker1.Size = new System.Drawing.Size(123, 36);
-            this.guna2DateTimePicker1.TabIndex = 5;
-            this.guna2DateTimePicker1.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.groupBox5.Controls.Add(this.chkLocTheoNgay);
+            this.groupBox5.Controls.Add(this.dtpDenNgay);
+            this.groupBox5.Controls.Add(this.dtpTuNgay);
+            this.groupBox5.Location = new System.Drawing.Point(49, 19);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(427, 78);
+            this.groupBox5.TabIndex = 30;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Lọc theo ngày";
+            // 
+            // chkLocTheoNgay
+            // 
+            this.chkLocTheoNgay.AutoSize = true;
+            this.chkLocTheoNgay.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.CheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.CheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.Location = new System.Drawing.Point(349, 36);
+            this.chkLocTheoNgay.Name = "chkLocTheoNgay";
+            this.chkLocTheoNgay.Size = new System.Drawing.Size(15, 14);
+            this.chkLocTheoNgay.TabIndex = 29;
+            this.chkLocTheoNgay.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chkLocTheoNgay.UncheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.UncheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // dtpDenNgay
+            // 
+            this.dtpDenNgay.BorderRadius = 5;
+            this.dtpDenNgay.Checked = true;
+            this.dtpDenNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDenNgay.Location = new System.Drawing.Point(200, 23);
+            this.dtpDenNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpDenNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpDenNgay.Name = "dtpDenNgay";
+            this.dtpDenNgay.Size = new System.Drawing.Size(130, 36);
+            this.dtpDenNgay.TabIndex = 27;
+            this.dtpDenNgay.Value = new System.DateTime(2025, 9, 10, 21, 4, 4, 463);
+            // 
+            // dtpTuNgay
+            // 
+            this.dtpTuNgay.BorderRadius = 5;
+            this.dtpTuNgay.Checked = true;
+            this.dtpTuNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpTuNgay.Location = new System.Drawing.Point(54, 23);
+            this.dtpTuNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpTuNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpTuNgay.Name = "dtpTuNgay";
+            this.dtpTuNgay.Size = new System.Drawing.Size(130, 36);
+            this.dtpTuNgay.TabIndex = 28;
+            this.dtpTuNgay.Value = new System.DateTime(2025, 9, 10, 21, 4, 4, 463);
+            // 
+            // HoTen
+            // 
+            this.HoTen.DataPropertyName = "HoTen";
+            this.HoTen.HeaderText = "Tên Khách Hàng";
+            this.HoTen.Name = "HoTen";
+            // 
+            // CCCD
+            // 
+            this.CCCD.DataPropertyName = "CCCD";
+            this.CCCD.HeaderText = "Căn cước công dân/Passport";
+            this.CCCD.Name = "CCCD";
+            // 
+            // SDT
+            // 
+            this.SDT.DataPropertyName = "SDT";
+            this.SDT.HeaderText = "Số điện thoại";
+            this.SDT.Name = "SDT";
+            // 
+            // NgayThamGia
+            // 
+            this.NgayThamGia.DataPropertyName = "NgayThamGia";
+            this.NgayThamGia.HeaderText = "Ngày tham gia";
+            this.NgayThamGia.Name = "NgayThamGia";
             // 
             // UserControlDanhSachKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.guna2DateTimePicker1);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.dtpTuNgay);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.groupBox1);
@@ -417,6 +487,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -424,9 +496,6 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2DataGridView dgvDSKH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private Guna.UI2.WinForms.Guna2RadioButton rdGiam;
@@ -439,10 +508,17 @@
         private Guna.UI2.WinForms.Guna2RadioButton rdSSDT;
         private Guna.UI2.WinForms.Guna2RadioButton rdSCCCD;
         private Guna.UI2.WinForms.Guna2RadioButton rdSTen;
-        private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
         private Guna.UI2.WinForms.Guna2Button btnChonTatCa;
-        private Guna.UI2.WinForms.Guna2Button txtXuatFile;
+        private Guna.UI2.WinForms.Guna2Button btnXuatFile;
         private System.Windows.Forms.GroupBox groupBox4;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private Guna.UI2.WinForms.Guna2CheckBox chkLocTheoNgay;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpDenNgay;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
+        private Guna.UI2.WinForms.Guna2Button btnReset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoTen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CCCD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgayThamGia;
     }
 }

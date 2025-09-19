@@ -1,6 +1,6 @@
 USE [QuanLyPhongKhachSan]
 GO
-/****** Object:  Table [dbo].[ChiTietHoaDon]    Script Date: 9/16/2025 12:30:00 PM ******/
+/****** Object:  Table [dbo].[ChiTietHoaDon]    Script Date: 9/19/2025 9:44:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +18,65 @@ CREATE TABLE [dbo].[ChiTietHoaDon](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DatPhong]    Script Date: 9/16/2025 12:30:00 PM ******/
+/****** Object:  Table [dbo].[HoaDon]    Script Date: 9/19/2025 9:44:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HoaDon](
+	[MaHD] [int] IDENTITY(1,1) NOT NULL,
+	[MaDat] [int] NOT NULL,
+	[MaNV] [int] NULL,
+	[NgayLap] [datetime2](0) NOT NULL,
+	[LoaiHoaDon] [nvarchar](40) NOT NULL,
+	[TongThanhToan] [decimal](18, 0) NULL,
+	[GhiChu] [nvarchar](max) NULL,
+ CONSTRAINT [PK_HoaDon] PRIMARY KEY CLUSTERED 
+(
+	[MaHD] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[vw_HoaDon_Tong]    Script Date: 9/19/2025 9:44:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+/* ========== 4) VIEW TỔNG HỢP HÓA ĐƠN (tính nhanh tổng phải thu) ========== */
+CREATE VIEW [dbo].[vw_HoaDon_Tong] AS
+SELECT
+  h.MaHD,
+  h.MaDat,
+  h.NgayLap,
+  h.LoaiHoaDon,
+  SUM(ISNULL(ct.ThanhTien,0)) AS TongChiTiet,
+  ISNULL(h.TienCoc,0)         AS TienCoc,
+  ISNULL(h.TienHoanTra,0)     AS TienHoanTra,
+  ISNULL(h.TienBoiThuong,0)   AS TienBoiThuong,
+  CAST(SUM(ISNULL(ct.ThanhTien,0))
+       - ISNULL(h.TienCoc,0)
+       - ISNULL(h.TienHoanTra,0)
+       + ISNULL(h.TienBoiThuong,0) AS DECIMAL(18,2)) AS TongPhaiThu
+FROM dbo.HoaDon h
+LEFT JOIN dbo.ChiTietHoaDon ct ON ct.MaHD = h.MaHD
+GROUP BY h.MaHD, h.MaDat, h.NgayLap, h.LoaiHoaDon, h.TienCoc, h.TienHoanTra, h.TienBoiThuong;
+GO
+/****** Object:  View [dbo].[v_MoTaCSDL]    Script Date: 9/19/2025 9:44:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[v_MoTaCSDL] AS
+SELECT 
+    c.TABLE_NAME,
+    c.COLUMN_NAME,
+    c.DATA_TYPE,
+    c.CHARACTER_MAXIMUM_LENGTH,
+    c.IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS c;
+GO
+/****** Object:  Table [dbo].[DatPhong]    Script Date: 9/19/2025 9:44:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -39,26 +97,7 @@ CREATE TABLE [dbo].[DatPhong](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[HoaDon]    Script Date: 9/16/2025 12:30:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[HoaDon](
-	[MaHD] [int] IDENTITY(1,1) NOT NULL,
-	[MaDat] [int] NOT NULL,
-	[MaNV] [int] NULL,
-	[NgayLap] [datetime2](0) NOT NULL,
-	[LoaiHoaDon] [nvarchar](40) NOT NULL,
-	[TongThanhToan] [decimal](18, 0) NULL,
-	[GhiChu] [nvarchar](max) NULL,
- CONSTRAINT [PK_HoaDon] PRIMARY KEY CLUSTERED 
-(
-	[MaHD] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[KhachHang]    Script Date: 9/16/2025 12:30:00 PM ******/
+/****** Object:  Table [dbo].[KhachHang]    Script Date: 9/19/2025 9:44:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -68,6 +107,7 @@ CREATE TABLE [dbo].[KhachHang](
 	[HoTen] [nvarchar](100) NOT NULL,
 	[CCCD] [varchar](15) NOT NULL,
 	[SDT] [varchar](15) NULL,
+	[NgayThamGia] [datetime] NULL,
  CONSTRAINT [PK_KhachHang] PRIMARY KEY CLUSTERED 
 (
 	[MaKH] ASC
@@ -78,7 +118,7 @@ CREATE TABLE [dbo].[KhachHang](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LichSuHoaDon]    Script Date: 9/16/2025 12:30:00 PM ******/
+/****** Object:  Table [dbo].[LichSuHoaDon]    Script Date: 9/19/2025 9:44:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +136,7 @@ CREATE TABLE [dbo].[LichSuHoaDon](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NhanVien]    Script Date: 9/16/2025 12:30:00 PM ******/
+/****** Object:  Table [dbo].[NhanVien]    Script Date: 9/19/2025 9:44:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,7 +153,7 @@ CREATE TABLE [dbo].[NhanVien](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Phong]    Script Date: 9/16/2025 12:30:00 PM ******/
+/****** Object:  Table [dbo].[Phong]    Script Date: 9/19/2025 9:44:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +174,7 @@ CREATE TABLE [dbo].[Phong](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TaiKhoan]    Script Date: 9/16/2025 12:30:00 PM ******/
+/****** Object:  Table [dbo].[TaiKhoan]    Script Date: 9/19/2025 9:44:05 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

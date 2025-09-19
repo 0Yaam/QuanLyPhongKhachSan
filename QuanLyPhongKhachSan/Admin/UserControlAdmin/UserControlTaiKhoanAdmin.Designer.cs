@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
+            this.pbAvatar = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnBrowse = new Guna.UI2.WinForms.Guna2Button();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2TextBox2
@@ -55,33 +55,34 @@
             this.guna2TextBox2.Size = new System.Drawing.Size(240, 36);
             this.guna2TextBox2.TabIndex = 32;
             // 
-            // btnThemKH
+            // btnDangXuat
             // 
-            this.btnThemKH.BorderRadius = 10;
-            this.btnThemKH.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemKH.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemKH.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThemKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThemKH.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThemKH.ForeColor = System.Drawing.Color.White;
-            this.btnThemKH.Location = new System.Drawing.Point(169, 196);
-            this.btnThemKH.Name = "btnThemKH";
-            this.btnThemKH.Size = new System.Drawing.Size(132, 41);
-            this.btnThemKH.TabIndex = 31;
-            this.btnThemKH.Text = "Đăng xuất";
+            this.btnDangXuat.BorderRadius = 10;
+            this.btnDangXuat.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDangXuat.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDangXuat.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDangXuat.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDangXuat.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDangXuat.ForeColor = System.Drawing.Color.White;
+            this.btnDangXuat.Location = new System.Drawing.Point(118, 278);
+            this.btnDangXuat.Name = "btnDangXuat";
+            this.btnDangXuat.Size = new System.Drawing.Size(132, 41);
+            this.btnDangXuat.TabIndex = 31;
+            this.btnDangXuat.Text = "Đăng xuất";
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
-            // guna2PictureBox1
+            // pbAvatar
             // 
-            this.guna2PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.guna2PictureBox1.BorderRadius = 10;
-            this.guna2PictureBox1.Image = global::QuanLyPhongKhachSan.Properties.Resources.GL7ic1kWUAAWMa_;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(319, 25);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(252, 294);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 30;
-            this.guna2PictureBox1.TabStop = false;
+            this.pbAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbAvatar.BorderRadius = 10;
+            this.pbAvatar.Image = global::QuanLyPhongKhachSan.Properties.Resources.GL7ic1kWUAAWMa_;
+            this.pbAvatar.ImageRotate = 0F;
+            this.pbAvatar.Location = new System.Drawing.Point(319, 25);
+            this.pbAvatar.Name = "pbAvatar";
+            this.pbAvatar.Size = new System.Drawing.Size(252, 294);
+            this.pbAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbAvatar.TabIndex = 30;
+            this.pbAvatar.TabStop = false;
             // 
             // guna2HtmlLabel1
             // 
@@ -104,11 +105,12 @@
             this.btnBrowse.FillColor = System.Drawing.Color.Silver;
             this.btnBrowse.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.ForeColor = System.Drawing.Color.Black;
-            this.btnBrowse.Location = new System.Drawing.Point(271, 311);
+            this.btnBrowse.Location = new System.Drawing.Point(271, 197);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(42, 35);
             this.btnBrowse.TabIndex = 33;
             this.btnBrowse.Text = "...";
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // UserControlTaiKhoanAdmin
             // 
@@ -116,12 +118,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.guna2TextBox2);
-            this.Controls.Add(this.btnThemKH);
-            this.Controls.Add(this.guna2PictureBox1);
+            this.Controls.Add(this.btnDangXuat);
+            this.Controls.Add(this.pbAvatar);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.Name = "UserControlTaiKhoanAdmin";
             this.Size = new System.Drawing.Size(612, 358);
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,8 +132,8 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
-        private Guna.UI2.WinForms.Guna2Button btnThemKH;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2Button btnDangXuat;
+        private Guna.UI2.WinForms.Guna2PictureBox pbAvatar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2Button btnBrowse;
     }

@@ -56,6 +56,7 @@
             this.txtNgayThamGia.SelectedText = "";
             this.txtNgayThamGia.Size = new System.Drawing.Size(200, 36);
             this.txtNgayThamGia.TabIndex = 0;
+            this.txtNgayThamGia.TextChanged += new System.EventHandler(this.txtNgayThamGia_TextChanged);
             // 
             // guna2HtmlLabel1
             // 
@@ -66,6 +67,7 @@
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(111, 24);
             this.guna2HtmlLabel1.TabIndex = 1;
             this.guna2HtmlLabel1.Text = "Ngày tham gia";
+            this.guna2HtmlLabel1.Click += new System.EventHandler(this.guna2HtmlLabel1_Click);
             // 
             // btnDangXuat
             // 
@@ -81,6 +83,7 @@
             this.btnDangXuat.Size = new System.Drawing.Size(132, 41);
             this.btnDangXuat.TabIndex = 26;
             this.btnDangXuat.Text = "Đăng xuất";
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // pbAvatar
             // 
@@ -94,6 +97,7 @@
             this.pbAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAvatar.TabIndex = 2;
             this.pbAvatar.TabStop = false;
+            this.pbAvatar.Click += new System.EventHandler(this.pbAvatar_Click);
             // 
             // txtTenNhanVien
             // 
@@ -113,6 +117,7 @@
             this.txtTenNhanVien.SelectedText = "";
             this.txtTenNhanVien.Size = new System.Drawing.Size(392, 36);
             this.txtTenNhanVien.TabIndex = 27;
+            this.txtTenNhanVien.TextChanged += new System.EventHandler(this.txtTenNhanVien_TextChanged);
             // 
             // label1
             // 
@@ -123,6 +128,7 @@
             this.label1.Size = new System.Drawing.Size(153, 39);
             this.label1.TabIndex = 28;
             this.label1.Text = "Reception";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnBrowse
             // 
@@ -140,6 +146,7 @@
             this.btnBrowse.Size = new System.Drawing.Size(47, 47);
             this.btnBrowse.TabIndex = 29;
             this.btnBrowse.Text = "...";
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // UserControlTaiKhoan
             // 

@@ -41,6 +41,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLoai = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.rdTang = new System.Windows.Forms.RadioButton();
             this.rdGiam = new System.Windows.Forms.RadioButton();
             this.flpContain = new System.Windows.Forms.FlowLayoutPanel();
@@ -123,7 +124,7 @@
             // 
             this.cbLoaiPhong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLoaiPhong.FormattingEnabled = true;
-            this.cbLoaiPhong.Location = new System.Drawing.Point(906, 359);
+            this.cbLoaiPhong.Location = new System.Drawing.Point(906, 391);
             this.cbLoaiPhong.Name = "cbLoaiPhong";
             this.cbLoaiPhong.Size = new System.Drawing.Size(102, 21);
             this.cbLoaiPhong.TabIndex = 16;
@@ -139,7 +140,7 @@
             this.txtSoPhong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSoPhong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSoPhong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSoPhong.Location = new System.Drawing.Point(906, 335);
+            this.txtSoPhong.Location = new System.Drawing.Point(906, 367);
             this.txtSoPhong.Name = "txtSoPhong";
             this.txtSoPhong.PlaceholderText = "";
             this.txtSoPhong.SelectedText = "";
@@ -155,7 +156,7 @@
             this.btnThem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThem.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Location = new System.Drawing.Point(917, 395);
+            this.btnThem.Location = new System.Drawing.Point(917, 427);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(83, 38);
             this.btnThem.TabIndex = 12;
@@ -167,7 +168,7 @@
             this.groupBox1.Controls.Add(this.rdPhongTrong);
             this.groupBox1.Controls.Add(this.rdPhongDaDat);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(900, 141);
+            this.groupBox1.Location = new System.Drawing.Point(900, 152);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(122, 90);
             this.groupBox1.TabIndex = 19;
@@ -200,12 +201,28 @@
             this.groupBox3.Controls.Add(this.rdTang);
             this.groupBox3.Controls.Add(this.rdGiam);
             this.groupBox3.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(900, 237);
+            this.groupBox3.Location = new System.Drawing.Point(900, 257);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(122, 92);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Sắp xếp theo";
+            // 
+            // btnReset
+            // 
+            this.btnReset.BorderRadius = 10;
+            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(976, 232);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(59, 33);
+            this.btnReset.TabIndex = 8;
+            this.btnReset.Text = "Reset";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // rdTang
             // 
@@ -387,7 +404,7 @@
             this.btnThemKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThemKH.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemKH.ForeColor = System.Drawing.Color.White;
-            this.btnThemKH.Location = new System.Drawing.Point(909, 455);
+            this.btnThemKH.Location = new System.Drawing.Point(909, 517);
             this.btnThemKH.Name = "btnThemKH";
             this.btnThemKH.Size = new System.Drawing.Size(99, 38);
             this.btnThemKH.TabIndex = 25;
@@ -397,6 +414,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnThemKH);
             this.Controls.Add(this.dtpNgayHienTai);
             this.Controls.Add(this.groupBox4);
@@ -452,5 +470,6 @@
         private Guna.UI2.WinForms.Guna2Button btnThemKH;
         private System.Windows.Forms.ComboBox cbLoai;
         private Guna.UI2.WinForms.Guna2RadioButton rdSoPhong;
+        private Guna.UI2.WinForms.Guna2Button btnReset;
     }
 }

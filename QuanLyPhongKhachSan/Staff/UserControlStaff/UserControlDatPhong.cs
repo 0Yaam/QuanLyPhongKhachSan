@@ -685,6 +685,14 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         private void rdCCCD_CheckedChanged(object sender, EventArgs e) { txtTimKiem.Clear(); txtTimKiem_TextChanged(sender, e); }
         private void rdSoPhong_CheckedChanged(object sender, EventArgs e) { txtTimKiem.Clear(); txtTimKiem_TextChanged(sender, e); }
         private void rdSDT_CheckedChanged(object sender, EventArgs e) { txtTimKiem.Clear(); txtTimKiem_TextChanged(sender, e); }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            rdPhongDaDat.Checked = false;
+            rdPhongTrong.Checked = false;
+            rdTang.Checked = false;
+            rdGiam.Checked = false;
+        }
     }
 }
 
