@@ -46,8 +46,11 @@
             this.LoaiHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpDenNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSu)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox4
@@ -259,7 +262,7 @@
             this.dtpDenNgay.Checked = true;
             this.dtpDenNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDenNgay.Location = new System.Drawing.Point(902, 19);
+            this.dtpDenNgay.Location = new System.Drawing.Point(152, 14);
             this.dtpDenNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpDenNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDenNgay.Name = "dtpDenNgay";
@@ -273,7 +276,7 @@
             this.dtpTuNgay.Checked = true;
             this.dtpTuNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpTuNgay.Location = new System.Drawing.Point(728, 19);
+            this.dtpTuNgay.Location = new System.Drawing.Point(6, 14);
             this.dtpTuNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpTuNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpTuNgay.Name = "dtpTuNgay";
@@ -281,12 +284,39 @@
             this.dtpTuNgay.TabIndex = 28;
             this.dtpTuNgay.Value = new System.DateTime(2025, 9, 10, 21, 4, 4, 463);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkLocTheoNgay);
+            this.groupBox1.Controls.Add(this.dtpDenNgay);
+            this.groupBox1.Controls.Add(this.dtpTuNgay);
+            this.groupBox1.Location = new System.Drawing.Point(705, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(324, 59);
+            this.groupBox1.TabIndex = 29;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lọc theo ngày";
+            // 
+            // chkLocTheoNgay
+            // 
+            this.chkLocTheoNgay.AutoSize = true;
+            this.chkLocTheoNgay.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.CheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.CheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.Location = new System.Drawing.Point(301, 27);
+            this.chkLocTheoNgay.Name = "chkLocTheoNgay";
+            this.chkLocTheoNgay.Size = new System.Drawing.Size(15, 14);
+            this.chkLocTheoNgay.TabIndex = 29;
+            this.chkLocTheoNgay.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chkLocTheoNgay.UncheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.UncheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
             // UserControlLichSuHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dtpTuNgay);
-            this.Controls.Add(this.dtpDenNgay);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvLichSu);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.txtTimKiem);
@@ -295,6 +325,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSu)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -316,5 +348,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ThoiGianIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoaiHoaDon;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private Guna.UI2.WinForms.Guna2CheckBox chkLocTheoNgay;
     }
 }

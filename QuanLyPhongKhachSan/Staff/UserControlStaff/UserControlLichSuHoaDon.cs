@@ -15,6 +15,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             this.Load += UserControlLichSuHoaDon_Load;
 
             AppEvents.InvoiceLogged += OnInvoiceLogged;
+
             this.Disposed += (s, e) => AppEvents.InvoiceLogged -= OnInvoiceLogged;
             txtTimKiem.PlaceholderText = "Tìm kiếm...";
         }
@@ -35,6 +36,14 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 var list = _svc.LayDanhSach();
                 System.Diagnostics.Debug.WriteLine($"RefreshData: Loaded {list?.Count ?? 0} records");
 
+                if (chkLocTheoNgay.Checked)
+                {
+                    DateTime tuNgay = dtpTuNgay.Value.Date;
+                    DateTime denNgay = dtpDenNgay.Value.Date.AddDays(1).AddTicks(-1); // Bao gồm cả ngày cuối
+                    list = list.Where(x => x.ThoiGianIn >= tuNgay && x.ThoiGianIn <= denNgay).ToList();
+                    System.Diagnostics.Debug.WriteLine($"Lọc theo ngày từ {tuNgay:dd/MM/yyyy} đến {denNgay:dd/MM/yyyy}: {list.Count} bản ghi");
+                }
+
                 var view = list.Select(x => new
                 {
                     MaHD = x.MaHD,
@@ -49,6 +58,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 dgvLichSu.DataSource = null;
                 dgvLichSu.DataSource = view;
 
+                // Xóa cột SoPhong dư thừa (nếu có)
                 int tenKhIndex = dgvLichSu.Columns.Contains("TenKH") ? dgvLichSu.Columns["TenKH"].Index : -1;
                 for (int i = dgvLichSu.Columns.Count - 1; i >= 0; i--)
                 {
@@ -76,6 +86,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             {
                 dgvLichSu.AutoGenerateColumns = false;
 
+                // Đảm bảo các cột đã được thêm trong Designer
                 if (dgvLichSu.Columns["MaHD"] == null) dgvLichSu.Columns.Add("MaHD", "Mã hóa đơn");
                 if (dgvLichSu.Columns["TenKH"] == null) dgvLichSu.Columns.Add("TenKH", "Tên KH");
                 if (dgvLichSu.Columns["CCCD"] == null) dgvLichSu.Columns.Add("CCCD", "CCCD");
@@ -115,7 +126,15 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
                 System.Diagnostics.Debug.WriteLine("Danh sách cột sau xử lý: " + string.Join(", ", dgvLichSu.Columns.Cast<DataGridViewColumn>().Select(c => $"{c.Name} (Index: {c.Index})")));
 
-                rdSoPhong.Checked = true; 
+                dtpTuNgay.Value = DateTime.Today.AddDays(-7); // Mặc định 7 ngày trước
+                dtpDenNgay.Value = DateTime.Today; // Mặc định hôm nay
+                chkLocTheoNgay.Checked = false; // Mặc định không lọc theo ngày
+                rdSoPhong.Checked = true; // Mặc định tìm kiếm theo số phòng
+
+                dtpTuNgay.ValueChanged += dtpTuNgay_ValueChanged;
+                dtpDenNgay.ValueChanged += dtpDenNgay_ValueChanged;
+                chkLocTheoNgay.CheckedChanged += chkLocTheoNgay_CheckedChanged;
+
                 RefreshData();
             }
             catch (Exception ex)
@@ -131,34 +150,39 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             {
                 string tuKhoa = txtTimKiem.Text.Trim();
                 var list = _svc.LayDanhSach();
+                System.Diagnostics.Debug.WriteLine($"Tìm kiếm với từ khóa: {tuKhoa}, Tổng số bản ghi: {list?.Count ?? 0}");
 
-                if (string.IsNullOrEmpty(tuKhoa))
+                if (chkLocTheoNgay.Checked)
                 {
-                    RefreshData();
-                    System.Diagnostics.Debug.WriteLine("Tìm kiếm rỗng, load toàn bộ danh sách");
-                    return;
+                    DateTime tuNgay = dtpTuNgay.Value.Date;
+                    DateTime denNgay = dtpDenNgay.Value.Date.AddDays(1).AddTicks(-1); // Bao gồm cả ngày cuối
+                    list = list.Where(x => x.ThoiGianIn >= tuNgay && x.ThoiGianIn <= denNgay).ToList();
+                    System.Diagnostics.Debug.WriteLine($"Lọc theo ngày từ {tuNgay:dd/MM/yyyy} đến {denNgay:dd/MM/yyyy}: {list.Count} bản ghi");
                 }
 
                 var filteredList = list;
-                if (rdSoPhong.Checked)
+                if (!string.IsNullOrEmpty(tuKhoa))
                 {
-                    filteredList = list.Where(x => (x.SoPhong.ToString() ?? "").Contains(tuKhoa)).ToList();
-                    System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo số phòng: {tuKhoa}, Kết quả: {filteredList.Count} bản ghi");
-                }
-                else if (rdTen.Checked)
-                {
-                    filteredList = list.Where(x => (x.TenKH ?? "").IndexOf(tuKhoa, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-                    System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo tên: {tuKhoa}, kết quả: {filteredList.Count} bản ghi");
-                }
-                else if (rdCCCD.Checked)
-                {
-                    filteredList = list.Where(x => (x.CCCD ?? "").Contains(tuKhoa)).ToList();
-                    System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo CCCD: {tuKhoa}, kết quả: {filteredList.Count} bản ghi");
-                }
-                else if (rdSDT.Checked)
-                {
-                    filteredList = list.Where(x => (x.SDT ?? "").Contains(tuKhoa)).ToList();
-                    System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo SĐT: {tuKhoa}, kết quả: {filteredList.Count} bản ghi");
+                    if (rdSoPhong.Checked)
+                    {
+                        filteredList = list.Where(x => (x.SoPhong.ToString() ?? "").Contains(tuKhoa)).ToList();
+                        System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo số phòng: {tuKhoa}, Kết quả: {filteredList.Count} bản ghi");
+                    }
+                    else if (rdTen.Checked)
+                    {
+                        filteredList = list.Where(x => (x.TenKH ?? "").IndexOf(tuKhoa, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                        System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo tên: {tuKhoa}, Kết quả: {filteredList.Count} bản ghi");
+                    }
+                    else if (rdCCCD.Checked)
+                    {
+                        filteredList = list.Where(x => (x.CCCD ?? "").Contains(tuKhoa)).ToList();
+                        System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo CCCD: {tuKhoa}, Kết quả: {filteredList.Count} bản ghi");
+                    }
+                    else if (rdSDT.Checked)
+                    {
+                        filteredList = list.Where(x => (x.SDT ?? "").Contains(tuKhoa)).ToList();
+                        System.Diagnostics.Debug.WriteLine($"Tìm kiếm theo SĐT: {tuKhoa}, Kết quả: {filteredList.Count} bản ghi");
+                    }
                 }
 
                 var view = filteredList.Select(x => new
@@ -187,6 +211,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                     }
                 }
 
+                System.Diagnostics.Debug.WriteLine("Danh sách cột sau tìm kiếm: " + string.Join(", ", dgvLichSu.Columns.Cast<DataGridViewColumn>().Select(c => $"{c.Name} (Index: {c.Index})")));
                 dgvLichSu.Refresh();
             }
             catch (Exception ex)
@@ -194,6 +219,30 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 System.Diagnostics.Debug.WriteLine($"Lỗi txtTimKiem_TextChanged: {ex.Message}");
                 MessageBox.Show("Lỗi tìm kiếm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkLocTheoNgay.Checked)
+            {
+                System.Diagnostics.Debug.WriteLine($"dtpTuNgay thay đổi: {dtpTuNgay.Value:dd/MM/yyyy}");
+                txtTimKiem_TextChanged(sender, e);
+            }
+        }
+
+        private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkLocTheoNgay.Checked)
+            {
+                System.Diagnostics.Debug.WriteLine($"dtpDenNgay thay đổi: {dtpDenNgay.Value:dd/MM/yyyy}");
+                txtTimKiem_TextChanged(sender, e);
+            }
+        }
+
+        private void chkLocTheoNgay_CheckedChanged(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"chkLocTheoNgay thay đổi: {chkLocTheoNgay.Checked}");
+            txtTimKiem_TextChanged(sender, e);
         }
 
         private void rdSoPhong_CheckedChanged(object sender, EventArgs e)
