@@ -50,12 +50,17 @@ namespace QuanLyPhongKhachSan
         private void LoadLoaiPhong()
         {
             cbLoaiPhong.Items.Clear();
-            foreach (var loai in PhongGiaConfig.GiaPhong.Keys)
+            var loais = phongService.LayDanhSachLoaiPhong(); // lấy từ LoaiPhong table
+            foreach (var loai in loais)
                 cbLoaiPhong.Items.Add(loai);
 
-            if (cbLoaiPhong.Items.Count > 0 && string.IsNullOrEmpty(_phong.LoaiPhong))
+            // chọn đúng loại hiện tại của phòng
+            if (!string.IsNullOrEmpty(_phong.LoaiPhong) && cbLoaiPhong.Items.Contains(_phong.LoaiPhong))
+                cbLoaiPhong.SelectedItem = _phong.LoaiPhong;
+            else if (cbLoaiPhong.Items.Count > 0)
                 cbLoaiPhong.SelectedIndex = 0;
         }
+
 
         private void LoadDatPhongCu()
         {
@@ -117,8 +122,9 @@ namespace QuanLyPhongKhachSan
         private decimal LayGiaTheoLoaiPhong(string loai)
         {
             if (string.IsNullOrWhiteSpace(loai)) return 0m;
-            return PhongGiaConfig.GiaPhong.TryGetValue(loai, out var gia) ? gia : 0m;
+            return phongService.LayGiaTheoLoai(loai); // lấy từ bảng LoaiPhong
         }
+
 
         private void dtpNgayNhan_ValueChanged(object sender, EventArgs e)
         {
@@ -135,14 +141,15 @@ namespace QuanLyPhongKhachSan
 
         private void cbLoaiPhong_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbLoaiPhong.SelectedItem != null)
-            {
-                _phong.LoaiPhong = cbLoaiPhong.SelectedItem.ToString();
-                _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
-                txtGia.Text = FormatVnd(_giaPhong);
-                CapNhatTamTinh();
-            }
+            if (cbLoaiPhong.SelectedItem == null) return;
+
+            // CHỈ dùng để hiển thị giá & tính tạm tính, KHÔNG đổi loại phòng trong DB
+            var tenLoai = cbLoaiPhong.SelectedItem.ToString();
+            _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
+            txtGia.Text = FormatVnd(_giaPhong);
+            CapNhatTamTinh();
         }
+
 
         public string TenKhachHang => txtTenKH.Text;
         public string CCCD => txtCCCD.Text;

@@ -28,11 +28,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
             if (dtpNgayHienTai != null) dtpNgayHienTai.Value = DateTime.Now;
             if (txtSoPhong != null) txtSoPhong.PlaceholderText = "Số phòng";
-            if (cbLoaiPhong != null)
-            {
-                cbLoaiPhong.Items.Clear();
-                cbLoaiPhong.Items.AddRange(new string[] { "Phòng đơn", "Phòng đôi", "Tiêu chuẩn", "VIP", "Deluxe" });
-            }
             if (btnThemKH != null) btnThemKH.Click += btnThemKH_Click;
             this.TabStop = true;
             this.KeyDown += UserControl_KeyDown;
@@ -141,7 +136,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 Location = new Point(14, 57),
                 Font = new Font("Microsoft Tai Le", 10, FontStyle.Italic),
                 AutoSize = true,
-                Text = PhongGiaConfig.GiaPhong[phong.LoaiPhong].ToString("N0") + "đ",
+                Text = phong.Gia.ToString("N0") + "đ",
                 BackColor = Color.Transparent
             };
 
@@ -420,45 +415,46 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (cbLoaiPhong.SelectedIndex == -1)
+            if (cbLoaiPhong == null || cbLoaiPhong.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn loại phòng!!");
                 return;
             }
-
             if (!int.TryParse(txtSoPhong.Text, out int soPhong) || soPhong <= 0)
             {
                 MessageBox.Show("Vui lòng nhập số phòng hợp lệ!!");
                 return;
             }
-
             if (_allRooms.Any(p => p.SoPhong == soPhong))
             {
                 MessageBox.Show("Số phòng đã tồn tại!");
                 return;
             }
 
-            string loaiPhong = cbLoaiPhong.SelectedItem.ToString();
-            decimal giaPhong = PhongGiaConfig.GiaPhong[loaiPhong];
-            string trangThai = "Trống";
+            var tenLoai = cbLoaiPhong.SelectedItem.ToString();
+            int maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
+            if (maLoai <= 0)
+            {
+                MessageBox.Show("Không tìm thấy Mã loại phòng. Hãy kiểm tra bảng LoaiPhong.");
+                return;
+            }
 
-            Phong phongMoi = new Phong(0, soPhong, loaiPhong, giaPhong, trangThai);
+            var phongMoi = new Phong(maPhong: 0, soPhong: soPhong, maLoaiPhong: maLoai, trangThai: "Trống");
             int maPhong = phongService.Them(phongMoi);
+
             if (maPhong > 0)
             {
-                phongMoi.MaPhong = maPhong;
-                _allRooms.Add(phongMoi);
-                var pnl = TaoPhongMoi(phongMoi);
-                flpContain.Controls.Add(pnl);
-                KhoiTaoComboBox();
+                // Sau khi thêm, reload list để lấy LoaiPhong/Gia từ JOIN
+                LoadPhongFromDB();
                 txtSoPhong.Clear();
-                cbLoaiPhong.SelectedIndex = -1;
+                if (cbLoaiPhong.Items.Count > 0) cbLoaiPhong.SelectedIndex = 0;
             }
             else
             {
-                MessageBox.Show("Thêm phòng thất bại! Kiểm tra lại dữ liệu.");
+                MessageBox.Show("Thêm phòng thất bại! Vui lòng kiểm tra lại LoaiPhong và dữ liệu đầu vào.");
             }
         }
+
 
         private void btnThemKH_Click(object sender, EventArgs e)
         {
@@ -559,11 +555,22 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         private void KhoiTaoComboBox()
         {
             var loaiPhongList = phongService.LayDanhSachLoaiPhong().Distinct().ToList();
+
+            // combobox lọc danh sách
             cbLoai.Items.Clear();
             cbLoai.Items.Add("None");
             cbLoai.Items.AddRange(loaiPhongList.ToArray());
-            cbLoai.SelectedIndex = 0;
+            if (cbLoai.Items.Count > 0) cbLoai.SelectedIndex = 0;
+
+            // combobox loại phòng khi thêm mới
+            if (cbLoaiPhong != null)
+            {
+                cbLoaiPhong.Items.Clear();
+                cbLoaiPhong.Items.AddRange(loaiPhongList.ToArray());
+                cbLoaiPhong.SelectedIndex = loaiPhongList.Count > 0 ? 0 : -1;
+            }
         }
+
 
         private void LoadDanhSachPhong()
         {
@@ -694,17 +701,4 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             rdGiam.Checked = false;
         }
     }
-}
-
-// Cấu hình giá
-public static class PhongGiaConfig
-{
-    public static Dictionary<string, decimal> GiaPhong = new Dictionary<string, decimal>
-    {
-        { "Phòng đơn", 100000m },
-        { "Phòng đôi", 200000m },
-        { "Tiêu chuẩn", 300000m },
-        { "VIP", 500000m },
-        { "Deluxe", 800000m }
-    };
 }

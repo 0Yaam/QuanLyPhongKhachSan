@@ -109,7 +109,8 @@ namespace QuanLyPhongKhachSan.Staff
                 var room = it.Room;
                 if (room == null) continue;
 
-                decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out decimal g) ? g : room.Gia;
+                decimal gia = room.Gia > 0 ? room.Gia : _phongService.LayGiaTheoLoai(room.LoaiPhong);
+
                 decimal coc = (it.Booking?.TienCoc > 0 ? it.Booking.TienCoc : 200000m);
                 total += gia * soDem + coc;
             }
@@ -166,7 +167,8 @@ namespace QuanLyPhongKhachSan.Staff
                         continue;
                     }
 
-                    decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out decimal g) ? g : room.Gia;
+                    decimal gia = room.Gia > 0 ? room.Gia : _phongService.LayGiaTheoLoai(room.LoaiPhong);
+
                     decimal tienThue = gia * soDem;
                     decimal coc = (it.Booking?.TienCoc > 0 ? it.Booking.TienCoc : 200000m);
 
@@ -277,7 +279,7 @@ namespace QuanLyPhongKhachSan.Staff
                         continue;
                     }
 
-                    decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out var g) ? g : room.Gia;
+                    decimal gia = room.Gia > 0 ? room.Gia : _phongService.LayGiaTheoLoai(room.LoaiPhong);
                     decimal coc = (bk.TienCoc > 0 ? bk.TienCoc : 200000m);
                     decimal tienPhong = soNgay * gia;
                     decimal tongTien = tienPhong + coc;
@@ -448,7 +450,7 @@ namespace QuanLyPhongKhachSan.Staff
 
                     int soNgay = Math.Max(1, (den - tu).Days);
 
-                    decimal gia = PhongGiaConfig.GiaPhong.TryGetValue(room.LoaiPhong, out var g) ? g : room.Gia;
+                    decimal gia = room.Gia > 0 ? room.Gia : _phongService.LayGiaTheoLoai(room.LoaiPhong);
                     decimal coc = (bk.TienCoc > 0 ? bk.TienCoc : 200000m);
                     tongCoc += coc;
 

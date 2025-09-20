@@ -10,61 +10,56 @@ namespace QuanLyPhongKhachSan.DAL.DAO
     {
         private string connectionString = Config.ConnectionString;
 
+        // DAL/DAO/PhongDAO.cs
         public List<Phong> LayDanhSach()
         {
-            List<Phong> danhSach = new List<Phong>();
-            try
+            var ds = new List<Phong>();
+            using (var conn = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                conn.Open();
+                const string sql = @"
+SELECT p.MaPhong, p.SoPhong, p.MaLoaiPhong, lp.TenLoaiPhong, lp.GiaPhong, p.TrangThai
+FROM   Phong p
+JOIN   LoaiPhong lp ON lp.MaLoaiPhong = p.MaLoaiPhong";
+                using (var cmd = new SqlCommand(sql, conn))
+                using (var r = cmd.ExecuteReader())
                 {
-                    conn.Open();
-                    string sql = "SELECT MaPhong, SoPhong, LoaiPhong, Gia, TrangThai FROM Phong";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
+                    while (r.Read())
                     {
-                        Phong p = new Phong
+                        ds.Add(new Phong
                         {
-                            MaPhong = reader.GetInt32(0),
-                            SoPhong = reader.GetInt32(1),
-                            LoaiPhong = reader.GetString(2),
-                            Gia = reader.GetDecimal(3),
-                            TrangThai = reader.GetString(4)
-                        };
-                        danhSach.Add(p);
+                            MaPhong = r.GetInt32(0),
+                            SoPhong = r.GetInt32(1),
+                            MaLoaiPhong = r.GetInt32(2),
+                            LoaiPhong = r.GetString(3),
+                            Gia = r.GetDecimal(4),
+                            TrangThai = r.GetString(5)
+                        });
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi: " + ex.Message);
-            }
-            return danhSach;
+            return ds;
         }
 
         public int Them(Phong p)
         {
-            try
+            using (var conn = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                conn.Open();
+                const string sql = @"
+INSERT INTO Phong (SoPhong, MaLoaiPhong, TrangThai)
+VALUES (@SoPhong, @MaLoaiPhong, @TrangThai);
+SELECT CAST(SCOPE_IDENTITY() AS int)";
+                using (var cmd = new SqlCommand(sql, conn))
                 {
-                    conn.Open();
-                    string sql = "INSERT INTO Phong (SoPhong, LoaiPhong, Gia, TrangThai) VALUES (@SoPhong, @LoaiPhong, @Gia, @TrangThai); SELECT CAST(SCOPE_IDENTITY() AS int)";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@SoPhong", p.SoPhong);
-                    cmd.Parameters.AddWithValue("@LoaiPhong", p.LoaiPhong);
-                    cmd.Parameters.AddWithValue("@Gia", p.Gia);
-                    cmd.Parameters.AddWithValue("@TrangThai", p.TrangThai);
+                    cmd.Parameters.AddWithValue("@MaLoaiPhong", p.MaLoaiPhong);
+                    cmd.Parameters.AddWithValue("@TrangThai", p.TrangThai ?? "Trống");
                     return (int)cmd.ExecuteScalar();
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khi thêm: " + ex.Message);
-                return -1;
-            }
         }
+
 
         public void Xoa(int maPhong)
         {
@@ -259,14 +254,20 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "UPDATE Phong SET SoPhong = @SoPhong, LoaiPhong = @LoaiPhong, Gia = @Gia, TrangThai = @TrangThai WHERE MaPhong = @MaPhong";
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    // ĐÃ CHUẨN HOÁ: bảng Phong giờ chỉ giữ SoPhong, MaLoaiPhong, TrangThai
+                    const string sql = @"
+UPDATE Phong
+SET SoPhong = @SoPhong,
+    MaLoaiPhong = @MaLoaiPhong,
+    TrangThai = @TrangThai
+WHERE MaPhong = @MaPhong";
+
+                    using (var cmd = new SqlCommand(sql, conn))
                     {
                         cmd.Parameters.AddWithValue("@MaPhong", phong.MaPhong);
                         cmd.Parameters.AddWithValue("@SoPhong", phong.SoPhong);
-                        cmd.Parameters.AddWithValue("@LoaiPhong", phong.LoaiPhong);
-                        cmd.Parameters.AddWithValue("@Gia", phong.Gia);
-                        cmd.Parameters.AddWithValue("@TrangThai", phong.TrangThai);
+                        cmd.Parameters.AddWithValue("@MaLoaiPhong", phong.MaLoaiPhong);
+                        cmd.Parameters.AddWithValue("@TrangThai", (object)phong.TrangThai ?? "Trống");
                         return cmd.ExecuteNonQuery();
                     }
                 }
@@ -277,6 +278,7 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 return 0;
             }
         }
+
         public int CapNhatTrangThai(int maPhong, string trangThai)
         {
             try
@@ -299,5 +301,32 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 return 0;
             }
         }
+        public decimal LayGiaTheoLoai(string loaiPhong)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    const string sql = @"
+                SELECT TOP 1 Gia 
+                FROM Phong 
+                WHERE LoaiPhong = @LoaiPhong
+                ORDER BY MaPhong DESC";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@LoaiPhong", loaiPhong);
+                        var obj = cmd.ExecuteScalar();
+                        return (obj == null || obj == DBNull.Value) ? 0m : Convert.ToDecimal(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LayGiaTheoLoai error: {ex.Message}");
+                return 0m;
+            }
+        }
+
     }
 }

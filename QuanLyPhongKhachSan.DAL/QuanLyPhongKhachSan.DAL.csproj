@@ -47,6 +47,7 @@
     <Compile Include="DAO\HoaDonDAO.cs" />
     <Compile Include="DAO\KhachHangDAO.cs" />
     <Compile Include="DAO\LichSuHoaDonDAO.cs" />
+    <Compile Include="DAO\LoaiPhongDAO.cs" />
     <Compile Include="DAO\PhongDAO.cs" />
     <Compile Include="DAO\TaiKhoanDAO.cs" />
     <Compile Include="DAO\ThongKeDAO.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="OL\HoaDon.cs" />
     <Compile Include="OL\KhachHang.cs" />
     <Compile Include="OL\LichSuHoaDon.cs" />
+    <Compile Include="OL\LoaiPhong.cs" />
     <Compile Include="OL\Phong.cs" />
     <Compile Include="OL\RoomBookingInfo.cs" />
     <Compile Include="OL\TaiKhoan.cs" />

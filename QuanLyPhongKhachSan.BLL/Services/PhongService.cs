@@ -18,12 +18,11 @@ namespace QuanLyPhongKhachSan.BLL.Services
 
         public int Them(Phong p)
         {
-            if (p.SoPhong <= 0 || string.IsNullOrEmpty(p.LoaiPhong) || p.Gia <= 0)
-            {
-                return -1;
-            }
+            if (p.SoPhong <= 0 || p.MaLoaiPhong <= 0) return -1;
             return _dao.Them(p);
         }
+
+
 
         public void Xoa(int maPhong)
         {
@@ -67,11 +66,6 @@ namespace QuanLyPhongKhachSan.BLL.Services
             return _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
         }
 
-        public List<string> LayDanhSachLoaiPhong()
-        {
-            return _dao.LayDanhSachLoaiPhong();
-        }
-
         public List<Phong> LayDanhSachSapXep(string loaiPhong, string trangThai, bool tangDan)
         {
             var phongList = _dao.LayDanhSach();
@@ -100,12 +94,13 @@ namespace QuanLyPhongKhachSan.BLL.Services
 
         public bool CapNhat(Phong phong)
         {
-            if (phong == null || phong.MaPhong <= 0 || string.IsNullOrEmpty(phong.LoaiPhong) || phong.Gia <= 0)
-            {
+            // Trước đây: check phong.LoaiPhong != null && phong.Gia > 0  -> SAI sau chuẩn hoá
+            if (phong == null || phong.MaPhong <= 0 || phong.MaLoaiPhong <= 0)
                 return false;
-            }
+
             return _dao.CapNhat(phong) > 0;
         }
+
 
         public Phong LayPhongTheoMaPhong(int maPhong)
         {
@@ -116,5 +111,16 @@ namespace QuanLyPhongKhachSan.BLL.Services
             var dao = new PhongDAO(); // Giả sử
             return dao.CapNhatTrangThai(maPhong, trangThai) > 0;
         }
+        // BLL/Services/PhongService.cs
+        public List<string> LayDanhSachLoaiPhong() =>
+            new LoaiPhongDAO().LayDanhSach().Select(x => x.TenLoaiPhong).ToList();
+
+        public int LayMaLoaiTheoTen(string ten) =>
+            new LoaiPhongDAO().LayDanhSach().FirstOrDefault(x => x.TenLoaiPhong == ten).MaLoaiPhong;
+
+        public decimal LayGiaTheoLoai(string ten) =>
+            new LoaiPhongDAO().LayDanhSach().FirstOrDefault(x => x.TenLoaiPhong == ten).GiaPhong;
+
+
     }
 }
