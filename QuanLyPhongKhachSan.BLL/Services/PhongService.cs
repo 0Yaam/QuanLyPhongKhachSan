@@ -10,7 +10,6 @@ namespace QuanLyPhongKhachSan.BLL.Services
     {
         private readonly PhongDAO _dao = new PhongDAO();
         private readonly DatPhongDAO _repoDatPhong = new DatPhongDAO();
-        private Dictionary<int, (string TenLoai, decimal Gia)> _loaiCache;
         public List<Phong> LayDanhSach()
         {
             return _dao.LayDanhSach();
