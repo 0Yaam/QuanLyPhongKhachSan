@@ -74,6 +74,7 @@ namespace QuanLyPhongKhachSan
 
 
 
+
         private void LoadDatPhongCu()
         {
             var datPhong = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
@@ -169,6 +170,7 @@ namespace QuanLyPhongKhachSan
 
 
 
+
         public string TenKhachHang => txtTenKH.Text;
         public string CCCD => txtCCCD.Text;
         public string SDT => txtSDT.Text;
@@ -194,52 +196,76 @@ namespace QuanLyPhongKhachSan
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtTenKH.Text))
-                {
-                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Tên khách hàng trống");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(txtSDT.Text))
-                {
-                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Số điện thoại trống");
-                    return;
-                }
-                if (NgayNhan >= NgayTraDuKien)
-                {
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Ngày nhận ({NgayNhan}) phải trước ngày trả dự kiến ({NgayTraDuKien})");
-                    return;
-                }
-                if (SoDem <= 0)
-                {
-                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Số đêm phải lớn hơn 0");
-                    return;
-                }
+                // Lấy booking hiện tại của phòng
+                var existingDat = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
+                bool phongDangTrong = (existingDat == null) || existingDat.NgayTraThucTe.HasValue;
 
-                // Cập nhật loại phòng
-                _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
-                // Cập nhật loại phòng (MaLoaiPhong) từ combobox
+                // Lấy loại đang chọn
                 var tenLoai = cbLoaiPhong.SelectedItem != null ? cbLoaiPhong.SelectedItem.ToString() : _phong.LoaiPhong;
                 var maLoaiPhongMoi = phongService.LayMaLoaiTheoTen(tenLoai);
                 if (maLoaiPhongMoi <= 0)
                 {
-                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Không tìm thấy MaLoaiPhong từ tên loại.");
+                    MessageBox.Show("Không tìm thấy Mã loại phòng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                _phong.MaLoaiPhong = maLoaiPhongMoi; // LƯU FK
-                _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
 
-                // Lưu DB phòng (đổi loại phòng)
+                // Nếu phòng trống và không nhập KH -> chỉ đổi loại phòng rồi thoát
+                bool khRong = string.IsNullOrWhiteSpace(txtTenKH.Text) && string.IsNullOrWhiteSpace(txtSDT.Text);
+                if (phongDangTrong && khRong)
+                {
+                    _phong.MaLoaiPhong = maLoaiPhongMoi;
+                    _phong.LoaiPhong = tenLoai;               // nếu model của bạn có thuộc tính này để hiển thị
+                    _giaPhong = LayGiaTheoLoaiPhong(tenLoai); // cập nhật giá hiển thị
+
+                    if (!phongService.CapNhat(_phong))
+                    {
+                        MessageBox.Show("Cập nhật loại phòng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    return;
+                }
+
+                // ====== Từ đây trở xuống là luồng đặt phòng như cũ ======
+                // Validate thông tin KH
+                if (string.IsNullOrWhiteSpace(txtTenKH.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập Tên khách hàng.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtSDT.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập Số điện thoại.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (NgayNhan >= NgayTraDuKien)
+                {
+                    MessageBox.Show("Ngày nhận phải trước ngày trả dự kiến.", "Sai ngày", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (SoDem <= 0)
+                {
+                    MessageBox.Show("Số đêm phải lớn hơn 0.", "Sai số đêm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Cập nhật loại phòng trước khi lưu đặt phòng
+                _phong.MaLoaiPhong = maLoaiPhongMoi;
+                _phong.LoaiPhong = tenLoai;
+                _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
                 if (!phongService.CapNhat(_phong))
                 {
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật loại phòng thất bại - MaPhong={_phong.MaPhong}, MaLoaiPhong={_phong.MaLoaiPhong}");
+                    MessageBox.Show("Cập nhật loại phòng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-
+                // Upsert khách hàng
                 int maKh = khachHangService.UpsertKhachHang(txtTenKH.Text, txtCCCD.Text, txtSDT.Text);
                 if (maKh <= 0)
                 {
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Lưu khách hàng thất bại - Ten={txtTenKH.Text}, CCCD={txtCCCD.Text}, SDT={txtSDT.Text}");
+                    MessageBox.Show("Lưu khách hàng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -258,31 +284,31 @@ namespace QuanLyPhongKhachSan
                 };
 
                 bool result;
-                var existingDat = phongService.LayDatPhongTheoMaPhong(_phong.MaPhong);
-                if (existingDat != null && !existingDat.NgayTraThucTe.HasValue && (existingDat.TrangThai == "Đã đặt" || existingDat.TrangThai == "Đang sử dụng"))
+                if (!phongDangTrong && existingDat != null && !existingDat.NgayTraThucTe.HasValue
+                    && (existingDat.TrangThai == "Đã đặt" || existingDat.TrangThai == "Đang sử dụng"))
                 {
+                    // Cập nhật đặt phòng
                     datPhong.MaDat = existingDat.MaDat;
                     result = phongService.CapNhatDatPhong(datPhong);
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật DatPhong - MaDat={datPhong.MaDat}, MaKH={maKh}, MaPhong={_phong.MaPhong}, Result={result}");
                 }
                 else
                 {
+                    // Thêm đặt phòng mới
                     int maDat = phongService.ThemDatPhong(datPhong);
                     result = maDat > 0;
                     _maDatHienTai = maDat;
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Thêm DatPhong - MaDat={maDat}, MaKH={maKh}, MaPhong={_phong.MaPhong}, Result={result}");
                 }
 
                 if (!result)
                 {
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Lưu DatPhong thất bại - MaKH={maKh}, MaPhong={_phong.MaPhong}");
+                    MessageBox.Show("Lưu đặt phòng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 // Cập nhật trạng thái phòng
                 if (!phongService.CapNhatTrangThai(_phong.MaPhong, trangThai))
                 {
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật trạng thái phòng thất bại - MaPhong={_phong.MaPhong}, TrangThai={trangThai}");
+                    MessageBox.Show("Cập nhật trạng thái phòng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -292,9 +318,10 @@ namespace QuanLyPhongKhachSan
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Lỗi btnHoanThanh_Click: {ex.Message}");
+                MessageBox.Show("Lỗi: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {

@@ -94,6 +94,7 @@ namespace QuanLyPhongKhachSan.BLL.Services
 
         public bool CapNhat(Phong phong)
         {
+
             // Trước đây: check phong.LoaiPhong != null && phong.Gia > 0  -> SAI sau chuẩn hoá
             if (phong == null || phong.MaPhong <= 0 || phong.MaLoaiPhong <= 0)
                 return false;

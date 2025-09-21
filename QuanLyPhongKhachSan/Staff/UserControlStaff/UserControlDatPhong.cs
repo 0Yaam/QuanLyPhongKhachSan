@@ -750,71 +750,117 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
         private void btnThemKH_Click(object sender, EventArgs e)
         {
-           var selected = GetSelectedRooms();
+            var selected = GetSelectedRooms();
             if (selected.Count == 0)
             {
                 MessageBox.Show("Chọn ít nhất 1 phòng.");
                 return;
             }
 
-            var list = new List<RoomBookingInfo>();
+            // Lấy booking hiện tại của từng phòng
+            var items = new List<RoomBookingInfo>();
             foreach (var room in selected)
             {
                 var bk = phongService.LayDatPhongTheoMaPhong(room.MaPhong);
                 KhachHang kh = (bk != null && !bk.NgayTraThucTe.HasValue)
                     ? khachHangService.LayKhachHangTheoMaKH(bk.MaKH)
                     : null;
-                list.Add(new RoomBookingInfo { Room = room, Booking = bk, Customer = kh });
+                items.Add(new RoomBookingInfo { Room = room, Booking = bk, Customer = kh });
             }
 
-            var bookedItems = list.Where(x => x.Booking != null && !x.Booking.NgayTraThucTe.HasValue).ToList();
-            var maKhSet = bookedItems.Select(x => x.Booking.MaKH).Distinct().ToList();
+            // Chia nhóm: trống vs đang có đặt (chưa trả)
+            var emptyRooms = items.Where(x => x.Booking == null || x.Booking.NgayTraThucTe.HasValue).ToList();
+            var bookedRooms = items.Where(x => x.Booking != null && !x.Booking.NgayTraThucTe.HasValue).ToList();
 
-            if (maKhSet.Count > 1)
+            // Không cho chọn lẫn lộn trống + có khách
+            if (emptyRooms.Count > 0 && bookedRooms.Count > 0)
             {
-                MessageBox.Show("Chỉ chọn các phòng của CÙNG 1 khách để sửa.");
+                MessageBox.Show("Vui lòng chỉ chọn các phòng TRỐNG hoặc các phòng của CÙNG 1 khách hàng.");
                 return;
             }
 
+            // Nếu là nhóm đang có khách: phải cùng 1 KH
+            if (bookedRooms.Count > 0)
+            {
+                var khSet = bookedRooms.Select(x => x.Booking.MaKH).Distinct().ToList();
+                if (khSet.Count > 1)
+                {
+                    MessageBox.Show("Chỉ chọn các phòng của CÙNG 1 khách để sửa.");
+                    return;
+                }
+            }
+
+            // Nếu chỉ chọn 1 phòng -> mở nhanh frmThemvaSuaKH
+            if (items.Count == 1)
+            {
+                var one = items[0];
+                try
+                {
+                    using (var frm = new frmThemvaSuaKH(one.Room))
+                    {
+                        var dr = frm.ShowDialog(this);
+                        if (dr == DialogResult.OK)
+                        {
+                            RefreshData();
+                            _selectedRoomIds.Clear();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi mở form: " + ex.Message);
+                }
+                return;
+            }
+
+            // Nhiều phòng hợp lệ -> mở frmThemKH (gộp)
             string preTen = "", preCCCD = "", preSDT = "";
             int preMaKH = 0;
             DateTime? preNhan = null, preTra = null;
 
-            if (bookedItems.Any())
+            if (bookedRooms.Count > 0)
             {
-                var validBooked = bookedItems.FirstOrDefault(x => x.Customer != null);
-                if (validBooked == null)
+                // Prefill theo KH hiện có
+                var anyHasCustomer = bookedRooms.FirstOrDefault(x => x.Customer != null);
+                if (anyHasCustomer == null)
                 {
                     MessageBox.Show("Có booking nhưng không lấy được thông tin khách hàng.");
                     return;
                 }
 
-                var kh = validBooked.Customer;
+                var kh = anyHasCustomer.Customer;
                 preTen = kh.HoTen ?? "";
                 preCCCD = kh.CCCD ?? "";
                 preSDT = kh.SDT ?? "";
                 preMaKH = kh.MaKH;
 
-                preNhan = bookedItems.Min(x => x.Booking.NgayNhan).Date;
-                preTra = bookedItems.Max(x => x.Booking.NgayTraDuKien).Date;
+                preNhan = bookedRooms.Min(x => x.Booking.NgayNhan).Date;
+                preTra = bookedRooms.Max(x => x.Booking.NgayTraDuKien).Date;
                 if (preTra <= preNhan) preTra = preNhan.Value.AddDays(1);
+            }
+            else
+            {
+                // Nhóm phòng trống: không prefill KH, ngày mặc định hôm nay -> ngày mai
+                preTen = ""; preCCCD = ""; preSDT = ""; preMaKH = 0;
+                preNhan = DateTime.Today;
+                preTra = DateTime.Today.AddDays(1);
             }
 
             try
             {
-                using (var frm = new frmThemKH(list, preTen, preCCCD, preSDT, preMaKH, preNhan, preTra))
+                using (var frm = new frmThemKH(items, preTen, preCCCD, preSDT, preMaKH, preNhan, preTra))
                 {
                     var dr = frm.ShowDialog(this);
                     if (dr == DialogResult.OK)
                     {
-                        RefreshData(); // Gọi RefreshData để làm mới giao diện
+                        RefreshData();
                         _selectedRoomIds.Clear();
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi mở form: {ex.Message}");
+                MessageBox.Show("Lỗi khi mở form: " + ex.Message);
             }
         }
     }
