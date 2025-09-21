@@ -23,16 +23,29 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            frmThemNhanVien frm = new frmThemNhanVien();
-            frm.ShowDialog();
+            using (var frm = new frmThemNhanVien())
+            {
+                var dr = frm.ShowDialog();      // mở modal
+                if (dr == DialogResult.OK)      // nếu thêm thành công
+                {
+                    LoadGrid();                 // -> reload
+                }
+            }
+        }
+        private void UserControlDanhSachTaiKhoan_Load(object sender, EventArgs e)
+        {
+            LoadGrid();
         }
 
-        private void UserControlDanhSachTaiKhoan_Load(object sender, EventArgs e)
+        private void LoadGrid()
         {
             try
             {
-                dgvDanhSachTaiKhoan.AutoGenerateColumns = false; // bạn đã set DataPropertyName trong Designer
-                dgvDanhSachTaiKhoan.DataSource = nhansu.LayDanhSachNhanVien();
+                dgvDanhSachTaiKhoan.AutoGenerateColumns = false;
+                var data = nhansu.LayDanhSachNhanVien();
+                // ép refresh mạnh tay tránh cache binding
+                dgvDanhSachTaiKhoan.DataSource = null;
+                dgvDanhSachTaiKhoan.DataSource = data;
             }
             catch (Exception ex)
             {

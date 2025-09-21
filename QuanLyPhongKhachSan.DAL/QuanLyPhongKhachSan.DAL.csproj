@@ -60,6 +60,7 @@
     <Compile Include="OL\LichSuHoaDon.cs" />
     <Compile Include="OL\LoaiPhong.cs" />
     <Compile Include="OL\NhanVien.cs" />
+    <Compile Include="OL\NhanVienView.cs" />
     <Compile Include="OL\Phong.cs" />
     <Compile Include="OL\RoomBookingInfo.cs" />
     <Compile Include="OL\TaiKhoan.cs" />
