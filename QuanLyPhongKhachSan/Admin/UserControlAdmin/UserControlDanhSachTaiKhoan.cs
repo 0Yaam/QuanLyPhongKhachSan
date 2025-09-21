@@ -19,7 +19,7 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         private readonly NhanSuService nhansu = new NhanSuService();
         private readonly TaiKhoanDAO dao = new TaiKhoanDAO();
         private bool _suppressRowSave = false;
-        private bool _userSorted = false; // Biến theo dõi trạng thái sắp xếp
+        private bool _userSorted = false;
 
         public UserControlDanhSachTaiKhoan()
         {
@@ -35,10 +35,10 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         {
             using (var frm = new frmThemNhanVien())
             {
-                var dr = frm.ShowDialog();      // mở modal
-                if (dr == DialogResult.OK)      // nếu thêm thành công
+                var dr = frm.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
-                    RefreshData();              // reload với tìm kiếm/sắp xếp
+                    RefreshData();
                 }
             }
         }
@@ -49,44 +49,17 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             {
                 dgvDanhSachTaiKhoan.AutoGenerateColumns = false;
 
-                // Gán DataPropertyName cho các cột
-                var colTen = dgvDanhSachTaiKhoan.Columns["Ten"];
-                var colCCCD = dgvDanhSachTaiKhoan.Columns["CCCD"];
-                var colSDT = dgvDanhSachTaiKhoan.Columns["SDT"];
-                var colNgay = dgvDanhSachTaiKhoan.Columns["NgayThamGia"];
-                var colTenTK = dgvDanhSachTaiKhoan.Columns["TenTaiKhoan"];
-                var colMatKhau = dgvDanhSachTaiKhoan.Columns["MatKhau"];
-
-                if (colTen != null) colTen.DataPropertyName = "Ten";
-                if (colCCCD != null) colCCCD.DataPropertyName = "CCCD";
-                if (colSDT != null) colSDT.DataPropertyName = "SDT";
-                if (colNgay != null)
-                {
-                    colNgay.DataPropertyName = "NgayThamGia";
-                    colNgay.DefaultCellStyle.Format = "dd/MM/yyyy";
-                    colNgay.DefaultCellStyle.NullValue = "";
-                }
-                if (colTenTK != null) colTenTK.DataPropertyName = "TenTaiKhoan";
-                if (colMatKhau != null) colMatKhau.DataPropertyName = "MatKhau";
-
-                // Vô hiệu hóa sắp xếp mặc định của DataGridView
                 foreach (DataGridViewColumn c in dgvDanhSachTaiKhoan.Columns)
                     c.SortMode = DataGridViewColumnSortMode.NotSortable;
 
                 // Gán sự kiện
-                rdTen.CheckedChanged += rdTen_CheckedChanged;
-                rdCCCD.CheckedChanged += rdCCCD_CheckedChanged;
-                rdSDT.CheckedChanged += rdSDT_CheckedChanged;
-                rdTang.CheckedChanged += rdTang_CheckedChanged;
-                rdGiam.CheckedChanged += rdGiam_CheckedChanged;
-                rdSTen.CheckedChanged += rdSTen_CheckedChanged;
-                rdSCCCD.CheckedChanged += rdSCCCD_CheckedChanged;
-                rdSSDT.CheckedChanged += rdSSDT_CheckedChanged;
-                txtTimKiem.TextChanged += txtTimKiem_TextChanged;
+              
+                if (chkLocTheoNgay != null) chkLocTheoNgay.CheckedChanged += chkLocTheoNgay_CheckedChanged;
 
                 // Thiết lập mặc định
                 dtpTuNgay.Value = DateTime.Today.AddDays(-7);
                 dtpDenNgay.Value = DateTime.Today;
+                if (chkLocTheoNgay != null) chkLocTheoNgay.Checked = false;
 
                 RefreshData();
             }
@@ -102,14 +75,15 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             {
                 var list = nhansu.LayDanhSachNhanVien();
 
-                // Lọc theo ngày tham gia (nếu có)
+                // Lọc theo ngày vào làm (NgayThamGia)
                 if (chkLocTheoNgay != null && chkLocTheoNgay.Checked)
                 {
                     DateTime tuNgay = dtpTuNgay.Value.Date;
                     DateTime denNgay = dtpDenNgay.Value.Date.AddDays(1).AddTicks(-1);
-                    list = list
-                        .Where(x => x.NgayThamGia >= tuNgay && x.NgayThamGia <= denNgay)
-                        .ToList();
+                    list = list.Where(x => x.NgayThamGia != DateTime.MinValue &&
+                                           x.NgayThamGia >= tuNgay &&
+                                           x.NgayThamGia <= denNgay)
+                               .ToList();
                 }
 
                 // Tìm kiếm
@@ -144,11 +118,9 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                 }
                 else
                 {
-                    // Mặc định: sắp xếp theo ngày tham gia giảm dần
                     list = list.OrderByDescending(x => x.NgayThamGia).ToList();
                 }
 
-                // Tạo view để hiển thị
                 var view = list.Select(x => new
                 {
                     x.MaNV,
@@ -250,6 +222,15 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
         {
             if (chkLocTheoNgay != null && chkLocTheoNgay.Checked) RefreshData();
+        }
+
+        private void chkLocTheoNgay_CheckedChanged(object sender, EventArgs e)
+        {
+            try { RefreshData(); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi lọc theo ngày: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private List<NhanVienView> GetSelectedItems()
