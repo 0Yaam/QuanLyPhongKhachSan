@@ -8,20 +8,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyPhongKhachSan.Admin;
+using QuanLyPhongKhachSan.BLL.Services;
 
 namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 {
     public partial class UserControlDanhSachTaiKhoan : UserControl
     {
+        private readonly NhanSuService nhansu = new NhanSuService();
         public UserControlDanhSachTaiKhoan()
         {
             InitializeComponent();
+            this.Load += UserControlDanhSachTaiKhoan_Load;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
             frmThemNhanVien frm = new frmThemNhanVien();
             frm.ShowDialog();
+        }
+
+        private void UserControlDanhSachTaiKhoan_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                dgvDanhSachTaiKhoan.AutoGenerateColumns = false; // bạn đã set DataPropertyName trong Designer
+                dgvDanhSachTaiKhoan.DataSource = nhansu.LayDanhSachNhanVien();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load danh sách nhân viên: " + ex.Message);
+            }
         }
 
         private void dtpDenNgay_ValueChanged(object sender, EventArgs e)

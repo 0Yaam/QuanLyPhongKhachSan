@@ -62,7 +62,6 @@
             this.txtTemHienThi.SelectedText = "";
             this.txtTemHienThi.Size = new System.Drawing.Size(171, 19);
             this.txtTemHienThi.TabIndex = 15;
-            this.txtTemHienThi.TextChanged += new System.EventHandler(this.txtTemHienThi_TextChanged);
             // 
             // guna2HtmlLabel9
             // 
@@ -73,7 +72,6 @@
             this.guna2HtmlLabel9.Size = new System.Drawing.Size(68, 19);
             this.guna2HtmlLabel9.TabIndex = 14;
             this.guna2HtmlLabel9.Text = "Tên hiển thị";
-            this.guna2HtmlLabel9.Click += new System.EventHandler(this.guna2HtmlLabel9_Click);
             // 
             // txtSDT
             // 
@@ -93,7 +91,6 @@
             this.txtSDT.SelectedText = "";
             this.txtSDT.Size = new System.Drawing.Size(171, 19);
             this.txtSDT.TabIndex = 17;
-            this.txtSDT.TextChanged += new System.EventHandler(this.txtSDT_TextChanged);
             // 
             // guna2HtmlLabel1
             // 
@@ -104,7 +101,6 @@
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(75, 19);
             this.guna2HtmlLabel1.TabIndex = 16;
             this.guna2HtmlLabel1.Text = "Số điện thoại";
-            this.guna2HtmlLabel1.Click += new System.EventHandler(this.guna2HtmlLabel1_Click);
             // 
             // txtCCCD
             // 
@@ -124,7 +120,6 @@
             this.txtCCCD.SelectedText = "";
             this.txtCCCD.Size = new System.Drawing.Size(171, 19);
             this.txtCCCD.TabIndex = 19;
-            this.txtCCCD.TextChanged += new System.EventHandler(this.txtCCCD_TextChanged);
             // 
             // guna2HtmlLabel2
             // 
@@ -135,7 +130,6 @@
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(39, 19);
             this.guna2HtmlLabel2.TabIndex = 18;
             this.guna2HtmlLabel2.Text = "CCCD";
-            this.guna2HtmlLabel2.Click += new System.EventHandler(this.guna2HtmlLabel2_Click);
             // 
             // dtpNgayThamGia
             // 
@@ -150,7 +144,6 @@
             this.dtpNgayThamGia.Size = new System.Drawing.Size(212, 38);
             this.dtpNgayThamGia.TabIndex = 20;
             this.dtpNgayThamGia.Value = new System.DateTime(2025, 9, 12, 15, 59, 5, 828);
-            this.dtpNgayThamGia.ValueChanged += new System.EventHandler(this.guna2DateTimePicker1_ValueChanged);
             // 
             // guna2HtmlLabel3
             // 
@@ -161,7 +154,6 @@
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(50, 19);
             this.guna2HtmlLabel3.TabIndex = 21;
             this.guna2HtmlLabel3.Text = "Chức vụ";
-            this.guna2HtmlLabel3.Click += new System.EventHandler(this.guna2HtmlLabel3_Click);
             // 
             // cbbChucVu
             // 
@@ -171,7 +163,6 @@
             this.cbbChucVu.Size = new System.Drawing.Size(121, 21);
             this.cbbChucVu.TabIndex = 22;
             this.cbbChucVu.Text = "Chức vụ";
-            this.cbbChucVu.SelectedIndexChanged += new System.EventHandler(this.cbbChucVu_SelectedIndexChanged);
             // 
             // txtPass
             // 
@@ -191,7 +182,6 @@
             this.txtPass.SelectedText = "";
             this.txtPass.Size = new System.Drawing.Size(133, 19);
             this.txtPass.TabIndex = 26;
-            this.txtPass.TextChanged += new System.EventHandler(this.txtPass_TextChanged);
             // 
             // guna2HtmlLabel4
             // 
@@ -202,7 +192,6 @@
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(55, 19);
             this.guna2HtmlLabel4.TabIndex = 25;
             this.guna2HtmlLabel4.Text = "Mật khẩu";
-            this.guna2HtmlLabel4.Click += new System.EventHandler(this.guna2HtmlLabel4_Click);
             // 
             // txtUserName
             // 
@@ -222,7 +211,6 @@
             this.txtUserName.SelectedText = "";
             this.txtUserName.Size = new System.Drawing.Size(133, 19);
             this.txtUserName.TabIndex = 24;
-            this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
             // 
             // guna2HtmlLabel5
             // 
@@ -233,7 +221,6 @@
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(78, 19);
             this.guna2HtmlLabel5.TabIndex = 23;
             this.guna2HtmlLabel5.Text = "Tên tài khoản";
-            this.guna2HtmlLabel5.Click += new System.EventHandler(this.guna2HtmlLabel5_Click);
             // 
             // btnHoanThanh
             // 
@@ -272,7 +259,6 @@
             this.Controls.Add(this.guna2HtmlLabel9);
             this.Name = "frmThemNhanVien";
             this.Text = "Form thêm nhân viên";
-            this.Load += new System.EventHandler(this.frmThemNhanVien_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

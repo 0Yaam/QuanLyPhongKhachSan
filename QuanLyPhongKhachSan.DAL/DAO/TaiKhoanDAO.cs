@@ -96,29 +96,6 @@ namespace QuanLyPhongKhachSan.DAL.DAO
             }
         }
 
-        public bool ThemTaiKhoan(TaiKhoan taiKhoan)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string sql = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau, Quyen) VALUES (@TenDangNhap, @MatKhau, @Quyen)";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@TenDangNhap", taiKhoan.TenDangNhap);
-                    cmd.Parameters.AddWithValue("@MatKhau", taiKhoan.MatKhau);
-                    cmd.Parameters.AddWithValue("@Quyen", taiKhoan.Quyen); // Sử dụng int
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khi thêm tài khoản: " + ex.Message);
-                return false;
-            }
-        }
-
         public bool XoaTaiKhoan(int maTK)
         {
             try
@@ -153,27 +130,85 @@ namespace QuanLyPhongKhachSan.DAL.DAO
         }
 
         /// <summary>Thêm tài khoản. Trả về true nếu OK.</summary>
-        public bool Them(string tenDangNhap, string matKhau, int quyen, int? maNV)
+        public int Them(TaiKhoan tk)
         {
             const string sql = @"
 INSERT INTO TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNV)
-VALUES (@u, @p, @q, @manv);";
+OUTPUT INSERTED.MaTK
+VALUES (@TenDangNhap, @MatKhau, @Quyen, @MaNV);";
 
             using (var conn = new SqlConnection(connectionString))
             using (var cmd = new SqlCommand(sql, conn))
             {
-                cmd.Parameters.Add("@u", SqlDbType.Char, 50).Value = tenDangNhap ?? string.Empty;
-                cmd.Parameters.Add("@p", SqlDbType.Char, 50).Value = matKhau ?? string.Empty;
-                cmd.Parameters.Add("@q", SqlDbType.Int).Value = quyen;
-                if (maNV.HasValue)
-                    cmd.Parameters.Add("@manv", SqlDbType.Int).Value = maNV.Value;
-                else
-                    cmd.Parameters.Add("@manv", SqlDbType.Int).Value = DBNull.Value;
+                cmd.Parameters.AddWithValue("@TenDangNhap", tk.TenDangNhap);
+                cmd.Parameters.AddWithValue("@MatKhau", tk.MatKhau);
+                cmd.Parameters.AddWithValue("@Quyen", tk.Quyen);
+                cmd.Parameters.AddWithValue("@MaNV", tk.MaNV);
 
                 conn.Open();
-                return cmd.ExecuteNonQuery() > 0;
+                var obj = cmd.ExecuteScalar();
+                return (obj != null && obj != DBNull.Value) ? Convert.ToInt32(obj) : 0;
             }
         }
+
+
+        public int ThemTaiKhoan(TaiKhoan tk)
+        {
+            const string sql = @"
+INSERT INTO TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNV)
+VALUES (@User, @Pass, @Quyen, @MaNV);
+SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+            using (var conn = new SqlConnection(Config.ConnectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@User", tk.TenDangNhap.Trim());
+                cmd.Parameters.AddWithValue("@Pass", tk.MatKhau); // TODO: hash
+                cmd.Parameters.AddWithValue("@Quyen", tk.Quyen);
+                // Nếu MaNV optional, cho phép null:
+                if (tk.MaNV > 0) cmd.Parameters.AddWithValue("@MaNV", tk.MaNV);
+                else cmd.Parameters.AddWithValue("@MaNV", DBNull.Value);
+
+                conn.Open();
+                var id = cmd.ExecuteScalar();
+                return id != null ? (int)id : 0;
+            }
+        }
+
+        public int DemTheoTenDangNhap(string ten, SqlConnection conn, SqlTransaction tran)
+        {
+            using (var cmd = new SqlCommand(
+                "SELECT COUNT(1) FROM dbo.TaiKhoan WHERE TenDangNhap = @u", conn, tran))
+            {
+                cmd.Parameters.AddWithValue("@u", ten);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        public void Them(TaiKhoan tk, SqlConnection conn, SqlTransaction tran)
+        {
+            using (var cmd = new SqlCommand(@"
+INSERT INTO dbo.TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNV)
+VALUES (@U, @P, @Q, @MaNV);", conn, tran))
+            {
+                cmd.Parameters.AddWithValue("@U", tk.TenDangNhap);
+                cmd.Parameters.AddWithValue("@P", tk.MatKhau);
+                cmd.Parameters.AddWithValue("@Q", tk.Quyen);
+                cmd.Parameters.AddWithValue("@MaNV", (object)tk.MaNV ?? DBNull.Value);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

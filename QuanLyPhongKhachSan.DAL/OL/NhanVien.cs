@@ -7,5 +7,6 @@
         public string CCCD { get; set; }
         public string SDT { get; set; }
         public string ChucVu { get; set; }
+        public System.DateTime NgayThamGia { get; set; }
     }
 }
