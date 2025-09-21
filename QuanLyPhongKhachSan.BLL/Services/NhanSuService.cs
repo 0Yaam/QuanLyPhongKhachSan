@@ -1,5 +1,4 @@
-﻿// BLL/Services/NhanSuService.cs
-using QuanLyPhongKhachSan.DAL;
+﻿using QuanLyPhongKhachSan.DAL;
 using QuanLyPhongKhachSan.DAL.DAO;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
@@ -15,10 +14,6 @@ namespace QuanLyPhongKhachSan.BLL.Services
         private readonly TaiKhoanDAO _tkDAO = new TaiKhoanDAO();
         private readonly string _cs = Config.ConnectionString;
 
-        /// <summary>
-        /// Thêm NHÂN VIÊN rồi thêm TÀI KHOẢN trong 1 transaction.
-        /// Trả về MaNV vừa tạo.
-        /// </summary>
         public int ThemNhanVienVaTaiKhoan(NhanVien nv, TaiKhoan tk, bool ganTaiKhoanVaoNhanVien = true)
         {
             using (var conn = new SqlConnection(_cs))
@@ -28,14 +23,11 @@ namespace QuanLyPhongKhachSan.BLL.Services
                 {
                     try
                     {
-                        // 1) thêm nhân viên
                         int maNV = _nvDAO.Them(nv, conn, tran);
                         if (maNV <= 0) throw new Exception("Không lấy được MaNV.");
 
-                        // 2) nếu cần gắn tài khoản cho NV
                         if (ganTaiKhoanVaoNhanVien)
                         {
-                            // check trùng username
                             if (_tkDAO.DemTheoTenDangNhap(tk.TenDangNhap, conn, tran) > 0)
                                 throw new Exception("Tên đăng nhập đã tồn tại.");
 
@@ -54,6 +46,7 @@ namespace QuanLyPhongKhachSan.BLL.Services
                 }
             }
         }
+
         public List<NhanVienView> LayDanhSachNhanVien()
         {
             return _nvDAO.LayDanhSachNhanVien();
@@ -61,7 +54,7 @@ namespace QuanLyPhongKhachSan.BLL.Services
 
         public bool CapNhatNhanVienVaTaiKhoan(NhanVienView v)
         {
-            if (v == null || v.MaNV <= 0) return false;
+            if (v == null || !v.MaTK.HasValue || v.MaTK.Value <= 0) return false;
 
             using (var conn = new SqlConnection(_cs))
             {
@@ -70,40 +63,42 @@ namespace QuanLyPhongKhachSan.BLL.Services
                 {
                     try
                     {
-                        // Update NhanVien
-                        var nv = new NhanVien
+                        // Chỉ cập nhật NhanVien nếu MaNV > 0
+                        if (v.MaNV > 0)
                         {
-                            MaNV = v.MaNV,
-                            TenNV = v.Ten,
-                            SDT = v.SDT,
-                            CCCD = v.CCCD,
-                            NgayThamGia = (v.NgayThamGia == DateTime.MinValue ? DateTime.Today : v.NgayThamGia)
-                        };
+                            var nv = new NhanVien
+                            {
+                                MaNV = v.MaNV,
+                                TenNV = v.Ten,
+                                SDT = v.SDT,
+                                CCCD = v.CCCD,
+                                ChucVu = v.Quyen == 1 ? "Admin" : (v.ChucVu ?? "Nhân viên"),
+                                NgayThamGia = (v.NgayThamGia == DateTime.MinValue ? DateTime.Today : v.NgayThamGia)
+                            };
 
-                        // dùng cùng connection/transaction cho chắc (overload theo conn/tran nếu bạn có)
-                        var cmdNV = new SqlCommand(@"
+                            var cmdNV = new SqlCommand(@"
 UPDATE dbo.NhanVien
-SET TenNV=@Ten, SDT=@SDT, CCCD=@CCCD, NgayThamGia=@Ngay
+SET TenNV=@Ten, SDT=@SDT, CCCD=@CCCD, ChucVu=@ChucVu, NgayThamGia=@Ngay
 WHERE MaNV=@MaNV;", conn, tran);
-                        cmdNV.Parameters.AddWithValue("@Ten", (object)nv.TenNV ?? DBNull.Value);
-                        cmdNV.Parameters.AddWithValue("@SDT", (object)nv.SDT ?? DBNull.Value);
-                        cmdNV.Parameters.AddWithValue("@CCCD", (object)nv.CCCD ?? DBNull.Value);
-                        cmdNV.Parameters.AddWithValue("@Ngay", nv.NgayThamGia);
-                        cmdNV.Parameters.AddWithValue("@MaNV", nv.MaNV);
-                        cmdNV.ExecuteNonQuery();
-
-                        // Update TaiKhoan nếu có
-                        if (v.MaTK.HasValue && v.MaTK.Value > 0)
-                        {
-                            var cmdTK = new SqlCommand(@"
-UPDATE dbo.TaiKhoan
-SET TenDangNhap = @U, MatKhau = @P
-WHERE MaTK = @MaTK;", conn, tran);
-                            cmdTK.Parameters.AddWithValue("@U", (object)(v.TenTaiKhoan ?? string.Empty));
-                            cmdTK.Parameters.AddWithValue("@P", (object)(v.MatKhau ?? string.Empty));
-                            cmdTK.Parameters.AddWithValue("@MaTK", v.MaTK.Value);
-                            cmdTK.ExecuteNonQuery();
+                            cmdNV.Parameters.AddWithValue("@Ten", (object)nv.TenNV ?? DBNull.Value);
+                            cmdNV.Parameters.AddWithValue("@SDT", (object)nv.SDT ?? DBNull.Value);
+                            cmdNV.Parameters.AddWithValue("@CCCD", (object)nv.CCCD ?? DBNull.Value);
+                            cmdNV.Parameters.AddWithValue("@ChucVu", (object)nv.ChucVu ?? DBNull.Value);
+                            cmdNV.Parameters.AddWithValue("@Ngay", nv.NgayThamGia);
+                            cmdNV.Parameters.AddWithValue("@MaNV", nv.MaNV);
+                            cmdNV.ExecuteNonQuery();
                         }
+
+                        // Cập nhật TaiKhoan, bao gồm Quyen
+                        var cmdTK = new SqlCommand(@"
+UPDATE dbo.TaiKhoan
+SET TenDangNhap = @U, MatKhau = @P, Quyen = @Quyen
+WHERE MaTK = @MaTK;", conn, tran);
+                        cmdTK.Parameters.AddWithValue("@U", (object)(v.TenTaiKhoan ?? string.Empty));
+                        cmdTK.Parameters.AddWithValue("@P", (object)(v.MatKhau ?? string.Empty));
+                        cmdTK.Parameters.AddWithValue("@Quyen", v.Quyen ?? 2); // Mặc định là Nhân viên nếu null
+                        cmdTK.Parameters.AddWithValue("@MaTK", v.MaTK.Value);
+                        cmdTK.ExecuteNonQuery();
 
                         tran.Commit();
                         return true;
@@ -117,7 +112,6 @@ WHERE MaTK = @MaTK;", conn, tran);
             }
         }
 
-        // BLL/Services/NhanSuService.cs  (thêm vào class NhanSuService)
         public int XoaNhanVien(int maNV)
         {
             return _nvDAO.Xoa(maNV);
@@ -136,9 +130,5 @@ WHERE MaTK = @MaTK;", conn, tran);
             foreach (var id in maTKs) total += _tkDAO.ResetMatKhau(id, newPass);
             return total;
         }
-
-
-
-
     }
 }

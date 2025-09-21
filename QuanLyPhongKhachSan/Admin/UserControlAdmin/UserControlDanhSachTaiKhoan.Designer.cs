@@ -39,6 +39,7 @@
             this.rdSTen = new Guna.UI2.WinForms.Guna2RadioButton();
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdGiam = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdTang = new Guna.UI2.WinForms.Guna2RadioButton();
@@ -46,13 +47,6 @@
             this.rdCCCD = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdTen = new Guna.UI2.WinForms.Guna2RadioButton();
             this.dgvDanhSachTaiKhoan = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnThem = new Guna.UI2.WinForms.Guna2Button();
-            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaTK = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +56,12 @@
             this.TenTaiKhoan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatKhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NgayThamGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnThem = new Guna.UI2.WinForms.Guna2Button();
+            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -186,6 +186,21 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sắp xếp theo";
+            // 
+            // btnReset
+            // 
+            this.btnReset.BorderRadius = 5;
+            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(106, 91);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(68, 28);
+            this.btnReset.TabIndex = 16;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // groupBox2
             // 
@@ -353,6 +368,62 @@
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // MaNV
+            // 
+            this.MaNV.DataPropertyName = "MaNV";
+            this.MaNV.HeaderText = "MaNV";
+            this.MaNV.Name = "MaNV";
+            this.MaNV.Visible = false;
+            // 
+            // MaTK
+            // 
+            this.MaTK.DataPropertyName = "MaTK";
+            this.MaTK.HeaderText = "MaTK";
+            this.MaTK.Name = "MaTK";
+            this.MaTK.Visible = false;
+            // 
+            // ChucVu
+            // 
+            this.ChucVu.DataPropertyName = "ChucVu";
+            this.ChucVu.HeaderText = "ChucVu";
+            this.ChucVu.Name = "ChucVu";
+            // 
+            // Ten
+            // 
+            this.Ten.DataPropertyName = "Ten";
+            this.Ten.HeaderText = "Họ và tên";
+            this.Ten.Name = "Ten";
+            // 
+            // SDT
+            // 
+            this.SDT.DataPropertyName = "SDT";
+            this.SDT.HeaderText = "Số điện thoại";
+            this.SDT.Name = "SDT";
+            // 
+            // CCCD
+            // 
+            this.CCCD.DataPropertyName = "CCCD";
+            this.CCCD.HeaderText = "CCCD";
+            this.CCCD.Name = "CCCD";
+            // 
+            // TenTaiKhoan
+            // 
+            this.TenTaiKhoan.DataPropertyName = "TenTaiKhoan";
+            this.TenTaiKhoan.HeaderText = "Tên tài khoản";
+            this.TenTaiKhoan.Name = "TenTaiKhoan";
+            // 
+            // MatKhau
+            // 
+            this.MatKhau.DataPropertyName = "MatKhau";
+            this.MatKhau.HeaderText = "Mật khẩu";
+            this.MatKhau.Name = "MatKhau";
+            // 
+            // NgayThamGia
+            // 
+            this.NgayThamGia.DataPropertyName = "NgayThamGia";
+            this.NgayThamGia.HeaderText = "Ngày tham gia";
+            this.NgayThamGia.Name = "NgayThamGia";
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -421,77 +492,6 @@
             this.chkLocTheoNgay.UncheckedState.BorderRadius = 0;
             this.chkLocTheoNgay.UncheckedState.BorderThickness = 0;
             this.chkLocTheoNgay.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // btnReset
-            // 
-            this.btnReset.BorderRadius = 5;
-            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.Location = new System.Drawing.Point(106, 91);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(68, 28);
-            this.btnReset.TabIndex = 16;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
-            // MaNV
-            // 
-            this.MaNV.DataPropertyName = "MaNV";
-            this.MaNV.HeaderText = "MaNV";
-            this.MaNV.Name = "MaNV";
-            this.MaNV.Visible = false;
-            // 
-            // MaTK
-            // 
-            this.MaTK.DataPropertyName = "MaTK";
-            this.MaTK.HeaderText = "MaTK";
-            this.MaTK.Name = "MaTK";
-            this.MaTK.Visible = false;
-            // 
-            // ChucVu
-            // 
-            this.ChucVu.DataPropertyName = "ChucVu";
-            this.ChucVu.HeaderText = "ChucVu";
-            this.ChucVu.Name = "ChucVu";
-            // 
-            // Ten
-            // 
-            this.Ten.DataPropertyName = "Ten";
-            this.Ten.HeaderText = "Họ và tên";
-            this.Ten.Name = "Ten";
-            // 
-            // SDT
-            // 
-            this.SDT.DataPropertyName = "SDT";
-            this.SDT.HeaderText = "Số điện thoại";
-            this.SDT.Name = "SDT";
-            // 
-            // CCCD
-            // 
-            this.CCCD.DataPropertyName = "CCCD";
-            this.CCCD.HeaderText = "CCCD";
-            this.CCCD.Name = "CCCD";
-            // 
-            // TenTaiKhoan
-            // 
-            this.TenTaiKhoan.DataPropertyName = "TenTaiKhoan";
-            this.TenTaiKhoan.HeaderText = "Tên tài khoản";
-            this.TenTaiKhoan.Name = "TenTaiKhoan";
-            // 
-            // MatKhau
-            // 
-            this.MatKhau.DataPropertyName = "MatKhau";
-            this.MatKhau.HeaderText = "Mật khẩu";
-            this.MatKhau.Name = "MatKhau";
-            // 
-            // NgayThamGia
-            // 
-            this.NgayThamGia.DataPropertyName = "NgayThamGia";
-            this.NgayThamGia.HeaderText = "Ngày tham gia";
-            this.NgayThamGia.Name = "NgayThamGia";
             // 
             // UserControlDanhSachTaiKhoan
             // 
