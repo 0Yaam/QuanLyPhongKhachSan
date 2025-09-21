@@ -69,6 +69,25 @@ namespace QuanLyPhongKhachSan
 
             if (taiKhoan != null)
             {
+                CurrentUser.MaTK = taiKhoan.MaTK;
+                CurrentUser.MaNV = (taiKhoan.MaNV > 0) ? (int?)taiKhoan.MaNV : null;
+                CurrentUser.TenDangNhap = taiKhoan.TenDangNhap;
+                CurrentUser.Quyen = taiKhoan.Quyen;
+
+                // Lấy tên hiển thị + ngày tham gia từ CSDL (nếu có MaNV)
+                string tenHienThi = taiKhoan.TenDangNhap;
+                System.DateTime? ngayTG = null;
+
+                if (CurrentUser.MaNV.HasValue)
+                {
+                    var nvDao = new NhanVienDAO();
+                    var nv = nvDao.LayTheoMa(CurrentUser.MaNV.Value);
+                    if (nv != null)
+                    {
+                        tenHienThi = string.IsNullOrWhiteSpace(nv.TenNV) ? tenHienThi : nv.TenNV;
+                        ngayTG = nv.NgayThamGia;
+                    }
+                }
                 AppSession.TaiKhoanDangNhap = taiKhoan;
                 AppSession.MaNVHienTai = taiKhoan.MaNV; // có thể = 0
 

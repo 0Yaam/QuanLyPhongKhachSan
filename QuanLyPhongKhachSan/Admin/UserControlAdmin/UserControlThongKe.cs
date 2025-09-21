@@ -16,5 +16,50 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         {
             InitializeComponent();
         }
+
+        private void UserControlThongKe_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbbNhanVien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSoLuongKhach_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTongTienThuong_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

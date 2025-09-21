@@ -18,9 +18,9 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = @"SELECT MaTK, TenDangNhap, MatKhau, Quyen, ISNULL(MaNV,0)
-               FROM TaiKhoan
-               WHERE TenDangNhap = @TenDangNhap AND MatKhau = @MatKhau";
+                    string sql = @"SELECT MaTK, TenDangNhap, MatKhau, Quyen, MaNV
+                           FROM TaiKhoan
+                           WHERE TenDangNhap = @TenDangNhap AND MatKhau = @MatKhau";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
                     cmd.Parameters.AddWithValue("@MatKhau", matKhau);
@@ -34,7 +34,7 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                             TenDangNhap = reader.GetString(1),
                             MatKhau = reader.GetString(2),
                             Quyen = reader.GetInt32(3),
-                            MaNV = reader.IsDBNull(4) ? 0 : reader.GetInt32(4)   // <<< THÊM
+                            MaNV = reader.IsDBNull(4) ? 0 : reader.GetInt32(4)
                         };
                     }
                     return null;
@@ -46,6 +46,7 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 return null;
             }
         }
+
 
         public List<TaiKhoan> LayDanhSachTaiKhoan()
         {

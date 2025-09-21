@@ -28,32 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
             this.pbAvatar = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnBrowse = new Guna.UI2.WinForms.Guna2Button();
+            this.lblTen = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblNgayThamGia = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.SuspendLayout();
-            // 
-            // guna2TextBox2
-            // 
-            this.guna2TextBox2.BorderRadius = 5;
-            this.guna2TextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox2.DefaultText = "";
-            this.guna2TextBox2.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox2.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Location = new System.Drawing.Point(43, 111);
-            this.guna2TextBox2.Name = "guna2TextBox2";
-            this.guna2TextBox2.PlaceholderText = "";
-            this.guna2TextBox2.SelectedText = "";
-            this.guna2TextBox2.Size = new System.Drawing.Size(240, 36);
-            this.guna2TextBox2.TabIndex = 32;
             // 
             // btnDangXuat
             // 
@@ -105,19 +87,40 @@
             this.btnBrowse.FillColor = System.Drawing.Color.Silver;
             this.btnBrowse.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.ForeColor = System.Drawing.Color.Black;
-            this.btnBrowse.Location = new System.Drawing.Point(271, 197);
+            this.btnBrowse.Location = new System.Drawing.Point(271, 228);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(42, 35);
             this.btnBrowse.TabIndex = 33;
             this.btnBrowse.Text = "...";
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // lblTen
+            // 
+            this.lblTen.BackColor = System.Drawing.Color.Transparent;
+            this.lblTen.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTen.Location = new System.Drawing.Point(84, 113);
+            this.lblTen.Name = "lblTen";
+            this.lblTen.Size = new System.Drawing.Size(83, 30);
+            this.lblTen.TabIndex = 35;
+            this.lblTen.Text = "ADMIN";
+            // 
+            // lblNgayThamGia
+            // 
+            this.lblNgayThamGia.BackColor = System.Drawing.Color.Transparent;
+            this.lblNgayThamGia.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayThamGia.Location = new System.Drawing.Point(118, 168);
+            this.lblNgayThamGia.Name = "lblNgayThamGia";
+            this.lblNgayThamGia.Size = new System.Drawing.Size(83, 30);
+            this.lblNgayThamGia.TabIndex = 36;
+            this.lblNgayThamGia.Text = "ADMIN";
+            // 
             // UserControlTaiKhoanAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblNgayThamGia);
+            this.Controls.Add(this.lblTen);
             this.Controls.Add(this.btnBrowse);
-            this.Controls.Add(this.guna2TextBox2);
             this.Controls.Add(this.btnDangXuat);
             this.Controls.Add(this.pbAvatar);
             this.Controls.Add(this.guna2HtmlLabel1);
@@ -130,11 +133,11 @@
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
         private Guna.UI2.WinForms.Guna2Button btnDangXuat;
         private Guna.UI2.WinForms.Guna2PictureBox pbAvatar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2Button btnBrowse;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTen;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayThamGia;
     }
 }

@@ -28,35 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtNgayThamGia = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
             this.pbAvatar = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.txtTenNhanVien = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBrowse = new Guna.UI2.WinForms.Guna2Button();
+            this.lblTen = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblNgayThamGia = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtNgayThamGia
-            // 
-            this.txtNgayThamGia.BorderRadius = 5;
-            this.txtNgayThamGia.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtNgayThamGia.DefaultText = "";
-            this.txtNgayThamGia.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtNgayThamGia.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtNgayThamGia.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtNgayThamGia.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtNgayThamGia.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNgayThamGia.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtNgayThamGia.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNgayThamGia.Location = new System.Drawing.Point(221, 223);
-            this.txtNgayThamGia.Name = "txtNgayThamGia";
-            this.txtNgayThamGia.PlaceholderText = "";
-            this.txtNgayThamGia.SelectedText = "";
-            this.txtNgayThamGia.Size = new System.Drawing.Size(200, 36);
-            this.txtNgayThamGia.TabIndex = 0;
-            this.txtNgayThamGia.TextChanged += new System.EventHandler(this.txtNgayThamGia_TextChanged);
             // 
             // guna2HtmlLabel1
             // 
@@ -67,7 +47,6 @@
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(111, 24);
             this.guna2HtmlLabel1.TabIndex = 1;
             this.guna2HtmlLabel1.Text = "Ngày tham gia";
-            this.guna2HtmlLabel1.Click += new System.EventHandler(this.guna2HtmlLabel1_Click);
             // 
             // btnDangXuat
             // 
@@ -97,27 +76,6 @@
             this.pbAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAvatar.TabIndex = 2;
             this.pbAvatar.TabStop = false;
-            this.pbAvatar.Click += new System.EventHandler(this.pbAvatar_Click);
-            // 
-            // txtTenNhanVien
-            // 
-            this.txtTenNhanVien.BorderRadius = 5;
-            this.txtTenNhanVien.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTenNhanVien.DefaultText = "";
-            this.txtTenNhanVien.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtTenNhanVien.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtTenNhanVien.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTenNhanVien.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTenNhanVien.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTenNhanVien.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtTenNhanVien.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTenNhanVien.Location = new System.Drawing.Point(29, 144);
-            this.txtTenNhanVien.Name = "txtTenNhanVien";
-            this.txtTenNhanVien.PlaceholderText = "";
-            this.txtTenNhanVien.SelectedText = "";
-            this.txtTenNhanVien.Size = new System.Drawing.Size(392, 36);
-            this.txtTenNhanVien.TabIndex = 27;
-            this.txtTenNhanVien.TextChanged += new System.EventHandler(this.txtTenNhanVien_TextChanged);
             // 
             // label1
             // 
@@ -128,7 +86,6 @@
             this.label1.Size = new System.Drawing.Size(153, 39);
             this.label1.TabIndex = 28;
             this.label1.Text = "Reception";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnBrowse
             // 
@@ -148,17 +105,37 @@
             this.btnBrowse.Text = "...";
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // lblTen
+            // 
+            this.lblTen.BackColor = System.Drawing.Color.Transparent;
+            this.lblTen.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTen.Location = new System.Drawing.Point(79, 148);
+            this.lblTen.Name = "lblTen";
+            this.lblTen.Size = new System.Drawing.Size(83, 30);
+            this.lblTen.TabIndex = 30;
+            this.lblTen.Text = "ADMIN";
+            // 
+            // lblNgayThamGia
+            // 
+            this.lblNgayThamGia.BackColor = System.Drawing.Color.Transparent;
+            this.lblNgayThamGia.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayThamGia.Location = new System.Drawing.Point(221, 225);
+            this.lblNgayThamGia.Name = "lblNgayThamGia";
+            this.lblNgayThamGia.Size = new System.Drawing.Size(83, 30);
+            this.lblNgayThamGia.TabIndex = 31;
+            this.lblNgayThamGia.Text = "ADMIN";
+            // 
             // UserControlTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblNgayThamGia);
+            this.Controls.Add(this.lblTen);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtTenNhanVien);
             this.Controls.Add(this.btnDangXuat);
             this.Controls.Add(this.pbAvatar);
             this.Controls.Add(this.guna2HtmlLabel1);
-            this.Controls.Add(this.txtNgayThamGia);
             this.Name = "UserControlTaiKhoan";
             this.Size = new System.Drawing.Size(1084, 614);
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).EndInit();
@@ -168,13 +145,12 @@
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2TextBox txtNgayThamGia;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2PictureBox pbAvatar;
         private Guna.UI2.WinForms.Guna2Button btnDangXuat;
-        private Guna.UI2.WinForms.Guna2TextBox txtTenNhanVien;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Button btnBrowse;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTen;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayThamGia;
     }
 }

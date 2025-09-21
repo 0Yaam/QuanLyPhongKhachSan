@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.Common;
+using QuanLyPhongKhachSan.DAL.DAO;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyPhongKhachSan.Bar
@@ -15,16 +12,44 @@ namespace QuanLyPhongKhachSan.Bar
         public UserControlTaiKhoan()
         {
             InitializeComponent();
+            this.Load += UserControlTaiKhoan_Load;
         }
 
-        private void txtNgayThamGia_TextChanged(object sender, EventArgs e)
+        private void UserControlTaiKhoan_Load(object sender, EventArgs e)
         {
+            try
+            {
+                string ten = CurrentUser.TenDangNhap;
+                DateTime? ngay = null;
 
-        }
+                if (CurrentUser.MaNV.HasValue && CurrentUser.MaNV.Value > 0)
+                {
+                    var nvDao = new NhanVienDAO();
+                    var nv = nvDao.LayTheoMa(CurrentUser.MaNV.Value);
+                    if (nv != null)
+                    {
+                        ten = string.IsNullOrWhiteSpace(nv.TenNV) ? ten : nv.TenNV;
+                        ngay = nv.NgayThamGia;
+                    }
+                }
 
-        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
-        {
+                // Fallback tên hiển thị lấy từ CurrentUser (nếu đã set trước)
+                if (!string.IsNullOrWhiteSpace(CurrentUser.TenHienThi))
+                    ten = CurrentUser.TenHienThi;
 
+                lblTen.Text = string.IsNullOrWhiteSpace(ten) ? "—" : ten;
+                lblNgayThamGia.Text = (ngay ?? CurrentUser.NgayThamGia ?? DateTime.Today)
+                    .ToString("dd/MM/yyyy");
+
+                // cache lại hiển thị cho form khác dùng
+                CurrentUser.TenHienThi = lblTen.Text;
+                CurrentUser.NgayThamGia = (ngay ?? CurrentUser.NgayThamGia ?? DateTime.Today);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể tải thông tin tài khoản: " + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
@@ -32,30 +57,15 @@ namespace QuanLyPhongKhachSan.Bar
             if (MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                // txtTenNhanVien.Text = ""; txtNgayThamGia.Text = ""; pbAvatar.Image = null; ...
+                lblTen.Text = ""; lblNgayThamGia.Text = "";
+                if (pbAvatar.Image != null) { pbAvatar.Image.Dispose(); pbAvatar.Image = null; }
 
-                var login = new frmLogin();
-                login.StartPosition = FormStartPosition.CenterScreen;
+                CurrentUser.Reset();
+
+                var login = new frmLogin { StartPosition = FormStartPosition.CenterScreen };
                 login.Show();
-
-                var currentForm = this.FindForm();
-                currentForm?.Hide();
+                this.FindForm()?.Hide();
             }
-        }
-
-        private void pbAvatar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtTenNhanVien_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -64,17 +74,11 @@ namespace QuanLyPhongKhachSan.Bar
             {
                 ofd.Title = "Chọn ảnh đại diện";
                 ofd.Filter = "Ảnh (*.jpg;*.jpeg;*.png;*.bmp;*.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
-
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        if (pbAvatar.Image != null)
-                        {
-                            pbAvatar.Image.Dispose();
-                            pbAvatar.Image = null;
-                        }
-
+                        if (pbAvatar.Image != null) { pbAvatar.Image.Dispose(); pbAvatar.Image = null; }
                         pbAvatar.Image = new Bitmap(ofd.FileName);
                         pbAvatar.SizeMode = PictureBoxSizeMode.StretchImage;
                         pbAvatar.Tag = ofd.FileName;
@@ -87,6 +91,5 @@ namespace QuanLyPhongKhachSan.Bar
                 }
             }
         }
-
     }
 }

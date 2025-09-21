@@ -131,6 +131,34 @@ ORDER BY tk.TenDangNhap;";
                 }
             }
         }
+        public NhanVien LayTheoMa(int maNV)
+        {
+            using (var conn = new SqlConnection(_cs))
+            using (var cmd = new SqlCommand(
+                @"SELECT MaNV, TenNV, CCCD, SDT, ChucVu, NgayThamGia
+          FROM NhanVien WHERE MaNV=@id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", maNV);
+                conn.Open();
+                using (var rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                        return new NhanVien
+                        {
+                            MaNV = rd.GetInt32(0),
+                            TenNV = rd.IsDBNull(1) ? null : rd.GetString(1),
+                            CCCD = rd.IsDBNull(2) ? null : rd.GetString(2),
+                            SDT = rd.IsDBNull(3) ? null : rd.GetString(3),
+                            ChucVu = rd.IsDBNull(4) ? null : rd.GetString(4),
+                            NgayThamGia = rd.IsDBNull(5) ? System.DateTime.Today : rd.GetDateTime(5)
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
         public string LayTenNV(int maNV)
         {
             using (var conn = new SqlConnection(_cs))
