@@ -46,11 +46,6 @@
             this.rdCCCD = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdTen = new Guna.UI2.WinForms.Guna2RadioButton();
             this.dgvDanhSachTaiKhoan = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnThem = new Guna.UI2.WinForms.Guna2Button();
-            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaTK = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +54,12 @@
             this.TenTaiKhoan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatKhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NgayThamGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnThem = new Guna.UI2.WinForms.Guna2Button();
+            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -72,7 +73,7 @@
             this.dtpDenNgay.Checked = true;
             this.dtpDenNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDenNgay.Location = new System.Drawing.Point(196, 11);
+            this.dtpDenNgay.Location = new System.Drawing.Point(181, 11);
             this.dtpDenNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpDenNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDenNgay.Name = "dtpDenNgay";
@@ -92,7 +93,6 @@
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tìm kiếm theo";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // rdSSDT
             // 
@@ -183,7 +183,6 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sắp xếp theo";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox2
             // 
@@ -194,7 +193,6 @@
             this.groupBox2.Size = new System.Drawing.Size(88, 90);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // rdGiam
             // 
@@ -350,61 +348,6 @@
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.Height = 22;
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvDanhSachTaiKhoan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSachTaiKhoan_CellContentClick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsXoa,
-            this.cmsReset});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // cmsReset
-            // 
-            this.cmsReset.Name = "cmsReset";
-            this.cmsReset.Size = new System.Drawing.Size(180, 22);
-            this.cmsReset.Text = "Reset mật khẩu";
-            this.cmsReset.Click += new System.EventHandler(this.cmsReset_Click);
-            // 
-            // cmsXoa
-            // 
-            this.cmsXoa.Name = "cmsXoa";
-            this.cmsXoa.Size = new System.Drawing.Size(180, 22);
-            this.cmsXoa.Text = "Xóa";
-            this.cmsXoa.Click += new System.EventHandler(this.cmsXoa_Click);
-            // 
-            // btnThem
-            // 
-            this.btnThem.BorderRadius = 5;
-            this.btnThem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Location = new System.Drawing.Point(272, 102);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(68, 28);
-            this.btnThem.TabIndex = 15;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // 
-            // dtpTuNgay
-            // 
-            this.dtpTuNgay.BorderRadius = 5;
-            this.dtpTuNgay.Checked = true;
-            this.dtpTuNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpTuNgay.Location = new System.Drawing.Point(39, 11);
-            this.dtpTuNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dtpTuNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dtpTuNgay.Name = "dtpTuNgay";
-            this.dtpTuNgay.Size = new System.Drawing.Size(131, 30);
-            this.dtpTuNgay.TabIndex = 16;
-            this.dtpTuNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
-            this.dtpTuNgay.ValueChanged += new System.EventHandler(this.dtpTuNgay_ValueChanged);
             // 
             // MaNV
             // 
@@ -456,10 +399,80 @@
             this.NgayThamGia.HeaderText = "Ngày tham gia";
             this.NgayThamGia.Name = "NgayThamGia";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsXoa,
+            this.cmsReset});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(156, 48);
+            // 
+            // cmsXoa
+            // 
+            this.cmsXoa.Name = "cmsXoa";
+            this.cmsXoa.Size = new System.Drawing.Size(155, 22);
+            this.cmsXoa.Text = "Xóa";
+            this.cmsXoa.Click += new System.EventHandler(this.cmsXoa_Click);
+            // 
+            // cmsReset
+            // 
+            this.cmsReset.Name = "cmsReset";
+            this.cmsReset.Size = new System.Drawing.Size(155, 22);
+            this.cmsReset.Text = "Reset mật khẩu";
+            this.cmsReset.Click += new System.EventHandler(this.cmsReset_Click);
+            // 
+            // btnThem
+            // 
+            this.btnThem.BorderRadius = 5;
+            this.btnThem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnThem.ForeColor = System.Drawing.Color.White;
+            this.btnThem.Location = new System.Drawing.Point(272, 102);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(68, 28);
+            this.btnThem.TabIndex = 15;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
+            // dtpTuNgay
+            // 
+            this.dtpTuNgay.BorderRadius = 5;
+            this.dtpTuNgay.Checked = true;
+            this.dtpTuNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpTuNgay.Location = new System.Drawing.Point(39, 11);
+            this.dtpTuNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpTuNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpTuNgay.Name = "dtpTuNgay";
+            this.dtpTuNgay.Size = new System.Drawing.Size(131, 30);
+            this.dtpTuNgay.TabIndex = 16;
+            this.dtpTuNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.dtpTuNgay.ValueChanged += new System.EventHandler(this.dtpTuNgay_ValueChanged);
+            // 
+            // chkLocTheoNgay
+            // 
+            this.chkLocTheoNgay.AutoSize = true;
+            this.chkLocTheoNgay.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.CheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.CheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.Location = new System.Drawing.Point(318, 20);
+            this.chkLocTheoNgay.Name = "chkLocTheoNgay";
+            this.chkLocTheoNgay.Size = new System.Drawing.Size(15, 14);
+            this.chkLocTheoNgay.TabIndex = 17;
+            this.chkLocTheoNgay.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chkLocTheoNgay.UncheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.UncheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
             // UserControlDanhSachTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkLocTheoNgay);
             this.Controls.Add(this.dtpTuNgay);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.dgvDanhSachTaiKhoan);
@@ -478,6 +491,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachTaiKhoan)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -510,5 +524,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TenTaiKhoan;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatKhau;
         private System.Windows.Forms.DataGridViewTextBoxColumn NgayThamGia;
+        private Guna.UI2.WinForms.Guna2CheckBox chkLocTheoNgay;
     }
 }

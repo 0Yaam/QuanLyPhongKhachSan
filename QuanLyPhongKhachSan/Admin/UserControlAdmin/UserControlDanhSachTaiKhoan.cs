@@ -19,6 +19,7 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         private readonly NhanSuService nhansu = new NhanSuService();
         private readonly TaiKhoanDAO dao = new TaiKhoanDAO();
         private bool _suppressRowSave = false;
+        private bool _userSorted = false; // Biến theo dõi trạng thái sắp xếp
 
         public UserControlDanhSachTaiKhoan()
         {
@@ -37,37 +38,145 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                 var dr = frm.ShowDialog();      // mở modal
                 if (dr == DialogResult.OK)      // nếu thêm thành công
                 {
-                    LoadGrid();                 // -> reload
+                    RefreshData();              // reload với tìm kiếm/sắp xếp
                 }
             }
         }
-        private void UserControlDanhSachTaiKhoan_Load(object sender, EventArgs e)
-        {
-            LoadGrid();
-        }
 
-        private void LoadGrid()
+        private void UserControlDanhSachTaiKhoan_Load(object sender, EventArgs e)
         {
             try
             {
                 dgvDanhSachTaiKhoan.AutoGenerateColumns = false;
-                var data = nhansu.LayDanhSachNhanVien();
-                // ép refresh mạnh tay tránh cache binding
-                dgvDanhSachTaiKhoan.DataSource = null;
-                dgvDanhSachTaiKhoan.DataSource = data;
+
+                // Gán DataPropertyName cho các cột
+                var colTen = dgvDanhSachTaiKhoan.Columns["Ten"];
+                var colCCCD = dgvDanhSachTaiKhoan.Columns["CCCD"];
+                var colSDT = dgvDanhSachTaiKhoan.Columns["SDT"];
+                var colNgay = dgvDanhSachTaiKhoan.Columns["NgayThamGia"];
+                var colTenTK = dgvDanhSachTaiKhoan.Columns["TenTaiKhoan"];
+                var colMatKhau = dgvDanhSachTaiKhoan.Columns["MatKhau"];
+
+                if (colTen != null) colTen.DataPropertyName = "Ten";
+                if (colCCCD != null) colCCCD.DataPropertyName = "CCCD";
+                if (colSDT != null) colSDT.DataPropertyName = "SDT";
+                if (colNgay != null)
+                {
+                    colNgay.DataPropertyName = "NgayThamGia";
+                    colNgay.DefaultCellStyle.Format = "dd/MM/yyyy";
+                    colNgay.DefaultCellStyle.NullValue = "";
+                }
+                if (colTenTK != null) colTenTK.DataPropertyName = "TenTaiKhoan";
+                if (colMatKhau != null) colMatKhau.DataPropertyName = "MatKhau";
+
+                // Vô hiệu hóa sắp xếp mặc định của DataGridView
+                foreach (DataGridViewColumn c in dgvDanhSachTaiKhoan.Columns)
+                    c.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                // Gán sự kiện
+                rdTen.CheckedChanged += rdTen_CheckedChanged;
+                rdCCCD.CheckedChanged += rdCCCD_CheckedChanged;
+                rdSDT.CheckedChanged += rdSDT_CheckedChanged;
+                rdTang.CheckedChanged += rdTang_CheckedChanged;
+                rdGiam.CheckedChanged += rdGiam_CheckedChanged;
+                rdSTen.CheckedChanged += rdSTen_CheckedChanged;
+                rdSCCCD.CheckedChanged += rdSCCCD_CheckedChanged;
+                rdSSDT.CheckedChanged += rdSSDT_CheckedChanged;
+                txtTimKiem.TextChanged += txtTimKiem_TextChanged;
+
+                // Thiết lập mặc định
+                dtpTuNgay.Value = DateTime.Today.AddDays(-7);
+                dtpDenNgay.Value = DateTime.Today;
+
+                RefreshData();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi load danh sách nhân viên: " + ex.Message);
+                MessageBox.Show("Lỗi tải danh sách tài khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RefreshData()
+        {
+            try
+            {
+                var list = nhansu.LayDanhSachNhanVien();
+
+                // Lọc theo ngày tham gia (nếu có)
+                if (chkLocTheoNgay != null && chkLocTheoNgay.Checked)
+                {
+                    DateTime tuNgay = dtpTuNgay.Value.Date;
+                    DateTime denNgay = dtpDenNgay.Value.Date.AddDays(1).AddTicks(-1);
+                    list = list
+                        .Where(x => x.NgayThamGia >= tuNgay && x.NgayThamGia <= denNgay)
+                        .ToList();
+                }
+
+                // Tìm kiếm
+                string tuKhoa = txtTimKiem.Text.Trim();
+                if (!string.IsNullOrEmpty(tuKhoa))
+                {
+                    if (rdSTen.Checked)
+                        list = list.Where(x => (x.Ten ?? "").IndexOf(tuKhoa, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                    else if (rdSCCCD.Checked)
+                        list = list.Where(x => (x.CCCD ?? "").Contains(tuKhoa)).ToList();
+                    else if (rdSSDT.Checked)
+                        list = list.Where(x => (x.SDT ?? "").Contains(tuKhoa)).ToList();
+                }
+
+                // Sắp xếp
+                if (_userSorted)
+                {
+                    if (rdTen.Checked)
+                    {
+                        list = (rdTang.Checked
+                            ? list.OrderBy(x => x.Ten, StringComparer.CurrentCultureIgnoreCase)
+                            : list.OrderByDescending(x => x.Ten, StringComparer.CurrentCultureIgnoreCase)).ToList();
+                    }
+                    else if (rdCCCD.Checked)
+                    {
+                        list = (rdTang.Checked ? list.OrderBy(x => x.CCCD) : list.OrderByDescending(x => x.CCCD)).ToList();
+                    }
+                    else if (rdSDT.Checked)
+                    {
+                        list = (rdTang.Checked ? list.OrderBy(x => x.SDT) : list.OrderByDescending(x => x.SDT)).ToList();
+                    }
+                }
+                else
+                {
+                    // Mặc định: sắp xếp theo ngày tham gia giảm dần
+                    list = list.OrderByDescending(x => x.NgayThamGia).ToList();
+                }
+
+                // Tạo view để hiển thị
+                var view = list.Select(x => new
+                {
+                    x.MaNV,
+                    x.MaTK,
+                    x.Ten,
+                    x.CCCD,
+                    x.SDT,
+                    x.TenTaiKhoan,
+                    x.MatKhau,
+                    x.NgayThamGia
+                }).ToList();
+
+                dgvDanhSachTaiKhoan.DataSource = null;
+                dgvDanhSachTaiKhoan.DataSource = view;
+                dgvDanhSachTaiKhoan.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải danh sách tài khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void dgvDanhSachTaiKhoan_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
-            if (_suppressRowSave) return; 
+            if (_suppressRowSave) return;
             if (e.RowIndex < 0) return;
             var row = dgvDanhSachTaiKhoan.Rows[e.RowIndex];
-            var item = row.DataBoundItem as QuanLyPhongKhachSan.DAL.OL.NhanVienView;
+            var item = row.DataBoundItem as NhanVienView;
             if (item == null) return;
 
             try
@@ -77,7 +186,6 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                 item.MatKhau = (item.MatKhau ?? "").Trim();
 
                 var ok = nhansu.CapNhatNhanVienVaTaiKhoan(item);
-                // if (!ok) { ... }
             }
             catch (Exception ex)
             {
@@ -85,83 +193,63 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             }
         }
 
-
-
-
-
-        private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rdSSDT_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rdSCCCD_CheckedChanged(object sender, EventArgs e)
-        {
-
+            try { RefreshData(); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void rdSTen_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (rdSTen.Checked) RefreshData();
         }
 
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        private void rdSCCCD_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (rdSCCCD.Checked) RefreshData();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void rdSSDT_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rdGiam_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rdTang_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rdSDT_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rdCCCD_CheckedChanged(object sender, EventArgs e)
-        {
-
+            if (rdSSDT.Checked) RefreshData();
         }
 
         private void rdTen_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (rdTen.Checked) { _userSorted = true; RefreshData(); }
         }
 
-        private void dgvDanhSachTaiKhoan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void rdCCCD_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (rdCCCD.Checked) { _userSorted = true; RefreshData(); }
         }
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        private void rdSDT_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdSDT.Checked) { _userSorted = true; RefreshData(); }
+        }
 
+        private void rdTang_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdTang.Checked && _userSorted) RefreshData();
+        }
+
+        private void rdGiam_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdGiam.Checked && _userSorted) RefreshData();
+        }
+
+        private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkLocTheoNgay != null && chkLocTheoNgay.Checked) RefreshData();
+        }
+
+        private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkLocTheoNgay != null && chkLocTheoNgay.Checked) RefreshData();
         }
 
         private List<NhanVienView> GetSelectedItems()
@@ -194,7 +282,7 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 
                 var ids = items.Select(x => x.MaNV).Distinct().ToList();
                 var done = nhansu.XoaNhanVienNhieu(ids);
-                LoadGrid();
+                RefreshData();
             }
             catch (Exception ex)
             {
@@ -230,14 +318,9 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                     "Xác nhận reset",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-                // CHẶN RowValidated ghi đè
                 _suppressRowSave = true;
-                // GỌI HÀM BULK mới
                 var affected = dao.CapNhatMatKhauByIds(maTKs, "123");
-
-                // Reload để đảm bảo grid hiển thị đúng dữ liệu từ DB
-                LoadGrid();
-
+                RefreshData();
                 MessageBox.Show($"Đã reset {affected} tài khoản về '123'.");
             }
             catch (Exception ex)
@@ -248,12 +331,6 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             {
                 _suppressRowSave = false;
             }
-        }
-
-
-        private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
