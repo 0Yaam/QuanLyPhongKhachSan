@@ -12,7 +12,7 @@ namespace QuanLyPhongKhachSan
         // Khởi tạo instance cho các UserControl, tái sử dụng thay vì tạo mới
         private UserControlDatPhong datPhongInstance;
         private UserControlDanhSachKhachHang danhSachKhachHangInstance;
-        private UserControlThongKe thongKeInstance;
+        private UserControlThongKeChung thongKeInstance;
         private UserControlTaiKhoan taiKhoanInstance;
         private UserControlLichSuHoaDon lichSuHoaDonInstance;
 
@@ -21,7 +21,6 @@ namespace QuanLyPhongKhachSan
             InitializeComponent();
             datPhongInstance = new UserControlDatPhong();
             danhSachKhachHangInstance = new UserControlDanhSachKhachHang();
-            thongKeInstance = new UserControlThongKe();
             taiKhoanInstance = new UserControlTaiKhoan();
             lichSuHoaDonInstance = new UserControlLichSuHoaDon();
             // Load UserControl mặc định khi mở form

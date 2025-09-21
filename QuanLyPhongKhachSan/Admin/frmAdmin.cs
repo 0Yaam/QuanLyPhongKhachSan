@@ -35,7 +35,7 @@ namespace QuanLyPhongKhachSan
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            UserControlThongKe userControlThongKe = new UserControlThongKe();
+            UserControlThongKeChung userControlThongKe = new UserControlThongKeChung();
             addUserControl(userControlThongKe);
         }
 

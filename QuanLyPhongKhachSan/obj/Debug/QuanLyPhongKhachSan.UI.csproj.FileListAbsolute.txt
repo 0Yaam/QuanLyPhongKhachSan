@@ -179,13 +179,11 @@ C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhach
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Staff.UserControlStaff.UserControlDatPhong.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Staff.UserControlStaff.UserControlLichSuHoaDon.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlTaiKhoan.resources
-C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlThongKe.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.frmAdmin.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.frmLogin.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlChucNang.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlDanhSachTaiKhoan.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlLichSuThayDoi.resources
-C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlThongKe.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.frmThemvaSuaKH.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Form1.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Properties.Resources.resources
@@ -194,3 +192,5 @@ C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhach
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPh.DF605182.Up2Date
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.exe
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlThongKeChung.resources
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlThongKeChung.resources

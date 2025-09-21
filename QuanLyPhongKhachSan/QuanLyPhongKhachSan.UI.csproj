@@ -146,11 +146,11 @@
     <Compile Include="Admin\UserControlAdmin\UserControlLichSuThayDoi.Designer.cs">
       <DependentUpon>UserControlLichSuThayDoi.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\UserControlAdmin\UserControlThongKe.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlThongKeChung.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Admin\UserControlAdmin\UserControlThongKe.Designer.cs">
-      <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    <Compile Include="Admin\UserControlAdmin\UserControlThongKeChung.Designer.cs">
+      <DependentUpon>UserControlThongKeChung.cs</DependentUpon>
     </Compile>
     <Compile Include="Staff\ThemvaSuaKH.cs">
       <SubType>Form</SubType>
@@ -211,8 +211,8 @@
     <EmbeddedResource Include="Admin\UserControlAdmin\UserControlLichSuThayDoi.resx">
       <DependentUpon>UserControlLichSuThayDoi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlThongKe.resx">
-      <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlThongKeChung.resx">
+      <DependentUpon>UserControlThongKeChung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Staff\ThemvaSuaKH.resx">
       <DependentUpon>ThemvaSuaKH.cs</DependentUpon>

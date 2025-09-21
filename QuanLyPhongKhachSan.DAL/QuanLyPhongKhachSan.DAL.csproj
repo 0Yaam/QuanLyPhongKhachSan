@@ -52,6 +52,7 @@
     <Compile Include="DAO\PhongDAO.cs" />
     <Compile Include="DAO\TaiKhoanDAO.cs" />
     <Compile Include="DAO\ThongKeDAO.cs" />
+    <Compile Include="DAO\ThongKeNhanVienDAO.cs" />
     <Compile Include="OL\ChiTietHoaDon.cs" />
     <Compile Include="OL\DatPhong.cs" />
     <Compile Include="OL\DichVuView.cs" />

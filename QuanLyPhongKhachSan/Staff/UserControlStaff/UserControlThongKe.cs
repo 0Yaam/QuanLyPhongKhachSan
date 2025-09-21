@@ -9,11 +9,11 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace QuanLyPhongKhachSan.Bar
 {
-    public partial class UserControlThongKe : UserControl
+    public partial class UserControlThongKeChung : UserControl
     {
         private readonly ThongKeService _service = new ThongKeService();
 
-        public UserControlThongKe()
+        public UserControlThongKeChung()
         {
             InitializeComponent();
         }

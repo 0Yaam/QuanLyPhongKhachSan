@@ -1,6 +1,6 @@
 ﻿namespace QuanLyPhongKhachSan.Bar
 {
-    partial class UserControlThongKe
+    partial class UserControlThongKeChung
     {
         /// <summary> 
         /// Required designer variable.
