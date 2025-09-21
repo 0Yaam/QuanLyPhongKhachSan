@@ -313,5 +313,14 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                 _suppressRowSave = false;
             }
         }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            rdCCCD.Checked = false;
+            rdSDT.Checked = false;
+            rdTen.Checked = false;  
+            rdTang.Checked = false;
+            rdGiam.Checked = false;
+        }
     }
 }
