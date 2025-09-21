@@ -77,6 +77,7 @@
             this.dtpDenNgay.Size = new System.Drawing.Size(131, 30);
             this.dtpDenNgay.TabIndex = 11;
             this.dtpDenNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.dtpDenNgay.ValueChanged += new System.EventHandler(this.dtpDenNgay_ValueChanged);
             // 
             // groupBox3
             // 
@@ -89,6 +90,7 @@
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tìm kiếm theo";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // rdSSDT
             // 
@@ -107,6 +109,7 @@
             this.rdSSDT.UncheckedState.BorderThickness = 2;
             this.rdSSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSSDT.CheckedChanged += new System.EventHandler(this.rdSSDT_CheckedChanged);
             // 
             // rdSCCCD
             // 
@@ -125,6 +128,7 @@
             this.rdSCCCD.UncheckedState.BorderThickness = 2;
             this.rdSCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSCCCD.CheckedChanged += new System.EventHandler(this.rdSCCCD_CheckedChanged);
             // 
             // rdSTen
             // 
@@ -143,6 +147,7 @@
             this.rdSTen.UncheckedState.BorderThickness = 2;
             this.rdSTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSTen.CheckedChanged += new System.EventHandler(this.rdSTen_CheckedChanged);
             // 
             // txtTimKiem
             // 
@@ -162,6 +167,7 @@
             this.txtTimKiem.SelectedText = "";
             this.txtTimKiem.Size = new System.Drawing.Size(237, 31);
             this.txtTimKiem.TabIndex = 8;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // groupBox1
             // 
@@ -175,6 +181,7 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sắp xếp theo";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox2
             // 
@@ -185,6 +192,7 @@
             this.groupBox2.Size = new System.Drawing.Size(88, 90);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // rdGiam
             // 
@@ -203,6 +211,7 @@
             this.rdGiam.UncheckedState.BorderThickness = 2;
             this.rdGiam.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdGiam.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdGiam.CheckedChanged += new System.EventHandler(this.rdGiam_CheckedChanged);
             // 
             // rdTang
             // 
@@ -221,6 +230,7 @@
             this.rdTang.UncheckedState.BorderThickness = 2;
             this.rdTang.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdTang.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTang.CheckedChanged += new System.EventHandler(this.rdTang_CheckedChanged);
             // 
             // rdSDT
             // 
@@ -239,6 +249,7 @@
             this.rdSDT.UncheckedState.BorderThickness = 2;
             this.rdSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSDT.CheckedChanged += new System.EventHandler(this.rdSDT_CheckedChanged);
             // 
             // rdCCCD
             // 
@@ -257,6 +268,7 @@
             this.rdCCCD.UncheckedState.BorderThickness = 2;
             this.rdCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.CheckedChanged += new System.EventHandler(this.rdCCCD_CheckedChanged);
             // 
             // rdTen
             // 
@@ -275,6 +287,7 @@
             this.rdTen.UncheckedState.BorderThickness = 2;
             this.rdTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.rdTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTen.CheckedChanged += new System.EventHandler(this.rdTen_CheckedChanged);
             // 
             // dgvDanhSachTaiKhoan
             // 
@@ -333,6 +346,7 @@
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.Height = 22;
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvDanhSachTaiKhoan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSachTaiKhoan_CellContentClick);
             // 
             // Column1
             // 
@@ -376,18 +390,21 @@
             this.cmsXoa});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(156, 48);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cmsReset
             // 
             this.cmsReset.Name = "cmsReset";
             this.cmsReset.Size = new System.Drawing.Size(155, 22);
             this.cmsReset.Text = "Reset mật khẩu";
+            this.cmsReset.Click += new System.EventHandler(this.cmsReset_Click);
             // 
             // cmsXoa
             // 
             this.cmsXoa.Name = "cmsXoa";
             this.cmsXoa.Size = new System.Drawing.Size(155, 22);
             this.cmsXoa.Text = "Xóa";
+            this.cmsXoa.Click += new System.EventHandler(this.cmsXoa_Click);
             // 
             // btnThem
             // 
@@ -418,6 +435,7 @@
             this.dtpTuNgay.Size = new System.Drawing.Size(131, 30);
             this.dtpTuNgay.TabIndex = 16;
             this.dtpTuNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.dtpTuNgay.ValueChanged += new System.EventHandler(this.dtpTuNgay_ValueChanged);
             // 
             // UserControlDanhSachTaiKhoan
             // 

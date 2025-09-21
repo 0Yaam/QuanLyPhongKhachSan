@@ -23,5 +23,95 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             frmThemNhanVien frm = new frmThemNhanVien();
             frm.ShowDialog();
         }
+
+        private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdSSDT_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdSCCCD_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdSTen_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdGiam_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdTang_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdSDT_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdCCCD_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdTen_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvDanhSachTaiKhoan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void cmsReset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmsXoa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

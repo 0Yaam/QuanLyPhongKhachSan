@@ -1,7 +1,8 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.DAL.OL;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using QuanLyPhongKhachSan.DAL.OL;
 
 namespace QuanLyPhongKhachSan.DAL.DAO
 {
@@ -138,5 +139,42 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 return false;
             }
         }
+        public bool TenDangNhapDaTonTai(string username)
+        {
+            const string sql = "SELECT 1 FROM TaiKhoan WHERE TenDangNhap = @u";
+            using (var conn = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.Add("@u", SqlDbType.Char, 50).Value = username ?? string.Empty;
+                conn.Open();
+                var obj = cmd.ExecuteScalar();
+                return obj != null;
+            }
+        }
+
+        /// <summary>Thêm tài khoản. Trả về true nếu OK.</summary>
+        public bool Them(string tenDangNhap, string matKhau, int quyen, int? maNV)
+        {
+            const string sql = @"
+INSERT INTO TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNV)
+VALUES (@u, @p, @q, @manv);";
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.Add("@u", SqlDbType.Char, 50).Value = tenDangNhap ?? string.Empty;
+                cmd.Parameters.Add("@p", SqlDbType.Char, 50).Value = matKhau ?? string.Empty;
+                cmd.Parameters.Add("@q", SqlDbType.Int).Value = quyen;
+                if (maNV.HasValue)
+                    cmd.Parameters.Add("@manv", SqlDbType.Int).Value = maNV.Value;
+                else
+                    cmd.Parameters.Add("@manv", SqlDbType.Int).Value = DBNull.Value;
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+
     }
 }
