@@ -131,5 +131,30 @@ ORDER BY tk.TenDangNhap;";
                 }
             }
         }
+        public string LayTenNV(int maNV)
+        {
+            using (var conn = new SqlConnection(_cs))
+            using (var cmd = new SqlCommand("SELECT TenNV FROM NhanVien WHERE MaNV=@id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", maNV);
+                conn.Open();
+                var obj = cmd.ExecuteScalar();
+                return obj == null ? null : obj.ToString();
+            }
+        }
+
+        public string LayTenTheoMa(int maNV)
+        {
+            if (maNV <= 0) return null;
+            using (var conn = new SqlConnection(_cs))
+            using (var cmd = new SqlCommand("SELECT TenNV FROM NhanVien WHERE MaNV=@id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", maNV);
+                conn.Open();
+                var obj = cmd.ExecuteScalar();
+                return obj == null || obj == DBNull.Value ? null : (string)obj;
+            }
+        }
+
     }
 }

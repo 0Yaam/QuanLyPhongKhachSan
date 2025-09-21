@@ -18,7 +18,9 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string sql = "SELECT MaTK, TenDangNhap, MatKhau, Quyen FROM TaiKhoan WHERE TenDangNhap = @TenDangNhap AND MatKhau = @MatKhau";
+                    string sql = @"SELECT MaTK, TenDangNhap, MatKhau, Quyen, ISNULL(MaNV,0)
+               FROM TaiKhoan
+               WHERE TenDangNhap = @TenDangNhap AND MatKhau = @MatKhau";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
                     cmd.Parameters.AddWithValue("@MatKhau", matKhau);
@@ -31,7 +33,8 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                             MaTK = reader.GetInt32(0),
                             TenDangNhap = reader.GetString(1),
                             MatKhau = reader.GetString(2),
-                            Quyen = reader.GetInt32(3) // Lấy int thay vì string
+                            Quyen = reader.GetInt32(3),
+                            MaNV = reader.IsDBNull(4) ? 0 : reader.GetInt32(4)   // <<< THÊM
                         };
                     }
                     return null;

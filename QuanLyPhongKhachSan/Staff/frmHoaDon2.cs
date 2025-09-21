@@ -1,4 +1,5 @@
 ﻿using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.Common;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,14 @@ namespace QuanLyPhongKhachSan.Staff
         private readonly PhongService _phongService = new PhongService();
         private readonly KhachHangService _khachHangService = new KhachHangService();
 
-        private int _maHD;                  // MaHD của Hóa đơn lần 2
-        private int _maDat;                 // MaDat (đặt phòng) đại diện
-        private decimal _tongTienLan1;      // Tổng thanh toán của Hóa đơn lần 1
-        private decimal _tienCoc;           // Tổng tiền cọc (của HĐ1)
-        private readonly int _maPhong;      // MaPhong đang xử lý
+        // Header state
+        private int _maHD;              // MaHD của Hóa đơn lần 2
+        private int _maDat;             // MaDat (đặt phòng) đại diện
+        private decimal _tongTienLan1;  // Tổng thanh toán của Hóa đơn lần 1
+        private decimal _tienCoc;       // Tổng tiền cọc (HĐ1)
+        private readonly int _maPhong;  // MaPhong đang xử lý
 
-        // Nguồn dữ liệu cho dgvDichVu (cho phép nhập trực tiếp)
+        // Dữ liệu dịch vụ (nhập tay)
         private readonly BindingList<DichVuView> _dvBinding = new BindingList<DichVuView>();
 
         public frmHoaDon2(int maPhong)
@@ -31,14 +33,14 @@ namespace QuanLyPhongKhachSan.Staff
 
             InitGridMapping();
 
-            // Cấu hình dgvDichVu để nhập trực tiếp dịch vụ
+            // Cấu hình nhập dịch vụ trực tiếp
             dgvDichVu.AutoGenerateColumns = false;
             dgvDichVu.AllowUserToAddRows = true;
             dgvDichVu.AllowUserToDeleteRows = true;
             dgvDichVu.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
             dgvDichVu.DataSource = _dvBinding;
 
-            // Recalc khi thay đổi dịch vụ
+            // Tự tính lại khi thay đổi DV
             dgvDichVu.CellValueChanged += (s, e) => CapNhatTongTien();
             dgvDichVu.RowsRemoved += (s, e) => CapNhatTongTien();
             dgvDichVu.UserAddedRow += (s, e) => CapNhatTongTien();
@@ -48,7 +50,7 @@ namespace QuanLyPhongKhachSan.Staff
                     dgvDichVu.CommitEdit(DataGridViewDataErrorContexts.Commit);
             };
 
-            // Nếu muốn 3 textbox chỉ để hiển thị, nên ReadOnly = true ở Designer.
+            // Khuyến nghị: đặt ReadOnly cho các TextBox tổng ở Designer (tránh bị sửa tay).
         }
 
         // View model cho dgvCTHD
@@ -92,33 +94,46 @@ namespace QuanLyPhongKhachSan.Staff
         }
 
         /// <summary>
-        /// Set header và thông số nội bộ: _maHD (HD2), _maDat, _tongTienLan1, _tienCoc
+        /// Set header & state: _maHD (HD2), _maDat, _tongTienLan1, _tienCoc
         /// </summary>
-        public void BindHeader(string loaiHD, DateTime ngayLap, string nhanVien, int maHD, string tenKH,
-                               int maDat, decimal tongTienLan1, decimal tienCoc)
+        public void BindHeader(
+            string loaiHD,
+            DateTime ngayLap,
+            string nhanVien,      // có thể để "" -> sẽ fallback AppSession.TenNhanVienHienThi
+            int maHD,
+            string tenKH,
+            int maDat,
+            decimal tongTienLan1,
+            decimal tienCoc)
         {
-            txtLoaiHD.Text = loaiHD;                      // "Hóa đơn lần 2"
+            // Fallback tên NV nếu caller không truyền
+            var tenNV = !string.IsNullOrWhiteSpace(nhanVien) ? nhanVien : AppSession.TenNhanVienHienThi;
+
+            txtLoaiHD.Text = string.IsNullOrWhiteSpace(loaiHD) ? "Hóa đơn lần 2" : loaiHD;
             txtNgayLapHD.Text = ngayLap.ToString("dd/MM/yyyy HH:mm");
-            txtNhanVien.Text = nhanVien;
+            txtNhanVien.Text = tenNV;
             txtMaHoaDon.Text = maHD.ToString();
-            txtKhachHang.Text = tenKH;
+            txtKhachHang.Text = tenKH ?? string.Empty;
 
             _maHD = maHD;
             _maDat = maDat;
             _tongTienLan1 = tongTienLan1;
             _tienCoc = tienCoc;
 
-            // Hiển thị ngay tổng cọc vào txtTongTienCoc
             var vi = CultureInfo.GetCultureInfo("vi-VN");
             txtTongTienCoc.Text = string.Format(vi, "{0:N0}đ", _tienCoc);
+
+            CapNhatTongTien(); // đảm bảo textbox tổng sync
         }
 
         /// <summary>
-        /// Bind chi tiết phòng vào dgvCTHD (tự tính lố ngày nếu có)
+        /// Bind chi tiết phòng (tự tính lố ngày nếu có)
         /// </summary>
         public void BindChiTietNhieuPhong(IEnumerable<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal TienCoc, decimal GiaPhong)> items)
         {
-            // Lấy đặt phòng hiện tại bằng MaPhong (tránh nhầm MaDat)
+            if (items == null) { dgvCTHD.DataSource = new List<CTHDView>(); CapNhatTongTien(); return; }
+
+            // Lấy đặt phòng hiện tại (tính lố ngày)
             var dat = _phongService.LayDatPhongTheoMaPhong(_maPhong);
             DateTime ngayTraThucTe = dat?.NgayTraThucTe ?? DateTime.Today;
 
@@ -131,8 +146,7 @@ namespace QuanLyPhongKhachSan.Staff
 
                 int soNgayDuKien = (denDuKien - tu).Days;
                 int soNgayLo = Math.Max(0, (denThucTe - denDuKien).Days);
-                int soNgayTong = soNgayDuKien + soNgayLo;
-                if (soNgayTong <= 0) soNgayTong = 1; // an toàn
+                int soNgayTong = Math.Max(1, soNgayDuKien + soNgayLo);
 
                 decimal gia = it.GiaPhong;
                 decimal tienPhong = soNgayTong * gia;
@@ -143,7 +157,7 @@ namespace QuanLyPhongKhachSan.Staff
                     TuNgay = tu,
                     DenNgay = denThucTe,
                     SoNgay = soNgayTong,
-                    TienCoc = 0m,                 // Lần 2 không cộng cọc vào dòng CTHD
+                    TienCoc = 0m,  // Lần 2 không cộng cọc vào từng dòng
                     TienPhong = tienPhong,
                     TongTien = tienPhong
                 });
@@ -154,16 +168,16 @@ namespace QuanLyPhongKhachSan.Staff
         }
 
         /// <summary>
-        /// Tính và hiển thị:
-        /// - txtTongTien = tổng tiền từ dgvCTHD
-        /// - txtTongTienCoc = tổng tiền cọc (HĐ1) = _tienCoc
-        /// - txtTienSauDichVu = _tienCoc - TổngDịchVụ
+        /// Tính & hiển thị tổng tiền: 
+        /// - txtTongTien: tổng tiền phòng (đã tính lố ngày)
+        /// - txtTongTienCoc: tổng cọc (HĐ1)
+        /// - txtTienSauDichVu: _tienCoc - tổng dịch vụ
         /// </summary>
         private void CapNhatTongTien()
         {
             var vi = CultureInfo.GetCultureInfo("vi-VN");
 
-            // 1) Tổng tiền CTHD (tiền phòng đã tính cả lố ngày nếu có)
+            // 1) Tổng tiền phòng
             var cthdRows = dgvCTHD.DataSource as List<CTHDView> ?? new List<CTHDView>();
             decimal tongCTHD = cthdRows.Sum(r => r.TongTien);
             txtTongTien.Text = string.Format(vi, "{0:N0}đ", tongCTHD);
@@ -173,14 +187,14 @@ namespace QuanLyPhongKhachSan.Staff
             foreach (var r in _dvBinding)
             {
                 if (r == null) continue;
-                if (r.SoTien < 0) r.SoTien = 0; // không âm
+                if (r.SoTien < 0) r.SoTien = 0; // chặn âm
                 tongDichVu += r.SoTien;
             }
 
-            // 3) Tổng tiền cọc hiển thị (từ HĐ1)
+            // 3) Tổng tiền cọc (từ HĐ1)
             txtTongTienCoc.Text = string.Format(vi, "{0:N0}đ", _tienCoc);
 
-            // 4) Tiền sau dịch vụ = tiền cọc - tổng dịch vụ (âm/dương đều có thể)
+            // 4) Tiền sau dịch vụ = tiền cọc - tổng dịch vụ
             decimal tienSauDichVu = _tienCoc - tongDichVu;
             txtTienSauDichVu.Text = string.Format(vi, "{0:N0}đ", tienSauDichVu);
         }
@@ -188,9 +202,20 @@ namespace QuanLyPhongKhachSan.Staff
         /// <summary>
         /// Lấy dữ liệu dịch vụ NV vừa nhập để caller ghi vào bảng ChiTietHoaDon
         /// </summary>
-        public List<DichVuView> GetDichVuData() => _dvBinding
-            .Where(x => x != null && (!string.IsNullOrWhiteSpace(x.DichVu) || x.SoTien > 0))
-            .ToList();
+        public List<DichVuView> GetDichVuData() =>
+            _dvBinding.Where(x => x != null && (!string.IsNullOrWhiteSpace(x.DichVu) || x.SoTien > 0)).ToList();
+
+        // Helpers public cho caller (nếu cần)
+        public decimal TongDichVu => _dvBinding.Where(x => x != null && x.SoTien > 0).Sum(x => x.SoTien);
+        public decimal TongTienPhong
+        {
+            get
+            {
+                var cthdRows = dgvCTHD.DataSource as List<CTHDView> ?? new List<CTHDView>();
+                return cthdRows.Sum(r => r.TongTien);
+            }
+        }
+        public decimal TinhSoTienLan2() => (TongTienPhong - _tongTienLan1) + TongDichVu - _tienCoc;
 
         private decimal ParseVnd(string s)
         {
@@ -201,31 +226,25 @@ namespace QuanLyPhongKhachSan.Staff
         }
 
         /// <summary>
-        /// Hoàn thành HĐ2:
-        ///   Số tiền LẦN 2 = (Tổng CTHD hiện tại - Tổng HĐ1) + Tổng Dịch Vụ - Tiền Cọc
-        ///   -> cập nhật vào HoaDon (HĐ2). Caller sẽ:
-        ///     - chèn các dòng ChiTietHoaDon (dịch vụ)
-        ///     - reset phòng / đặt phòng
+        /// Hoàn tất HĐ2:
+        ///   Số tiền LẦN 2 = (Tổng tiền phòng hiện tại - Tổng HĐ1) + Tổng dịch vụ - Tiền cọc
+        ///   -> cập nhật vào HoaDon (HĐ2).
+        ///   Lưu ý: logging LichSuHoaDon (MaNV) làm ở caller sau khi ShowDialog.
         /// </summary>
         private void btnHoanThanh_Click(object sender, EventArgs e)
         {
             try
             {
-                var cthdRows = dgvCTHD.DataSource as List<CTHDView> ?? new List<CTHDView>();
-                decimal tongCTHD = cthdRows.Sum(r => r.TongTien);
-                decimal tongDV = _dvBinding.Sum(r => r?.SoTien ?? 0m);
-
-                decimal soTienLan2 = (tongCTHD - _tongTienLan1) + tongDV - _tienCoc;
-
                 if (_maHD <= 0)
                 {
-                    MessageBox.Show("Mã hóa đơn không hợp lệ!");
+                    MessageBox.Show("Mã hóa đơn không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                decimal soTienLan2 = TinhSoTienLan2();
                 if (!_hoaDonService.CapNhatTongTien(_maHD, soTienLan2))
                 {
-                    MessageBox.Show("Cập nhật tổng tiền lần 2 thất bại!");
+                    MessageBox.Show("Cập nhật tổng tiền lần 2 thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -235,40 +254,40 @@ namespace QuanLyPhongKhachSan.Staff
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi hoàn thành: {ex.Message}");
+                MessageBox.Show($"Lỗi khi hoàn thành: {ex.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // THÊM vào frmHoaDon2
+        /// <summary>
+        /// Bind nhanh nếu đã có dữ liệu "precomputed"
+        /// </summary>
         public void BindChiTietPrecomputed(IEnumerable<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal GiaPhong)> items)
         {
             var rows = new List<CTHDView>();
-            foreach (var it in items)
+            if (items != null)
             {
-                int soNgay = Math.Max(1, it.SoNgay);
-                decimal tienPhong = soNgay * it.GiaPhong;
-
-                rows.Add(new CTHDView
+                foreach (var it in items)
                 {
-                    Phong = it.Phong,
-                    TuNgay = it.TuNgay.Date,
-                    DenNgay = it.DenNgay.Date <= it.TuNgay.Date ? it.TuNgay.Date.AddDays(1) : it.DenNgay.Date,
-                    SoNgay = soNgay,
-                    TienCoc = 0m,           // Lần 2 không cộng cọc vào dòng chi tiết
-                    TienPhong = tienPhong,
-                    TongTien = tienPhong
-                });
+                    int soNgay = Math.Max(1, it.SoNgay);
+                    decimal tienPhong = soNgay * it.GiaPhong;
+
+                    rows.Add(new CTHDView
+                    {
+                        Phong = it.Phong,
+                        TuNgay = it.TuNgay.Date,
+                        DenNgay = it.DenNgay.Date <= it.TuNgay.Date ? it.TuNgay.Date.AddDays(1) : it.DenNgay.Date,
+                        SoNgay = soNgay,
+                        TienCoc = 0m,
+                        TienPhong = tienPhong,
+                        TongTien = tienPhong
+                    });
+                }
             }
 
             dgvCTHD.DataSource = rows;
-            // Cập nhật lại các textbox tổng/tạm tính
-            var vi = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+            var vi = CultureInfo.GetCultureInfo("vi-VN");
             txtTongTien.Text = string.Format(vi, "{0:N0}đ", rows.Sum(r => r.TongTien));
-            // txtTongTienCoc / txtTienSauDichVu sẽ tự cập nhật khi NV nhập dịch vụ (đã gắn event trong ctor)
+            CapNhatTongTien();
         }
-
-
-
-
     }
 }

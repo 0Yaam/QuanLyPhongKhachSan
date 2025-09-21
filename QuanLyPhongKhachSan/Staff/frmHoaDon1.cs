@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.Common;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -49,6 +50,7 @@ namespace QuanLyPhongKhachSan
         }
 
         // Header KHÔNG có tham số soPhong (vì in nhiều phòng)
+        // frmHoaDon1.cs
         public void BindHeader(string loaiHD, DateTime ngayLap, string nhanVien, int maHD, string tenKH)
         {
             txtLoaiHD.Text = loaiHD;
@@ -57,6 +59,7 @@ namespace QuanLyPhongKhachSan
             txtMaHoaDon.Text = maHD.ToString();
             txtKhachHang.Text = tenKH;
         }
+
 
         public void BindChiTietNhieuPhong(IEnumerable<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal TienCoc, decimal GiaPhong)> items)
         {

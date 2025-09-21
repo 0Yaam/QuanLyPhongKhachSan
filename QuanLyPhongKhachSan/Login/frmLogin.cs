@@ -1,7 +1,9 @@
-﻿using QuanLyPhongKhachSan.DAL.OL;
+﻿using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.Common;
+using QuanLyPhongKhachSan.DAL.DAO;
+using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Windows.Forms;
-using QuanLyPhongKhachSan.BLL.Services;
 
 namespace QuanLyPhongKhachSan
 {
@@ -67,6 +69,22 @@ namespace QuanLyPhongKhachSan
 
             if (taiKhoan != null)
             {
+                AppSession.TaiKhoanDangNhap = taiKhoan;
+                AppSession.MaNVHienTai = taiKhoan.MaNV; // có thể = 0
+
+                string tenNV = null;
+                if (taiKhoan.MaNV > 0)
+                {
+                    // Lấy tên NV nhanh gọn (thêm 1 helper nếu muốn)
+                    var nvDao = new NhanVienDAO();
+                    // Viết helper trong DAO:
+                    // public string LayTenNV(int maNV) { SELECT TenNV FROM NhanVien WHERE MaNV=@id }
+                    tenNV = nvDao.LayTenNV(taiKhoan.MaNV); // bạn thêm method này (1–2 dòng SQL)
+                }
+
+                AppSession.TenNhanVienHienThi =
+                    !string.IsNullOrWhiteSpace(tenNV) ? tenNV
+                    : (taiKhoan.Quyen == 1 ? "Admin" : taiKhoan.TenDangNhap);
                 if (taiKhoan.Quyen == 1)
                 {
                     var formAdmin = new frmAdmin();

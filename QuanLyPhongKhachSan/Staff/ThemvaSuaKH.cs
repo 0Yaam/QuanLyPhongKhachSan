@@ -1,4 +1,5 @@
 ﻿using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.Common;
 using QuanLyPhongKhachSan.DAL.OL;
 using QuanLyPhongKhachSan.Staff;
 using System;
@@ -16,7 +17,7 @@ namespace QuanLyPhongKhachSan
         private readonly ChiTietHoaDonService _cthdService = new ChiTietHoaDonService();
 
         private static decimal TienCocMacDinh = 200_000m;
-        private readonly string _tenNhanVien = Environment.UserName;
+        private readonly string _tenNhanVien = AppSession.TenNhanVienHienThi;
         private int _maDatHienTai = 0;
 
         private int _soDem = 0;
@@ -458,7 +459,7 @@ namespace QuanLyPhongKhachSan
                     MaHD = maHD,
                     MaDat = _maDatHienTai,
                     ThoiGianIn = DateTime.Now,
-                    MaNV = 0, // Thay bằng mã nhân viên thực tế nếu có
+                    MaNV = AppSession.MaNVHienTai, // Thay bằng mã nhân viên thực tế nếu có
                     SoPhong = soPhongStr
                 });
                 System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {_maDatHienTai}, SoPhong: {soPhongStr}");

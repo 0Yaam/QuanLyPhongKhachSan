@@ -66,6 +66,7 @@
       <DependentUpon>UserControlTaiKhoanAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="AppEvents.cs" />
+    <Compile Include="Common\AppSession.cs" />
     <Compile Include="Staff\frmHoaDon1.cs">
       <SubType>Form</SubType>
     </Compile>
