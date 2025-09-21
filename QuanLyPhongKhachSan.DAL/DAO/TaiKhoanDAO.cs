@@ -200,6 +200,22 @@ VALUES (@U, @P, @Q, @MaNV);", conn, tran))
         }
 
 
+        public int CapNhatTaiKhoan(int maTK, string tenDangNhap, string matKhau)
+        {
+            const string sql = @"
+UPDATE dbo.TaiKhoan
+SET TenDangNhap = @U, MatKhau = @P
+WHERE MaTK = @MaTK;";
+            using (var conn = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@U", (object)(tenDangNhap ?? string.Empty));
+                cmd.Parameters.AddWithValue("@P", (object)(matKhau ?? string.Empty));
+                cmd.Parameters.AddWithValue("@MaTK", maTK);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
 
 
 

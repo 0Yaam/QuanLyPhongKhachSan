@@ -51,6 +51,8 @@
             this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaTK = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCCD = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -304,6 +306,8 @@
             this.dgvDanhSachTaiKhoan.ColumnHeadersHeight = 28;
             this.dgvDanhSachTaiKhoan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvDanhSachTaiKhoan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MaNV,
+            this.MaTK,
             this.Ten,
             this.SDT,
             this.CCCD,
@@ -351,23 +355,23 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsReset,
-            this.cmsXoa});
+            this.cmsXoa,
+            this.cmsReset});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(156, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cmsReset
             // 
             this.cmsReset.Name = "cmsReset";
-            this.cmsReset.Size = new System.Drawing.Size(155, 22);
+            this.cmsReset.Size = new System.Drawing.Size(180, 22);
             this.cmsReset.Text = "Reset mật khẩu";
             this.cmsReset.Click += new System.EventHandler(this.cmsReset_Click);
             // 
             // cmsXoa
             // 
             this.cmsXoa.Name = "cmsXoa";
-            this.cmsXoa.Size = new System.Drawing.Size(155, 22);
+            this.cmsXoa.Size = new System.Drawing.Size(180, 22);
             this.cmsXoa.Text = "Xóa";
             this.cmsXoa.Click += new System.EventHandler(this.cmsXoa_Click);
             // 
@@ -401,6 +405,20 @@
             this.dtpTuNgay.TabIndex = 16;
             this.dtpTuNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
             this.dtpTuNgay.ValueChanged += new System.EventHandler(this.dtpTuNgay_ValueChanged);
+            // 
+            // MaNV
+            // 
+            this.MaNV.DataPropertyName = "MaNV";
+            this.MaNV.HeaderText = "MaNV";
+            this.MaNV.Name = "MaNV";
+            this.MaNV.Visible = false;
+            // 
+            // MaTK
+            // 
+            this.MaTK.DataPropertyName = "MaTK";
+            this.MaTK.HeaderText = "MaTK";
+            this.MaTK.Name = "MaTK";
+            this.MaTK.Visible = false;
             // 
             // Ten
             // 
@@ -484,6 +502,8 @@
         private System.Windows.Forms.ToolStripMenuItem cmsReset;
         private System.Windows.Forms.ToolStripMenuItem cmsXoa;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaNV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaTK;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
         private System.Windows.Forms.DataGridViewTextBoxColumn SDT;
         private System.Windows.Forms.DataGridViewTextBoxColumn CCCD;

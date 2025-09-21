@@ -31,7 +31,26 @@ VALUES (@Ten, @CCCD, @SDT, @ChucVu, @NgayThamGia);";
             }
         }
 
-        // DÙNG ĐỂ LOAD LÊN DGV
+
+        public int CapNhatThongTin(NhanVien nv)
+        {
+            const string sql = @"
+UPDATE dbo.NhanVien
+SET TenNV = @Ten, SDT = @SDT, CCCD = @CCCD, NgayThamGia = @Ngay
+WHERE MaNV = @MaNV;";
+            using (var conn = new SqlConnection(_cs))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@Ten", (object)nv.TenNV ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@SDT", (object)nv.SDT ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@CCCD", (object)nv.CCCD ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Ngay", nv.NgayThamGia);
+                cmd.Parameters.AddWithValue("@MaNV", nv.MaNV);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
         public List<NhanVienView> LayDanhSachNhanVien()
         {
             var list = new List<NhanVienView>();
@@ -40,16 +59,17 @@ VALUES (@Ten, @CCCD, @SDT, @ChucVu, @NgayThamGia);";
                 conn.Open();
                 const string sql = @"
 SELECT 
-    nv.TenNV                                  AS Ten,
-    nv.SDT                                     AS SDT,
-    nv.CCCD                                    AS CCCD,
-    RTRIM(tk.TenDangNhap)                      AS TenTaiKhoan,
-    RTRIM(tk.MatKhau)                          AS MatKhau,
-    nv.NgayThamGia                             AS NgayThamGia
+    nv.MaNV,
+    tk.MaTK,
+    nv.TenNV           AS Ten,
+    nv.SDT             AS SDT,
+    nv.CCCD            AS CCCD,
+    RTRIM(tk.TenDangNhap) AS TenTaiKhoan,   -- cột CHAR thì RTRIM
+    RTRIM(tk.MatKhau)      AS MatKhau,
+    nv.NgayThamGia     AS NgayThamGia
 FROM dbo.NhanVien nv
 LEFT JOIN dbo.TaiKhoan tk ON tk.MaNV = nv.MaNV
 ORDER BY nv.TenNV;";
-
                 using (var cmd = new SqlCommand(sql, conn))
                 using (var rd = cmd.ExecuteReader())
                 {
@@ -57,12 +77,14 @@ ORDER BY nv.TenNV;";
                     {
                         list.Add(new NhanVienView
                         {
-                            Ten = rd.IsDBNull(0) ? "" : rd.GetString(0),
-                            SDT = rd.IsDBNull(1) ? null : rd.GetString(1),
-                            CCCD = rd.IsDBNull(2) ? null : rd.GetString(2),
-                            TenTaiKhoan = rd.IsDBNull(3) ? null : rd.GetString(3),
-                            MatKhau = rd.IsDBNull(4) ? null : rd.GetString(4),
-                            NgayThamGia = rd.IsDBNull(5) ? DateTime.MinValue : rd.GetDateTime(5)
+                            MaNV = rd.GetInt32(0),
+                            MaTK = rd.IsDBNull(1) ? (int?)null : rd.GetInt32(1),
+                            Ten = rd.IsDBNull(2) ? "" : rd.GetString(2),
+                            SDT = rd.IsDBNull(3) ? null : rd.GetString(3),
+                            CCCD = rd.IsDBNull(4) ? null : rd.GetString(4),
+                            TenTaiKhoan = rd.IsDBNull(5) ? null : rd.GetString(5),
+                            MatKhau = rd.IsDBNull(6) ? null : rd.GetString(6),
+                            NgayThamGia = rd.IsDBNull(7) ? DateTime.MinValue : rd.GetDateTime(7)
                         });
                     }
                 }
@@ -70,6 +92,7 @@ ORDER BY nv.TenNV;";
             return list;
         }
 
-        
+
+
     }
 }

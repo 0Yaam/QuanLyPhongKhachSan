@@ -19,6 +19,9 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         {
             InitializeComponent();
             this.Load += UserControlDanhSachTaiKhoan_Load;
+            dgvDanhSachTaiKhoan.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
+            dgvDanhSachTaiKhoan.RowValidated += dgvDanhSachTaiKhoan_RowValidated;
+            dgvDanhSachTaiKhoan.DataError += (s, e) => { /* tránh vỡ khi nhập sai định dạng ngày...*/ };
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -52,6 +55,38 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                 MessageBox.Show("Lỗi load danh sách nhân viên: " + ex.Message);
             }
         }
+
+        private void dgvDanhSachTaiKhoan_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            var row = dgvDanhSachTaiKhoan.Rows[e.RowIndex];
+            var item = row.DataBoundItem as QuanLyPhongKhachSan.DAL.OL.NhanVienView;
+            if (item == null) return;
+
+            try
+            {
+                // Validate nhẹ
+                if (item.MaNV <= 0) return;
+
+                // (Optional) Chuẩn hoá NULL -> "" để tránh lỗi CHAR
+                item.TenTaiKhoan = (item.TenTaiKhoan ?? "").Trim();
+                item.MatKhau = (item.MatKhau ?? "").Trim();
+
+                // cập nhật DB
+                var ok = nhansu.CapNhatNhanVienVaTaiKhoan(item);
+                if (!ok)
+                {
+                    // không ném MessageBox liên tục; bạn có thể log
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu dòng: " + ex.Message);
+            }
+        }
+
+
+
 
         private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
         {
