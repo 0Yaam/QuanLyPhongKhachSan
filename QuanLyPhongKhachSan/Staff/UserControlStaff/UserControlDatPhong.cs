@@ -146,6 +146,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
             var lblLoaiPhong = new Label
             {
+                Name = "lblLoaiPhong",
                 Location = new Point(14, 35),
                 Font = new Font("Microsoft Tai Le", 10, FontStyle.Regular),
                 AutoSize = true,
@@ -155,12 +156,14 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
             var lblGia = new Label
             {
+                Name = "lblGia",
                 Location = new Point(14, 57),
                 Font = new Font("Microsoft Tai Le", 10, FontStyle.Italic),
                 AutoSize = true,
                 Text = phong.Gia.ToString("N0") + "đ",
                 BackColor = Color.Transparent
             };
+
 
             var lblKhach = new Label
             {
@@ -332,7 +335,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                         System.Diagnostics.Debug.WriteLine(string.Format("MoFormKhachHang: Hủy hoặc đóng form - MaPhong={0}", phong.MaPhong));
                         return;
                     }
-
+                    LoadPhongFromDB();
+                    _selectedRoomIds.Clear();
                     string ten = (frmthemvasua.TenKhachHang ?? "").Trim();
                     string cccd = (frmthemvasua.CCCD ?? "").Trim();
                     string sdt = (frmthemvasua.SDT ?? "").Trim();
@@ -500,16 +504,31 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         private void RefreshPhongPanel(Guna2Panel panelPhong)
         {
             if (panelPhong == null) return;
-            var phong = panelPhong.Tag as Phong;
-            if (phong == null) return;
+            var phongTag = panelPhong.Tag as Phong;
+            if (phongTag == null) return;
 
-            var lbl = panelPhong.Controls.Find("lblKhach", true)
-                                         .OfType<Label>()
-                                         .FirstOrDefault();
-            if (lbl == null) return;
+            // Lấy lại dữ liệu phòng mới nhất (đã đổi loại / giá) từ DB
+            var phongMoi = phongService.LayPhongTheoMaPhong(phongTag.MaPhong);
+            if (phongMoi != null)
+            {
+                // cập nhật Tag để những lần sau dùng dữ liệu mới
+                panelPhong.Tag = phongMoi;
 
-            HienKhachLenPanel(phong, lbl, panelPhong);
+                // cập nhật label Loại phòng & Giá
+                var lblLoai = panelPhong.Controls.Find("lblLoaiPhong", true).OfType<Label>().FirstOrDefault();
+                var lblGia = panelPhong.Controls.Find("lblGia", true).OfType<Label>().FirstOrDefault();
+                if (lblLoai != null) lblLoai.Text = phongMoi.LoaiPhong ?? "";
+                if (lblGia != null) lblGia.Text = phongMoi.Gia.ToString("N0") + "đ";
+            }
+
+            // cập nhật phần khách + màu nền
+            var lblKhach = panelPhong.Controls.Find("lblKhach", true).OfType<Label>().FirstOrDefault();
+            if (lblKhach != null)
+            {
+                HienKhachLenPanel((Phong)panelPhong.Tag, lblKhach, panelPhong);
+            }
         }
+
 
         public void RefreshPhongById(int maPhong)
         {
