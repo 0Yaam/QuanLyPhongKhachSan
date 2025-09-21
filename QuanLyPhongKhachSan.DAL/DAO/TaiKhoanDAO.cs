@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace QuanLyPhongKhachSan.DAL.DAO
 {
@@ -242,6 +243,42 @@ WHERE MaTK = @MaTK;";
             }
         }
 
+        public int CapNhatMatKhauByIds(IEnumerable<int> maTKs, string newPass)
+        {
+            if (maTKs == null) return 0;
+            var ids = maTKs.Distinct().ToList();
+            if (ids.Count == 0) return 0;
+
+            const string sql = "UPDATE dbo.TaiKhoan SET MatKhau = @p WHERE MaTK = @id";
+
+            using (var conn = new SqlConnection(Config.ConnectionString))
+            {
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        int total = 0;
+                        foreach (var id in ids)
+                        {
+                            using (var cmd = new SqlCommand(sql, conn, tran))
+                            {
+                                cmd.Parameters.AddWithValue("@p", newPass);
+                                cmd.Parameters.AddWithValue("@id", id);
+                                total += cmd.ExecuteNonQuery();
+                            }
+                        }
+                        tran.Commit();
+                        return total; // số bản ghi cập nhật
+                    }
+                    catch
+                    {
+                        tran.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
 
 
 

@@ -1,5 +1,6 @@
 ﻿using QuanLyPhongKhachSan.Admin;
 using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.DAL.DAO;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
     public partial class UserControlDanhSachTaiKhoan : UserControl
     {
         private readonly NhanSuService nhansu = new NhanSuService();
+        private readonly TaiKhoanDAO dao = new TaiKhoanDAO();
+        private bool _suppressRowSave = false;
+
         public UserControlDanhSachTaiKhoan()
         {
             InitializeComponent();
@@ -60,6 +64,7 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 
         private void dgvDanhSachTaiKhoan_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
+            if (_suppressRowSave) return; 
             if (e.RowIndex < 0) return;
             var row = dgvDanhSachTaiKhoan.Rows[e.RowIndex];
             var item = row.DataBoundItem as QuanLyPhongKhachSan.DAL.OL.NhanVienView;
@@ -67,25 +72,19 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 
             try
             {
-                // Validate nhẹ
                 if (item.MaNV <= 0) return;
-
-                // (Optional) Chuẩn hoá NULL -> "" để tránh lỗi CHAR
                 item.TenTaiKhoan = (item.TenTaiKhoan ?? "").Trim();
                 item.MatKhau = (item.MatKhau ?? "").Trim();
 
-                // cập nhật DB
                 var ok = nhansu.CapNhatNhanVienVaTaiKhoan(item);
-                if (!ok)
-                {
-                    // không ném MessageBox liên tục; bạn có thể log
-                }
+                // if (!ok) { ... }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi lưu dòng: " + ex.Message);
             }
         }
+
 
 
 
@@ -231,15 +230,26 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                     "Xác nhận reset",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-                var done = nhansu.ResetMatKhauNhieu(maTKs, "123");
-                MessageBox.Show($"Đã reset mật khẩu cho {done} tài khoản.");
-                LoadGrid(); // reload để thấy cột MatKhau = 123
+                // CHẶN RowValidated ghi đè
+                _suppressRowSave = true;
+                // GỌI HÀM BULK mới
+                var affected = dao.CapNhatMatKhauByIds(maTKs, "123");
+
+                // Reload để đảm bảo grid hiển thị đúng dữ liệu từ DB
+                LoadGrid();
+
+                MessageBox.Show($"Đã reset {affected} tài khoản về '123'.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi reset: " + ex.Message);
             }
+            finally
+            {
+                _suppressRowSave = false;
+            }
         }
+
 
         private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
         {
