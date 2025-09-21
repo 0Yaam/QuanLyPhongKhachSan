@@ -117,6 +117,28 @@ WHERE MaTK = @MaTK;", conn, tran);
             }
         }
 
+        // BLL/Services/NhanSuService.cs  (thêm vào class NhanSuService)
+        public int XoaNhanVien(int maNV)
+        {
+            return _nvDAO.Xoa(maNV);
+        }
+
+        public int XoaNhanVienNhieu(IEnumerable<int> maNVs)
+        {
+            int total = 0;
+            foreach (var id in maNVs) total += _nvDAO.Xoa(id);
+            return total;
+        }
+
+        public int ResetMatKhauNhieu(IEnumerable<int> maTKs, string newPass = "123")
+        {
+            int total = 0;
+            foreach (var id in maTKs) total += _tkDAO.ResetMatKhau(id, newPass);
+            return total;
+        }
+
+
+
 
     }
 }

@@ -51,6 +51,7 @@ WHERE MaNV = @MaNV;";
             }
         }
 
+        // DAL/DAO/NhanVienDAO.cs
         public List<NhanVienView> LayDanhSachNhanVien()
         {
             var list = new List<NhanVienView>();
@@ -61,15 +62,16 @@ WHERE MaNV = @MaNV;";
 SELECT 
     nv.MaNV,
     tk.MaTK,
-    nv.TenNV           AS Ten,
-    nv.SDT             AS SDT,
-    nv.CCCD            AS CCCD,
-    RTRIM(tk.TenDangNhap) AS TenTaiKhoan,   -- cột CHAR thì RTRIM
-    RTRIM(tk.MatKhau)      AS MatKhau,
-    nv.NgayThamGia     AS NgayThamGia
+    nv.TenNV,
+    nv.SDT,
+    nv.CCCD,
+    RTRIM(tk.TenDangNhap) AS TenDangNhap,
+    RTRIM(tk.MatKhau)     AS MatKhau,
+    nv.NgayThamGia
 FROM dbo.NhanVien nv
 LEFT JOIN dbo.TaiKhoan tk ON tk.MaNV = nv.MaNV
 ORDER BY nv.TenNV;";
+
                 using (var cmd = new SqlCommand(sql, conn))
                 using (var rd = cmd.ExecuteReader())
                 {
@@ -93,6 +95,40 @@ ORDER BY nv.TenNV;";
         }
 
 
+        public int Xoa(int maNV)
+        {
+            using (var conn = new SqlConnection(_cs))
+            {
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Xóa TK trước (nếu có)
+                        using (var cmdTK = new SqlCommand("DELETE FROM dbo.TaiKhoan WHERE MaNV = @MaNV;", conn, tran))
+                        {
+                            cmdTK.Parameters.AddWithValue("@MaNV", maNV);
+                            cmdTK.ExecuteNonQuery();
+                        }
+                        // Xóa NV
+                        int rows;
+                        using (var cmdNV = new SqlCommand("DELETE FROM dbo.NhanVien WHERE MaNV = @MaNV;", conn, tran))
+                        {
+                            cmdNV.Parameters.AddWithValue("@MaNV", maNV);
+                            rows = cmdNV.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        return rows; // 1 nếu xóa thành công
+                    }
+                    catch
+                    {
+                        tran.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
 
     }
 }

@@ -217,7 +217,30 @@ WHERE MaTK = @MaTK;";
             }
         }
 
+        public int ResetMatKhau(int maTK, string newPass = "123")
+        {
+            const string sql = "UPDATE dbo.TaiKhoan SET MatKhau = @P WHERE MaTK = @MaTK;";
+            using (var conn = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@P", newPass);
+                cmd.Parameters.AddWithValue("@MaTK", maTK);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
 
+        public int XoaTheoMaNV(int maNV)
+        {
+            const string sql = "DELETE FROM dbo.TaiKhoan WHERE MaNV = @MaNV;";
+            using (var conn = new SqlConnection(connectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@MaNV", maNV);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
 
 
 

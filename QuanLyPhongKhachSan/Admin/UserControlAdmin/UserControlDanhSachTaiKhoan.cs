@@ -1,4 +1,7 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.Admin;
+using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.DAL.OL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QuanLyPhongKhachSan.Admin;
-using QuanLyPhongKhachSan.BLL.Services;
 
 namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 {
@@ -22,6 +23,7 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             dgvDanhSachTaiKhoan.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
             dgvDanhSachTaiKhoan.RowValidated += dgvDanhSachTaiKhoan_RowValidated;
             dgvDanhSachTaiKhoan.DataError += (s, e) => { /* tránh vỡ khi nhập sai định dạng ngày...*/ };
+            txtTimKiem.PlaceholderText = "Tìm kiếm...";
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -163,14 +165,80 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 
         }
 
-        private void cmsReset_Click(object sender, EventArgs e)
+        private List<NhanVienView> GetSelectedItems()
         {
-
+            return dgvDanhSachTaiKhoan.SelectedRows
+                .Cast<DataGridViewRow>()
+                .Select(r => r.DataBoundItem as NhanVienView)
+                .Where(x => x != null)
+                .ToList();
         }
 
         private void cmsXoa_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var items = GetSelectedItems();
+                if (items.Count == 0)
+                {
+                    MessageBox.Show("Hãy chọn ít nhất một nhân viên để xóa.");
+                    return;
+                }
 
+                var tenList = items.Select(x => x.Ten).Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+                var msg = (items.Count == 1)
+                    ? $"Xóa nhân viên \"{tenList.FirstOrDefault() ?? ("MaNV=" + items.First().MaNV)}\"?"
+                    : $"Xóa {items.Count} nhân viên đã chọn?\n{string.Join(", ", tenList)}";
+
+                if (MessageBox.Show(msg, "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    return;
+
+                var ids = items.Select(x => x.MaNV).Distinct().ToList();
+                var done = nhansu.XoaNhanVienNhieu(ids);
+                LoadGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xóa: " + ex.Message);
+            }
+        }
+
+        private void cmsReset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var items = GetSelectedItems();
+                if (items.Count == 0)
+                {
+                    MessageBox.Show("Hãy chọn ít nhất một dòng để reset mật khẩu.");
+                    return;
+                }
+
+                var maTKs = items
+                    .Where(x => x.MaTK.HasValue && x.MaTK.Value > 0)
+                    .Select(x => x.MaTK.Value)
+                    .Distinct()
+                    .ToList();
+
+                if (maTKs.Count == 0)
+                {
+                    MessageBox.Show("Các dòng được chọn không có tài khoản để reset.");
+                    return;
+                }
+
+                if (MessageBox.Show(
+                    $"Reset mật khẩu về '123' cho {maTKs.Count} tài khoản?",
+                    "Xác nhận reset",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
+                var done = nhansu.ResetMatKhauNhieu(maTKs, "123");
+                MessageBox.Show($"Đã reset mật khẩu cho {done} tài khoản.");
+                LoadGrid(); // reload để thấy cột MatKhau = 123
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi reset: " + ex.Message);
+            }
         }
 
         private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
