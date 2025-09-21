@@ -19,12 +19,43 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             txtLoaiPhong.PlaceholderText = "Thêm loại phòng";
         }
 
-        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void txtLoaiPhong_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void xóaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void txtTrangThai_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbbLoaiPhong_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nudGiaTien_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnHoanThanh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void xóaToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvTrangThai_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvLoaiPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

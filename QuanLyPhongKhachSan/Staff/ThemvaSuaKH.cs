@@ -50,16 +50,28 @@ namespace QuanLyPhongKhachSan
         private void LoadLoaiPhong()
         {
             cbLoaiPhong.Items.Clear();
-            var loais = phongService.LayDanhSachLoaiPhong(); // lấy từ LoaiPhong table
+            var loais = phongService.LayDanhSachLoaiPhong(); // danh sách tên loại phòng
             foreach (var loai in loais)
                 cbLoaiPhong.Items.Add(loai);
 
-            // chọn đúng loại hiện tại của phòng
+            // chọn đúng loại hiện tại (từ JOIN)
             if (!string.IsNullOrEmpty(_phong.LoaiPhong) && cbLoaiPhong.Items.Contains(_phong.LoaiPhong))
                 cbLoaiPhong.SelectedItem = _phong.LoaiPhong;
             else if (cbLoaiPhong.Items.Count > 0)
                 cbLoaiPhong.SelectedIndex = 0;
+
+            // Đồng bộ MaLoaiPhong & giá theo selection hiện tại
+            if (cbLoaiPhong.SelectedItem != null)
+            {
+                var tenLoai = cbLoaiPhong.SelectedItem.ToString();
+                var maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
+                if (maLoai > 0) _phong.MaLoaiPhong = maLoai;
+
+                _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
+                txtGia.Text = FormatVnd(_giaPhong);
+            }
         }
+
 
 
         private void LoadDatPhongCu()
@@ -143,12 +155,18 @@ namespace QuanLyPhongKhachSan
         {
             if (cbLoaiPhong.SelectedItem == null) return;
 
-            // CHỈ dùng để hiển thị giá & tính tạm tính, KHÔNG đổi loại phòng trong DB
             var tenLoai = cbLoaiPhong.SelectedItem.ToString();
+
+            // CẬP NHẬT MaLoaiPhong để khi lưu/hoá đơn là update đúng FK
+            var maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
+            if (maLoai > 0) _phong.MaLoaiPhong = maLoai;
+
+            // hiển thị giá & tính tạm tính
             _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
             txtGia.Text = FormatVnd(_giaPhong);
             CapNhatTamTinh();
         }
+
 
 
         public string TenKhachHang => txtTenKH.Text;
@@ -199,12 +217,24 @@ namespace QuanLyPhongKhachSan
 
                 // Cập nhật loại phòng
                 _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
-                _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
-                if (!phongService.CapNhat(_phong))
+                // Cập nhật loại phòng (MaLoaiPhong) từ combobox
+                var tenLoai = cbLoaiPhong.SelectedItem != null ? cbLoaiPhong.SelectedItem.ToString() : _phong.LoaiPhong;
+                var maLoaiPhongMoi = phongService.LayMaLoaiTheoTen(tenLoai);
+                if (maLoaiPhongMoi <= 0)
                 {
-                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật loại phòng thất bại - MaPhong={_phong.MaPhong}, LoaiPhong={_phong.LoaiPhong}");
+                    System.Diagnostics.Debug.WriteLine("btnHoanThanh_Click: Không tìm thấy MaLoaiPhong từ tên loại.");
                     return;
                 }
+                _phong.MaLoaiPhong = maLoaiPhongMoi; // LƯU FK
+                _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
+
+                // Lưu DB phòng (đổi loại phòng)
+                if (!phongService.CapNhat(_phong))
+                {
+                    System.Diagnostics.Debug.WriteLine($"btnHoanThanh_Click: Cập nhật loại phòng thất bại - MaPhong={_phong.MaPhong}, MaLoaiPhong={_phong.MaLoaiPhong}");
+                    return;
+                }
+
 
                 int maKh = khachHangService.UpsertKhachHang(txtTenKH.Text, txtCCCD.Text, txtSDT.Text);
                 if (maKh <= 0)

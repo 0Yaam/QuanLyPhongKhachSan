@@ -41,9 +41,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbLoai = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.rdTang = new System.Windows.Forms.RadioButton();
             this.rdGiam = new System.Windows.Forms.RadioButton();
+            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.flpContain = new System.Windows.Forms.FlowLayoutPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.xóaThôngTinKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +54,7 @@
             this.rdSDT = new Guna.UI2.WinForms.Guna2RadioButton();
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dtpNgayHienTai = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -208,22 +209,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Sắp xếp theo";
             // 
-            // btnReset
-            // 
-            this.btnReset.BorderRadius = 10;
-            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.Location = new System.Drawing.Point(976, 232);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(59, 33);
-            this.btnReset.TabIndex = 8;
-            this.btnReset.Text = "Reset";
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
             // rdTang
             // 
             this.rdTang.AutoSize = true;
@@ -247,6 +232,22 @@
             this.rdGiam.Text = "Giảm";
             this.rdGiam.UseVisualStyleBackColor = true;
             this.rdGiam.CheckedChanged += new System.EventHandler(this.rdGiam_CheckedChanged);
+            // 
+            // btnReset
+            // 
+            this.btnReset.BorderRadius = 10;
+            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(976, 232);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(59, 33);
+            this.btnReset.TabIndex = 8;
+            this.btnReset.Text = "Reset";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // flpContain
             // 
@@ -395,6 +396,21 @@
             this.dtpNgayHienTai.TabIndex = 24;
             this.dtpNgayHienTai.Value = new System.DateTime(2025, 9, 7, 12, 22, 27, 197);
             // 
+            // guna2Button1
+            // 
+            this.guna2Button1.BorderRadius = 10;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.Location = new System.Drawing.Point(470, 297);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(99, 38);
+            this.guna2Button1.TabIndex = 26;
+            this.guna2Button1.Text = "Thêm khách hàng";
+            // 
             // btnThemKH
             // 
             this.btnThemKH.BorderRadius = 10;
@@ -404,18 +420,19 @@
             this.btnThemKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThemKH.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemKH.ForeColor = System.Drawing.Color.White;
-            this.btnThemKH.Location = new System.Drawing.Point(909, 517);
+            this.btnThemKH.Location = new System.Drawing.Point(917, 551);
             this.btnThemKH.Name = "btnThemKH";
-            this.btnThemKH.Size = new System.Drawing.Size(99, 38);
+            this.btnThemKH.Size = new System.Drawing.Size(83, 46);
             this.btnThemKH.TabIndex = 25;
-            this.btnThemKH.Text = "Thêm khách hàng";
+            this.btnThemKH.Text = "Thêm";
+            this.btnThemKH.Click += new System.EventHandler(this.btnThemKH_Click);
             // 
             // UserControlDatPhong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnThemKH);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.dtpNgayHienTai);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.txtTimKiem);
@@ -467,9 +484,10 @@
         private Guna.UI2.WinForms.Guna2RadioButton rdTen;
         private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayHienTai;
-        private Guna.UI2.WinForms.Guna2Button btnThemKH;
         private System.Windows.Forms.ComboBox cbLoai;
         private Guna.UI2.WinForms.Guna2RadioButton rdSoPhong;
         private Guna.UI2.WinForms.Guna2Button btnReset;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnThemKH;
     }
 }
