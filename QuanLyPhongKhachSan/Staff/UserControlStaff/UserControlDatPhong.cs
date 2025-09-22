@@ -1,6 +1,7 @@
 ﻿using Guna.UI2.WinForms;
 using QuanLyPhongKhachSan.BLL.Services;
 using QuanLyPhongKhachSan.DAL.OL;
+using QuanLyPhongKhachSan.UI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,7 +26,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             KhoiTaoComboBox();
             this.Load += UserControlDatPhong_Load;
 
-            // Nghe event toàn cục: in xong HĐ → reload
             AppEvents.InvoiceLogged -= AppEvents_InvoiceLogged;
             AppEvents.InvoiceLogged += AppEvents_InvoiceLogged;
 
@@ -33,16 +33,19 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             if (txtSoPhong != null) txtSoPhong.PlaceholderText = "Số phòng";
             this.TabStop = true;
             this.KeyDown += UserControl_KeyDown;
+
             if (flpContain != null)
             {
                 flpContain.TabStop = true;
                 flpContain.KeyDown += UserControl_KeyDown;
             }
+
             txtTimKiem.TextChanged += txtTimKiem_TextChanged;
             rdSoPhong.Checked = true;
 
             if (dtpNgayHienTai != null)
                 dtpNgayHienTai.ValueChanged += (s, e) => LoadDanhSachPhong();
+
             txtSoPhong.PlaceholderText = "Nhập số phòng";
             txtTimKiem.PlaceholderText = "Tìm kiếm...";
         }
@@ -75,7 +78,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             LoadPhongFromDB();
         }
 
-        // Cache các MaDat đã có HĐ Lần 1 (để tô màu nhanh)
         private void BuildHoaDonLan1Cache()
         {
             try
@@ -98,7 +100,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             _allRooms.Clear();
             flpContain.Controls.Clear();
 
-            // Xây cache HĐ1
             BuildHoaDonLan1Cache();
 
             var danhSach = phongService.LayDanhSach();
@@ -163,7 +164,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 BackColor = Color.Transparent
             };
 
-
             var lblKhach = new Label
             {
                 Name = "lblKhach",
@@ -198,11 +198,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             // Menu chuột phải
             var menu = new ContextMenuStrip();
             menu.Items.Add("Xóa").Click += (s, e) => XoaPhongSelectedOrOne(pnl);
-
-            // Đổi loại phòng
             menu.Items.Add("Đổi loại phòng...").Click += (s, e) => DoiLoaiPhong(pnl);
 
-            // Đặt trạng thái
             var mSetStatus = new ToolStripMenuItem("Đặt trạng thái");
             mSetStatus.DropDownItems.Add("Trống", null, (s, e) => DatTrangThaiPhong(pnl, "Trống"));
             mSetStatus.DropDownItems.Add("Đã đặt", null, (s, e) => DatTrangThaiPhong(pnl, "Đã đặt"));
@@ -215,7 +212,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             return pnl;
         }
 
-        // Hiển thị KH & tô màu panel theo trạng thái + HĐ Lần 1
         private void HienKhachLenPanel(Phong phong, Label lblKhach, Guna2Panel pnl)
         {
             try
@@ -224,7 +220,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 if (dat == null || dat.NgayTraThucTe.HasValue)
                 {
                     lblKhach.Text = "";
-                    pnl.FillColor = Color.FromArgb(255, 192, 192); // Trống
+                    pnl.FillColor = Color.FromArgb(255, 192, 192);
                     return;
                 }
 
@@ -233,8 +229,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                                    || dat.TrangThai.Equals("Đang sử dụng", StringComparison.OrdinalIgnoreCase);
 
                 bool hieuLuc =
-                    (today >= dat.NgayNhan.Date && today <= dat.NgayTraDuKien.Date) // gồm cả ngày trả
-                    || (today < dat.NgayNhan.Date); // đặt tương lai
+                    (today >= dat.NgayNhan.Date && today <= dat.NgayTraDuKien.Date)
+                    || (today < dat.NgayNhan.Date);
 
                 if (!trangThaiOK || !hieuLuc)
                 {
@@ -244,14 +240,12 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 }
 
                 var kh = khachHangService.LayKhachHangTheoMaKH(dat.MaKH);
-                lblKhach.Text = string.Format("{0} - {1}", kh != null ? kh.HoTen : "", kh != null ? kh.SDT : "");
+                lblKhach.Text = $"{(kh != null ? kh.HoTen : "")} - {(kh != null ? kh.SDT : "")}";
 
                 bool daInLan1 = _maDatDaInLan1.Contains(dat.MaDat);
-
-                // Chưa in Lần 1: vàng nhạt; Đã in Lần 1: xanh nhạt
                 pnl.FillColor = daInLan1
-                    ? Color.FromArgb(187, 222, 251)   // xanh nhạt
-                    : Color.FromArgb(255, 245, 157);  // vàng nhạt
+                    ? Color.FromArgb(187, 222, 251)
+                    : Color.FromArgb(255, 245, 157);
             }
             catch
             {
@@ -307,10 +301,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
         }
 
-        private List<Phong> GetSelectedRooms()
-        {
-            return _allRooms.Where(p => _selectedRoomIds.Contains(p.MaPhong)).ToList();
-        }
+        private List<Phong> GetSelectedRooms() =>
+            _allRooms.Where(p => _selectedRoomIds.Contains(p.MaPhong)).ToList();
 
         private static string ComputeTrangThai(DateTime ngayNhan, DateTime ngayTraDuKien)
         {
@@ -331,11 +323,13 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                     var dr = frmthemvasua.ShowDialog(this);
                     if (dr != DialogResult.OK)
                     {
-                        System.Diagnostics.Debug.WriteLine(string.Format("MoFormKhachHang: Hủy hoặc đóng form - MaPhong={0}", phong.MaPhong));
+                        System.Diagnostics.Debug.WriteLine($"MoFormKhachHang: Hủy hoặc đóng form - MaPhong={phong.MaPhong}");
                         return;
                     }
+
                     LoadPhongFromDB();
                     _selectedRoomIds.Clear();
+
                     string ten = (frmthemvasua.TenKhachHang ?? "").Trim();
                     string cccd = (frmthemvasua.CCCD ?? "").Trim();
                     string sdt = (frmthemvasua.SDT ?? "").Trim();
@@ -346,16 +340,17 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
                     if (string.IsNullOrWhiteSpace(ten) || string.IsNullOrWhiteSpace(sdt))
                     {
-                        System.Diagnostics.Debug.WriteLine(string.Format("Lỗi MoFormKhachHang: Tên hoặc SDT trống - Ten={0}, SDT={1}", ten, sdt));
+                        System.Diagnostics.Debug.WriteLine($"Lỗi MoFormKhachHang: Tên hoặc SDT trống - Ten={ten}, SDT={sdt}");
                         return;
                     }
 
                     int maKh = khachHangService.UpsertKhachHang(ten, cccd, sdt);
-                    if (maKh <= 0)
-                    {
-                        System.Diagnostics.Debug.WriteLine(string.Format("Lỗi UpsertKhachHang: Ten={0}, CCCD={1}, SDT={2}", ten, cccd, sdt));
-                        return;
-                    }
+                    AuditHelper.Log("Upsert", "KhachHang", maKh.ToString(),
+                        moTa: $"KH: {ten} - {sdt}",
+                        duLieuMoi: $"Ten={ten}; CCCD={cccd}; SDT={sdt}",
+                        ketQua: maKh > 0);
+
+                    if (maKh <= 0) return;
 
                     string trangThai = ComputeTrangThai(ngayNhan, ngayTraDuKien);
                     var datPhong = new DatPhong(
@@ -365,49 +360,51 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                     );
 
                     var dat = phongService.LayDatPhongTheoMaPhong(phong.MaPhong);
-                    System.Diagnostics.Debug.WriteLine(string.Format("MoFormKhachHang: Kiểm tra DatPhong - MaPhong={0}, Dat={1}",
-                        phong.MaPhong,
-                        (dat != null ? string.Format("MaDat={0}, NgayTraThucTe={1}, TrangThai={2}", dat.MaDat, dat.NgayTraThucTe, dat.TrangThai) : "null")));
-
                     bool result;
+
                     if (dat != null && !dat.NgayTraThucTe.HasValue && (dat.TrangThai == "Đã đặt" || dat.TrangThai == "Đang sử dụng"))
                     {
                         datPhong.MaDat = dat.MaDat;
                         datPhong.TrangThai = trangThai;
                         result = phongService.CapNhatDatPhong(datPhong);
-                        System.Diagnostics.Debug.WriteLine(string.Format("Cập nhật DatPhong: MaDat={0}, MaKH={1}, MaPhong={2}, Result={3}",
-                            datPhong.MaDat, maKh, phong.MaPhong, result));
+
+                        AuditHelper.Log("Sửa", "DatPhong",
+                            datPhong.MaDat.ToString(),
+                            moTa: $"Cập nhật đặt phòng | Phòng={phong.SoPhong} | {ngayNhan:dd/MM}→{ngayTraDuKien:dd/MM} | Cọc={tienCoc:N0} | Thuế={tienThue:N0} | Trạng thái={trangThai}",
+                            ketQua: result);
                     }
                     else
                     {
                         int maDat = phongService.ThemDatPhong(datPhong);
                         result = maDat > 0;
-                        System.Diagnostics.Debug.WriteLine(string.Format("Thêm DatPhong: MaDat={0}, MaKH={1}, MaPhong={2}, Result={3}",
-                            maDat, maKh, phong.MaPhong, result));
+
+                        AuditHelper.Log("Thêm", "DatPhong",
+                            (maDat > 0 ? maDat.ToString() : null),
+                            moTa: $"Thêm đặt phòng | Phòng={phong.SoPhong} | {ngayNhan:dd/MM}→{ngayTraDuKien:dd/MM} | Cọc={tienCoc:N0} | Thuế={tienThue:N0} | Trạng thái={trangThai}",
+                            ketQua: result);
                     }
 
                     if (result)
                     {
-                        if (!phongService.CapNhatTrangThai(phong.MaPhong, trangThai))
-                        {
-                            System.Diagnostics.Debug.WriteLine(string.Format("Lỗi CapNhatTrangThai: MaPhong={0}, TrangThai={1}", phong.MaPhong, trangThai));
-                            return;
-                        }
+                        bool okTrangThai = phongService.CapNhatTrangThai(phong.MaPhong, trangThai);
+                        AuditHelper.Log("Sửa", "Phong",
+                            phong.MaPhong.ToString(),
+                            moTa: $"Cập nhật trạng thái phòng {phong.SoPhong} = {trangThai}",
+                            ketQua: okTrangThai);
 
                         LoadPhongFromDB();
                         _selectedRoomIds.Clear();
-                        System.Diagnostics.Debug.WriteLine(string.Format("Lưu đặt phòng thành công: MaKH={0}, MaPhong={1}", maKh, phong.MaPhong));
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine(string.Format("Lỗi lưu DatPhong: MaKH={0}, MaPhong={1}, NgayNhan={2}, NgayTraDuKien={3}",
-                            maKh, phong.MaPhong, ngayNhan, ngayTraDuKien));
                     }
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(string.Format("Lỗi MoFormKhachHang: MaPhong={0}, Exception={1}", phong.MaPhong, ex.Message));
+                System.Diagnostics.Debug.WriteLine($"Lỗi MoFormKhachHang: MaPhong={phong.MaPhong}, Exception={ex.Message}");
+                AuditHelper.Log("Sửa", "DatPhong",
+                    phong.MaPhong.ToString(),
+                    ketQua: false,
+                    loi: ex.Message,
+                    moTa: "Exception khi lưu đặt phòng");
             }
         }
 
@@ -426,8 +423,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             if (_selectedRoomIds.Count > 0) ids.AddRange(_selectedRoomIds);
             else if (contextPanelIfNoneSelected != null)
             {
-                var p = contextPanelIfNoneSelected.Tag as Phong;
-                if (p != null) ids.Add(p.MaPhong);
+                if (contextPanelIfNoneSelected.Tag is Phong p) ids.Add(p.MaPhong);
             }
 
             if (ids.Count == 0)
@@ -436,69 +432,122 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 return;
             }
 
-            var soPhongs = _allRooms
-                .Where(x => ids.Contains(x.MaPhong))
-                .Select(x => x.SoPhong)
-                .OrderBy(x => x)
-                .ToList();
+            var soPhongs = _allRooms.Where(x => ids.Contains(x.MaPhong))
+                                    .Select(x => x.SoPhong)
+                                    .OrderBy(x => x)
+                                    .ToList();
 
             var msg = (ids.Count == 1)
-                ? string.Format("Xóa phòng {0}?", soPhongs.First())
-                : string.Format("Xóa {0} phòng: {1} ?", ids.Count, string.Join(", ", soPhongs));
+                ? $"Xóa phòng {soPhongs.First()}?"
+                : $"Xóa {ids.Count} phòng: {string.Join(", ", soPhongs)} ?";
 
             if (MessageBox.Show(msg, "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                return;
+                return; // chỉ return ở đây, KHÔNG đặt log phía sau return
 
-            foreach (var id in ids)
+            try
             {
-                phongService.Xoa(id);
-                var phong = _allRooms.FirstOrDefault(x => x.MaPhong == id);
-                if (phong != null) _allRooms.Remove(phong);
+                foreach (var id in ids)
+                {
+                    phongService.Xoa(id);
+                    var phong = _allRooms.FirstOrDefault(x => x.MaPhong == id);
+                    if (phong != null) _allRooms.Remove(phong);
+                }
+
+                // LOG OK (ghi 1 log cho thao tác hàng loạt)
+                QuanLyPhongKhachSan.UI.Helpers.AuditHelper.LogSuccess(
+                    hanhDong: "Xoá",
+                    doiTuong: "Phong",
+                    khoaChinh: string.Join(",", ids),
+                    moTa: $"Xóa phòng số {string.Join(", ", soPhongs)}"
+                );
+
+                LoadPhongFromDB();
             }
-            LoadPhongFromDB();
+            catch (Exception ex)
+            {
+                QuanLyPhongKhachSan.UI.Helpers.AuditHelper.LogFail(
+                    hanhDong: "Xoá",
+                    doiTuong: "Phong",
+                    khoaChinh: string.Join(",", ids),
+                    moTa: $"Xóa phòng số {string.Join(", ", soPhongs)}",
+                    loi: ex.Message
+                );
+                MessageBox.Show("Lỗi xóa phòng: " + ex.Message);
+            }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (cbLoaiPhong == null || cbLoaiPhong.SelectedIndex == -1)
+            try
             {
-                MessageBox.Show("Vui lòng chọn loại phòng!!");
-                return;
-            }
-            int soPhong;
-            if (!int.TryParse(txtSoPhong.Text, out soPhong) || soPhong <= 0)
-            {
-                MessageBox.Show("Vui lòng nhập số phòng hợp lệ!!");
-                return;
-            }
-            if (_allRooms.Any(p => p.SoPhong == soPhong))
-            {
-                MessageBox.Show("Số phòng đã tồn tại!");
-                return;
-            }
+                if (cbLoaiPhong == null || cbLoaiPhong.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Vui lòng chọn loại phòng!!");
+                    return;
+                }
+                if (!int.TryParse(txtSoPhong.Text, out var soPhong) || soPhong <= 0)
+                {
+                    MessageBox.Show("Vui lòng nhập số phòng hợp lệ!!");
+                    return;
+                }
+                if (_allRooms.Any(p => p.SoPhong == soPhong))
+                {
+                    MessageBox.Show("Số phòng đã tồn tại!");
+                    return;
+                }
 
-            var tenLoai = cbLoaiPhong.SelectedItem.ToString();
-            int maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
-            if (maLoai <= 0)
-            {
-                MessageBox.Show("Không tìm thấy Mã loại phòng. Hãy kiểm tra bảng LoaiPhong.");
-                return;
-            }
+                var tenLoai = cbLoaiPhong.SelectedItem.ToString();
+                int maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
+                if (maLoai <= 0)
+                {
+                    MessageBox.Show("Không tìm thấy Mã loại phòng. Hãy kiểm tra bảng LoaiPhong.");
+                    return;
+                }
 
-            var phongMoi = new Phong(maPhong: 0, soPhong: soPhong, maLoaiPhong: maLoai, trangThai: "Trống");
-            int maPhong = phongService.Them(phongMoi);
+                var phongMoi = new Phong(maPhong: 0, soPhong: soPhong, maLoaiPhong: maLoai, trangThai: "Trống");
+                int maPhong = phongService.Them(phongMoi);
 
-            if (maPhong > 0)
-            {
-                LoadPhongFromDB();
-                txtSoPhong.Clear();
-                if (cbLoaiPhong.Items.Count > 0) cbLoaiPhong.SelectedIndex = 0;
+                if (maPhong > 0)
+                {
+                    // LOG OK
+                    QuanLyPhongKhachSan.UI.Helpers.AuditHelper.LogSuccess(
+                        hanhDong: "Thêm",
+                        doiTuong: "Phong",
+                        khoaChinh: maPhong.ToString(),
+                        moTa: $"Thêm phòng số {soPhong}, loại {tenLoai}"
+                    );
+
+                    LoadPhongFromDB();
+                    txtSoPhong.Clear();
+                    if (cbLoaiPhong.Items.Count > 0) cbLoaiPhong.SelectedIndex = 0;
+                }
+                else
+                {
+                    // LOG FAIL
+                    QuanLyPhongKhachSan.UI.Helpers.AuditHelper.LogFail(
+                        hanhDong: "Thêm",
+                        doiTuong: "Phong",
+                        khoaChinh: "(chưa có)",
+                        moTa: $"Thêm phòng số {soPhong}, loại {tenLoai}",
+                        loi: "Them() trả về 0"
+                    );
+
+                    MessageBox.Show("Thêm phòng thất bại! Vui lòng kiểm tra lại LoaiPhong và dữ liệu đầu vào.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Thêm phòng thất bại! Vui lòng kiểm tra lại LoaiPhong và dữ liệu đầu vào.");
+                QuanLyPhongKhachSan.UI.Helpers.AuditHelper.LogFail(
+                    hanhDong: "Thêm",
+                    doiTuong: "Phong",
+                    khoaChinh: "(exception)",
+                    moTa: "Lỗi khi thêm phòng",
+                    loi: ex.Message
+                );
+                MessageBox.Show("Lỗi thêm phòng: " + ex.Message);
             }
         }
+
 
         private void RefreshPhongPanel(Guna2Panel panelPhong)
         {
@@ -506,28 +555,23 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             var phongTag = panelPhong.Tag as Phong;
             if (phongTag == null) return;
 
-            // Lấy lại dữ liệu phòng mới nhất (đã đổi loại / giá) từ DB
             var phongMoi = phongService.LayPhongTheoMaPhong(phongTag.MaPhong);
             if (phongMoi != null)
             {
-                // cập nhật Tag để những lần sau dùng dữ liệu mới
                 panelPhong.Tag = phongMoi;
 
-                // cập nhật label Loại phòng & Giá
                 var lblLoai = panelPhong.Controls.Find("lblLoaiPhong", true).OfType<Label>().FirstOrDefault();
                 var lblGia = panelPhong.Controls.Find("lblGia", true).OfType<Label>().FirstOrDefault();
                 if (lblLoai != null) lblLoai.Text = phongMoi.LoaiPhong ?? "";
                 if (lblGia != null) lblGia.Text = phongMoi.Gia.ToString("N0") + "đ";
             }
 
-            // cập nhật phần khách + màu nền
             var lblKhach = panelPhong.Controls.Find("lblKhach", true).OfType<Label>().FirstOrDefault();
             if (lblKhach != null)
             {
                 HienKhachLenPanel((Phong)panelPhong.Tag, lblKhach, panelPhong);
             }
         }
-
 
         public void RefreshPhongById(int maPhong)
         {
@@ -550,13 +594,11 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
         {
             var loaiPhongList = phongService.LayDanhSachLoaiPhong().Distinct().ToList();
 
-            // combobox lọc danh sách
             cbLoai.Items.Clear();
             cbLoai.Items.Add("None");
             cbLoai.Items.AddRange(loaiPhongList.ToArray());
             if (cbLoai.Items.Count > 0) cbLoai.SelectedIndex = 0;
 
-            // combobox loại phòng khi thêm mới
             if (cbLoaiPhong != null)
             {
                 cbLoaiPhong.Items.Clear();
@@ -615,7 +657,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format("Lỗi khi tải danh sách phòng: {0}", ex.Message));
+                MessageBox.Show($"Lỗi khi tải danh sách phòng: {ex.Message}");
             }
         }
 
@@ -694,8 +736,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             rdGiam.Checked = false;
         }
 
-        //helperss
-
         private void DoiLoaiPhong(Guna2Panel pnl)
         {
             if (pnl == null) return;
@@ -716,7 +756,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 f.MinimizeBox = false;
                 f.MaximizeBox = false;
                 f.Width = 360; f.Height = 140;
-                f.Text = string.Format("Đổi loại phòng {0}", p.SoPhong);
+                f.Text = $"Đổi loại phòng {p.SoPhong}";
 
                 var cb = new ComboBox { Left = 15, Top = 15, Width = 320, DropDownStyle = ComboBoxStyle.DropDownList };
                 cb.Items.AddRange(loais.ToArray());
@@ -730,7 +770,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
                 if (f.ShowDialog(this.FindForm()) == DialogResult.OK)
                 {
-                    var tenLoai = cb.SelectedItem != null ? cb.SelectedItem.ToString() : null;
+                    string old = p.LoaiPhong;
+                    var tenLoai = cb.SelectedItem?.ToString();
                     int maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
                     if (maLoai <= 0)
                     {
@@ -739,7 +780,15 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                     }
 
                     p.MaLoaiPhong = maLoai;
-                    if (!phongService.CapNhat(p))
+                    bool ok = phongService.CapNhat(p);
+
+                    AuditHelper.Log("Sửa", "Phong",
+                        p.MaPhong.ToString(),
+                        moTa: $"Đổi loại phòng {p.SoPhong}: {old} -> {tenLoai}",
+                        duLieuCu: old, duLieuMoi: tenLoai,
+                        ketQua: ok);
+
+                    if (!ok)
                     {
                         MessageBox.Show("Cập nhật loại phòng thất bại.");
                         return;
@@ -750,14 +799,20 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
         }
 
-        // Đặt trạng thái phòng thủ công (Trống/Đã đặt/Đang sử dụng)
         private void DatTrangThaiPhong(Guna2Panel pnl, string trangThai)
         {
             if (pnl == null) return;
             var p = pnl.Tag as Phong;
             if (p == null) return;
 
-            if (!phongService.CapNhatTrangThai(p.MaPhong, trangThai))
+            bool ok = phongService.CapNhatTrangThai(p.MaPhong, trangThai);
+
+            AuditHelper.Log("Sửa", "Phong",
+                p.MaPhong.ToString(),
+                moTa: $"Đặt trạng thái phòng {p.SoPhong} = {trangThai}",
+                ketQua: ok);
+
+            if (!ok)
             {
                 MessageBox.Show("Cập nhật trạng thái phòng thất bại.");
                 return;
@@ -765,7 +820,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
             LoadPhongFromDB();
         }
-
 
         private void btnThemNhieuKhachHang_Click(object sender, EventArgs e)
         {
@@ -776,7 +830,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 return;
             }
 
-            // Lấy booking hiện tại của từng phòng
             var items = new List<RoomBookingInfo>();
             foreach (var room in selected)
             {
@@ -787,18 +840,15 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 items.Add(new RoomBookingInfo { Room = room, Booking = bk, Customer = kh });
             }
 
-            // Chia nhóm: trống vs đang có đặt (chưa trả)
             var emptyRooms = items.Where(x => x.Booking == null || x.Booking.NgayTraThucTe.HasValue).ToList();
             var bookedRooms = items.Where(x => x.Booking != null && !x.Booking.NgayTraThucTe.HasValue).ToList();
 
-            // Không cho chọn lẫn lộn trống + có khách
             if (emptyRooms.Count > 0 && bookedRooms.Count > 0)
             {
                 MessageBox.Show("Vui lòng chỉ chọn các phòng TRỐNG hoặc các phòng của CÙNG 1 khách hàng.");
                 return;
             }
 
-            // Nếu là nhóm đang có khách: phải cùng 1 KH
             if (bookedRooms.Count > 0)
             {
                 var khSet = bookedRooms.Select(x => x.Booking.MaKH).Distinct().ToList();
@@ -809,7 +859,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 }
             }
 
-            // Nếu chỉ chọn 1 phòng -> mở nhanh frmThemvaSuaKH
             if (items.Count == 1)
             {
                 var one = items[0];
@@ -832,14 +881,12 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 return;
             }
 
-            // Nhiều phòng hợp lệ -> mở frmThemKH (gộp)
             string preTen = "", preCCCD = "", preSDT = "";
             int preMaKH = 0;
             DateTime? preNhan = null, preTra = null;
 
             if (bookedRooms.Count > 0)
             {
-                // Prefill theo KH hiện có
                 var anyHasCustomer = bookedRooms.FirstOrDefault(x => x.Customer != null);
                 if (anyHasCustomer == null)
                 {
@@ -859,7 +906,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
             else
             {
-                // Nhóm phòng trống: không prefill KH, ngày mặc định hôm nay -> ngày mai
                 preTen = ""; preCCCD = ""; preSDT = ""; preMaKH = 0;
                 preNhan = DateTime.Today;
                 preTra = DateTime.Today.AddDays(1);

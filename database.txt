@@ -1,6 +1,6 @@
 USE [QuanLyPhongKhachSan]
 GO
-/****** Object:  Table [dbo].[ChiTietHoaDon]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[ChiTietHoaDon]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +18,7 @@ CREATE TABLE [dbo].[ChiTietHoaDon](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DatPhong]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[DatPhong]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -39,7 +39,7 @@ CREATE TABLE [dbo].[DatPhong](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[HoaDon]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[HoaDon]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -58,7 +58,7 @@ CREATE TABLE [dbo].[HoaDon](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[KhachHang]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[KhachHang]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -79,7 +79,7 @@ CREATE TABLE [dbo].[KhachHang](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LichSuHoaDon]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[LichSuHoaDon]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -97,7 +97,7 @@ CREATE TABLE [dbo].[LichSuHoaDon](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LoaiPhong]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[LoaiPhong]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -112,7 +112,7 @@ CREATE TABLE [dbo].[LoaiPhong](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NhanVien]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[NhanVien]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -131,7 +131,33 @@ CREATE TABLE [dbo].[NhanVien](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Phong]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[NhatKyHeThong]    Script Date: 9/22/2025 10:09:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NhatKyHeThong](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ThoiGian] [datetime2](0) NOT NULL,
+	[MaNV] [int] NULL,
+	[TenDangNhap] [nvarchar](100) NULL,
+	[HanhDong] [nvarchar](50) NOT NULL,
+	[DoiTuong] [nvarchar](50) NULL,
+	[KhoaChinh] [nvarchar](50) NULL,
+	[MoTa] [nvarchar](500) NULL,
+	[DuLieuCu] [nvarchar](max) NULL,
+	[DuLieuMoi] [nvarchar](max) NULL,
+	[KetQua] [bit] NOT NULL,
+	[Loi] [nvarchar](1000) NULL,
+	[DiaChiIP] [nvarchar](45) NULL,
+	[TenMay] [nvarchar](100) NULL,
+ CONSTRAINT [PK__NhatKyHe__3214EC07C080B631] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Phong]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -153,7 +179,7 @@ CREATE TABLE [dbo].[Phong](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TaiKhoan]    Script Date: 9/22/2025 8:27:44 PM ******/
+/****** Object:  Table [dbo].[TaiKhoan]    Script Date: 9/22/2025 10:09:18 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -175,6 +201,10 @@ GO
 ALTER TABLE [dbo].[DatPhong] ADD  CONSTRAINT [DF_DatPhong_TrangThai]  DEFAULT (N'Đã đặt') FOR [TrangThai]
 GO
 ALTER TABLE [dbo].[HoaDon] ADD  CONSTRAINT [DF_HoaDon_NgayLap]  DEFAULT (sysutcdatetime()) FOR [NgayLap]
+GO
+ALTER TABLE [dbo].[NhatKyHeThong] ADD  CONSTRAINT [DF__NhatKyHeT__ThoiG__1D4655FB]  DEFAULT (sysutcdatetime()) FOR [ThoiGian]
+GO
+ALTER TABLE [dbo].[NhatKyHeThong] ADD  CONSTRAINT [DF__NhatKyHeT__KetQu__1E3A7A34]  DEFAULT ((1)) FOR [KetQua]
 GO
 ALTER TABLE [dbo].[Phong] ADD  CONSTRAINT [DF_Phong_TrangThai]  DEFAULT (N'Trống') FOR [TrangThai]
 GO
@@ -218,6 +248,11 @@ ALTER TABLE [dbo].[LichSuHoaDon]  WITH CHECK ADD  CONSTRAINT [FK_LichSuHoaDon_Nh
 REFERENCES [dbo].[NhanVien] ([MaNV])
 GO
 ALTER TABLE [dbo].[LichSuHoaDon] CHECK CONSTRAINT [FK_LichSuHoaDon_NhanVien]
+GO
+ALTER TABLE [dbo].[NhatKyHeThong]  WITH CHECK ADD  CONSTRAINT [FK_NhatKyHeThong_NhanVien] FOREIGN KEY([MaNV])
+REFERENCES [dbo].[NhanVien] ([MaNV])
+GO
+ALTER TABLE [dbo].[NhatKyHeThong] CHECK CONSTRAINT [FK_NhatKyHeThong_NhanVien]
 GO
 ALTER TABLE [dbo].[Phong]  WITH CHECK ADD  CONSTRAINT [FK_Phong_LoaiPhong] FOREIGN KEY([MaLoaiPhong])
 REFERENCES [dbo].[LoaiPhong] ([MaLoaiPhong])

@@ -35,12 +35,9 @@
             this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.cbbTenNhanVien = new System.Windows.Forms.ComboBox();
             this.dgvLog = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
             this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -82,10 +79,6 @@
             this.dgvLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLog.ColumnHeadersHeight = 15;
             this.dgvLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
             this.dgvLog.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -123,16 +116,6 @@
             this.dgvLog.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvLog.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Tên nhân viên";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Chi tiết thay đổi";
-            this.Column2.Name = "Column2";
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -160,11 +143,6 @@
             this.guna2DateTimePicker1.TabIndex = 8;
             this.guna2DateTimePicker1.Value = new System.DateTime(2025, 9, 12, 15, 33, 13, 654);
             // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Ngày thay đổi";
-            this.Column3.Name = "Column3";
-            // 
             // UserControlLichSuThayDoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,11 +163,8 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
         private System.Windows.Forms.ComboBox cbbTenNhanVien;
         private Guna.UI2.WinForms.Guna2DataGridView dgvLog;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cmsXoa;
         private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

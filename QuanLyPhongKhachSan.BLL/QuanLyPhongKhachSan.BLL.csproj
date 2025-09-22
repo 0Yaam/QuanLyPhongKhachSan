@@ -46,6 +46,7 @@
     <Compile Include="Services\KhachHangService.cs" />
     <Compile Include="Services\LichSuHoaDonService.cs" />
     <Compile Include="Services\NhanSuService.cs" />
+    <Compile Include="Services\NhatKyService.cs" />
     <Compile Include="Services\PhongService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TaiKhoanService.cs" />
