@@ -17,7 +17,6 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         private readonly Label labelEmpty = new Label
         {
             AutoSize = false,
-            Dock = DockStyle.Fill,
             Text = "Không có nhật ký",
             TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
             ForeColor = System.Drawing.Color.DimGray,
@@ -52,7 +51,6 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             dgvLog.AllowUserToDeleteRows = false;
             dgvLog.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvLog.MultiSelect = false;
-            dgvLog.Dock = DockStyle.Fill;
 
             // Clear cột cũ để tránh trùng/ẩn
             dgvLog.Columns.Clear();
@@ -73,7 +71,6 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                 Name = "TenNV",
                 HeaderText = "Tên nhân viên",
                 DataPropertyName = "TenNV",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 FillWeight = 45
             };
             dgvLog.Columns.Add(colTenNV);
@@ -84,7 +81,6 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
                 Name = "Loai",
                 HeaderText = "Loại thay đổi",
                 DataPropertyName = "Loai",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 FillWeight = 55
             };
             dgvLog.Columns.Add(colLoai);
@@ -159,6 +155,26 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
             {
                 frm.ShowDialog(this);
             }
+        }
+
+        private void dgvLog_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void guna2DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbbTenNhanVien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

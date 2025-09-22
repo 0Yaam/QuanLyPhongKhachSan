@@ -3,6 +3,7 @@ using QuanLyPhongKhachSan.Common;
 using QuanLyPhongKhachSan.DAL.DAO;
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
+using QuanLyPhongKhachSan.UI.Helpers;
 using System.Windows.Forms;
 
 namespace QuanLyPhongKhachSan
@@ -73,7 +74,10 @@ namespace QuanLyPhongKhachSan
                 CurrentUser.MaNV = (taiKhoan.MaNV > 0) ? (int?)taiKhoan.MaNV : null;
                 CurrentUser.TenDangNhap = taiKhoan.TenDangNhap;
                 CurrentUser.Quyen = taiKhoan.Quyen;
-
+                AuditHelper.SetCurrentUser(
+                CurrentUser.MaNV,            // MaNV: để Admin grid map sang TenNV
+                CurrentUser.TenDangNhap      // để log vẫn có user text nếu MaNV=null
+                );
                 // Lấy tên hiển thị + ngày tham gia từ CSDL (nếu có MaNV)
                 string tenHienThi = taiKhoan.TenDangNhap;
                 System.DateTime? ngayTG = null;
