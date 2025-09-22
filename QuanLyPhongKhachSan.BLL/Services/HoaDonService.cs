@@ -2,6 +2,7 @@
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyPhongKhachSan.BLL.Services
 {
@@ -37,7 +38,13 @@ namespace QuanLyPhongKhachSan.BLL.Services
             return _dao.CapNhatTongTienVaGhiChu(maHD, tong, ghiChu) > 0;
         }
 
+        public HoaDon LayTheoMa(int maHD) => _dao.LayTheoMa(maHD);
 
+        public HoaDon LayLan1TheoMaDat(int maDat)
+        {
+            var all = _dao.LayDanhSach();
+            return all.FirstOrDefault(x => x.MaDat == maDat && string.Equals(x.LoaiHoaDon, "Lần 1", StringComparison.OrdinalIgnoreCase));
+        }
 
 
     }
