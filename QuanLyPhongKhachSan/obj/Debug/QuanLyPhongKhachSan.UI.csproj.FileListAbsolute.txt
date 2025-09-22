@@ -192,5 +192,5 @@ C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhach
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPh.DF605182.Up2Date
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.exe
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.pdb
-C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlThongKeChung.resources
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Login.UserControlAdmin.UserControlThongKeChung.resources
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan\obj\Debug\QuanLyPhongKhachSan.Bar.UserControlThongKe.resources

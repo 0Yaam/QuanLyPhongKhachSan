@@ -31,7 +31,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
 
             if (dtpNgayHienTai != null) dtpNgayHienTai.Value = DateTime.Now;
             if (txtSoPhong != null) txtSoPhong.PlaceholderText = "Số phòng";
-            if (btnThemKH != null) btnThemKH.Click += btnThemKH_Click;
             this.TabStop = true;
             this.KeyDown += UserControl_KeyDown;
             if (flpContain != null)
@@ -767,7 +766,8 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             LoadPhongFromDB();
         }
 
-        private void btnThemKH_Click(object sender, EventArgs e)
+
+        private void btnThemNhieuKhachHang_Click(object sender, EventArgs e)
         {
             var selected = GetSelectedRooms();
             if (selected.Count == 0)

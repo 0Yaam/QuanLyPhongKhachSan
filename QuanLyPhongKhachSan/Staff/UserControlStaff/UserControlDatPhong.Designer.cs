@@ -55,7 +55,7 @@
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dtpNgayHienTai = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
+            this.btnThemNhieuKhachHang = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -411,27 +411,27 @@
             this.guna2Button1.TabIndex = 26;
             this.guna2Button1.Text = "Thêm khách hàng";
             // 
-            // btnThemKH
+            // btnThemNhieuKhachHang
             // 
-            this.btnThemKH.BorderRadius = 10;
-            this.btnThemKH.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemKH.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemKH.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThemKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThemKH.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThemKH.ForeColor = System.Drawing.Color.White;
-            this.btnThemKH.Location = new System.Drawing.Point(917, 551);
-            this.btnThemKH.Name = "btnThemKH";
-            this.btnThemKH.Size = new System.Drawing.Size(83, 46);
-            this.btnThemKH.TabIndex = 25;
-            this.btnThemKH.Text = "Thêm";
-            this.btnThemKH.Click += new System.EventHandler(this.btnThemKH_Click);
+            this.btnThemNhieuKhachHang.BorderRadius = 10;
+            this.btnThemNhieuKhachHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemNhieuKhachHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemNhieuKhachHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThemNhieuKhachHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThemNhieuKhachHang.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnThemNhieuKhachHang.ForeColor = System.Drawing.Color.White;
+            this.btnThemNhieuKhachHang.Location = new System.Drawing.Point(915, 542);
+            this.btnThemNhieuKhachHang.Name = "btnThemNhieuKhachHang";
+            this.btnThemNhieuKhachHang.Size = new System.Drawing.Size(97, 40);
+            this.btnThemNhieuKhachHang.TabIndex = 25;
+            this.btnThemNhieuKhachHang.Text = "Thêm nhiều KH";
+            this.btnThemNhieuKhachHang.Click += new System.EventHandler(this.btnThemNhieuKhachHang_Click);
             // 
             // UserControlDatPhong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnThemKH);
+            this.Controls.Add(this.btnThemNhieuKhachHang);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.dtpNgayHienTai);
             this.Controls.Add(this.groupBox4);
@@ -488,6 +488,6 @@
         private Guna.UI2.WinForms.Guna2RadioButton rdSoPhong;
         private Guna.UI2.WinForms.Guna2Button btnReset;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2Button btnThemKH;
+        private Guna.UI2.WinForms.Guna2Button btnThemNhieuKhachHang;
     }
 }

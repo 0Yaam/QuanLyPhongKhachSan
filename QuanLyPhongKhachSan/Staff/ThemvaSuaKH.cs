@@ -459,7 +459,7 @@ namespace QuanLyPhongKhachSan
                     MaHD = maHD,
                     MaDat = _maDatHienTai,
                     ThoiGianIn = DateTime.Now,
-                    MaNV = AppSession.MaNVHienTai, // Thay bằng mã nhân viên thực tế nếu có
+                    MaNV = CurrentUser.MaNV ?? 0, // Thay bằng mã nhân viên thực tế nếu có
                     SoPhong = soPhongStr
                 });
                 System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {_maDatHienTai}, SoPhong: {soPhongStr}");
@@ -470,7 +470,7 @@ namespace QuanLyPhongKhachSan
                     f.BindHeader(
                         loaiHD: loaiHDDb,
                         ngayLap: DateTime.Now,
-                        nhanVien: _tenNhanVien,
+                        nhanVien: CurrentUser.TenHienThi,
                         maHD: maHD,
                         tenKH: tenKH
                     );
@@ -551,7 +551,7 @@ namespace QuanLyPhongKhachSan
                     f.BindHeader(
                         loaiHD: "Hóa đơn lần 2",
                         ngayLap: DateTime.Now,
-                        nhanVien: _tenNhanVien,
+                        nhanVien: CurrentUser.TenHienThi,
                         maHD: maHD2,
                         tenKH: tenKH,
                         maDat: _maDatHienTai,
@@ -618,7 +618,7 @@ namespace QuanLyPhongKhachSan
                         MaHD = maHD2,
                         MaDat = dat.MaDat,
                         ThoiGianIn = DateTime.Now,
-                        MaNV = 0, // Thay bằng mã nhân viên thực tế nếu có
+                        MaNV = CurrentUser.MaNV ?? 0, // Thay bằng mã nhân viên thực tế nếu có
                         SoPhong = soPhongStr
                     });
                     System.Diagnostics.Debug.WriteLine($"LichSuHoaDon Lần 2 saved with ID: {logId}, MaHD: {maHD2}, MaDat: {dat.MaDat}, SoPhong: {soPhongStr}");

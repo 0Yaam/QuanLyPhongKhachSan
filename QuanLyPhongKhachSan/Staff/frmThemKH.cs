@@ -1,5 +1,6 @@
 ﻿using QuanLyPhongKhachSan;
 using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.Common;
 using QuanLyPhongKhachSan.DAL.OL;
 using QuanLyPhongKhachSan.Staff.UserControlStaff;
 using System;
@@ -21,7 +22,6 @@ namespace QuanLyPhongKhachSan.Staff
 
         private readonly PhongService _phongService = new PhongService();
         private readonly KhachHangService _khService = new KhachHangService();
-
         private decimal _tongTamTinh = 0m;
 
         public frmThemKH(
@@ -345,7 +345,7 @@ namespace QuanLyPhongKhachSan.Staff
                     MaHD = maHD,
                     MaDat = maDatDaiDien,
                     ThoiGianIn = DateTime.Now,
-                    MaNV = 0,
+                    MaNV = CurrentUser.MaNV ?? 0,
                     SoPhong = soPhongStr
                 });
                 System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: LichSuHoaDon saved with ID: {logId}, MaHD: {maHD}, MaDat: {maDatDaiDien}, SoPhong: {soPhongStr}");
@@ -356,13 +356,14 @@ namespace QuanLyPhongKhachSan.Staff
                     f.BindHeader(
                         loaiHD: "Lần 1",
                         ngayLap: DateTime.Now,
-                        nhanVien: Environment.UserName,
+                        nhanVien: TenNhanVienHienThi(),  // <— thay Environment.UserName
                         maHD: maHD,
                         tenKH: tenKH
                     );
                     f.BindChiTietNhieuPhong(lines);
                     f.ShowDialog(this);
                 }
+
 
                 // Thông báo thành công
                 MessageBox.Show(
@@ -485,7 +486,7 @@ namespace QuanLyPhongKhachSan.Staff
                     f.BindHeader(
                         loaiHD: "Hóa đơn lần 2",
                         ngayLap: DateTime.Now,
-                        nhanVien: Environment.UserName,
+                        nhanVien: CurrentUser.TenHienThi,
                         maHD: maHD2,
                         tenKH: tenKH,
                         maDat: maDatDaiDien,
@@ -535,7 +536,8 @@ namespace QuanLyPhongKhachSan.Staff
                         MaDat = maDatDaiDien,
                         ThoiGianIn = DateTime.Now,
                         SoPhong = soPhongStr,
-                        MaNV = 0
+                        MaNV = CurrentUser.MaNV ?? 0,
+
                     });
                     System.Diagnostics.Debug.WriteLine($"btnHoaDon2_Click: LichSuHoaDon saved with ID: {logId2}, MaHD: {maHD2}, MaDat: {maDatDaiDien}, SoPhong: {soPhongStr}");
                     AppEvents.RaiseInvoiceLogged();
@@ -591,5 +593,32 @@ namespace QuanLyPhongKhachSan.Staff
                 MessageBox.Show("Lỗi in Hóa đơn lần 2: " + ex.Message);
             }
         }
+
+
+        // dùng chung đâu cũng được (frmThemKH hoặc 1 Utils tĩnh)
+        private string TenNhanVienHienThi()
+        {
+            // CurrentUser.* do bạn set khi đăng nhập
+            if (!string.IsNullOrWhiteSpace(CurrentUser.TenHienThi))
+                return CurrentUser.TenHienThi;
+            if (!string.IsNullOrWhiteSpace(CurrentUser.TenDangNhap))
+                return CurrentUser.TenDangNhap;
+
+            // Tra DB nếu có MaNV
+            try
+            {
+                if (CurrentUser.MaNV.HasValue && CurrentUser.MaNV.Value > 0)
+                {
+                    var nv = new QuanLyPhongKhachSan.DAL.DAO.NhanVienDAO()
+                                .LayTheoMa(CurrentUser.MaNV.Value);
+                    if (nv != null && !string.IsNullOrWhiteSpace(nv.TenNV))
+                        return nv.TenNV;
+                }
+            }
+            catch { /* bỏ qua, fallback */ }
+
+            return "Nhân viên";
+        }
+
     }
 }

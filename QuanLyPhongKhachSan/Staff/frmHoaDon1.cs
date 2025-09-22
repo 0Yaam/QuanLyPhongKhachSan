@@ -53,9 +53,10 @@ namespace QuanLyPhongKhachSan
         // frmHoaDon1.cs
         public void BindHeader(string loaiHD, DateTime ngayLap, string nhanVien, int maHD, string tenKH)
         {
+            
             txtLoaiHD.Text = loaiHD;
             txtNgayLapHD.Text = ngayLap.ToString("dd/MM/yyyy HH:mm");
-            txtNhanVien.Text = nhanVien;
+            txtNhanVien.Text = AppSession.TenNhanVienHienThi;
             txtMaHoaDon.Text = maHD.ToString();
             txtKhachHang.Text = tenKH;
         }

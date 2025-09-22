@@ -99,7 +99,7 @@ namespace QuanLyPhongKhachSan.Staff
         public void BindHeader(
             string loaiHD,
             DateTime ngayLap,
-            string nhanVien,      // có thể để "" -> sẽ fallback AppSession.TenNhanVienHienThi
+            string nhanVien,   
             int maHD,
             string tenKH,
             int maDat,

@@ -1,6 +1,6 @@
 ﻿namespace QuanLyPhongKhachSan.Bar
 {
-    partial class UserControlThongKeChung
+    partial class UserControlThongKe
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.chrThongKe = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -59,16 +59,16 @@
             // 
             // chrThongKe
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chrThongKe.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chrThongKe.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chrThongKe.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrThongKe.Legends.Add(legend1);
             this.chrThongKe.Location = new System.Drawing.Point(29, 86);
             this.chrThongKe.Name = "chrThongKe";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chrThongKe.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chrThongKe.Series.Add(series1);
             this.chrThongKe.Size = new System.Drawing.Size(993, 520);
             this.chrThongKe.TabIndex = 36;
             this.chrThongKe.Text = "chart1";
