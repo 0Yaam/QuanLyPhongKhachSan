@@ -44,6 +44,13 @@
             this.txtLoaiHD = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.dgvCTHD = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.Phong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TuNgay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DenNgay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoNgay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TienCoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TienPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTongTien = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -58,13 +65,6 @@
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtSoTien = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.Phong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TuNgay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DenNgay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoNgay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TienCoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TienPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCTHD)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -266,6 +266,7 @@
             this.dgvCTHD.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCTHD.Location = new System.Drawing.Point(12, 258);
             this.dgvCTHD.Name = "dgvCTHD";
+            this.dgvCTHD.ReadOnly = true;
             this.dgvCTHD.RowHeadersVisible = false;
             this.dgvCTHD.Size = new System.Drawing.Size(435, 169);
             this.dgvCTHD.TabIndex = 16;
@@ -282,7 +283,7 @@
             this.dgvCTHD.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.dgvCTHD.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvCTHD.ThemeStyle.HeaderStyle.Height = 15;
-            this.dgvCTHD.ThemeStyle.ReadOnly = false;
+            this.dgvCTHD.ThemeStyle.ReadOnly = true;
             this.dgvCTHD.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvCTHD.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCTHD.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -290,6 +291,54 @@
             this.dgvCTHD.ThemeStyle.RowsStyle.Height = 22;
             this.dgvCTHD.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCTHD.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            // 
+            // Phong
+            // 
+            this.Phong.HeaderText = "Phòng";
+            this.Phong.Name = "Phong";
+            this.Phong.ReadOnly = true;
+            // 
+            // TuNgay
+            // 
+            this.TuNgay.FillWeight = 213.198F;
+            this.TuNgay.HeaderText = "Từ ngày";
+            this.TuNgay.Name = "TuNgay";
+            this.TuNgay.ReadOnly = true;
+            // 
+            // DenNgay
+            // 
+            this.DenNgay.FillWeight = 161.5F;
+            this.DenNgay.HeaderText = "Đến";
+            this.DenNgay.Name = "DenNgay";
+            this.DenNgay.ReadOnly = true;
+            // 
+            // SoNgay
+            // 
+            this.SoNgay.FillWeight = 74.13689F;
+            this.SoNgay.HeaderText = "Thời gian";
+            this.SoNgay.Name = "SoNgay";
+            this.SoNgay.ReadOnly = true;
+            // 
+            // TienCoc
+            // 
+            this.TienCoc.FillWeight = 50.38838F;
+            this.TienCoc.HeaderText = "Tiền cọc";
+            this.TienCoc.Name = "TienCoc";
+            this.TienCoc.ReadOnly = true;
+            // 
+            // TienPhong
+            // 
+            this.TienPhong.FillWeight = 50.38838F;
+            this.TienPhong.HeaderText = "Tiền phòng";
+            this.TienPhong.Name = "TienPhong";
+            this.TienPhong.ReadOnly = true;
+            // 
+            // TongTien
+            // 
+            this.TongTien.FillWeight = 50.38838F;
+            this.TongTien.HeaderText = "Tổng tiền";
+            this.TongTien.Name = "TongTien";
+            this.TongTien.ReadOnly = true;
             // 
             // txtTongTien
             // 
@@ -499,47 +548,6 @@
             this.guna2HtmlLabel15.Size = new System.Drawing.Size(44, 19);
             this.guna2HtmlLabel15.TabIndex = 26;
             this.guna2HtmlLabel15.Text = "Số tiền:";
-            // 
-            // Phong
-            // 
-            this.Phong.HeaderText = "Phòng";
-            this.Phong.Name = "Phong";
-            // 
-            // TuNgay
-            // 
-            this.TuNgay.FillWeight = 213.198F;
-            this.TuNgay.HeaderText = "Từ ngày";
-            this.TuNgay.Name = "TuNgay";
-            // 
-            // DenNgay
-            // 
-            this.DenNgay.FillWeight = 161.5F;
-            this.DenNgay.HeaderText = "Đến";
-            this.DenNgay.Name = "DenNgay";
-            // 
-            // SoNgay
-            // 
-            this.SoNgay.FillWeight = 74.13689F;
-            this.SoNgay.HeaderText = "Thời gian";
-            this.SoNgay.Name = "SoNgay";
-            // 
-            // TienCoc
-            // 
-            this.TienCoc.FillWeight = 50.38838F;
-            this.TienCoc.HeaderText = "Tiền cọc";
-            this.TienCoc.Name = "TienCoc";
-            // 
-            // TienPhong
-            // 
-            this.TienPhong.FillWeight = 50.38838F;
-            this.TienPhong.HeaderText = "Tiền phòng";
-            this.TienPhong.Name = "TienPhong";
-            // 
-            // TongTien
-            // 
-            this.TongTien.FillWeight = 50.38838F;
-            this.TongTien.HeaderText = "Tổng tiền";
-            this.TongTien.Name = "TongTien";
             // 
             // frmHoaDon1
             // 

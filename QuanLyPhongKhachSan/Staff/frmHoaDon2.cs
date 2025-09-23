@@ -99,7 +99,7 @@ namespace QuanLyPhongKhachSan.Staff
         public void BindHeader(
             string loaiHD,
             DateTime ngayLap,
-            string nhanVien,   
+            string nhanVien,
             int maHD,
             string tenKH,
             int maDat,
@@ -150,6 +150,8 @@ namespace QuanLyPhongKhachSan.Staff
 
                 decimal gia = it.GiaPhong;
                 decimal tienPhong = soNgayTong * gia;
+                decimal tienCoc = it.TienCoc > 0 ? it.TienCoc : 200000m; // Auto 200k nếu không có giá trị
+                decimal tongTien = tienCoc + tienPhong;
 
                 rows.Add(new CTHDView
                 {
@@ -157,9 +159,9 @@ namespace QuanLyPhongKhachSan.Staff
                     TuNgay = tu,
                     DenNgay = denThucTe,
                     SoNgay = soNgayTong,
-                    TienCoc = 0m,  // Lần 2 không cộng cọc vào từng dòng
+                    TienCoc = tienCoc,
                     TienPhong = tienPhong,
-                    TongTien = tienPhong
+                    TongTien = tongTien
                 });
             }
 
@@ -168,8 +170,8 @@ namespace QuanLyPhongKhachSan.Staff
         }
 
         /// <summary>
-        /// Tính & hiển thị tổng tiền: 
-        /// - txtTongTien: tổng tiền phòng (đã tính lố ngày)
+        /// Tính & hiển thị tổng tiền:
+        /// - txtTongTien: tổng cột TongTien trong bảng (đã bao gồm cọc + phòng)
         /// - txtTongTienCoc: tổng cọc (HĐ1)
         /// - txtTienSauDichVu: _tienCoc - tổng dịch vụ
         /// </summary>
@@ -177,10 +179,10 @@ namespace QuanLyPhongKhachSan.Staff
         {
             var vi = CultureInfo.GetCultureInfo("vi-VN");
 
-            // 1) Tổng tiền phòng
+            // 1) Tổng tiền từ cột TongTien (đã = cọc + phòng mỗi dòng)
             var cthdRows = dgvCTHD.DataSource as List<CTHDView> ?? new List<CTHDView>();
-            decimal tongCTHD = cthdRows.Sum(r => r.TongTien);
-            txtTongTien.Text = string.Format(vi, "{0:N0}đ", tongCTHD);
+            decimal tongTien = cthdRows.Sum(r => r.TongTien);
+            txtTongTien.Text = string.Format(vi, "{0:N0}đ", tongTien);
 
             // 2) Tổng dịch vụ
             decimal tongDichVu = 0m;
@@ -192,7 +194,8 @@ namespace QuanLyPhongKhachSan.Staff
             }
 
             // 3) Tổng tiền cọc (từ HĐ1)
-            txtTongTienCoc.Text = string.Format(vi, "{0:N0}đ", _tienCoc);
+            decimal tongTienCoc = _tienCoc;
+            txtTongTienCoc.Text = string.Format(vi, "{0:N0}đ", tongTienCoc);
 
             // 4) Tiền sau dịch vụ = tiền cọc - tổng dịch vụ
             decimal tienSauDichVu = _tienCoc - tongDichVu;
@@ -270,6 +273,8 @@ namespace QuanLyPhongKhachSan.Staff
                 {
                     int soNgay = Math.Max(1, it.SoNgay);
                     decimal tienPhong = soNgay * it.GiaPhong;
+                    decimal tienCoc = 200000m; 
+                    decimal tongTien = tienCoc + tienPhong;
 
                     rows.Add(new CTHDView
                     {
@@ -277,16 +282,14 @@ namespace QuanLyPhongKhachSan.Staff
                         TuNgay = it.TuNgay.Date,
                         DenNgay = it.DenNgay.Date <= it.TuNgay.Date ? it.TuNgay.Date.AddDays(1) : it.DenNgay.Date,
                         SoNgay = soNgay,
-                        TienCoc = 0m,
+                        TienCoc = tienCoc,
                         TienPhong = tienPhong,
-                        TongTien = tienPhong
+                        TongTien = tongTien
                     });
                 }
             }
 
             dgvCTHD.DataSource = rows;
-            var vi = CultureInfo.GetCultureInfo("vi-VN");
-            txtTongTien.Text = string.Format(vi, "{0:N0}đ", rows.Sum(r => r.TongTien));
             CapNhatTongTien();
         }
     }

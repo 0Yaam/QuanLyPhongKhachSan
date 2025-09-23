@@ -38,6 +38,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
             this.dtpDenNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -124,13 +125,14 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsXoa});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(95, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
             // 
             // cmsXoa
             // 
             this.cmsXoa.Name = "cmsXoa";
-            this.cmsXoa.Size = new System.Drawing.Size(94, 22);
+            this.cmsXoa.Size = new System.Drawing.Size(180, 22);
             this.cmsXoa.Text = "Xóa";
+            this.cmsXoa.Click += new System.EventHandler(this.cmsXoa_Click_1);
             // 
             // dtpDenNgay
             // 
@@ -138,7 +140,7 @@
             this.dtpDenNgay.Checked = true;
             this.dtpDenNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDenNgay.Location = new System.Drawing.Point(453, 17);
+            this.dtpDenNgay.Location = new System.Drawing.Point(435, 17);
             this.dtpDenNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpDenNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDenNgay.Name = "dtpDenNgay";
@@ -147,10 +149,28 @@
             this.dtpDenNgay.Value = new System.DateTime(2025, 9, 12, 15, 33, 13, 654);
             this.dtpDenNgay.ValueChanged += new System.EventHandler(this.dtpDenNgay_ValueChanged);
             // 
+            // chkLocTheoNgay
+            // 
+            this.chkLocTheoNgay.AutoSize = true;
+            this.chkLocTheoNgay.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.CheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.CheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.Location = new System.Drawing.Point(565, 24);
+            this.chkLocTheoNgay.Name = "chkLocTheoNgay";
+            this.chkLocTheoNgay.Size = new System.Drawing.Size(15, 14);
+            this.chkLocTheoNgay.TabIndex = 9;
+            this.chkLocTheoNgay.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chkLocTheoNgay.UncheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.UncheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chkLocTheoNgay.CheckedChanged += new System.EventHandler(this.chkLocTheoNgay_CheckedChanged);
+            // 
             // UserControlLichSuThayDoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkLocTheoNgay);
             this.Controls.Add(this.dtpDenNgay);
             this.Controls.Add(this.dgvLog);
             this.Controls.Add(this.cbbTenNhanVien);
@@ -160,6 +180,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -170,5 +191,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cmsXoa;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpDenNgay;
+        private Guna.UI2.WinForms.Guna2CheckBox chkLocTheoNgay;
     }
 }

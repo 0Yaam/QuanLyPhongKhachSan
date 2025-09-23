@@ -1,7 +1,6 @@
 ﻿using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace QuanLyPhongKhachSan.DAL.DAO
@@ -110,6 +109,18 @@ VALUES (@MaNV, @User, SYSDATETIME(), @HanhDong, @DoiTuong, @KhoaChinh, @MoTa, @K
                 }
             }
             return null;
+        }
+
+        public void Xoa(int id)
+        {
+            const string sql = "DELETE FROM dbo.NhatKyHeThong WHERE Id = @id";
+            using (var conn = new SqlConnection(_cs))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }
