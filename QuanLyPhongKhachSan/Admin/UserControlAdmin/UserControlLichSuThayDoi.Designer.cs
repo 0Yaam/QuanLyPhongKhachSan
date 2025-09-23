@@ -145,7 +145,7 @@
             this.dtpDenNgay.Size = new System.Drawing.Size(124, 28);
             this.dtpDenNgay.TabIndex = 8;
             this.dtpDenNgay.Value = new System.DateTime(2025, 9, 12, 15, 33, 13, 654);
-            this.dtpDenNgay.ValueChanged += new System.EventHandler(this.guna2DateTimePicker1_ValueChanged);
+            this.dtpDenNgay.ValueChanged += new System.EventHandler(this.dtpDenNgay_ValueChanged);
             // 
             // UserControlLichSuThayDoi
             // 

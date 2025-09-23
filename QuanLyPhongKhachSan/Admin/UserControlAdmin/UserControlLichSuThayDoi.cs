@@ -162,17 +162,17 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
 
         }
 
-        private void guna2DateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cbbTenNhanVien_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
         private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
         {
 
         }
