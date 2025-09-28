@@ -1,7 +1,11 @@
-﻿using QuanLyPhongKhachSan.DAL.OL;
+﻿using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.Common;
+using QuanLyPhongKhachSan.DAL.DAO;
+using QuanLyPhongKhachSan.DAL.OL;
 using System;
+using QuanLyPhongKhachSan.UI.Helpers;
 using System.Windows.Forms;
-using QuanLyPhongKhachSan.BLL.Services;
+using QuanLyPhongKhachSan.Login;
 
 namespace QuanLyPhongKhachSan
 {
@@ -67,6 +71,44 @@ namespace QuanLyPhongKhachSan
 
             if (taiKhoan != null)
             {
+                CurrentUser.MaTK = taiKhoan.MaTK;
+                CurrentUser.MaNV = (taiKhoan.MaNV > 0) ? (int?)taiKhoan.MaNV : null;
+                CurrentUser.TenDangNhap = taiKhoan.TenDangNhap;
+                CurrentUser.Quyen = taiKhoan.Quyen;
+                AuditHelper.SetCurrentUser(
+                CurrentUser.MaNV,            // MaNV: để Admin grid map sang TenNV
+                CurrentUser.TenDangNhap      // để log vẫn có user text nếu MaNV=null
+                );
+                // Lấy tên hiển thị + ngày tham gia từ CSDL (nếu có MaNV)
+                string tenHienThi = taiKhoan.TenDangNhap;
+                System.DateTime? ngayTG = null;
+
+                if (CurrentUser.MaNV.HasValue)
+                {
+                    var nvDao = new NhanVienDAO();
+                    var nv = nvDao.LayTheoMa(CurrentUser.MaNV.Value);
+                    if (nv != null)
+                    {
+                        tenHienThi = string.IsNullOrWhiteSpace(nv.TenNV) ? tenHienThi : nv.TenNV;
+                        ngayTG = nv.NgayThamGia;
+                    }
+                }
+                AppSession.TaiKhoanDangNhap = taiKhoan;
+                AppSession.MaNVHienTai = taiKhoan.MaNV; // có thể = 0
+
+                string tenNV = null;
+                if (taiKhoan.MaNV > 0)
+                {
+                    // Lấy tên NV nhanh gọn (thêm 1 helper nếu muốn)
+                    var nvDao = new NhanVienDAO();
+                    // Viết helper trong DAO:
+                    // public string LayTenNV(int maNV) { SELECT TenNV FROM NhanVien WHERE MaNV=@id }
+                    tenNV = nvDao.LayTenNV(taiKhoan.MaNV); // bạn thêm method này (1–2 dòng SQL)
+                }
+
+                AppSession.TenNhanVienHienThi =
+                    !string.IsNullOrWhiteSpace(tenNV) ? tenNV
+                    : (taiKhoan.Quyen == 1 ? "Admin" : taiKhoan.TenDangNhap);
                 if (taiKhoan.Quyen == 1)
                 {
                     var formAdmin = new frmAdmin();
@@ -88,6 +130,12 @@ namespace QuanLyPhongKhachSan
             {
                 MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!");
             }
+        }
+
+        private void lblForgotPassword_Click(object sender, EventArgs e)
+        {
+            frmQuenMK f = new frmQuenMK();
+            f.ShowDialog();
         }
     }
 }

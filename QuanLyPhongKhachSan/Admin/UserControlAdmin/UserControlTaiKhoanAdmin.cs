@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.Common;
+using QuanLyPhongKhachSan.DAL.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,44 @@ namespace QuanLyPhongKhachSan.Admin.UserControlAdmin
         public UserControlTaiKhoanAdmin()
         {
             InitializeComponent();
+            this.Load += UserControlTaiKhoan_Load;
+        }
+
+        private void UserControlTaiKhoan_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                string ten = CurrentUser.TenDangNhap;
+                DateTime? ngay = null;
+
+                if (CurrentUser.MaNV.HasValue && CurrentUser.MaNV.Value > 0)
+                {
+                    var nvDao = new NhanVienDAO();
+                    var nv = nvDao.LayTheoMa(CurrentUser.MaNV.Value);
+                    if (nv != null)
+                    {
+                        ten = string.IsNullOrWhiteSpace(nv.TenNV) ? ten : nv.TenNV;
+                        ngay = nv.NgayThamGia;
+                    }
+                }
+
+                // Fallback tên hiển thị lấy từ CurrentUser (nếu đã set trước)
+                if (!string.IsNullOrWhiteSpace(CurrentUser.TenHienThi))
+                    ten = CurrentUser.TenHienThi;
+
+                lblTen.Text = string.IsNullOrWhiteSpace(ten) ? "—" : ten;
+                lblNgayThamGia.Text = (ngay ?? CurrentUser.NgayThamGia ?? DateTime.Today)
+                    .ToString("dd/MM/yyyy");
+
+                // cache lại hiển thị cho form khác dùng
+                CurrentUser.TenHienThi = lblTen.Text;
+                CurrentUser.NgayThamGia = (ngay ?? CurrentUser.NgayThamGia ?? DateTime.Today);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể tải thông tin tài khoản: " + ex.Message,
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 

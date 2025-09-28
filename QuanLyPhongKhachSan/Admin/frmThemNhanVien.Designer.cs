@@ -144,7 +144,6 @@
             this.dtpNgayThamGia.Size = new System.Drawing.Size(212, 38);
             this.dtpNgayThamGia.TabIndex = 20;
             this.dtpNgayThamGia.Value = new System.DateTime(2025, 9, 12, 15, 59, 5, 828);
-            this.dtpNgayThamGia.ValueChanged += new System.EventHandler(this.guna2DateTimePicker1_ValueChanged);
             // 
             // guna2HtmlLabel3
             // 
@@ -237,6 +236,7 @@
             this.btnHoanThanh.Size = new System.Drawing.Size(104, 31);
             this.btnHoanThanh.TabIndex = 27;
             this.btnHoanThanh.Text = "Hoàn thành";
+            this.btnHoanThanh.Click += new System.EventHandler(this.btnHoanThanh_Click);
             // 
             // frmThemNhanVien
             // 
@@ -259,7 +259,6 @@
             this.Controls.Add(this.guna2HtmlLabel9);
             this.Name = "frmThemNhanVien";
             this.Text = "Form thêm nhân viên";
-            this.Load += new System.EventHandler(this.frmThemNhanVien_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

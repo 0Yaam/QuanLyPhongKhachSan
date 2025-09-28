@@ -224,6 +224,30 @@ WHERE MaHD = @MaHD;";
                 return 0;
             }
         }
+        public HoaDon LayTheoMa(int maHD)
+        {
+            using (var conn = new SqlConnection(_connStr))
+            using (var cmd = new SqlCommand(
+                @"SELECT MaHD, MaDat, NgayLap, LoaiHoaDon, TongThanhToan, GhiChu
+          FROM HoaDon WHERE MaHD=@id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", maHD);
+                conn.Open();
+                using (var rd = cmd.ExecuteReader())
+                {
+                    if (!rd.Read()) return null;
+                    return new HoaDon
+                    {
+                        MaHD = rd.GetInt32(0),
+                        MaDat = rd.IsDBNull(1) ? 0 : rd.GetInt32(1),
+                        NgayLap = rd.IsDBNull(2) ? DateTime.Now : rd.GetDateTime(2),
+                        LoaiHoaDon = rd.IsDBNull(3) ? "" : rd.GetString(3),
+                        TongThanhToan = rd.IsDBNull(4) ? (decimal?)null : rd.GetDecimal(4),
+                        GhiChu = rd.IsDBNull(5) ? "" : rd.GetString(5)
+                    };
+                }
+            }
+        }
 
     }
 }

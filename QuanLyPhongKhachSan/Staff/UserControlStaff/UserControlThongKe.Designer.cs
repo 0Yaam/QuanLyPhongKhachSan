@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.chrThongKe = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -59,16 +59,16 @@
             // 
             // chrThongKe
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chrThongKe.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chrThongKe.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chrThongKe.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrThongKe.Legends.Add(legend2);
             this.chrThongKe.Location = new System.Drawing.Point(29, 86);
             this.chrThongKe.Name = "chrThongKe";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chrThongKe.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chrThongKe.Series.Add(series2);
             this.chrThongKe.Size = new System.Drawing.Size(993, 520);
             this.chrThongKe.TabIndex = 36;
             this.chrThongKe.Text = "chart1";
@@ -126,7 +126,7 @@
             this.txtTongTienThuong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTongTienThuong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTongTienThuong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTongTienThuong.Location = new System.Drawing.Point(905, 31);
+            this.txtTongTienThuong.Location = new System.Drawing.Point(871, 31);
             this.txtTongTienThuong.Name = "txtTongTienThuong";
             this.txtTongTienThuong.PlaceholderText = "";
             this.txtTongTienThuong.ReadOnly = true;
@@ -137,12 +137,12 @@
             // guna2HtmlLabel4
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(755, 31);
+            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(783, 34);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(144, 28);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(76, 24);
             this.guna2HtmlLabel4.TabIndex = 43;
-            this.guna2HtmlLabel4.Text = "Tổng hoa hồng:";
+            this.guna2HtmlLabel4.Text = "Tổng thu:";
             // 
             // guna2HtmlLabel2
             // 

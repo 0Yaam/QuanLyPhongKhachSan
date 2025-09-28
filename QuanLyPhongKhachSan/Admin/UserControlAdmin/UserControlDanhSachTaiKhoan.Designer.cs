@@ -29,34 +29,39 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpDenNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rdSSDT = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.rdSCCCD = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.rdSTen = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdGiam = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.rdTang = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdSDT = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdCCCD = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdTen = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.guna2RadioButton5 = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2RadioButton4 = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2RadioButton3 = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2RadioButton2 = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2RadioButton1 = new Guna.UI2.WinForms.Guna2RadioButton();
             this.dgvDanhSachTaiKhoan = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaTK = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CCCD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenTaiKhoan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatKhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayThamGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsReset = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsXoa = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsReset = new System.Windows.Forms.ToolStripMenuItem();
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -70,19 +75,20 @@
             this.dtpDenNgay.Checked = true;
             this.dtpDenNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDenNgay.Location = new System.Drawing.Point(196, 11);
+            this.dtpDenNgay.Location = new System.Drawing.Point(181, 11);
             this.dtpDenNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpDenNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDenNgay.Name = "dtpDenNgay";
             this.dtpDenNgay.Size = new System.Drawing.Size(131, 30);
             this.dtpDenNgay.TabIndex = 11;
             this.dtpDenNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.dtpDenNgay.ValueChanged += new System.EventHandler(this.dtpDenNgay_ValueChanged);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.rdSDT);
-            this.groupBox3.Controls.Add(this.rdCCCD);
-            this.groupBox3.Controls.Add(this.rdTen);
+            this.groupBox3.Controls.Add(this.rdSSDT);
+            this.groupBox3.Controls.Add(this.rdSCCCD);
+            this.groupBox3.Controls.Add(this.rdSTen);
             this.groupBox3.Location = new System.Drawing.Point(21, 47);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(319, 49);
@@ -90,59 +96,62 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tìm kiếm theo";
             // 
-            // rdSDT
+            // rdSSDT
             // 
-            this.rdSDT.AutoSize = true;
-            this.rdSDT.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdSDT.CheckedState.BorderThickness = 0;
-            this.rdSDT.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdSDT.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.rdSDT.CheckedState.InnerOffset = -4;
-            this.rdSDT.Location = new System.Drawing.Point(203, 19);
-            this.rdSDT.Name = "rdSDT";
-            this.rdSDT.Size = new System.Drawing.Size(88, 17);
-            this.rdSDT.TabIndex = 7;
-            this.rdSDT.Text = "Số điện thoại";
-            this.rdSDT.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.rdSDT.UncheckedState.BorderThickness = 2;
-            this.rdSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.rdSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSSDT.AutoSize = true;
+            this.rdSSDT.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSSDT.CheckedState.BorderThickness = 0;
+            this.rdSSDT.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSSDT.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdSSDT.CheckedState.InnerOffset = -4;
+            this.rdSSDT.Location = new System.Drawing.Point(203, 19);
+            this.rdSSDT.Name = "rdSSDT";
+            this.rdSSDT.Size = new System.Drawing.Size(88, 17);
+            this.rdSSDT.TabIndex = 7;
+            this.rdSSDT.Text = "Số điện thoại";
+            this.rdSSDT.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdSSDT.UncheckedState.BorderThickness = 2;
+            this.rdSSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdSSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSSDT.CheckedChanged += new System.EventHandler(this.rdSSDT_CheckedChanged);
             // 
-            // rdCCCD
+            // rdSCCCD
             // 
-            this.rdCCCD.AutoSize = true;
-            this.rdCCCD.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdCCCD.CheckedState.BorderThickness = 0;
-            this.rdCCCD.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdCCCD.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.rdCCCD.CheckedState.InnerOffset = -4;
-            this.rdCCCD.Location = new System.Drawing.Point(104, 19);
-            this.rdCCCD.Name = "rdCCCD";
-            this.rdCCCD.Size = new System.Drawing.Size(54, 17);
-            this.rdCCCD.TabIndex = 7;
-            this.rdCCCD.Text = "CCCD";
-            this.rdCCCD.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.rdCCCD.UncheckedState.BorderThickness = 2;
-            this.rdCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.rdCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSCCCD.AutoSize = true;
+            this.rdSCCCD.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSCCCD.CheckedState.BorderThickness = 0;
+            this.rdSCCCD.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSCCCD.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdSCCCD.CheckedState.InnerOffset = -4;
+            this.rdSCCCD.Location = new System.Drawing.Point(104, 19);
+            this.rdSCCCD.Name = "rdSCCCD";
+            this.rdSCCCD.Size = new System.Drawing.Size(54, 17);
+            this.rdSCCCD.TabIndex = 7;
+            this.rdSCCCD.Text = "CCCD";
+            this.rdSCCCD.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdSCCCD.UncheckedState.BorderThickness = 2;
+            this.rdSCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdSCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSCCCD.CheckedChanged += new System.EventHandler(this.rdSCCCD_CheckedChanged);
             // 
-            // rdTen
+            // rdSTen
             // 
-            this.rdTen.AutoSize = true;
-            this.rdTen.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdTen.CheckedState.BorderThickness = 0;
-            this.rdTen.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdTen.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.rdTen.CheckedState.InnerOffset = -4;
-            this.rdTen.Location = new System.Drawing.Point(15, 19);
-            this.rdTen.Name = "rdTen";
-            this.rdTen.Size = new System.Drawing.Size(44, 17);
-            this.rdTen.TabIndex = 7;
-            this.rdTen.Text = "Tên";
-            this.rdTen.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.rdTen.UncheckedState.BorderThickness = 2;
-            this.rdTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.rdTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSTen.AutoSize = true;
+            this.rdSTen.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSTen.CheckedState.BorderThickness = 0;
+            this.rdSTen.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSTen.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdSTen.CheckedState.InnerOffset = -4;
+            this.rdSTen.Location = new System.Drawing.Point(15, 19);
+            this.rdSTen.Name = "rdSTen";
+            this.rdSTen.Size = new System.Drawing.Size(44, 17);
+            this.rdSTen.TabIndex = 7;
+            this.rdSTen.Text = "Tên";
+            this.rdSTen.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdSTen.UncheckedState.BorderThickness = 2;
+            this.rdSTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdSTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSTen.CheckedChanged += new System.EventHandler(this.rdSTen_CheckedChanged);
             // 
             // txtTimKiem
             // 
@@ -162,13 +171,15 @@
             this.txtTimKiem.SelectedText = "";
             this.txtTimKiem.Size = new System.Drawing.Size(237, 31);
             this.txtTimKiem.TabIndex = 8;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.guna2RadioButton3);
-            this.groupBox1.Controls.Add(this.guna2RadioButton2);
-            this.groupBox1.Controls.Add(this.guna2RadioButton1);
+            this.groupBox1.Controls.Add(this.rdSDT);
+            this.groupBox1.Controls.Add(this.rdCCCD);
+            this.groupBox1.Controls.Add(this.rdTen);
             this.groupBox1.Location = new System.Drawing.Point(379, 11);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 119);
@@ -176,136 +187,159 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sắp xếp theo";
             // 
+            // btnReset
+            // 
+            this.btnReset.BorderRadius = 5;
+            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(106, 91);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(68, 28);
+            this.btnReset.TabIndex = 16;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.guna2RadioButton5);
-            this.groupBox2.Controls.Add(this.guna2RadioButton4);
-            this.groupBox2.Location = new System.Drawing.Point(106, 15);
+            this.groupBox2.Controls.Add(this.rdGiam);
+            this.groupBox2.Controls.Add(this.rdTang);
+            this.groupBox2.Location = new System.Drawing.Point(106, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(88, 90);
+            this.groupBox2.Size = new System.Drawing.Size(88, 81);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
-            // guna2RadioButton5
+            // rdGiam
             // 
-            this.guna2RadioButton5.AutoSize = true;
-            this.guna2RadioButton5.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton5.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton5.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton5.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton5.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton5.Location = new System.Drawing.Point(6, 53);
-            this.guna2RadioButton5.Name = "guna2RadioButton5";
-            this.guna2RadioButton5.Size = new System.Drawing.Size(70, 17);
-            this.guna2RadioButton5.TabIndex = 8;
-            this.guna2RadioButton5.Text = "Giảm dần";
-            this.guna2RadioButton5.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton5.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton5.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton5.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdGiam.AutoSize = true;
+            this.rdGiam.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdGiam.CheckedState.BorderThickness = 0;
+            this.rdGiam.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdGiam.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdGiam.CheckedState.InnerOffset = -4;
+            this.rdGiam.Location = new System.Drawing.Point(6, 53);
+            this.rdGiam.Name = "rdGiam";
+            this.rdGiam.Size = new System.Drawing.Size(70, 17);
+            this.rdGiam.TabIndex = 8;
+            this.rdGiam.Text = "Giảm dần";
+            this.rdGiam.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdGiam.UncheckedState.BorderThickness = 2;
+            this.rdGiam.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdGiam.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdGiam.CheckedChanged += new System.EventHandler(this.rdGiam_CheckedChanged);
             // 
-            // guna2RadioButton4
+            // rdTang
             // 
-            this.guna2RadioButton4.AutoSize = true;
-            this.guna2RadioButton4.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton4.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton4.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton4.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton4.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton4.Location = new System.Drawing.Point(6, 21);
-            this.guna2RadioButton4.Name = "guna2RadioButton4";
-            this.guna2RadioButton4.Size = new System.Drawing.Size(71, 17);
-            this.guna2RadioButton4.TabIndex = 7;
-            this.guna2RadioButton4.Text = "Tăng dần";
-            this.guna2RadioButton4.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton4.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton4.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton4.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTang.AutoSize = true;
+            this.rdTang.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdTang.CheckedState.BorderThickness = 0;
+            this.rdTang.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdTang.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdTang.CheckedState.InnerOffset = -4;
+            this.rdTang.Location = new System.Drawing.Point(6, 21);
+            this.rdTang.Name = "rdTang";
+            this.rdTang.Size = new System.Drawing.Size(71, 17);
+            this.rdTang.TabIndex = 7;
+            this.rdTang.Text = "Tăng dần";
+            this.rdTang.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdTang.UncheckedState.BorderThickness = 2;
+            this.rdTang.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdTang.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTang.CheckedChanged += new System.EventHandler(this.rdTang_CheckedChanged);
             // 
-            // guna2RadioButton3
+            // rdSDT
             // 
-            this.guna2RadioButton3.AutoSize = true;
-            this.guna2RadioButton3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton3.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton3.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton3.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton3.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton3.Location = new System.Drawing.Point(16, 82);
-            this.guna2RadioButton3.Name = "guna2RadioButton3";
-            this.guna2RadioButton3.Size = new System.Drawing.Size(88, 17);
-            this.guna2RadioButton3.TabIndex = 5;
-            this.guna2RadioButton3.Text = "Số điện thoại";
-            this.guna2RadioButton3.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton3.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton3.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton3.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSDT.AutoSize = true;
+            this.rdSDT.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSDT.CheckedState.BorderThickness = 0;
+            this.rdSDT.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSDT.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdSDT.CheckedState.InnerOffset = -4;
+            this.rdSDT.Location = new System.Drawing.Point(16, 82);
+            this.rdSDT.Name = "rdSDT";
+            this.rdSDT.Size = new System.Drawing.Size(88, 17);
+            this.rdSDT.TabIndex = 5;
+            this.rdSDT.Text = "Số điện thoại";
+            this.rdSDT.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdSDT.UncheckedState.BorderThickness = 2;
+            this.rdSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSDT.CheckedChanged += new System.EventHandler(this.rdSDT_CheckedChanged);
             // 
-            // guna2RadioButton2
+            // rdCCCD
             // 
-            this.guna2RadioButton2.AutoSize = true;
-            this.guna2RadioButton2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton2.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton2.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton2.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton2.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton2.Location = new System.Drawing.Point(16, 54);
-            this.guna2RadioButton2.Name = "guna2RadioButton2";
-            this.guna2RadioButton2.Size = new System.Drawing.Size(54, 17);
-            this.guna2RadioButton2.TabIndex = 4;
-            this.guna2RadioButton2.Text = "CCCD";
-            this.guna2RadioButton2.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton2.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton2.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton2.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.AutoSize = true;
+            this.rdCCCD.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdCCCD.CheckedState.BorderThickness = 0;
+            this.rdCCCD.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdCCCD.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdCCCD.CheckedState.InnerOffset = -4;
+            this.rdCCCD.Location = new System.Drawing.Point(16, 54);
+            this.rdCCCD.Name = "rdCCCD";
+            this.rdCCCD.Size = new System.Drawing.Size(54, 17);
+            this.rdCCCD.TabIndex = 4;
+            this.rdCCCD.Text = "CCCD";
+            this.rdCCCD.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdCCCD.UncheckedState.BorderThickness = 2;
+            this.rdCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.CheckedChanged += new System.EventHandler(this.rdCCCD_CheckedChanged);
             // 
-            // guna2RadioButton1
+            // rdTen
             // 
-            this.guna2RadioButton1.AutoSize = true;
-            this.guna2RadioButton1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton1.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton1.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton1.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton1.Location = new System.Drawing.Point(16, 27);
-            this.guna2RadioButton1.Name = "guna2RadioButton1";
-            this.guna2RadioButton1.Size = new System.Drawing.Size(44, 17);
-            this.guna2RadioButton1.TabIndex = 3;
-            this.guna2RadioButton1.Text = "Tên";
-            this.guna2RadioButton1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton1.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton1.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton1.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTen.AutoSize = true;
+            this.rdTen.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdTen.CheckedState.BorderThickness = 0;
+            this.rdTen.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdTen.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdTen.CheckedState.InnerOffset = -4;
+            this.rdTen.Location = new System.Drawing.Point(16, 27);
+            this.rdTen.Name = "rdTen";
+            this.rdTen.Size = new System.Drawing.Size(44, 17);
+            this.rdTen.TabIndex = 3;
+            this.rdTen.Text = "Tên";
+            this.rdTen.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdTen.UncheckedState.BorderThickness = 2;
+            this.rdTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTen.CheckedChanged += new System.EventHandler(this.rdTen_CheckedChanged);
             // 
             // dgvDanhSachTaiKhoan
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvDanhSachTaiKhoan.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDanhSachTaiKhoan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvDanhSachTaiKhoan.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDanhSachTaiKhoan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDanhSachTaiKhoan.ColumnHeadersHeight = 28;
             this.dgvDanhSachTaiKhoan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvDanhSachTaiKhoan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
+            this.MaNV,
+            this.MaTK,
+            this.ChucVu,
+            this.Ten,
+            this.SDT,
+            this.CCCD,
+            this.TenTaiKhoan,
+            this.MatKhau,
+            this.NgayThamGia});
             this.dgvDanhSachTaiKhoan.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDanhSachTaiKhoan.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDanhSachTaiKhoan.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDanhSachTaiKhoan.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDanhSachTaiKhoan.Location = new System.Drawing.Point(21, 145);
             this.dgvDanhSachTaiKhoan.Name = "dgvDanhSachTaiKhoan";
@@ -334,60 +368,83 @@
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDanhSachTaiKhoan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // Column1
+            // MaNV
             // 
-            this.Column1.DataPropertyName = "Ten";
-            this.Column1.HeaderText = "Tên";
-            this.Column1.Name = "Column1";
+            this.MaNV.DataPropertyName = "MaNV";
+            this.MaNV.HeaderText = "MaNV";
+            this.MaNV.Name = "MaNV";
+            this.MaNV.Visible = false;
             // 
-            // Column2
+            // MaTK
             // 
-            this.Column2.DataPropertyName = "SDT";
-            this.Column2.HeaderText = "Số điện thoại";
-            this.Column2.Name = "Column2";
+            this.MaTK.DataPropertyName = "MaTK";
+            this.MaTK.HeaderText = "MaTK";
+            this.MaTK.Name = "MaTK";
+            this.MaTK.Visible = false;
             // 
-            // Column3
+            // ChucVu
             // 
-            this.Column3.DataPropertyName = "CCCD";
-            this.Column3.HeaderText = "CCCD";
-            this.Column3.Name = "Column3";
+            this.ChucVu.DataPropertyName = "ChucVu";
+            this.ChucVu.HeaderText = "ChucVu";
+            this.ChucVu.Name = "ChucVu";
             // 
-            // Column4
+            // Ten
             // 
-            this.Column4.DataPropertyName = "TenTaiKhoan";
-            this.Column4.HeaderText = "Tên tài khoản";
-            this.Column4.Name = "Column4";
+            this.Ten.DataPropertyName = "Ten";
+            this.Ten.HeaderText = "Họ và tên";
+            this.Ten.Name = "Ten";
             // 
-            // Column5
+            // SDT
             // 
-            this.Column5.DataPropertyName = "MatKhau";
-            this.Column5.HeaderText = "Mật khẩu";
-            this.Column5.Name = "Column5";
+            this.SDT.DataPropertyName = "SDT";
+            this.SDT.HeaderText = "Số điện thoại";
+            this.SDT.Name = "SDT";
             // 
-            // Column6
+            // CCCD
             // 
-            this.Column6.HeaderText = "Ngày tham gia";
-            this.Column6.Name = "Column6";
+            this.CCCD.DataPropertyName = "CCCD";
+            this.CCCD.HeaderText = "CCCD";
+            this.CCCD.Name = "CCCD";
+            // 
+            // TenTaiKhoan
+            // 
+            this.TenTaiKhoan.DataPropertyName = "TenTaiKhoan";
+            this.TenTaiKhoan.HeaderText = "Tên tài khoản";
+            this.TenTaiKhoan.Name = "TenTaiKhoan";
+            // 
+            // MatKhau
+            // 
+            this.MatKhau.DataPropertyName = "MatKhau";
+            this.MatKhau.HeaderText = "Mật khẩu";
+            this.MatKhau.Name = "MatKhau";
+            // 
+            // NgayThamGia
+            // 
+            this.NgayThamGia.DataPropertyName = "NgayThamGia";
+            this.NgayThamGia.HeaderText = "Ngày tham gia";
+            this.NgayThamGia.Name = "NgayThamGia";
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsReset,
-            this.cmsXoa});
+            this.cmsXoa,
+            this.cmsReset});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(156, 48);
-            // 
-            // cmsReset
-            // 
-            this.cmsReset.Name = "cmsReset";
-            this.cmsReset.Size = new System.Drawing.Size(155, 22);
-            this.cmsReset.Text = "Reset mật khẩu";
             // 
             // cmsXoa
             // 
             this.cmsXoa.Name = "cmsXoa";
             this.cmsXoa.Size = new System.Drawing.Size(155, 22);
             this.cmsXoa.Text = "Xóa";
+            this.cmsXoa.Click += new System.EventHandler(this.cmsXoa_Click);
+            // 
+            // cmsReset
+            // 
+            this.cmsReset.Name = "cmsReset";
+            this.cmsReset.Size = new System.Drawing.Size(155, 22);
+            this.cmsReset.Text = "Reset mật khẩu";
+            this.cmsReset.Click += new System.EventHandler(this.cmsReset_Click);
             // 
             // btnThem
             // 
@@ -405,25 +462,43 @@
             this.btnThem.Text = "Thêm";
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // guna2DateTimePicker1
+            // dtpTuNgay
             // 
-            this.guna2DateTimePicker1.BorderRadius = 5;
-            this.guna2DateTimePicker1.Checked = true;
-            this.guna2DateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.guna2DateTimePicker1.Location = new System.Drawing.Point(39, 11);
-            this.guna2DateTimePicker1.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            this.guna2DateTimePicker1.Size = new System.Drawing.Size(131, 30);
-            this.guna2DateTimePicker1.TabIndex = 16;
-            this.guna2DateTimePicker1.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.dtpTuNgay.BorderRadius = 5;
+            this.dtpTuNgay.Checked = true;
+            this.dtpTuNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpTuNgay.Location = new System.Drawing.Point(39, 11);
+            this.dtpTuNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpTuNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpTuNgay.Name = "dtpTuNgay";
+            this.dtpTuNgay.Size = new System.Drawing.Size(131, 30);
+            this.dtpTuNgay.TabIndex = 16;
+            this.dtpTuNgay.Value = new System.DateTime(2025, 9, 7, 10, 9, 39, 154);
+            this.dtpTuNgay.ValueChanged += new System.EventHandler(this.dtpTuNgay_ValueChanged);
+            // 
+            // chkLocTheoNgay
+            // 
+            this.chkLocTheoNgay.AutoSize = true;
+            this.chkLocTheoNgay.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.CheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.CheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chkLocTheoNgay.Location = new System.Drawing.Point(318, 20);
+            this.chkLocTheoNgay.Name = "chkLocTheoNgay";
+            this.chkLocTheoNgay.Size = new System.Drawing.Size(15, 14);
+            this.chkLocTheoNgay.TabIndex = 17;
+            this.chkLocTheoNgay.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.chkLocTheoNgay.UncheckedState.BorderRadius = 0;
+            this.chkLocTheoNgay.UncheckedState.BorderThickness = 0;
+            this.chkLocTheoNgay.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
             // UserControlDanhSachTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.guna2DateTimePicker1);
+            this.Controls.Add(this.chkLocTheoNgay);
+            this.Controls.Add(this.dtpTuNgay);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.dgvDanhSachTaiKhoan);
             this.Controls.Add(this.dtpDenNgay);
@@ -441,6 +516,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachTaiKhoan)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -448,28 +524,33 @@
 
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpDenNgay;
         private System.Windows.Forms.GroupBox groupBox3;
-        private Guna.UI2.WinForms.Guna2RadioButton rdSDT;
-        private Guna.UI2.WinForms.Guna2RadioButton rdCCCD;
-        private Guna.UI2.WinForms.Guna2RadioButton rdTen;
+        private Guna.UI2.WinForms.Guna2RadioButton rdSSDT;
+        private Guna.UI2.WinForms.Guna2RadioButton rdSCCCD;
+        private Guna.UI2.WinForms.Guna2RadioButton rdSTen;
         private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton5;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton4;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton3;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton2;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton1;
+        private Guna.UI2.WinForms.Guna2RadioButton rdGiam;
+        private Guna.UI2.WinForms.Guna2RadioButton rdTang;
+        private Guna.UI2.WinForms.Guna2RadioButton rdSDT;
+        private Guna.UI2.WinForms.Guna2RadioButton rdCCCD;
+        private Guna.UI2.WinForms.Guna2RadioButton rdTen;
         private Guna.UI2.WinForms.Guna2DataGridView dgvDanhSachTaiKhoan;
         private Guna.UI2.WinForms.Guna2Button btnThem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cmsReset;
         private System.Windows.Forms.ToolStripMenuItem cmsXoa;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
+        private Guna.UI2.WinForms.Guna2CheckBox chkLocTheoNgay;
+        private Guna.UI2.WinForms.Guna2Button btnReset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaNV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaTK;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ChucVu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CCCD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenTaiKhoan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatKhau;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgayThamGia;
     }
 }

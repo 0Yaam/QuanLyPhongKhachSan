@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\frmChiTietNhatKy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmChiTietNhatKy.Designer.cs">
+      <DependentUpon>frmChiTietNhatKy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\frmThemNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,15 @@
       <DependentUpon>UserControlTaiKhoanAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="AppEvents.cs" />
+    <Compile Include="Common\AppSession.cs" />
+    <Compile Include="Common\CurrentUser.cs" />
+    <Compile Include="Helpers\AuditHelper.cs" />
+    <Compile Include="Login\frmQuenMK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\frmQuenMK.Designer.cs">
+      <DependentUpon>frmQuenMK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Staff\frmHoaDon1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,11 +159,11 @@
     <Compile Include="Admin\UserControlAdmin\UserControlLichSuThayDoi.Designer.cs">
       <DependentUpon>UserControlLichSuThayDoi.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\UserControlAdmin\UserControlThongKe.cs">
+    <Compile Include="Admin\UserControlAdmin\UserControlThongKeChung.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Admin\UserControlAdmin\UserControlThongKe.Designer.cs">
-      <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    <Compile Include="Admin\UserControlAdmin\UserControlThongKeChung.Designer.cs">
+      <DependentUpon>UserControlThongKeChung.cs</DependentUpon>
     </Compile>
     <Compile Include="Staff\ThemvaSuaKH.cs">
       <SubType>Form</SubType>
@@ -169,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\UserControlAdmin\UserControlTaiKhoanAdmin.resx">
       <DependentUpon>UserControlTaiKhoanAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\frmQuenMK.resx">
+      <DependentUpon>frmQuenMK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Staff\frmHoaDon1.resx">
       <DependentUpon>frmHoaDon1.cs</DependentUpon>
@@ -209,8 +227,8 @@
     <EmbeddedResource Include="Admin\UserControlAdmin\UserControlLichSuThayDoi.resx">
       <DependentUpon>UserControlLichSuThayDoi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlThongKe.resx">
-      <DependentUpon>UserControlThongKe.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\UserControlAdmin\UserControlThongKeChung.resx">
+      <DependentUpon>UserControlThongKeChung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Staff\ThemvaSuaKH.resx">
       <DependentUpon>ThemvaSuaKH.cs</DependentUpon>

@@ -38,16 +38,17 @@
             this.rdSDT = new Guna.UI2.WinForms.Guna2RadioButton();
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dgvLichSu = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.dtpDenNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.TenNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCCD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThoiGianIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoaiHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtpDenNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkLocTheoNgay = new Guna.UI2.WinForms.Guna2CheckBox();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichSu)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -179,6 +180,7 @@
             this.dgvLichSu.ColumnHeadersHeight = 15;
             this.dgvLichSu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvLichSu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TenNV,
             this.TenKH,
             this.CCCD,
             this.SDT,
@@ -220,41 +222,6 @@
             this.dgvLichSu.ThemeStyle.RowsStyle.Height = 22;
             this.dgvLichSu.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvLichSu.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // TenKH
-            // 
-            this.TenKH.DataPropertyName = "TenKH";
-            this.TenKH.HeaderText = "Tên Khách Hàng";
-            this.TenKH.Name = "TenKH";
-            // 
-            // CCCD
-            // 
-            this.CCCD.DataPropertyName = "CCCD";
-            this.CCCD.HeaderText = "Căn cước công dân/Passport";
-            this.CCCD.Name = "CCCD";
-            // 
-            // SDT
-            // 
-            this.SDT.DataPropertyName = "SDT";
-            this.SDT.HeaderText = "Số điện thoại";
-            this.SDT.Name = "SDT";
-            // 
-            // SoPhong
-            // 
-            this.SoPhong.HeaderText = "Số phòng";
-            this.SoPhong.Name = "SoPhong";
-            // 
-            // ThoiGianIn
-            // 
-            this.ThoiGianIn.DataPropertyName = "ThoiGianIn";
-            this.ThoiGianIn.HeaderText = "Thời gian in";
-            this.ThoiGianIn.Name = "ThoiGianIn";
-            // 
-            // LoaiHoaDon
-            // 
-            this.LoaiHoaDon.DataPropertyName = "LoaiHoaDon";
-            this.LoaiHoaDon.HeaderText = "Loại hóa đơn";
-            this.LoaiHoaDon.Name = "LoaiHoaDon";
             // 
             // dtpDenNgay
             // 
@@ -312,6 +279,47 @@
             this.chkLocTheoNgay.UncheckedState.BorderThickness = 0;
             this.chkLocTheoNgay.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
+            // TenNV
+            // 
+            this.TenNV.DataPropertyName = "TenNV";
+            this.TenNV.HeaderText = "Tên nhân viên";
+            this.TenNV.Name = "TenNV";
+            // 
+            // TenKH
+            // 
+            this.TenKH.DataPropertyName = "TenKH";
+            this.TenKH.HeaderText = "Tên Khách Hàng";
+            this.TenKH.Name = "TenKH";
+            // 
+            // CCCD
+            // 
+            this.CCCD.DataPropertyName = "CCCD";
+            this.CCCD.HeaderText = "Căn cước công dân/Passport";
+            this.CCCD.Name = "CCCD";
+            // 
+            // SDT
+            // 
+            this.SDT.DataPropertyName = "SDT";
+            this.SDT.HeaderText = "Số điện thoại";
+            this.SDT.Name = "SDT";
+            // 
+            // SoPhong
+            // 
+            this.SoPhong.HeaderText = "Số phòng";
+            this.SoPhong.Name = "SoPhong";
+            // 
+            // ThoiGianIn
+            // 
+            this.ThoiGianIn.DataPropertyName = "ThoiGianIn";
+            this.ThoiGianIn.HeaderText = "Thời gian in";
+            this.ThoiGianIn.Name = "ThoiGianIn";
+            // 
+            // LoaiHoaDon
+            // 
+            this.LoaiHoaDon.DataPropertyName = "LoaiHoaDon";
+            this.LoaiHoaDon.HeaderText = "Loại hóa đơn";
+            this.LoaiHoaDon.Name = "LoaiHoaDon";
+            // 
             // UserControlLichSuHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,14 +349,15 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private Guna.UI2.WinForms.Guna2DataGridView dgvLichSu;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpDenNgay;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private Guna.UI2.WinForms.Guna2CheckBox chkLocTheoNgay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenNV;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn CCCD;
         private System.Windows.Forms.DataGridViewTextBoxColumn SDT;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoPhong;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThoiGianIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoaiHoaDon;
-        private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private Guna.UI2.WinForms.Guna2CheckBox chkLocTheoNgay;
     }
 }

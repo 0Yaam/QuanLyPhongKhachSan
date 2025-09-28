@@ -103,6 +103,7 @@
             this.lblForgotPassword.Size = new System.Drawing.Size(91, 15);
             this.lblForgotPassword.TabIndex = 3;
             this.lblForgotPassword.Text = "Forgot Password ?";
+            this.lblForgotPassword.Click += new System.EventHandler(this.lblForgotPassword_Click);
             // 
             // cbShowPass
             // 

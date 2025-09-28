@@ -31,14 +31,17 @@ namespace QuanLyPhongKhachSan.BLL.Services
             return dao.CapNhatMatKhau(maTK, matKhauMoi);
         }
 
-        public bool ThemTaiKhoan(TaiKhoan taiKhoan)
+        public int ThemTaiKhoan(TaiKhoan taiKhoan)
         {
-            if (string.IsNullOrEmpty(taiKhoan.TenDangNhap) || string.IsNullOrEmpty(taiKhoan.MatKhau) || taiKhoan.Quyen == 0)
+            if (string.IsNullOrEmpty(taiKhoan.TenDangNhap)
+                || string.IsNullOrEmpty(taiKhoan.MatKhau)
+                || taiKhoan.Quyen == 0)
             {
-                return false;
+                return 0; // 0 = fail
             }
-            return dao.ThemTaiKhoan(taiKhoan);
+            return dao.ThemTaiKhoan(taiKhoan); // trả MaTK
         }
+
 
         public bool XoaTaiKhoan(int maTK)
         {

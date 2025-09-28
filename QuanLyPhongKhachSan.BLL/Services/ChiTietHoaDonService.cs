@@ -1,6 +1,7 @@
 ﻿// BLL/Services/ChiTietHoaDonService.cs
-using QuanLyPhongKhachSan.DAL.OL;
 using QuanLyPhongKhachSan.DAL.DAO;
+using QuanLyPhongKhachSan.DAL.OL;
+using System.Collections.Generic;
 
 namespace QuanLyPhongKhachSan.BLL.Services
 {
@@ -13,5 +14,7 @@ namespace QuanLyPhongKhachSan.BLL.Services
             if (ct == null || ct.MaHD <= 0 || ct.SoLuong <= 0 || ct.Gia < 0) return 0;
             return _dao.Them(ct);
         }
+        public List<ChiTietHoaDon> LayTheoMaHD(int maHD) => _dao.LayTheoMaHD(maHD);
+
     }
 }
