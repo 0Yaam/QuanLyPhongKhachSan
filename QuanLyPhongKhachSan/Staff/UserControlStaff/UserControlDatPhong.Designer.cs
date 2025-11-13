@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.rdPhongTrong = new System.Windows.Forms.RadioButton();
             this.rdPhongDaDat = new System.Windows.Forms.RadioButton();
-            this.rdPhongDoi = new System.Windows.Forms.RadioButton();
-            this.rdPhongVip = new System.Windows.Forms.RadioButton();
-            this.rdPhongDon = new System.Windows.Forms.RadioButton();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
@@ -42,20 +39,23 @@
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbLoai = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rdTang = new System.Windows.Forms.RadioButton();
             this.rdGiam = new System.Windows.Forms.RadioButton();
+            this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.flpContain = new System.Windows.Forms.FlowLayoutPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.xóaThôngTinKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.guna2RadioButton8 = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2RadioButton7 = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2RadioButton6 = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.rdSoPhong = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.rdCCCD = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.rdTen = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.rdSDT = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dtpNgayHienTai = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.btnThemKH = new Guna.UI2.WinForms.Guna2Button();
-            this.btnTraPhong = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.btnThemNhieuKhachHang = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,6 +75,7 @@
             this.rdPhongTrong.TabStop = true;
             this.rdPhongTrong.Text = "Phòng trống";
             this.rdPhongTrong.UseVisualStyleBackColor = true;
+            this.rdPhongTrong.CheckedChanged += new System.EventHandler(this.rdPhongTrong_CheckedChanged);
             // 
             // rdPhongDaDat
             // 
@@ -86,39 +87,7 @@
             this.rdPhongDaDat.TabStop = true;
             this.rdPhongDaDat.Text = "Phòng đã đặt";
             this.rdPhongDaDat.UseVisualStyleBackColor = true;
-            // 
-            // rdPhongDoi
-            // 
-            this.rdPhongDoi.AutoSize = true;
-            this.rdPhongDoi.Location = new System.Drawing.Point(7, 49);
-            this.rdPhongDoi.Name = "rdPhongDoi";
-            this.rdPhongDoi.Size = new System.Drawing.Size(89, 22);
-            this.rdPhongDoi.TabIndex = 10;
-            this.rdPhongDoi.TabStop = true;
-            this.rdPhongDoi.Text = "Phòng đôi";
-            this.rdPhongDoi.UseVisualStyleBackColor = true;
-            // 
-            // rdPhongVip
-            // 
-            this.rdPhongVip.AutoSize = true;
-            this.rdPhongVip.Location = new System.Drawing.Point(7, 24);
-            this.rdPhongVip.Name = "rdPhongVip";
-            this.rdPhongVip.Size = new System.Drawing.Size(92, 22);
-            this.rdPhongVip.TabIndex = 9;
-            this.rdPhongVip.TabStop = true;
-            this.rdPhongVip.Text = "Phòng VIP";
-            this.rdPhongVip.UseVisualStyleBackColor = true;
-            // 
-            // rdPhongDon
-            // 
-            this.rdPhongDon.AutoSize = true;
-            this.rdPhongDon.Location = new System.Drawing.Point(7, 77);
-            this.rdPhongDon.Name = "rdPhongDon";
-            this.rdPhongDon.Size = new System.Drawing.Size(92, 22);
-            this.rdPhongDon.TabIndex = 11;
-            this.rdPhongDon.TabStop = true;
-            this.rdPhongDon.Text = "Phòng đơn";
-            this.rdPhongDon.UseVisualStyleBackColor = true;
+            this.rdPhongDaDat.CheckedChanged += new System.EventHandler(this.rdPhongDaDat_CheckedChanged);
             // 
             // guna2Panel1
             // 
@@ -156,9 +125,9 @@
             // 
             this.cbLoaiPhong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLoaiPhong.FormattingEnabled = true;
-            this.cbLoaiPhong.Location = new System.Drawing.Point(917, 407);
+            this.cbLoaiPhong.Location = new System.Drawing.Point(906, 391);
             this.cbLoaiPhong.Name = "cbLoaiPhong";
-            this.cbLoaiPhong.Size = new System.Drawing.Size(83, 21);
+            this.cbLoaiPhong.Size = new System.Drawing.Size(102, 21);
             this.cbLoaiPhong.TabIndex = 16;
             // 
             // txtSoPhong
@@ -172,11 +141,11 @@
             this.txtSoPhong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSoPhong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSoPhong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSoPhong.Location = new System.Drawing.Point(917, 383);
+            this.txtSoPhong.Location = new System.Drawing.Point(906, 367);
             this.txtSoPhong.Name = "txtSoPhong";
             this.txtSoPhong.PlaceholderText = "";
             this.txtSoPhong.SelectedText = "";
-            this.txtSoPhong.Size = new System.Drawing.Size(83, 18);
+            this.txtSoPhong.Size = new System.Drawing.Size(102, 18);
             this.txtSoPhong.TabIndex = 17;
             // 
             // btnThem
@@ -188,7 +157,7 @@
             this.btnThem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThem.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Location = new System.Drawing.Point(917, 443);
+            this.btnThem.Location = new System.Drawing.Point(917, 427);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(83, 38);
             this.btnThem.TabIndex = 12;
@@ -200,7 +169,7 @@
             this.groupBox1.Controls.Add(this.rdPhongTrong);
             this.groupBox1.Controls.Add(this.rdPhongDaDat);
             this.groupBox1.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(900, 189);
+            this.groupBox1.Location = new System.Drawing.Point(900, 152);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(122, 90);
             this.groupBox1.TabIndex = 19;
@@ -209,23 +178,31 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.rdPhongVip);
-            this.groupBox2.Controls.Add(this.rdPhongDoi);
-            this.groupBox2.Controls.Add(this.rdPhongDon);
+            this.groupBox2.Controls.Add(this.cbLoai);
             this.groupBox2.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(900, 68);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(119, 115);
+            this.groupBox2.Size = new System.Drawing.Size(119, 67);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Trạng thái";
+            // 
+            // cbLoai
+            // 
+            this.cbLoai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLoai.FormattingEnabled = true;
+            this.cbLoai.Location = new System.Drawing.Point(17, 24);
+            this.cbLoai.Name = "cbLoai";
+            this.cbLoai.Size = new System.Drawing.Size(83, 26);
+            this.cbLoai.TabIndex = 27;
+            this.cbLoai.SelectedIndexChanged += new System.EventHandler(this.cbLoai_SelectedIndexChanged);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.rdTang);
             this.groupBox3.Controls.Add(this.rdGiam);
             this.groupBox3.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(900, 285);
+            this.groupBox3.Location = new System.Drawing.Point(900, 257);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(122, 92);
             this.groupBox3.TabIndex = 20;
@@ -242,6 +219,7 @@
             this.rdTang.TabStop = true;
             this.rdTang.Text = "Tăng";
             this.rdTang.UseVisualStyleBackColor = true;
+            this.rdTang.CheckedChanged += new System.EventHandler(this.rdTang_CheckedChanged);
             // 
             // rdGiam
             // 
@@ -253,6 +231,23 @@
             this.rdGiam.TabStop = true;
             this.rdGiam.Text = "Giảm";
             this.rdGiam.UseVisualStyleBackColor = true;
+            this.rdGiam.CheckedChanged += new System.EventHandler(this.rdGiam_CheckedChanged);
+            // 
+            // btnReset
+            // 
+            this.btnReset.BorderRadius = 10;
+            this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnReset.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnReset.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(976, 232);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(59, 33);
+            this.btnReset.TabIndex = 8;
+            this.btnReset.Text = "Reset";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // flpContain
             // 
@@ -278,88 +273,114 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.guna2RadioButton8);
-            this.groupBox4.Controls.Add(this.guna2RadioButton7);
-            this.groupBox4.Controls.Add(this.guna2RadioButton6);
-            this.groupBox4.Location = new System.Drawing.Point(512, 9);
+            this.groupBox4.Controls.Add(this.rdSoPhong);
+            this.groupBox4.Controls.Add(this.rdCCCD);
+            this.groupBox4.Controls.Add(this.rdTen);
+            this.groupBox4.Controls.Add(this.rdSDT);
+            this.groupBox4.Location = new System.Drawing.Point(472, 9);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(297, 49);
+            this.groupBox4.Size = new System.Drawing.Size(337, 49);
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tìm kiếm theo";
             // 
-            // guna2RadioButton8
+            // rdSoPhong
             // 
-            this.guna2RadioButton8.AutoSize = true;
-            this.guna2RadioButton8.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton8.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton8.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton8.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton8.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton8.Location = new System.Drawing.Point(203, 19);
-            this.guna2RadioButton8.Name = "guna2RadioButton8";
-            this.guna2RadioButton8.Size = new System.Drawing.Size(88, 17);
-            this.guna2RadioButton8.TabIndex = 7;
-            this.guna2RadioButton8.Text = "Số điện thoại";
-            this.guna2RadioButton8.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton8.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton8.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton8.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSoPhong.AutoSize = true;
+            this.rdSoPhong.Checked = true;
+            this.rdSoPhong.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSoPhong.CheckedState.BorderThickness = 0;
+            this.rdSoPhong.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSoPhong.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdSoPhong.CheckedState.InnerOffset = -4;
+            this.rdSoPhong.Location = new System.Drawing.Point(6, 19);
+            this.rdSoPhong.Name = "rdSoPhong";
+            this.rdSoPhong.Size = new System.Drawing.Size(71, 17);
+            this.rdSoPhong.TabIndex = 8;
+            this.rdSoPhong.TabStop = true;
+            this.rdSoPhong.Text = "Số phòng";
+            this.rdSoPhong.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdSoPhong.UncheckedState.BorderThickness = 2;
+            this.rdSoPhong.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdSoPhong.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSoPhong.CheckedChanged += new System.EventHandler(this.rdSoPhong_CheckedChanged);
             // 
-            // guna2RadioButton7
+            // rdCCCD
             // 
-            this.guna2RadioButton7.AutoSize = true;
-            this.guna2RadioButton7.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton7.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton7.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton7.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton7.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton7.Location = new System.Drawing.Point(104, 19);
-            this.guna2RadioButton7.Name = "guna2RadioButton7";
-            this.guna2RadioButton7.Size = new System.Drawing.Size(54, 17);
-            this.guna2RadioButton7.TabIndex = 7;
-            this.guna2RadioButton7.Text = "CCCD";
-            this.guna2RadioButton7.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton7.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton7.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton7.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.AutoSize = true;
+            this.rdCCCD.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdCCCD.CheckedState.BorderThickness = 0;
+            this.rdCCCD.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdCCCD.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdCCCD.CheckedState.InnerOffset = -4;
+            this.rdCCCD.Location = new System.Drawing.Point(207, 19);
+            this.rdCCCD.Name = "rdCCCD";
+            this.rdCCCD.Size = new System.Drawing.Size(54, 17);
+            this.rdCCCD.TabIndex = 7;
+            this.rdCCCD.Text = "CCCD";
+            this.rdCCCD.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdCCCD.UncheckedState.BorderThickness = 2;
+            this.rdCCCD.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdCCCD.CheckedChanged += new System.EventHandler(this.rdCCCD_CheckedChanged);
             // 
-            // guna2RadioButton6
+            // rdTen
             // 
-            this.guna2RadioButton6.AutoSize = true;
-            this.guna2RadioButton6.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton6.CheckedState.BorderThickness = 0;
-            this.guna2RadioButton6.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2RadioButton6.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2RadioButton6.CheckedState.InnerOffset = -4;
-            this.guna2RadioButton6.Location = new System.Drawing.Point(15, 19);
-            this.guna2RadioButton6.Name = "guna2RadioButton6";
-            this.guna2RadioButton6.Size = new System.Drawing.Size(44, 17);
-            this.guna2RadioButton6.TabIndex = 7;
-            this.guna2RadioButton6.Text = "Tên";
-            this.guna2RadioButton6.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2RadioButton6.UncheckedState.BorderThickness = 2;
-            this.guna2RadioButton6.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2RadioButton6.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTen.AutoSize = true;
+            this.rdTen.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdTen.CheckedState.BorderThickness = 0;
+            this.rdTen.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdTen.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdTen.CheckedState.InnerOffset = -4;
+            this.rdTen.Location = new System.Drawing.Point(287, 19);
+            this.rdTen.Name = "rdTen";
+            this.rdTen.Size = new System.Drawing.Size(44, 17);
+            this.rdTen.TabIndex = 7;
+            this.rdTen.Text = "Tên";
+            this.rdTen.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdTen.UncheckedState.BorderThickness = 2;
+            this.rdTen.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdTen.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdTen.CheckedChanged += new System.EventHandler(this.rdTen_CheckedChanged);
             // 
-            // guna2TextBox1
+            // rdSDT
             // 
-            this.guna2TextBox1.BorderRadius = 12;
-            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.DefaultText = "";
-            this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(48, 19);
-            this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.PlaceholderText = "";
-            this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(443, 31);
-            this.guna2TextBox1.TabIndex = 22;
+            this.rdSDT.AutoSize = true;
+            this.rdSDT.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSDT.CheckedState.BorderThickness = 0;
+            this.rdSDT.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.rdSDT.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.rdSDT.CheckedState.InnerOffset = -4;
+            this.rdSDT.Location = new System.Drawing.Point(93, 19);
+            this.rdSDT.Name = "rdSDT";
+            this.rdSDT.Size = new System.Drawing.Size(88, 17);
+            this.rdSDT.TabIndex = 7;
+            this.rdSDT.Text = "Số điện thoại";
+            this.rdSDT.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.rdSDT.UncheckedState.BorderThickness = 2;
+            this.rdSDT.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.rdSDT.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.rdSDT.CheckedChanged += new System.EventHandler(this.rdSDT_CheckedChanged);
+            // 
+            // txtTimKiem
+            // 
+            this.txtTimKiem.BorderRadius = 12;
+            this.txtTimKiem.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTimKiem.DefaultText = "";
+            this.txtTimKiem.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtTimKiem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtTimKiem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTimKiem.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTimKiem.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtTimKiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTimKiem.Location = new System.Drawing.Point(17, 19);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.PlaceholderText = "";
+            this.txtTimKiem.SelectedText = "";
+            this.txtTimKiem.Size = new System.Drawing.Size(443, 31);
+            this.txtTimKiem.TabIndex = 22;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // dtpNgayHienTai
             // 
@@ -375,45 +396,46 @@
             this.dtpNgayHienTai.TabIndex = 24;
             this.dtpNgayHienTai.Value = new System.DateTime(2025, 9, 7, 12, 22, 27, 197);
             // 
-            // btnThemKH
+            // guna2Button1
             // 
-            this.btnThemKH.BorderRadius = 10;
-            this.btnThemKH.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemKH.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnThemKH.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnThemKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThemKH.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThemKH.ForeColor = System.Drawing.Color.White;
-            this.btnThemKH.Location = new System.Drawing.Point(909, 503);
-            this.btnThemKH.Name = "btnThemKH";
-            this.btnThemKH.Size = new System.Drawing.Size(99, 38);
-            this.btnThemKH.TabIndex = 25;
-            this.btnThemKH.Text = "Thêm khách hàng";
+            this.guna2Button1.BorderRadius = 10;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.Location = new System.Drawing.Point(470, 297);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(99, 38);
+            this.guna2Button1.TabIndex = 26;
+            this.guna2Button1.Text = "Thêm khách hàng";
             // 
-            // btnTraPhong
+            // btnThemNhieuKhachHang
             // 
-            this.btnTraPhong.BorderRadius = 10;
-            this.btnTraPhong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTraPhong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTraPhong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTraPhong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTraPhong.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTraPhong.ForeColor = System.Drawing.Color.White;
-            this.btnTraPhong.Location = new System.Drawing.Point(909, 570);
-            this.btnTraPhong.Name = "btnTraPhong";
-            this.btnTraPhong.Size = new System.Drawing.Size(99, 38);
-            this.btnTraPhong.TabIndex = 26;
-            this.btnTraPhong.Text = "Trả phòng";
+            this.btnThemNhieuKhachHang.BorderRadius = 10;
+            this.btnThemNhieuKhachHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemNhieuKhachHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemNhieuKhachHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThemNhieuKhachHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThemNhieuKhachHang.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnThemNhieuKhachHang.ForeColor = System.Drawing.Color.White;
+            this.btnThemNhieuKhachHang.Location = new System.Drawing.Point(915, 542);
+            this.btnThemNhieuKhachHang.Name = "btnThemNhieuKhachHang";
+            this.btnThemNhieuKhachHang.Size = new System.Drawing.Size(97, 40);
+            this.btnThemNhieuKhachHang.TabIndex = 25;
+            this.btnThemNhieuKhachHang.Text = "Thêm nhiều KH";
+            this.btnThemNhieuKhachHang.Click += new System.EventHandler(this.btnThemNhieuKhachHang_Click);
             // 
             // UserControlDatPhong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnTraPhong);
-            this.Controls.Add(this.btnThemKH);
+            this.Controls.Add(this.btnThemNhieuKhachHang);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.dtpNgayHienTai);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.guna2TextBox1);
+            this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.flpContain);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -429,7 +451,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.flpContain.ResumeLayout(false);
@@ -443,9 +464,6 @@
         #endregion
         private System.Windows.Forms.RadioButton rdPhongTrong;
         private System.Windows.Forms.RadioButton rdPhongDaDat;
-        private System.Windows.Forms.RadioButton rdPhongDoi;
-        private System.Windows.Forms.RadioButton rdPhongVip;
-        private System.Windows.Forms.RadioButton rdPhongDon;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
@@ -461,12 +479,15 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem xóaThôngTinKháchHàngToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox4;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton8;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton7;
-        private Guna.UI2.WinForms.Guna2RadioButton guna2RadioButton6;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2RadioButton rdSDT;
+        private Guna.UI2.WinForms.Guna2RadioButton rdCCCD;
+        private Guna.UI2.WinForms.Guna2RadioButton rdTen;
+        private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayHienTai;
-        private Guna.UI2.WinForms.Guna2Button btnThemKH;
-        private Guna.UI2.WinForms.Guna2Button btnTraPhong;
+        private System.Windows.Forms.ComboBox cbLoai;
+        private Guna.UI2.WinForms.Guna2RadioButton rdSoPhong;
+        private Guna.UI2.WinForms.Guna2Button btnReset;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnThemNhieuKhachHang;
     }
 }

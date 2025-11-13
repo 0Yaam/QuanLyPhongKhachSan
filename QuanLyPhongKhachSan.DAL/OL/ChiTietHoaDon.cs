@@ -6,33 +6,26 @@ using System.Threading.Tasks;
 
 namespace QuanLyPhongKhachSan.DAL.OL
 {
-    public class ChiTietHoaDon // Lớp mới
+    public class ChiTietHoaDon
     {
         public int MaCTHD { get; set; }
         public int MaHD { get; set; }
         public string TenDichVu { get; set; }
         public int SoLuong { get; set; }
         public decimal Gia { get; set; }
-        public decimal ThanhTien
-        {
-            get { return SoLuong * Gia; }
-        }
+        public decimal ThanhTien => SoLuong * Gia;
 
-        public ChiTietHoaDon()
-        {
-            
-        }
+        public ChiTietHoaDon() { }
 
-        public ChiTietHoaDon(int maCTHD, int maHD, string tenDichVu, int soLuong, decimal gia, decimal thanhTien)
+        // Nếu cần constructor đầy đủ:
+        public ChiTietHoaDon(int maCTHD, int maHD, string tenDichVu, int soLuong, decimal gia)
         {
-            maCTHD = MaCTHD;
+            MaCTHD = maCTHD;
             MaHD = maHD;
             TenDichVu = tenDichVu;
             SoLuong = soLuong;
             Gia = gia;
-            thanhTien = ThanhTien;
         }
     }
-    
 
 }

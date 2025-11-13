@@ -14,17 +14,19 @@ namespace QuanLyPhongKhachSan
         private UserControlDanhSachKhachHang danhSachKhachHangInstance;
         private UserControlThongKe thongKeInstance;
         private UserControlTaiKhoan taiKhoanInstance;
+        private UserControlLichSuHoaDon lichSuHoaDonInstance;
 
         public Form1()
         {
             InitializeComponent();
             datPhongInstance = new UserControlDatPhong();
             danhSachKhachHangInstance = new UserControlDanhSachKhachHang();
-            thongKeInstance = new UserControlThongKe();
             taiKhoanInstance = new UserControlTaiKhoan();
-
+            lichSuHoaDonInstance = new UserControlLichSuHoaDon();
             // Load UserControl mặc định khi mở form
             addUserControl(datPhongInstance);
+            thongKeInstance = new UserControlThongKe();     
+
         }
 
         private void addUserControl(UserControl c)
@@ -32,6 +34,11 @@ namespace QuanLyPhongKhachSan
             if (panelContainer == null)
             {
                 MessageBox.Show("panelContainer không tồn tại. Vui lòng kiểm tra Designer!");
+                return;
+            }
+            if (c == null)                                        // <— THÊM GUARD
+            {
+                MessageBox.Show("UserControl chưa được khởi tạo.");
                 return;
             }
             panelContainer.Controls.Clear();
@@ -83,7 +90,7 @@ namespace QuanLyPhongKhachSan
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            addUserControl(thongKeInstance); // Tái sử dụng instance
+            addUserControl(lichSuHoaDonInstance); // Tái sử dụng instance
             CapNhatMauNut(sender);
         }
 
@@ -114,6 +121,12 @@ namespace QuanLyPhongKhachSan
             {
                 clickedBtn.FillColor = ColorTranslator.FromHtml("#D7E4F2"); // Màu chọn
             }
+        }
+
+        private void btnThongKe_Click_1(object sender, EventArgs e)
+        {
+            addUserControl(thongKeInstance); // Tái sử dụng instance
+            CapNhatMauNut(sender);
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuanLyPhongKhachSan.DAL.OL
 {
@@ -12,6 +8,7 @@ namespace QuanLyPhongKhachSan.DAL.OL
         public string HoTen { get; set; }
         public string CCCD { get; set; }
         public string SDT { get; set; }
+        public DateTime? NgayThamGia { get; set; }
 
         public KhachHang() { }
         public KhachHang(string hoTen, string cccd, string sdt)
@@ -19,6 +16,7 @@ namespace QuanLyPhongKhachSan.DAL.OL
             HoTen = hoTen;
             CCCD = cccd;
             SDT = sdt;
+            NgayThamGia = DateTime.Now; // Tự động gán thời gian hiện tại
         }
     }
 }

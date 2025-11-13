@@ -1,61 +1,13 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.DAL.OL;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
-using QuanLyPhongKhachSan.DAL.OL;
 
 namespace QuanLyPhongKhachSan.DAL.DAO
 {
     public class KhachHangDAO
     {
-        private string connectionString = Config.ConnectionString;
-
-        public int ThemKhachHang(KhachHang khachHang)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string sql = "INSERT INTO KhachHang (HoTen, CCCD, SDT) VALUES (@HoTen, @CCCD, @SDT); SELECT CAST(SCOPE_IDENTITY() AS int)";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@HoTen", khachHang.HoTen ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@CCCD", khachHang.CCCD ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@SDT", khachHang.SDT ?? (object)DBNull.Value);
-                    return (int)cmd.ExecuteScalar();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khi thêm khách hàng: " + ex.Message);
-                return -1;
-            }
-        }
-
-        public int CapNhatKhachHang(KhachHang khachHang)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string sql = @"
-                        UPDATE KhachHang 
-                        SET HoTen = @HoTen, CCCD = @CCCD, SDT = @SDT 
-                        WHERE MaKH = @MaKH";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@MaKH", khachHang.MaKH);
-                    cmd.Parameters.AddWithValue("@HoTen", khachHang.HoTen ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@CCCD", khachHang.CCCD ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@SDT", khachHang.SDT ?? (object)DBNull.Value);
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0 ? khachHang.MaKH : -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khi cập nhật khách hàng: " + ex.Message);
-                return -1;
-            }
-        }
+        private readonly string connectionString = Config.ConnectionString;
 
         public int KiemTraTonTai(string cccd, string sdt)
         {
@@ -66,17 +18,129 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                     conn.Open();
                     string sql = "SELECT MaKH FROM KhachHang WHERE CCCD = @CCCD OR SDT = @SDT";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@CCCD", cccd ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@SDT", sdt ?? (object)DBNull.Value);
-                    var result = cmd.ExecuteScalar();
-                    return result != null && result != DBNull.Value ? Convert.ToInt32(result) : -1;
+                    cmd.Parameters.AddWithValue("@CCCD", (object)cccd ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@SDT", sdt);
+                    object result = cmd.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : -1;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi kiểm tra tồn tại: " + ex.Message);
-                return -1;
+                throw new Exception($"Lỗi khi kiểm tra tồn tại khách hàng: {ex.Message}");
             }
+        }
+
+        public int ThemKhachHang(KhachHang khachHang)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string sql = "INSERT INTO KhachHang (HoTen, CCCD, SDT, NgayThamGia) OUTPUT INSERTED.MaKH VALUES (@HoTen, @CCCD, @SDT, @NgayThamGia)";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@HoTen", khachHang.HoTen);
+                    cmd.Parameters.AddWithValue("@CCCD", (object)khachHang.CCCD ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@SDT", khachHang.SDT);
+                    cmd.Parameters.AddWithValue("@NgayThamGia", (object)khachHang.NgayThamGia ?? DBNull.Value);
+                    return (int)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi thêm khách hàng: {ex.Message}");
+            }
+        }
+
+        public int CapNhatKhachHang(KhachHang khachHang)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string sql = "UPDATE KhachHang SET HoTen = @HoTen, CCCD = @CCCD, SDT = @SDT, NgayThamGia = @NgayThamGia WHERE MaKH = @MaKH";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@HoTen", khachHang.HoTen);
+                    cmd.Parameters.AddWithValue("@CCCD", (object)khachHang.CCCD ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@SDT", khachHang.SDT);
+                    cmd.Parameters.AddWithValue("@NgayThamGia", (object)khachHang.NgayThamGia ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MaKH", khachHang.MaKH);
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0 ? khachHang.MaKH : -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi cập nhật khách hàng: {ex.Message}");
+            }
+        }
+
+        public KhachHang LayKhachHangTheoMaKH(int maKH)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string sql = "SELECT MaKH, HoTen, CCCD, SDT, NgayThamGia FROM KhachHang WHERE MaKH = @MaKH";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@MaKH", maKH);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new KhachHang
+                            {
+                                MaKH = reader.GetInt32(0),
+                                HoTen = reader.GetString(1),
+                                CCCD = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                SDT = reader.GetString(3),
+                                NgayThamGia = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
+                            };
+                        }
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lấy khách hàng (MaKH={maKH}): {ex.Message}");
+            }
+        }
+
+        public List<KhachHang> LayDanhSach()
+        {
+            var danhSach = new List<KhachHang>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string sql = "SELECT MaKH, HoTen, CCCD, SDT, NgayThamGia FROM KhachHang";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            danhSach.Add(new KhachHang
+                            {
+                                MaKH = reader.GetInt32(0),
+                                HoTen = reader.GetString(1),
+                                CCCD = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                SDT = reader.GetString(3),
+                                NgayThamGia = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Lỗi khi lấy danh sách khách hàng: {ex.Message}");
+                throw;
+            }
+            return danhSach;
         }
     }
 }

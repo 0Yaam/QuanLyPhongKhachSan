@@ -63,9 +63,39 @@ namespace QuanLyPhongKhachSan.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1486564716_magnifying_glass_search_81527 {
+            get {
+                object obj = ResourceManager.GetObject("1486564716-magnifying-glass-search_81527", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap avatar {
             get {
                 object obj = ResourceManager.GetObject("avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GL7ic1kWUAAWMa_ {
+            get {
+                object obj = ResourceManager.GetObject("GL7ic1kWUAAWMa_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pexels_rickyrecap_1802268__1_ {
+            get {
+                object obj = ResourceManager.GetObject("pexels-rickyrecap-1802268 (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

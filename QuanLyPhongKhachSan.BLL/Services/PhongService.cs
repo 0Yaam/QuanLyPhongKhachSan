@@ -2,72 +2,124 @@
 using QuanLyPhongKhachSan.DAL.OL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyPhongKhachSan.BLL.Services
 {
     public class PhongService
     {
-        private PhongDAO dao = new PhongDAO();
+        private readonly PhongDAO _dao = new PhongDAO();
         private readonly DatPhongDAO _repoDatPhong = new DatPhongDAO();
-        private readonly PhongDAO _repoPhong = new PhongDAO(); // nếu bạn đã có
-
         public List<Phong> LayDanhSach()
         {
-            return dao.LayDanhSach();
+            return _dao.LayDanhSach();
         }
 
         public int Them(Phong p)
         {
-            if (p.SoPhong <= 0)
-            {
-                Console.WriteLine("Số phòng phải lớn hơn 0!");
-                return -1;
-            }
-            if (string.IsNullOrEmpty(p.LoaiPhong))
-            {
-                Console.WriteLine("Loại phòng không được để trống!");
-                return -1;
-            }
-            if (p.Gia <= 0)
-            {
-                Console.WriteLine("Giá phải lớn hơn 0!");
-                return -1;
-            }
-            return dao.Them(p);
+            if (p.SoPhong <= 0 || p.MaLoaiPhong <= 0) return -1;
+            return _dao.Them(p);
         }
+
+
 
         public void Xoa(int maPhong)
         {
-            dao.Xoa(maPhong);
+            _dao.Xoa(maPhong);
         }
 
         public DatPhong LayDatPhongTheoMaPhong(int maPhong)
         {
-            return dao.LayDatPhongTheoMaPhong(maPhong);
+            return _repoDatPhong.LayDatPhongTheoMaPhong(maPhong);
         }
 
         public int ThemDatPhong(DatPhong datPhong)
         {
-            if (datPhong.MaKH <= 0 || datPhong.MaPhong <= 0 || datPhong.NgayNhan == DateTime.MinValue || datPhong.NgayTraDuKien == DateTime.MinValue)
+            if (datPhong.MaKH <= 0 || datPhong.MaPhong <= 0
+                || datPhong.NgayNhan == DateTime.MinValue
+                || datPhong.NgayTraDuKien == DateTime.MinValue)
             {
-                Console.WriteLine("Thông tin đặt phòng không hợp lệ!");
+                System.Diagnostics.Debug.WriteLine($"ThemDatPhong thất bại: Dữ liệu không hợp lệ - MaKH={datPhong.MaKH}, MaPhong={datPhong.MaPhong}, NgayNhan={datPhong.NgayNhan}, NgayTraDuKien={datPhong.NgayTraDuKien}");
                 return -1;
             }
-            return dao.ThemDatPhong(datPhong);
+
+            int maDat = _repoDatPhong.Them(datPhong);
+            System.Diagnostics.Debug.WriteLine($"ThemDatPhong: MaDat={maDat}, MaKH={datPhong.MaKH}, MaPhong={datPhong.MaPhong}");
+            return maDat;
         }
+
+
         public bool KiemTraPhongTrungLichExcept(int maPhong, DateTime nhan, DateTime tra, int excludeMaDat)
         {
             return _repoDatPhong.KiemTraPhongTrungLichExcept(maPhong, nhan, tra, excludeMaDat);
         }
-
-        public bool CapNhatDatPhong(DatPhong dat)
+        public bool CapNhatDatPhong(DatPhong datPhong)
         {
-            return _repoDatPhong.Update(dat) > 0;
+            int rowsAffected = _repoDatPhong.Update(datPhong);
+            System.Diagnostics.Debug.WriteLine($"CapNhatDatPhong: MaDat={datPhong.MaDat}, RowsAffected={rowsAffected}");
+            return rowsAffected > 0;
         }
 
         public bool KiemTraPhongTrungLich(int maPhong, DateTime nhan, DateTime tra)
-            => _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
+        {
+            return _repoDatPhong.KiemTraPhongTrungLich(maPhong, nhan, tra);
+        }
 
+        public List<Phong> LayDanhSachSapXep(string loaiPhong, string trangThai, bool tangDan)
+        {
+            var phongList = _dao.LayDanhSach();
+
+            if (!string.IsNullOrEmpty(loaiPhong) && loaiPhong != "None")
+            {
+                phongList = phongList.Where(p => p.LoaiPhong == loaiPhong).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(trangThai))
+            {
+                phongList = phongList.Where(p => p.TrangThai == trangThai).ToList();
+            }
+
+            if (tangDan)
+            {
+                phongList = phongList.OrderBy(p => p.SoPhong).ToList();
+            }
+            else
+            {
+                phongList = phongList.OrderByDescending(p => p.SoPhong).ToList();
+            }
+
+            return phongList;
+        }
+
+        public bool CapNhat(Phong phong)
+        {
+
+            // Trước đây: check phong.LoaiPhong != null && phong.Gia > 0  -> SAI sau chuẩn hoá
+            if (phong == null || phong.MaPhong <= 0 || phong.MaLoaiPhong <= 0)
+                return false;
+
+            return _dao.CapNhat(phong) > 0;
+        }
+
+
+        public Phong LayPhongTheoMaPhong(int maPhong)
+        {
+            return _dao.LayDanhSach().FirstOrDefault(p => p.MaPhong == maPhong);
+        }
+        public bool CapNhatTrangThai(int maPhong, string trangThai)
+        {
+            var dao = new PhongDAO(); // Giả sử
+            return dao.CapNhatTrangThai(maPhong, trangThai) > 0;
+        }
+        // BLL/Services/PhongService.cs
+        public List<string> LayDanhSachLoaiPhong() =>
+            new LoaiPhongDAO().LayDanhSach().Select(x => x.TenLoaiPhong).ToList();
+
+        public int LayMaLoaiTheoTen(string ten) =>
+            new LoaiPhongDAO().LayDanhSach().FirstOrDefault(x => x.TenLoaiPhong == ten).MaLoaiPhong;
+
+        public decimal LayGiaTheoLoai(string ten) =>
+            new LoaiPhongDAO().LayDanhSach().FirstOrDefault(x => x.TenLoaiPhong == ten).GiaPhong;
 
 
     }

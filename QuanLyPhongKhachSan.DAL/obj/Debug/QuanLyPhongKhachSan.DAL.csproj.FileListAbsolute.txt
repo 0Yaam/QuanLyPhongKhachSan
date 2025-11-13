@@ -16,3 +16,33 @@ C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan-feat-delete\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-admin (1)\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
+Z:\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+Z:\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+Z:\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+Z:\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+Z:\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+Z:\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan-feat-admin\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb

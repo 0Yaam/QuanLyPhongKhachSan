@@ -1,4 +1,5 @@
-﻿using QuanLyPhongKhachSan.Login.UserControlAdmin;
+﻿using QuanLyPhongKhachSan.Admin.UserControlAdmin;
+using QuanLyPhongKhachSan.Login.UserControlAdmin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +35,7 @@ namespace QuanLyPhongKhachSan
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            UserControlThongKe userControlThongKe = new UserControlThongKe();
+            UserControlThongKeChung userControlThongKe = new UserControlThongKeChung();
             addUserControl(userControlThongKe);
         }
 
@@ -55,6 +56,12 @@ namespace QuanLyPhongKhachSan
         {
             UserControlDanhSachTaiKhoan userControlDanhSachTaiKhoan = new UserControlDanhSachTaiKhoan();
             addUserControl(userControlDanhSachTaiKhoan);
+        }
+
+        private void btnAdmin_Click(object sender, EventArgs e)
+        {
+            UserControlTaiKhoanAdmin userControlAdmin = new UserControlTaiKhoanAdmin();
+            addUserControl(userControlAdmin);
         }
     }
 }

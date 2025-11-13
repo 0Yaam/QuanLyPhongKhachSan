@@ -1,6 +1,7 @@
-﻿using System;
+﻿using QuanLyPhongKhachSan.Common;
+using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,12 +12,12 @@ namespace QuanLyPhongKhachSan
         public frmHoaDon1()
         {
             InitializeComponent();
-            InitGridMappingIfNeeded();
+            InitGridMapping();
         }
 
-        // Model cho 1 dòng CTHD (khớp tên cột)
-        private class CTHDRow
+        private class CTHDView
         {
+            public string Phong { get; set; }
             public DateTime TuNgay { get; set; }
             public DateTime DenNgay { get; set; }
             public int SoNgay { get; set; }
@@ -25,11 +26,10 @@ namespace QuanLyPhongKhachSan
             public decimal TongTien { get; set; }
         }
 
-        // Đảm bảo DataPropertyName khớp tên cột – nếu bạn đã set trong Designer rồi thì đoạn này giữ nguyên
-        private void InitGridMappingIfNeeded()
+        private void InitGridMapping()
         {
             dgvCTHD.AutoGenerateColumns = false;
-
+            MapCol("Phong", "Phong", null);
             MapCol("TuNgay", "TuNgay", "dd/MM/yyyy");
             MapCol("DenNgay", "DenNgay", "dd/MM/yyyy");
             MapCol("SoNgay", "SoNgay", null);
@@ -41,58 +41,59 @@ namespace QuanLyPhongKhachSan
         private void MapCol(string colName, string dataProperty, string format)
         {
             var col = dgvCTHD.Columns.Cast<DataGridViewColumn>()
-                        .FirstOrDefault(c => c.Name == colName);
+                         .FirstOrDefault(c => c.Name == colName);
             if (col == null) return;
 
-            col.DataPropertyName = dataProperty; // đảm bảo mapping
+            col.DataPropertyName = dataProperty;
             if (!string.IsNullOrEmpty(format) && col is DataGridViewTextBoxColumn)
-            {
                 col.DefaultCellStyle.Format = format;
-            }
         }
 
-        public void BindHeader(
-          string soPhong,
-          string loaiHD,
-          DateTime ngayLap,
-          string nhanVien,
-          int maHD,
-          string tenKH)
+        // Header KHÔNG có tham số soPhong (vì in nhiều phòng)
+        // frmHoaDon1.cs
+        public void BindHeader(string loaiHD, DateTime ngayLap, string nhanVien, int maHD, string tenKH)
         {
-            txtPhong.Text = soPhong;
+            
             txtLoaiHD.Text = loaiHD;
             txtNgayLapHD.Text = ngayLap.ToString("dd/MM/yyyy HH:mm");
-            txtNhanVien.Text = nhanVien;
+            txtNhanVien.Text = AppSession.TenNhanVienHienThi;
             txtMaHoaDon.Text = maHD.ToString();
             txtKhachHang.Text = tenKH;
         }
 
-        // GỌN: chỉ add 1 dòng vào dgvCTHD
-        public void BindChiTiet(DateTime tuNgay, DateTime denNgay, int soNgay, decimal tienCoc, decimal tongTien)
+
+        public void BindChiTietNhieuPhong(IEnumerable<(string Phong, DateTime TuNgay, DateTime DenNgay, int SoNgay, decimal TienCoc, decimal GiaPhong)> items)
         {
-            // Nếu cần hiển thị tiền phòng riêng: suy ra từ tổng
-            // tongTien = soNgay * giaPhong + tienCoc => TienPhong = tongTien - tienCoc
-            decimal tienPhong = tongTien - tienCoc;
-            if (tienPhong < 0) tienPhong = 0;
+            var rows = new List<CTHDView>();
 
-            var rows = new List<CTHDRow>
+            foreach (var it in items)
             {
-                new CTHDRow
-                {
-                    TuNgay   = tuNgay,
-                    DenNgay  = denNgay,
-                    SoNgay   = soNgay,
-                    TienCoc  = tienCoc,
-                    TienPhong= tienPhong,
-                    TongTien = tongTien
-                }
-            };
+                var tu = it.TuNgay.Date;
+                var den = it.DenNgay.Date <= tu ? tu.AddDays(1) : it.DenNgay.Date;
+                int so = it.SoNgay > 0 ? it.SoNgay : (den - tu).Days;
 
-            dgvCTHD.DataSource = null;  // reset an toàn
-            dgvCTHD.DataSource = rows;  // bind list -> tên property = DataPropertyName
-            decimal tongTatCa = rows.Sum(r => r.TongTien);
-            txtTongTien.Text = tongTatCa.ToString("N0");
-            txtSoTien.Text = tongTatCa.ToString("N0");
+                decimal tienPhong = so * it.GiaPhong;
+                decimal tong = tienPhong + it.TienCoc;
+
+                rows.Add(new CTHDView
+                {
+                    Phong = it.Phong,
+                    TuNgay = tu,
+                    DenNgay = den,
+                    SoNgay = so,
+                    TienCoc = it.TienCoc,
+                    TienPhong = tienPhong,
+                    TongTien = tong
+                });
+            }
+
+            dgvCTHD.DataSource = null;
+            dgvCTHD.DataSource = rows;
+
+            var vi = CultureInfo.GetCultureInfo("vi-VN");
+            decimal sum = rows.Sum(r => r.TongTien);
+            txtTongTien.Text = string.Format(vi, "{0:N0}", sum);
+            txtSoTien.Text = string.Format(vi, "{0:N0}", sum);
         }
     }
 }
