@@ -46,3 +46,9 @@ C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan-feat-update\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Documents\Works\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Documents\Works\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Documents\Works\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\Documents\Works\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\Documents\Works\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Documents\Works\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
