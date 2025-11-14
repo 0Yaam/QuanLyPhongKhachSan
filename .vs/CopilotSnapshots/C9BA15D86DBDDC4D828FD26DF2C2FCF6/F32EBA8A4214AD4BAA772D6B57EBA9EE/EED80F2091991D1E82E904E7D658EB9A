@@ -33,21 +33,15 @@ namespace QuanLyPhongKhachSan
 
             LoadLoaiPhong(); // sẽ gán _giaPhong nếu có loại phòng
 
-            // FIX: Giá bị ghi đè 0 do _phong.LoaiPhong chưa gán -> dùng SelectedItem nếu cần
-            var selectedLoai = cbLoaiPhong.SelectedItem != null ? cbLoaiPhong.SelectedItem.ToString() : _phong.LoaiPhong;
-            if (_phong.Gia > 0)
-            {
-                _giaPhong = _phong.Gia;
-            }
-            else
-            {
-                _giaPhong = LayGiaTheoLoaiPhong(selectedLoai);
-            }
-            if (!string.IsNullOrEmpty(selectedLoai)) _phong.LoaiPhong = selectedLoai; // đồng bộ object
+            // Ưu tiên giá từ đối tượng phòng nếu đã có (JOIN trả về)
+            if (_phong.Gia > 0) _giaPhong = _phong.Gia;
+            else if (_giaPhong <= 0) _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
 
             txtSoPhong.Text = _phong.SoPhong.ToString();
-            cbLoaiPhong.SelectedItem = selectedLoai;
+            cbLoaiPhong.SelectedItem = _phong.LoaiPhong;
             txtGia.Text = FormatVnd(_giaPhong); // hiển thị giá phòng ngay khi load
+            txtGia.ReadOnly = true; // chỉ đọc theo yêu cầu
+            cbLoaiPhong.Enabled = false; // loại phòng khoá
 
             dtpNgayNhan.Value = DateTime.Now;
             dtpNgayTraDuKien.MinDate = dtpNgayNhan.Value.AddDays(1);
@@ -134,6 +128,7 @@ namespace QuanLyPhongKhachSan
             }
             else
             {
+                // Không có đặt phòng trước đó: vẫn giữ LoaiPhong & Giá hiện tại đã load
                 ClearForm(false);
             }
         }
@@ -184,18 +179,9 @@ namespace QuanLyPhongKhachSan
             var tenLoai = cbLoaiPhong.SelectedItem.ToString();
             var maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
             if (maLoai > 0) _phong.MaLoaiPhong = maLoai;
-            _phong.LoaiPhong = tenLoai; // đồng bộ loại phòng mới
             _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
-            _phong.Gia = _giaPhong; // nếu cần hiển thị lại ở nơi khác
             txtGia.Text = FormatVnd(_giaPhong);
             CapNhatTamTinh();
-
-            // Cập nhật ngay DB khi đổi loại phòng (yêu cầu 1)
-            bool capNhatOk = phongService.CapNhat(_phong);
-            if (!capNhatOk)
-            {
-                System.Diagnostics.Debug.WriteLine($"cbLoaiPhong_SelectedIndexChanged: CapNhat thất bại MaPhong={_phong.MaPhong}, LoaiPhong={tenLoai}");
-            }
         }
 
 
