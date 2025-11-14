@@ -70,7 +70,7 @@
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(84, 51);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(133, 47);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(83, 30);
             this.guna2HtmlLabel1.TabIndex = 29;
@@ -98,7 +98,7 @@
             // 
             this.lblTen.BackColor = System.Drawing.Color.Transparent;
             this.lblTen.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTen.Location = new System.Drawing.Point(84, 113);
+            this.lblTen.Location = new System.Drawing.Point(65, 109);
             this.lblTen.Name = "lblTen";
             this.lblTen.Size = new System.Drawing.Size(83, 30);
             this.lblTen.TabIndex = 35;
@@ -108,7 +108,7 @@
             // 
             this.lblNgayThamGia.BackColor = System.Drawing.Color.Transparent;
             this.lblNgayThamGia.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayThamGia.Location = new System.Drawing.Point(118, 168);
+            this.lblNgayThamGia.Location = new System.Drawing.Point(65, 166);
             this.lblNgayThamGia.Name = "lblNgayThamGia";
             this.lblNgayThamGia.Size = new System.Drawing.Size(83, 30);
             this.lblNgayThamGia.TabIndex = 36;
