@@ -47,7 +47,7 @@ namespace QuanLyPhongKhachSan
 
             txtSoPhong.Text = _phong.SoPhong.ToString();
             cbLoaiPhong.SelectedItem = selectedLoai;
-            txtGia.Text = FormatVnd(_giaPhong); // hiển thị giá phòng ngay khi load
+            HienThiGiaPhong(_giaPhong); // hiển thị giá phòng ngay khi load
 
             dtpNgayNhan.Value = DateTime.Now;
             dtpNgayTraDuKien.MinDate = dtpNgayNhan.Value.AddDays(1);
@@ -103,7 +103,7 @@ namespace QuanLyPhongKhachSan
                 var maLoai = phongService.LayMaLoaiTheoTen(tenLoai);
                 if (maLoai > 0) _phong.MaLoaiPhong = maLoai;
                 _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
-                txtGia.Text = FormatVnd(_giaPhong);
+                HienThiGiaPhong(_giaPhong);
             }
         }
 
@@ -187,7 +187,7 @@ namespace QuanLyPhongKhachSan
             _phong.LoaiPhong = tenLoai; // đồng bộ loại phòng mới
             _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
             _phong.Gia = _giaPhong; // nếu cần hiển thị lại ở nơi khác
-            txtGia.Text = FormatVnd(_giaPhong);
+            HienThiGiaPhong(_giaPhong);
             CapNhatTamTinh();
 
             // Cập nhật ngay DB khi đổi loại phòng (yêu cầu 1)
@@ -246,6 +246,7 @@ namespace QuanLyPhongKhachSan
                     _phong.MaLoaiPhong = maLoaiPhongMoi;
                     _phong.LoaiPhong = tenLoai;               // nếu model của bạn có thuộc tính này để hiển thị
                     _giaPhong = LayGiaTheoLoaiPhong(tenLoai); // cập nhật giá hiển thị
+                    HienThiGiaPhong(_giaPhong);
 
                     if (!phongService.CapNhat(_phong))
                     {
@@ -285,6 +286,7 @@ namespace QuanLyPhongKhachSan
                 _phong.MaLoaiPhong = maLoaiPhongMoi;
                 _phong.LoaiPhong = tenLoai;
                 _giaPhong = LayGiaTheoLoaiPhong(tenLoai);
+                HienThiGiaPhong(_giaPhong);
                 if (!phongService.CapNhat(_phong))
                 {
                     MessageBox.Show("Cập nhật loại phòng thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -390,6 +392,7 @@ namespace QuanLyPhongKhachSan
                 // Cập nhật loại phòng
                 _phong.LoaiPhong = cbLoaiPhong.SelectedItem?.ToString() ?? _phong.LoaiPhong;
                 _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
+                HienThiGiaPhong(_giaPhong);
                 if (!phongService.CapNhat(_phong))
                 {
                     System.Diagnostics.Debug.WriteLine($"btnInHoaDon_Click: Cập nhật loại phòng thất bại - MaPhong={_phong.MaPhong}, LoaiPhong={_phong.LoaiPhong}");
@@ -731,8 +734,15 @@ namespace QuanLyPhongKhachSan
             {
                 // vẫn giữ nguyên loại phòng đã load, chỉ tính lại giá nếu cần
                 if (_phong.Gia > 0) _giaPhong = _phong.Gia; else _giaPhong = LayGiaTheoLoaiPhong(_phong.LoaiPhong);
-                txtGia.Text = FormatVnd(_giaPhong);
+                HienThiGiaPhong(_giaPhong);
             }
+        }
+
+        private void HienThiGiaPhong(decimal gia)
+        {
+            if (gia < txtGia.Minimum) gia = txtGia.Minimum;
+            if (gia > txtGia.Maximum) txtGia.Maximum = gia;
+            txtGia.Value = gia;
         }
     }
 }
