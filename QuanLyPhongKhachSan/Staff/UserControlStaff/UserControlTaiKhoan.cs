@@ -33,15 +33,11 @@ namespace QuanLyPhongKhachSan.Bar
                     }
                 }
 
-                // Fallback tên hiển thị lấy từ CurrentUser (nếu đã set trước)
-                if (!string.IsNullOrWhiteSpace(CurrentUser.TenHienThi))
-                    ten = CurrentUser.TenHienThi;
-
                 lblTen.Text = string.IsNullOrWhiteSpace(ten) ? "—" : ten;
                 lblNgayThamGia.Text = (ngay ?? CurrentUser.NgayThamGia ?? DateTime.Today)
                     .ToString("dd/MM/yyyy");
 
-                // cache lại hiển thị cho form khác dùng
+                // cache lại hiển thị cho form khác dùng (cập nhật theo thông tin hiện tại)
                 CurrentUser.TenHienThi = lblTen.Text;
                 CurrentUser.NgayThamGia = (ngay ?? CurrentUser.NgayThamGia ?? DateTime.Today);
             }

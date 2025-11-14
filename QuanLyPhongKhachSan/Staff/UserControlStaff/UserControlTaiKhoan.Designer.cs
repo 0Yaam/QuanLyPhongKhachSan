@@ -41,10 +41,10 @@
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(104, 228);
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(104, 200);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(111, 24);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(147, 30);
             this.guna2HtmlLabel1.TabIndex = 1;
             this.guna2HtmlLabel1.Text = "Ngày tham gia";
             // 
@@ -109,7 +109,7 @@
             // 
             this.lblTen.BackColor = System.Drawing.Color.Transparent;
             this.lblTen.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTen.Location = new System.Drawing.Point(79, 148);
+            this.lblTen.Location = new System.Drawing.Point(104, 137);
             this.lblTen.Name = "lblTen";
             this.lblTen.Size = new System.Drawing.Size(83, 30);
             this.lblTen.TabIndex = 30;
@@ -119,7 +119,7 @@
             // 
             this.lblNgayThamGia.BackColor = System.Drawing.Color.Transparent;
             this.lblNgayThamGia.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayThamGia.Location = new System.Drawing.Point(221, 225);
+            this.lblNgayThamGia.Location = new System.Drawing.Point(257, 200);
             this.lblNgayThamGia.Name = "lblNgayThamGia";
             this.lblNgayThamGia.Size = new System.Drawing.Size(83, 30);
             this.lblNgayThamGia.TabIndex = 31;

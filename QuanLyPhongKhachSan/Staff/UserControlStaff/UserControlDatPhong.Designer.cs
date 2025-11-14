@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.rdPhongTrong = new System.Windows.Forms.RadioButton();
             this.rdPhongDaDat = new System.Windows.Forms.RadioButton();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
@@ -45,8 +44,6 @@
             this.rdGiam = new System.Windows.Forms.RadioButton();
             this.btnReset = new Guna.UI2.WinForms.Guna2Button();
             this.flpContain = new System.Windows.Forms.FlowLayoutPanel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.xóaThôngTinKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rdSoPhong = new Guna.UI2.WinForms.Guna2RadioButton();
             this.rdCCCD = new Guna.UI2.WinForms.Guna2RadioButton();
@@ -61,7 +58,6 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.flpContain.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -258,19 +254,6 @@
             this.flpContain.Size = new System.Drawing.Size(875, 540);
             this.flpContain.TabIndex = 8;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xóaThôngTinKháchHàngToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(212, 26);
-            // 
-            // xóaThôngTinKháchHàngToolStripMenuItem
-            // 
-            this.xóaThôngTinKháchHàngToolStripMenuItem.Name = "xóaThôngTinKháchHàngToolStripMenuItem";
-            this.xóaThôngTinKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.xóaThôngTinKháchHàngToolStripMenuItem.Text = "Xóa thông tin khách hàng";
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rdSoPhong);
@@ -420,7 +403,7 @@
             this.btnThemNhieuKhachHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnThemNhieuKhachHang.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnThemNhieuKhachHang.ForeColor = System.Drawing.Color.White;
-            this.btnThemNhieuKhachHang.Location = new System.Drawing.Point(915, 542);
+            this.btnThemNhieuKhachHang.Location = new System.Drawing.Point(911, 543);
             this.btnThemNhieuKhachHang.Name = "btnThemNhieuKhachHang";
             this.btnThemNhieuKhachHang.Size = new System.Drawing.Size(97, 40);
             this.btnThemNhieuKhachHang.TabIndex = 25;
@@ -454,7 +437,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.flpContain.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
@@ -476,8 +458,6 @@
         private System.Windows.Forms.RadioButton rdTang;
         private System.Windows.Forms.RadioButton rdGiam;
         private System.Windows.Forms.FlowLayoutPanel flpContain;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem xóaThôngTinKháchHàngToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox4;
         private Guna.UI2.WinForms.Guna2RadioButton rdSDT;
         private Guna.UI2.WinForms.Guna2RadioButton rdCCCD;

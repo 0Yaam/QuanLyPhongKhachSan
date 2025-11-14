@@ -21,7 +21,6 @@ namespace QuanLyPhongKhachSan
             txtPassword.PasswordChar = '●';
 
 
-            // Bắt phím toàn form
             this.KeyPreview = true;
             this.KeyDown += frmLogin_KeyDown;
             this.AcceptButton = btnDangNhap;
@@ -30,23 +29,19 @@ namespace QuanLyPhongKhachSan
 
         private void cbShowPass_CheckedChanged(object sender, EventArgs e)
         {
-            // đảo trạng thái ẩn/hiện
             txtPassword.UseSystemPasswordChar = !cbShowPass.Checked;
         }
 
-        // ENTER/DELETE
         private void frmLogin_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                // Cách 1: perform click
                 btnDangNhap.PerformClick();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                // Delete: xóa ô hiện tại. Ctrl+Delete: xóa cả 2 ô
                 if (ModifierKeys == Keys.Control)
                 {
                     txtUserName.Clear();
@@ -94,7 +89,7 @@ namespace QuanLyPhongKhachSan
                     }
                 }
                 AppSession.TaiKhoanDangNhap = taiKhoan;
-                AppSession.MaNVHienTai = taiKhoan.MaNV; // có thể = 0
+                AppSession.MaNVHienTai = taiKhoan.MaNV; 
 
                 string tenNV = null;
                 if (taiKhoan.MaNV > 0)

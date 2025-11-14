@@ -200,11 +200,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             menu.Items.Add("Xóa").Click += (s, e) => XoaPhongSelectedOrOne(pnl);
             menu.Items.Add("Đổi loại phòng...").Click += (s, e) => DoiLoaiPhong(pnl);
 
-            var mSetStatus = new ToolStripMenuItem("Đặt trạng thái");
-            mSetStatus.DropDownItems.Add("Trống", null, (s, e) => DatTrangThaiPhong(pnl, "Trống"));
-            mSetStatus.DropDownItems.Add("Đã đặt", null, (s, e) => DatTrangThaiPhong(pnl, "Đã đặt"));
-            mSetStatus.DropDownItems.Add("Đang sử dụng", null, (s, e) => DatTrangThaiPhong(pnl, "Đang sử dụng"));
-            menu.Items.Add(mSetStatus);
 
             pnl.ContextMenuStrip = menu;
 
@@ -799,27 +794,6 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
             }
         }
 
-        private void DatTrangThaiPhong(Guna2Panel pnl, string trangThai)
-        {
-            if (pnl == null) return;
-            var p = pnl.Tag as Phong;
-            if (p == null) return;
-
-            bool ok = phongService.CapNhatTrangThai(p.MaPhong, trangThai);
-
-            AuditHelper.Log("Sửa", "Phong",
-                p.MaPhong.ToString(),
-                moTa: $"Đặt trạng thái phòng {p.SoPhong} = {trangThai}",
-                ketQua: ok);
-
-            if (!ok)
-            {
-                MessageBox.Show("Cập nhật trạng thái phòng thất bại.");
-                return;
-            }
-
-            LoadPhongFromDB();
-        }
 
         private void btnThemNhieuKhachHang_Click(object sender, EventArgs e)
         {
@@ -928,5 +902,7 @@ namespace QuanLyPhongKhachSan.Staff.UserControlStaff
                 MessageBox.Show("Lỗi khi mở form: " + ex.Message);
             }
         }
+
+   
     }
 }

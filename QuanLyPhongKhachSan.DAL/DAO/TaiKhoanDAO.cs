@@ -67,7 +67,7 @@ namespace QuanLyPhongKhachSan.DAL.DAO
                             MaTK = reader.GetInt32(0),
                             TenDangNhap = reader.GetString(1),
                             MatKhau = reader.GetString(2),
-                            Quyen = reader.GetInt32(3) // Lấy int
+                            Quyen = reader.GetInt32(3) 
                         });
                     }
                 }
@@ -168,9 +168,8 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
             using (var cmd = new SqlCommand(sql, conn))
             {
                 cmd.Parameters.AddWithValue("@User", tk.TenDangNhap.Trim());
-                cmd.Parameters.AddWithValue("@Pass", tk.MatKhau); // TODO: hash
+                cmd.Parameters.AddWithValue("@Pass", tk.MatKhau); 
                 cmd.Parameters.AddWithValue("@Quyen", tk.Quyen);
-                // Nếu MaNV optional, cho phép null:
                 if (tk.MaNV > 0) cmd.Parameters.AddWithValue("@MaNV", tk.MaNV);
                 else cmd.Parameters.AddWithValue("@MaNV", DBNull.Value);
 

@@ -1,5 +1,4 @@
-﻿// BLL/Services/ChiTietHoaDonService.cs
-using QuanLyPhongKhachSan.DAL.DAO;
+﻿using QuanLyPhongKhachSan.DAL.DAO;
 using QuanLyPhongKhachSan.DAL.OL;
 using System.Collections.Generic;
 
