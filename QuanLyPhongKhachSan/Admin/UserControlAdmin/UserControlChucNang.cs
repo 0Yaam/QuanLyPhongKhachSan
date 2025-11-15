@@ -383,5 +383,11 @@ namespace QuanLyPhongKhachSan.Login.UserControlAdmin
         private void dgvLoaiPhong_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void nudThemGiaTien_ValueChanged(object sender, EventArgs e) { }
         private void nudGiaTien_ValueChanged(object sender, EventArgs e) { }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtLoaiPhong.Clear();
+            nudThemGiaTien.Value = 0;
+        }
     }
 }

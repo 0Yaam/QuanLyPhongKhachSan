@@ -70,40 +70,11 @@ namespace QuanLyPhongKhachSan.Staff
 
                 CapNhatTamTinh();
                 UpdatePrintButtonState();
-
-                // Nếu đã có HĐ Lần 1 cho bất kỳ phòng nào trong danh sách -> mờ nút in ngay khi mở form
-                PreCheckDisablePrintIfAlreadyPrinted();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi load form: {ex.Message}");
             }
-        }
-
-        private void PreCheckDisablePrintIfAlreadyPrinted()
-        {
-            try
-            {
-                var bookingIds = new List<int>();
-                foreach (var it in _items)
-                {
-                    var room = it.Room;
-                    if (room == null) continue;
-                    var bk = it.Booking ?? _phongService.LayDatPhongTheoMaPhong(room.MaPhong);
-                    if (bk != null && bk.MaDat > 0) bookingIds.Add(bk.MaDat);
-                }
-                if (bookingIds.Count == 0) return;
-
-                var hdSvc = new HoaDonService();
-                var list = hdSvc.LayDanhSach();
-                bool anyLan1 = list.Any(h => bookingIds.Contains(h.MaDat) && string.Equals(h.LoaiHoaDon, "Lần 1", StringComparison.OrdinalIgnoreCase));
-                if (anyLan1)
-                {
-                    _printedLan1 = true;
-                    if (btnInHoaDon != null) btnInHoaDon.Enabled = false;
-                }
-            }
-            catch { /* ignore */ }
         }
 
         private void UpdatePrintButtonState()
@@ -414,7 +385,6 @@ namespace QuanLyPhongKhachSan.Staff
                     MessageBox.Show("Đã tồn tại Hóa đơn Lần 1 cho đặt phòng đã chọn.");
                     _printedLan1 = true;
                     UpdatePrintButtonState();
-                    if (btnInHoaDon != null) btnInHoaDon.Enabled = false; // đảm bảo mờ nút in
                     return;
                 }
 
@@ -496,10 +466,9 @@ namespace QuanLyPhongKhachSan.Staff
                     f.ShowDialog(this);
                 }
 
-                // Sau khi in lần 1 xong: chặn in lại lần 1 và làm mờ nút
+                // Sau khi in lần 1 xong: chặn in lại lần 1
                 _printedLan1 = true;
                 UpdatePrintButtonState();
-                if (btnInHoaDon != null) btnInHoaDon.Enabled = false;
 
                 // Thông báo thành công
                 MessageBox.Show(

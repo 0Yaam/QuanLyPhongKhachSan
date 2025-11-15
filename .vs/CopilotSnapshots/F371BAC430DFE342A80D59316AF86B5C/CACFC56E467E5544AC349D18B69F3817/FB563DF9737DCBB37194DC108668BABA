@@ -70,40 +70,11 @@ namespace QuanLyPhongKhachSan.Staff
 
                 CapNhatTamTinh();
                 UpdatePrintButtonState();
-
-                // Nếu đã có HĐ Lần 1 cho bất kỳ phòng nào trong danh sách -> mờ nút in ngay khi mở form
-                PreCheckDisablePrintIfAlreadyPrinted();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi load form: {ex.Message}");
             }
-        }
-
-        private void PreCheckDisablePrintIfAlreadyPrinted()
-        {
-            try
-            {
-                var bookingIds = new List<int>();
-                foreach (var it in _items)
-                {
-                    var room = it.Room;
-                    if (room == null) continue;
-                    var bk = it.Booking ?? _phongService.LayDatPhongTheoMaPhong(room.MaPhong);
-                    if (bk != null && bk.MaDat > 0) bookingIds.Add(bk.MaDat);
-                }
-                if (bookingIds.Count == 0) return;
-
-                var hdSvc = new HoaDonService();
-                var list = hdSvc.LayDanhSach();
-                bool anyLan1 = list.Any(h => bookingIds.Contains(h.MaDat) && string.Equals(h.LoaiHoaDon, "Lần 1", StringComparison.OrdinalIgnoreCase));
-                if (anyLan1)
-                {
-                    _printedLan1 = true;
-                    if (btnInHoaDon != null) btnInHoaDon.Enabled = false;
-                }
-            }
-            catch { /* ignore */ }
         }
 
         private void UpdatePrintButtonState()

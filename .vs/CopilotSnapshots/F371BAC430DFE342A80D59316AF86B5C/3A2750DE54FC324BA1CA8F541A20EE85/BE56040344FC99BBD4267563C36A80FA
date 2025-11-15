@@ -70,40 +70,11 @@ namespace QuanLyPhongKhachSan.Staff
 
                 CapNhatTamTinh();
                 UpdatePrintButtonState();
-
-                // Nếu đã có HĐ Lần 1 cho bất kỳ phòng nào trong danh sách -> mờ nút in ngay khi mở form
-                PreCheckDisablePrintIfAlreadyPrinted();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi load form: {ex.Message}");
             }
-        }
-
-        private void PreCheckDisablePrintIfAlreadyPrinted()
-        {
-            try
-            {
-                var bookingIds = new List<int>();
-                foreach (var it in _items)
-                {
-                    var room = it.Room;
-                    if (room == null) continue;
-                    var bk = it.Booking ?? _phongService.LayDatPhongTheoMaPhong(room.MaPhong);
-                    if (bk != null && bk.MaDat > 0) bookingIds.Add(bk.MaDat);
-                }
-                if (bookingIds.Count == 0) return;
-
-                var hdSvc = new HoaDonService();
-                var list = hdSvc.LayDanhSach();
-                bool anyLan1 = list.Any(h => bookingIds.Contains(h.MaDat) && string.Equals(h.LoaiHoaDon, "Lần 1", StringComparison.OrdinalIgnoreCase));
-                if (anyLan1)
-                {
-                    _printedLan1 = true;
-                    if (btnInHoaDon != null) btnInHoaDon.Enabled = false;
-                }
-            }
-            catch { /* ignore */ }
         }
 
         private void UpdatePrintButtonState()
@@ -324,10 +295,9 @@ namespace QuanLyPhongKhachSan.Staff
                     if (room == null) { skipped++; continue; }
 
                     DatPhong bk = it.Booking;
-
-                    // Nếu chưa có đặt phòng -> tạo mới
                     if (bk == null)
                     {
+                        // tạo đặt phòng nếu chưa có
                         bool conflictNew = _phongService.KiemTraPhongTrungLich(room.MaPhong, tu, den);
                         if (conflictNew)
                         {
@@ -344,42 +314,14 @@ namespace QuanLyPhongKhachSan.Staff
                             bk = _phongService.LayDatPhongTheoMaPhong(room.MaPhong);
                         }
                     }
-                    else
-                    {
-                        // ĐÃ có đặt phòng: đảm bảo về đúng KH và ngày để có thể in ngay không cần bấm Hoàn thành
-                        try
-                        {
-                            bool needUpdate = (bk.MaKH != maKh) || bk.NgayNhan.Date != tu || bk.NgayTraDuKien.Date != den || (bk.TrangThai != "Đã đặt" && bk.TrangThai != "Đang sử dụng");
-                            if (needUpdate)
-                            {
-                                bool conflict = _phongService.KiemTraPhongTrungLichExcept(room.MaPhong, tu, den, bk.MaDat);
-                                if (conflict)
-                                {
-                                    skipped++;
-                                    continue;
-                                }
-                                decimal giaUpd = room.Gia > 0 ? room.Gia : _phongService.LayGiaTheoLoai(room.LoaiPhong);
-                                decimal cocUpd = (bk.TienCoc > 0 ? bk.TienCoc : 200000m);
-                                bk.MaKH = maKh;
-                                bk.NgayNhan = tu;
-                                bk.NgayTraDuKien = den;
-                                bk.NgayTraThucTe = null;
-                                bk.TienCoc = cocUpd;
-                                bk.TienThue = giaUpd * soNgay;
-                                bk.TrangThai = "Đã đặt";
-                                _phongService.CapNhatDatPhong(bk);
-                            }
-                        }
-                        catch { /* bỏ qua 1 phòng lỗi, tiếp tục phòng khác */ }
-                    }
 
-                    if (bk == null)
+                    if (bk == null || bk.MaKH != maKh)
                     {
+                        // không có booking phù hợp -> bỏ qua phòng này
                         skipped++;
                         continue;
                     }
 
-                    // Tính tiền cho dòng in
                     decimal gia = room.Gia > 0 ? room.Gia : _phongService.LayGiaTheoLoai(room.LoaiPhong);
                     decimal coc = (bk.TienCoc > 0 ? bk.TienCoc : 200000m);
                     decimal tienPhong = soNgay * gia;
@@ -405,7 +347,7 @@ namespace QuanLyPhongKhachSan.Staff
                     return;
                 }
 
-                // Chặn in lần 1 nếu đã có hóa đơn lần 1 trước đó cho bất kỳ MaDat nào
+                // Chặn in lần 1 nếu đã có hóa đơn lần 1 trước đó cho các MaDat này
                 var hdSvc = new HoaDonService();
                 var hoaDonList = hdSvc.LayDanhSach();
                 bool alreadyPrinted = hoaDonList.Any(hd => bookingIds.Contains(hd.MaDat) && string.Equals(hd.LoaiHoaDon, "Lần 1", StringComparison.OrdinalIgnoreCase));
@@ -414,7 +356,6 @@ namespace QuanLyPhongKhachSan.Staff
                     MessageBox.Show("Đã tồn tại Hóa đơn Lần 1 cho đặt phòng đã chọn.");
                     _printedLan1 = true;
                     UpdatePrintButtonState();
-                    if (btnInHoaDon != null) btnInHoaDon.Enabled = false; // đảm bảo mờ nút in
                     return;
                 }
 
@@ -450,25 +391,6 @@ namespace QuanLyPhongKhachSan.Staff
 
                 hdSvc.CapNhatTongTien(maHD, tongAll);
 
-                // Tạo các Hóa đơn 'đánh dấu đã in lần 1' cho những MaDat còn lại để UI đổi màu đồng nhất
-                var otherMaDats = bookingIds.Where(id => id != maDatDaiDien).Distinct().ToList();
-                foreach (var md in otherMaDats)
-                {
-                    try
-                    {
-                        var marker = new HoaDon
-                        {
-                            MaDat = md,
-                            NgayLap = DateTime.Now,
-                            LoaiHoaDon = "Lần 1",
-                            TongThanhToan = 0m,
-                            GhiChu = $"Thuộc HĐ gộp #{maHD}"
-                        };
-                        hdSvc.ThemVaLayMa(marker);
-                    }
-                    catch { /* ignore 1 phòng lỗi, tiếp tục phòng khác */ }
-                }
-
                 // Lưu vào LichSuHoaDon với danh sách số phòng trong SoPhong
                 var lichSuSvc = new LichSuHoaDonService();
                 string soPhongStr = string.Join(" - ", soPhongList);
@@ -496,10 +418,9 @@ namespace QuanLyPhongKhachSan.Staff
                     f.ShowDialog(this);
                 }
 
-                // Sau khi in lần 1 xong: chặn in lại lần 1 và làm mờ nút
+                // Sau khi in lần 1 xong: chặn in lại lần 1
                 _printedLan1 = true;
                 UpdatePrintButtonState();
-                if (btnInHoaDon != null) btnInHoaDon.Enabled = false;
 
                 // Thông báo thành công
                 MessageBox.Show(
