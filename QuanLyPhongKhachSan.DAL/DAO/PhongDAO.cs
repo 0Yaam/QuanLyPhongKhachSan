@@ -72,57 +72,71 @@ SELECT CAST(SCOPE_IDENTITY() AS int)";
                     {
                         try
                         {
-                            // 1. Xóa các bản ghi trong ChiTietHoaDon liên quan đến HoaDon của DatPhong
+                            // 1) Xóa ChiTietHoaDon theo các MaHD thuộc các HoaDon của các DatPhong của phòng này
                             string sqlChiTietHoaDon = @"
-                    DELETE FROM ChiTietHoaDon 
-                    WHERE MaHD IN (
-                        SELECT MaHD 
-                        FROM HoaDon 
-                        WHERE MaDat IN (
-                            SELECT MaDat 
-                            FROM DatPhong 
-                            WHERE MaPhong = @MaPhong
-                        )
-                    )";
+DELETE FROM ChiTietHoaDon 
+WHERE MaHD IN (
+    SELECT MaHD 
+    FROM HoaDon 
+    WHERE MaDat IN (
+        SELECT MaDat 
+        FROM DatPhong 
+        WHERE MaPhong = @MaPhong
+    )
+)";
                             using (SqlCommand cmd = new SqlCommand(sqlChiTietHoaDon, conn, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@MaPhong", maPhong);
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // 2. Xóa các bản ghi trong HoaDon liên quan đến DatPhong
+                            // 2) Xóa LichSuHoaDon THAM CHIẾU tới HoaDon (bằng MaHD) - phải làm TRƯỚC khi xóa HoaDon để không dính FK
+                            string sqlLichSuHoaDon_ByHD = @"
+DELETE FROM LichSuHoaDon 
+WHERE MaHD IN (
+    SELECT MaHD 
+    FROM HoaDon 
+    WHERE MaDat IN (
+        SELECT MaDat 
+        FROM DatPhong 
+        WHERE MaPhong = @MaPhong
+    )
+)";
+                            using (SqlCommand cmd = new SqlCommand(sqlLichSuHoaDon_ByHD, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 2b) Xóa LichSuHoaDon THAM CHIẾU trực tiếp DatPhong (bằng MaDat) nếu có log không có MaHD
+                            string sqlLichSuHoaDon_ByDat = @"
+DELETE FROM LichSuHoaDon 
+WHERE MaDat IN (
+    SELECT MaDat 
+    FROM DatPhong 
+    WHERE MaPhong = @MaPhong
+)";
+                            using (SqlCommand cmd = new SqlCommand(sqlLichSuHoaDon_ByDat, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 3) Xóa HoaDon liên quan đến các DatPhong của phòng
                             string sqlHoaDon = @"
-                    DELETE FROM HoaDon 
-                    WHERE MaDat IN (
-                        SELECT MaDat 
-                        FROM DatPhong 
-                        WHERE MaPhong = @MaPhong
-                    )";
+DELETE FROM HoaDon 
+WHERE MaDat IN (
+    SELECT MaDat 
+    FROM DatPhong 
+    WHERE MaPhong = @MaPhong
+)";
                             using (SqlCommand cmd = new SqlCommand(sqlHoaDon, conn, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@MaPhong", maPhong);
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // 3. Xóa các bản ghi trong LichSuHoaDon liên quan đến HoaDon
-                            string sqlLichSuHoaDon = @"
-                    DELETE FROM LichSuHoaDon 
-                    WHERE MaHD IN (
-                        SELECT MaHD 
-                        FROM HoaDon 
-                        WHERE MaDat IN (
-                            SELECT MaDat 
-                            FROM DatPhong 
-                            WHERE MaPhong = @MaPhong
-                        )
-                    )";
-                            using (SqlCommand cmd = new SqlCommand(sqlLichSuHoaDon, conn, transaction))
-                            {
-                                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            // 4. Xóa các bản ghi trong DatPhong liên quan
+                            // 4) Xóa DatPhong liên quan
                             string sqlDatPhong = "DELETE FROM DatPhong WHERE MaPhong = @MaPhong";
                             using (SqlCommand cmd = new SqlCommand(sqlDatPhong, conn, transaction))
                             {
@@ -130,7 +144,7 @@ SELECT CAST(SCOPE_IDENTITY() AS int)";
                                 cmd.ExecuteNonQuery();
                             }
 
-                            // 5. Xóa phòng
+                            // 5) Xóa phòng
                             string sqlPhong = "DELETE FROM Phong WHERE MaPhong = @MaPhong";
                             using (SqlCommand cmd = new SqlCommand(sqlPhong, conn, transaction))
                             {
