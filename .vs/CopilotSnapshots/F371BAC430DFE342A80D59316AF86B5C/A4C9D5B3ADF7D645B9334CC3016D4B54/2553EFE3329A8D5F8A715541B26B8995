@@ -1,6 +1,5 @@
 ﻿// Admin/frmThemNhanVien.cs
 using System;
-using System.Linq;
 using System.Windows.Forms;
 using QuanLyPhongKhachSan.BLL.Services;
 using QuanLyPhongKhachSan.DAL.OL;
@@ -22,13 +21,6 @@ namespace QuanLyPhongKhachSan.Admin
                 cbbChucVu.Items.Add("Nhân viên");  // quyền = 2
                 cbbChucVu.SelectedIndex = 1;       // mặc định
             }
-        }
-
-        private static bool IsValidMin6WithLetter(string s)
-        {
-            if (string.IsNullOrEmpty(s)) return false;
-            if (s.Length < 6) return false;
-            return s.Any(char.IsLetter);
         }
 
         private void btnHoanThanh_Click(object sender, EventArgs e)
@@ -59,18 +51,6 @@ namespace QuanLyPhongKhachSan.Admin
                 if (string.IsNullOrWhiteSpace(password))
                 {
                     MessageBox.Show("Vui lòng nhập Mật khẩu.");
-                    return;
-                }
-
-                // Ràng buộc: tối thiểu 6 ký tự và chứa ít nhất 1 chữ
-                if (!IsValidMin6WithLetter(username))
-                {
-                    MessageBox.Show("Tên đăng nhập phải tối thiểu 6 ký tự và chứa ít nhất 1 chữ cái.");
-                    return;
-                }
-                if (!IsValidMin6WithLetter(password))
-                {
-                    MessageBox.Show("Mật khẩu phải tối thiểu 6 ký tự và chứa ít nhất 1 chữ cái.");
                     return;
                 }
 
