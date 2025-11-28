@@ -58,3 +58,11 @@ C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-main\QuanLyPhongKhachSan-main\Q
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-main\QuanLyPhongKhachSan-main\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-main\QuanLyPhongKhachSan-main\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
 C:\Users\TruongDan\Downloads\QuanLyPhongKhachSan-main\QuanLyPhongKhachSan-main\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\database\HotelManager.mdf
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\database\HotelManager_log.ldf
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\bin\Debug\QuanLyPhongKhachSan.DAL.pdb
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.AssemblyReference.cache
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.csproj.CoreCompileInputs.cache
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.dll
+C:\Users\TruongDan\Documents\QuanLyPhongKhachSan\QuanLyPhongKhachSan.DAL\obj\Debug\QuanLyPhongKhachSan.DAL.pdb
